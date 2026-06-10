@@ -5,12 +5,12 @@
     rel="stylesheet">
 
 <!-- Css Style -->
-<!-- <style>
+<style>
     :root{
         --color-main:#<?= $optsetting['background']['color_main'] ?>;
         --color-nhan:#<?= $optsetting['background']['color_main_1'] ?>;
     }
-</style> -->
+</style>
 
 <!-- Css Files -->
 <?php
@@ -31,12 +31,12 @@
     $css->setCss("./assets/slick/slick-style.css");
     $css->setCss("./assets/css/fonts.css");
     $css->setCss("./assets/css/style.css");
-    /*
+    
     $css->setCss("./assets/css/cart.css");
     $css->setCss("./assets/css/style_media.css");
-    $css->setCss("./assets/login/login.css");
+    // $css->setCss("./assets/login/login.css");
 
-    */
+    
     echo $css->getCss();
 ?>
 

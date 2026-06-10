@@ -332,23 +332,23 @@ $('.icon_menu_mobi,.close_menu,.menu_baophu,.open-menu').click(function() {
 <script src="https://www.google.com/recaptcha/api.js?render=<?= $config['googleAPI']['recaptcha']['sitekey'] ?>">
 </script>
 <script type="text/javascript">
-// grecaptcha.ready(function() {
+grecaptcha.ready(function() {
 
 
-//     grecaptcha.execute('<?= $config['googleAPI']['recaptcha']['sitekey'] ?>', {
-//         action: 'contact'
-//     }).then(function(token) {
-//         var recaptchaResponseContact = document.getElementById('recaptchaResponseContact');
-//         recaptchaResponseContact.value = token;
-//     });
-//     grecaptcha.execute('<?= $config['googleAPI']['recaptcha']['sitekey'] ?>', {
-//         action: 'Newsletter'
-//     }).then(function(token) {
-//         var recaptchaResponseNewsletter = document.getElementById('recaptchaResponseNewsletter');
-//         recaptchaResponseNewsletter.value = token;
-//     });
+    grecaptcha.execute('<?= $config['googleAPI']['recaptcha']['sitekey'] ?>', {
+        action: 'contact'
+    }).then(function(token) {
+        var recaptchaResponseContact = document.getElementById('recaptchaResponseContact');
+        recaptchaResponseContact.value = token;
+    });
+    grecaptcha.execute('<?= $config['googleAPI']['recaptcha']['sitekey'] ?>', {
+        action: 'Newsletter'
+    }).then(function(token) {
+        var recaptchaResponseNewsletter = document.getElementById('recaptchaResponseNewsletter');
+        recaptchaResponseNewsletter.value = token;
+    });
 
-// });
+});
 </script>
 <?php } ?>
 

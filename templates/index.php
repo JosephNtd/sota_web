@@ -9,7 +9,7 @@
 <body>
 
     <div id="wrapper">
-        <!-- <div id="preloader">
+        <div id="preloader">
             <div class="spinner">
                 <div class="rect1"></div>
                 <div class="rect2"></div>
@@ -17,7 +17,7 @@
                 <div class="rect4"></div>
                 <div class="rect5"></div>
             </div>
-        </div> -->
+        </div>
         <div class="content1">
         <?php
         include TEMPLATE . LAYOUT . "seo.php";

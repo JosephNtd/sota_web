@@ -45,9 +45,9 @@
             <div class="modal-header">
                 <h5 class="modal-title w-100 d-block text-center" id="popup-notify-label"><strong>ĐĂNG KÝ TƯ
                         VẤN</strong></h5>
-                <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
-				</button> -->
+				</button>
             </div>
             <div class="modal-body">
                 <form class="form-contact validation-contact" novalidate method="post" action=""
