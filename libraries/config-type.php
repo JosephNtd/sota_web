@@ -11,10 +11,10 @@
         ),*/
         "Nội dung trang chủ" => array(
             "photo" => array("slider"),
-            // "news" => array("feedback"),
-            // "photo_static" => array("background-tieuchi"),
-            //"tags" => array("tin-tuc"),
-            //"newsletter" => array("dangkytuyendung")
+            "news" => array("feedback"),
+            "photo_static" => array("background-tieuchi"),
+            "tags" => array("tin-tuc"),
+            "newsletter" => array("dangkytuyendung")
         ),
         // "Quản lý tin tức" => array(
         //     "news" => array("tin-tuc","tin-tuc-hen-gio"),

@@ -3042,20 +3042,40 @@ coccocgrammar {
 .scale-img {
     overflow: hidden;
     display: block;
-    position: relative;
 }
 
 .scale-img img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-    transition: transform 0.4s ease;
-    transform: scale(1);
+    -webkit-transition: 0.3s ease-out;
+    -moz-transition: 0.3s ease-out;
+    -o-transition: 0.3s ease-out;
+    transition: 0.3s ease-out;
+    -moz-transform: scale(1,
+            1);
+    -webkit-transform: scale(1,
+            1);
+    -o-transform: scale(1,
+            1);
+    -ms-transform: scale(1,
+            1);
+    transform: scale(1,
+            1);
 }
 
-.scale-img:hover img {
-    transform: scale(1.05);
+.scale-img:hover>img {
+    -webkit-transition: 0.3s ease-out;
+    -moz-transition: 0.3s ease-out;
+    -o-transition: 0.3s ease-out;
+    transition: 0.3s ease-out;
+    -moz-transform: scale(1.1,
+            1.1);
+    -webkit-transform: scale(1.1,
+            1.1);
+    -o-transform: scale(1.1,
+            1.1);
+    -ms-transform: scale(1.1,
+            1.1);
+    transform: scale(1.1,
+            1.1);
 }
 
 div.menu_mobi,
