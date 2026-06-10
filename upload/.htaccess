@@ -1,0 +1,3 @@
+<Files ~ "\.(inc|sql|php|cgi|pl|php4|php5|asp|aspx|jsp|txt|kid|cbg|nok|shtml)$">
+  Require all denied
+</Files>
