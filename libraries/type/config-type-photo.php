@@ -72,7 +72,7 @@
 
     /* Slideshow */
     $nametype = "doi-tac";
-    $config['photo']['man_photo'][$nametype]['title_main_photo'] = "Đối Tác";
+    $config['photo']['man_photo'][$nametype]['title_main_photo'] = "Trường tiêu biểu";
     $config['photo']['man_photo'][$nametype]['number_photo'] = 1;
     $config['photo']['man_photo'][$nametype]['images_photo'] = true;
     $config['photo']['man_photo'][$nametype]['avatar_photo'] = true;

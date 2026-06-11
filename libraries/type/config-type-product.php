@@ -3,8 +3,10 @@
     /* Sản phẩm */
     $nametype = "san-pham";
     $config['product'][$nametype]['title_main'] = "Sản phẩm";
-    $config['product'][$nametype]['dropdown'] = true;
-    $config['product'][$nametype]['list'] = true;
+    // $config['product'][$nametype]['dropdown'] = true;
+    // $config['product'][$nametype]['list'] = true;
+    $config['product'][$nametype]['dropdown'] = false;
+    $config['product'][$nametype]['list'] = false;
     $config['product'][$nametype]['qr'] = false;
     $config['product'][$nametype]['cat'] = false;
     $config['product'][$nametype]['item'] = false;
@@ -59,7 +61,8 @@
         )*/
     );
     $config['product'][$nametype]['ma'] = true;
-    $config['product'][$nametype]['gia'] = true;
+    // $config['product'][$nametype]['gia'] = true;
+    $config['product'][$nametype]['gia'] = false;
     $config['product'][$nametype]['giamoi'] = false;
     $config['product'][$nametype]['giakm'] = false;
     $config['product'][$nametype]['motangan'] = false;

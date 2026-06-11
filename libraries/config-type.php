@@ -9,16 +9,20 @@
             //"photo_static" => array("watermark"),
             //"newsletter" => array("dangkybaogia")
         ),*/
-        "Nội dung trang chủ" => array(
-            "photo" => array("slider"),
-            "news" => array("feedback"),
-            "photo_static" => array("background-tieuchi"),
-            "tags" => array("tin-tuc"),
-            "newsletter" => array("dangkytuyendung")
-        ),
+        // "Nội dung trang chủ" => array(
+        //     "photo" => array("slider"),
+        //     "news" => array("feedback"),
+        //     "photo_static" => array("background-tieuchi"),
+        //     "tags" => array("tin-tuc"),
+        //     "newsletter" => array("dangkytuyendung")
+        // ),
         // "Quản lý tin tức" => array(
         //     "news" => array("tin-tuc","tin-tuc-hen-gio"),
         // ),
+        "Nội dung trang chủ" => array(
+            "photo"      => array("slider", "doi-tac"),
+            "newsletter" => array("dang-ky-tu-van"),
+        ),
     );
 
     /* Config type - Product */
@@ -40,15 +44,24 @@
     require_once LIBRARIES.'type/config-type-photo.php';
 
     /* Seo page */
-    $config['seopage']['page'] = array(
-        "gioi-thieu" => "Giới thiệu",
-        "san-pham" => "Sản phẩm",
-        "dich-vu" => "Dịch vụ",     
-        "du-an" => "Dự án",              
-        "tin-tuc" => "Tin tức",        
-        "lien-he" => "Liên hệ",
+    // $config['seopage']['page'] = array(
+    //     "gioi-thieu" => "Giới thiệu",
+    //     "san-pham" => "Sản phẩm",
+    //     "dich-vu" => "Dịch vụ",     
+    //     "du-an" => "Dự án",              
+    //     "tin-tuc" => "Tin tức",        
+    //     "lien-he" => "Liên hệ",
         // "video" => "Video",        
         // "tim-kiem" => "Tìm kiếm"
+    // );
+    $config['seopage']['page'] = array(
+        "gioi-thieu"       => "Giới thiệu",
+        "san-pham"         => "Sản phẩm",
+        "tinh-nang"        => "Tính năng nổi bật",
+        "huong-dan"        => "Hướng dẫn sử dụng",
+        "tin-tuc"          => "Tin tức",
+        "van-ban-phap-ly"  => "Văn bản pháp lý",
+        "lien-he"          => "Liên hệ",
     );
     $config['seopage']['width'] = 300;
     $config['seopage']['height'] = 200;
@@ -63,8 +76,9 @@
     $config['setting']['oaidzalo'] = false;
     $config['setting']['copyright'] = true;
     $config['setting']['email'] = true;
-    $config['setting']['website'] = true;
-    $config['setting']['fanpage'] = true;
+    $config['setting']['website'] = false;
+    $config['setting']['fanpage'] = true;      // Facebook
+    $config['setting']['youtube'] = true;      // MỚI
     $config['setting']['tiktok'] = false;
     $config['setting']['toado'] = true;
     $config['setting']['slogan'] = false;
@@ -92,7 +106,7 @@
     $config['places']['placesship'] = false;
 
     /* Quản lý giỏ hàng */
-    $config['order']['active'] = true;
+    $config['order']['active'] = false;
     $config['order']['search'] = true;
     $config['order']['excel'] = true;
     $config['order']['word'] = true;

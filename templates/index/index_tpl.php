@@ -1,4 +1,4 @@
-<!--  GIỚI THIỆU  -->
+<!-- ========== GIỚI THIỆU ========== -->
 <?php if(isset($gioithieu) && $gioithieu) { ?>
 <section class="section wow fadeInUp" id="background-header">
     <div class="fixwidth" style="padding: 60px 0;">
@@ -22,7 +22,7 @@
 </section>
 <?php } ?>
 
-<!--  DỊCH VỤ NỔI BẬT  -->
+<!-- ========== DỊCH VỤ NỔI BẬT ========== -->
 <?php if(isset($dichvu) && count($dichvu) > 0) { ?>
 <section class="section wow fadeInUp" style="background: #f8f9fa; padding: 60px 0;">
     <div class="fixwidth">
@@ -61,15 +61,8 @@
 </section>
 <?php } ?>
 
-<!--  SẢN PHẨM NỔI BẬT  -->
-<?php if(isset($danhmuc_list) && count($danhmuc_list) > 0) { ?>
-<section class="section wow fadeInUp" style="padding: 60px 0;">
-    <div class="fixwidth">
-        <div class="title"><span>Sản phẩm nổi bật</span></div>
-        <?php include TEMPLATE . LAYOUT . "tab.php"; ?>
-    </div>
-</section>
-<?php } else if(isset($sanpham_nb) && count($sanpham_nb) > 0) { ?>
+<!-- ========== SẢN PHẨM NỔI BẬT ========== -->
+<?php if(isset($sanpham_nb) && count($sanpham_nb) > 0) { ?>
 <section class="section wow fadeInUp" style="padding: 60px 0;">
     <div class="fixwidth">
         <div class="title"><span>Sản phẩm nổi bật</span></div>
@@ -104,7 +97,7 @@
 </section>
 <?php } ?>
 
-<!--  SẢN PHẨM THEO DANH MỤC (OWL CAROUSEL)  -->
+<!-- ========== SẢN PHẨM THEO DANH MỤC (OWL CAROUSEL) ========== -->
 <?php if(isset($danhmucnb_list) && count($danhmucnb_list) > 0) { ?>
 <section class="section wow fadeInUp" style="background: #f8f9fa; padding: 60px 0;">
     <div class="fixwidth">
@@ -139,7 +132,7 @@
 </section>
 <?php } ?>
 
-<!--  TIN TỨC  -->
+<!-- ========== TIN TỨC ========== -->
 <?php if(isset($tintuc) && count($tintuc) > 0) { ?>
 <section class="section wow fadeInUp" style="padding: 60px 0;">
     <div class="fixwidth">
@@ -152,7 +145,7 @@
 </section>
 <?php } ?>
 
-<!--  ĐỐI TÁC  -->
+<!-- ========== ĐỐI TÁC ========== -->
 <?php if(isset($doitac) && count($doitac) > 0) { ?>
 <section class="section wow fadeInUp" style="background: #f8f9fa; padding: 50px 0;">
     <div class="fixwidth">
@@ -173,7 +166,7 @@
 </section>
 <?php } ?>
 
-<!--  KHÁCH HÀNG NÓI GÌ (TESTIMONIALS)  -->
+<!-- ========== KHÁCH HÀNG NÓI GÌ (TESTIMONIALS) ========== -->
 <?php if(isset($kh) && count($kh) > 0) { ?>
 <section class="section wow fadeInUp" style="padding: 60px 0;">
     <div class="fixwidth">
@@ -213,7 +206,7 @@
 </section>
 <?php } ?>
 
-<!--  VIDEO  -->
+<!-- ========== VIDEO ========== -->
 <?php if(isset($video) && count($video) > 0) { ?>
 <section class="section wow fadeInUp" style="background: #f8f9fa; padding: 60px 0;">
     <div class="fixwidth">
@@ -236,7 +229,7 @@
 </section>
 <?php } ?>
 
-<!--  ĐĂNG KÝ NHẬN TIN  -->
+<!-- ========== ĐĂNG KÝ NHẬN TIN ========== -->
 <section class="section wow fadeInUp" id="background-tuvan" style="padding: 50px 0; background: var(--color-main);">
     <div class="fixwidth">
         <div class="tit_dknt">
@@ -280,7 +273,7 @@
     </div>
 </section>
 
-<!--  OWL CAROUSEL INIT CHO ĐỐI TÁC + SẢN PHẨM DANH MỤC  -->
+<!-- ========== OWL CAROUSEL INIT CHO ĐỐI TÁC + SẢN PHẨM DANH MỤC ========== -->
 <script>
 $(document).ready(function(){
     /* Đối tác carousel */

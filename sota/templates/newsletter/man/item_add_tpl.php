@@ -72,10 +72,11 @@
                             <input type="text" class="form-control" name="data[diachi]" id="diachi" placeholder="Địa chỉ" value="<?=@$item['diachi']?>">
                         </div>
                     <?php } ?>
-                    <?php if(isset($config['newsletter'][$type]['chude']) && $config['newsletter'][$type]['chude'] == true) { ?>
+                    <?php if(isset($config['newsletter'][$type]['chude']) && $config['newsletter'][$type]['chude'] == true) {
+                        $chudeLabel = isset($config['newsletter'][$type]['chude_label']) ? $config['newsletter'][$type]['chude_label'] : 'Chủ đề'; ?>
                         <div class="form-group col-md-4">
-                            <label for="chude">Chủ đề:</label>
-                            <input type="text" class="form-control" name="data[chude]" id="chude" placeholder="Chủ đề" value="<?=@$item['chude']?>">
+                            <label for="chude"><?=$chudeLabel?>:</label>
+                            <input type="text" class="form-control" name="data[chude]" id="chude" placeholder="<?=$chudeLabel?>" value="<?=@$item['chude']?>">
                         </div>
                     <?php } ?>
                     <?php if(isset($config['newsletter'][$type]['tinhtrang']) && count($config['newsletter'][$type]['tinhtrang']) > 0) { ?>
