@@ -187,6 +187,13 @@
                             placeholder="Fanpage" value="<?=$options['fanpage']?>">
                     </div>
                     <?php } ?>
+                    <?php if(isset($config['setting']['youtube']) && $config['setting']['youtube'] == true) { ?>
+                    <div class="form-group col-md-4 col-sm-6">
+                        <label for="youtube">Youtube:</label>
+                        <input type="text" class="form-control" name="data[options][youtube]" id="youtube"
+                            placeholder="Youtube" value="<?=isset($options['youtube']) ? $options['youtube'] : ''?>">
+                    </div>
+                    <?php } ?>
                     <?php if(isset($config['setting']['tiktok']) && $config['setting']['tiktok'] == true) { ?>
                     <div class="form-group col-md-4 col-sm-6">
                         <label for="tiktok">Tiktok:</label>

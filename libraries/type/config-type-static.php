@@ -52,4 +52,11 @@
     $config['static'][$nametype]['tieude'] = true;
     $config['static'][$nametype]['noidung'] = true;
     $config['static'][$nametype]['noidung_cke'] = true;
+
+    /* Văn bản pháp lý */
+    $nametype = "van-ban-phap-ly";
+    $config['static'][$nametype]['title_main'] = "Văn bản pháp lý";
+    $config['static'][$nametype]['tieude'] = true;
+    $config['static'][$nametype]['noidung'] = true;
+    $config['static'][$nametype]['noidung_cke'] = true;
 ?>

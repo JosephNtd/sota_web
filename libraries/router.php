@@ -95,9 +95,12 @@ $requick = array(
 	array("tbl" => "news", "field" => "id", "source" => "news", "com" => "dich-vu", "type" => "dich-vu", 'menu' => true),
 	array("tbl" => "news", "field" => "id", "source" => "news", "com" => "du-an", "type" => "du-an", 'menu' => true),
 	array("tbl" => "news", "field" => "id", "source" => "news", "com" => "tin-tuc", "type" => "tin-tuc", 'menu' => true),
-
+	array("tbl" => "news", "field" => "id", "source" => "news", "com" => "tinh-nang", "type" => "tinh-nang", 'menu' => true),
+	array("tbl" => "news", "field" => "id", "source" => "news", "com" => "huong-dan", "type" => "huong-dan", 'menu' => true),
+	
 	/* Trang tĩnh */
 	array("tbl" => "static", "field" => "id", "source" => "static", "com" => "gioi-thieu", "type" => "gioi-thieu", 'menu' => true),
+	array("tbl" => "static", "field" => "id", "source" => "static", "com" => "van-ban-phap-ly", "type" => "van-ban-phap-ly", 'menu' => true),
 
 	/* Liên hệ */
 	array("tbl" => "", "field" => "id", "source" => "", "com" => "lien-he", "type" => "", 'menu' => true),
@@ -166,6 +169,22 @@ switch ($com) {
 		$title_crumb = "Dịch vụ";
 		break;
 
+	case 'tinh-nang':
+		$source = "news";
+		$template = isset($_GET['id']) ? "news/news_detail" : "news/news";
+		$seo->setSeo('type', isset($_GET['id']) ? "article" : "object");
+		$type = $com;
+		$title_crumb = "Tính năng nổi bật";
+		break;
+
+	case 'huong-dan':
+		$source = "news";
+		$template = isset($_GET['id']) ? "news/news_detail" : "news/news";
+		$seo->setSeo('type', isset($_GET['id']) ? "article" : "object");
+		$type = $com;
+		$title_crumb = "Hướng dẫn sử dụng";
+		break;
+
 	case 'video':
 		$source = "video";
 		$template =  "video/video";
@@ -189,7 +208,7 @@ switch ($com) {
 		$title_crumb = timkiem;
 		break;
 
-		/*case 'tags-san-pham':
+	/*case 'tags-san-pham':
 			$source = "tags";
 			$template = "product/product";
 			$type = $url_type;
@@ -214,7 +233,7 @@ switch ($com) {
 		$seo->setSeo('type', 'object');
 		break;
 
-		/*case 'account':
+	/*case 'account':
 			$source = "user";
 			break;
 		*/
