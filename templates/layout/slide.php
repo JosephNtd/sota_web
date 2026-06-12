@@ -1,26 +1,36 @@
 <?php
-/*
- * HERO SLIDER (titkul) - full width, KHÔNG sidebar danh mục.
- * Dùng class .owl-slideshow + .prev-slideshow/.next-slideshow
- * -> auto init bởi assets/js/apps.js
-*/
+/* HERO titkul: slider nền + overlay (heading + CTA + lục giác).
+ * Chỉ render ở trang chủ (nơi $slider được nạp).
+ * .owl-slideshow auto-init bởi assets/js/apps.js
+ */
 ?>
 <?php if (isset($slider) && count($slider)) { ?>
-<div class="tk-hero wrap_slider">
-    <div class="slideshow tk-slideshow">
-        <p class="control-slideshow prev-slideshow transition"><i class="fas fa-chevron-left"></i></p>
+<div class="tk-hero">
+    <!-- Slider nền -->
+    <div class="tk-hero-bg">
         <div id="slider" class="owl-carousel owl-theme owl-slideshow">
             <?php foreach ($slider as $v) { ?>
-            <div class="item_slider tk-slide-item">
-                <?php if (!empty($v['link'])) { ?><a href="<?= $v['link'] ?>" title="<?= $v['ten' . $lang] ?>"><?php } ?>
-                <img onerror="this.src='<?= THUMBS ?>/1366x520x2/assets/images/noimage.png';"
-                    src="<?= UPLOAD_PHOTO_L . $v['photo'] ?>" alt="<?= $v['ten' . $lang] ?>"
-                    title="<?= $v['ten' . $lang] ?>" />
-                <?php if (!empty($v['link'])) { ?></a><?php } ?>
+            <div class="tk-hero-slide">
+                <img onerror="this.style.display='none';"
+                    src="<?= UPLOAD_PHOTO_L . $v['photo'] ?>" alt="<?= $v['ten' . $lang] ?>" title="<?= $v['ten' . $lang] ?>" />
             </div>
-            <?php } ?>
+            <?php } ?>  
         </div>
-        <p class="control-slideshow next-slideshow transition"><i class="fas fa-chevron-right"></i></p>
+    </div>
+
+    <!-- Overlay nội dung hero -->
+    <div class="tk-hero-overlay">
+        <div class="fixwidth tk-hero-inner">
+            <div class="tk-hero-text">
+                <h1 class="tk-hero-brand">TitKul</h1>
+                <p class="tk-hero-sub">Ứng dụng chuyển đổi số Trường học<br>từ cấp Mầm non đến Phổ thông</p>
+                <a class="tk-hero-cta" href="#dangkytuvan">Đăng Ký Tư Vấn Ngay</a>
+                <p class="tk-hero-tagline">Năng động - Chuyên nghiệp - Thực tiễn</p>
+            </div>
+            <div class="tk-hero-graphic">
+                <img src="assets/images/titkul/hexagon.png" alt="Titkul" onerror="this.style.display='none';" />
+            </div>
+        </div>
     </div>
 </div>
 <?php } ?>

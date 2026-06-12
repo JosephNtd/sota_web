@@ -48,9 +48,10 @@ if (isset($_POST['submit-newsletter'])) {
         $data['dienthoai'] = (isset($_REQUEST['phone-newsletter']) && $_REQUEST['phone-newsletter'] != '') ? htmlspecialchars($_REQUEST['phone-newsletter']) : '';
         $data['email'] = (isset($_REQUEST['email-newsletter']) && $_REQUEST['email-newsletter'] != '') ? htmlspecialchars($_REQUEST['email-newsletter']) : '';
         $data['diachi'] = (isset($_REQUEST['diachi-newsletter']) && $_REQUEST['diachi-newsletter'] != '') ? htmlspecialchars($_REQUEST['diachi-newsletter']) : '';
+        $data['chude'] = (isset($_REQUEST['truong-newsletter']) && $_REQUEST['truong-newsletter'] != '') ? htmlspecialchars($_REQUEST['truong-newsletter']) : '';
         $data['noidung'] = (isset($_REQUEST['noidung-newsletter']) && $_REQUEST['noidung-newsletter'] != '') ? htmlspecialchars($_REQUEST['noidung-newsletter']) : '';
         $data['ngaytao'] = time();
-        $data['type'] = 'newsletter';
+        $data['type'] = 'dang-ky-tu-van';
         $d->insert('newsletter', $data);
 
         /* Gán giá trị gửi email */
