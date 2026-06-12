@@ -38,8 +38,11 @@
 
     
     echo $css->getCss();
-?>
 
+   
+?>
+ //  Titkul custom CSS (load sau cùng để override; Phase 8 gộp vào cached)
+    <link rel="stylesheet" href="assets/css/titkul.css?v=<?= @filemtime('assets/css/titkul.css') ?>">
 <!-- Background -->
 <?php
  

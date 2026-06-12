@@ -1,0 +1,133 @@
+/*
+   TITKUL - CSS layout shell (P4.2)
+   Brand chính lấy từ admin: var(--color-main), var(--color-nhan)
+   Có thể chỉnh nhanh accent ở :root bên dưới.
+ */
+:root {
+    --tk-main: var(--color-main, #16b1a9);
+    --tk-cta: #f7941e;          /* cam CTA - chỉnh cho khớp titkul nếu cần */
+    --tk-dark: #1f2d3d;
+    --tk-soft: #f5f8fa;
+    --tk-line: #e6ebef;
+    --tk-text: #333;
+}
+
+/* ---------- TOP BAR ---------- */
+.tk-topbar { background: var(--tk-dark); color: #fff; font-size: 14px; padding: 7px 0; }
+.tk-topbar a { color: #fff; text-decoration: none; }
+.tk-top-phone i { color: var(--tk-cta); margin-right: 5px; }
+.tk-top-hdsd { background: var(--tk-cta); padding: 4px 14px; border-radius: 20px; font-weight: 600; }
+.tk-top-hdsd:hover { filter: brightness(1.08); }
+
+/* ---------- HEADER ---------- */
+.tk-header { background: #fff; padding: 10px 0; box-shadow: 0 2px 10px rgba(0,0,0,.06); }
+.tk-header-wrap.tk-sticky .tk-header { position: fixed; top: 0; left: 0; right: 0; z-index: 999; animation: tkDrop .3s; }
+@keyframes tkDrop { from { transform: translateY(-100%); } to { transform: translateY(0); } }
+.tk-logo img { max-height: 56px; width: auto; display: block; }
+
+/* ---------- NAV ---------- */
+.tk-nav { }
+.tk-menu { list-style: none; margin: 0; padding: 0; align-items: center; }
+.tk-menu > li { position: relative; }
+.tk-menu > li > a {
+    display: block; padding: 18px 16px; color: var(--tk-dark);
+    font-weight: 600; text-transform: uppercase; font-size: 14px; text-decoration: none;
+    transition: color .2s;
+}
+.tk-menu > li > a i { font-size: 11px; margin-left: 3px; }
+.tk-menu > li:hover > a,
+.tk-menu > li.active > a { color: var(--tk-main); }
+.tk-menu > li.active > a { border-bottom: 3px solid var(--tk-main); }
+
+/* dropdown */
+.tk-menu .menu_cap_con {
+    position: absolute; top: 100%; left: 0; min-width: 230px; background: #fff;
+    box-shadow: 0 8px 24px rgba(0,0,0,.12); border-radius: 0 0 8px 8px;
+    list-style: none; margin: 0; padding: 6px 0; z-index: 50;
+    opacity: 0; visibility: hidden; transform: translateY(8px); transition: all .22s;
+}
+.tk-menu > li:hover .menu_cap_con { opacity: 1; visibility: visible; transform: translateY(0); }
+.tk-menu .menu_cap_con li a {
+    display: block; padding: 9px 18px; color: var(--tk-text); font-size: 14px; text-decoration: none;
+    border-bottom: 1px solid var(--tk-line);
+}
+.tk-menu .menu_cap_con li:last-child a { border-bottom: 0; }
+.tk-menu .menu_cap_con li a:hover { background: var(--tk-soft); color: var(--tk-main); padding-left: 23px; }
+
+/* burger (mobile) */
+.tk-burger { display: none; }
+.tk-burger .icon_menu_mobi { font-size: 24px; color: var(--tk-dark); cursor: pointer; margin: 0; }
+
+/* ---------- HERO ---------- */
+.tk-hero { position: relative; }
+.tk-slideshow { position: relative; }
+.tk-slide-item img { width: 100%; height: auto; display: block; }
+.tk-slideshow .control-slideshow {
+    position: absolute; top: 50%; transform: translateY(-50%); z-index: 20;
+    width: 44px; height: 44px; line-height: 44px; text-align: center; cursor: pointer;
+    background: rgba(255,255,255,.85); color: var(--tk-main); border-radius: 50%; margin: 0;
+}
+.tk-slideshow .prev-slideshow { left: 18px; }
+.tk-slideshow .next-slideshow { right: 18px; }
+.tk-slideshow .control-slideshow:hover { background: var(--tk-main); color: #fff; }
+
+/* ---------- BANNER + BREADCRUMB ---------- */
+.tk-pagebanner { background: var(--tk-main); background-size: cover; background-position: center; }
+.tk-pagebanner.has-img .tk-pagebanner-overlay { background: linear-gradient(to right, rgba(0,0,0,.55), rgba(0,0,0,.2)); }
+.tk-pagebanner-overlay { padding: 34px 0; }
+.tk-pagebanner-title { color: #fff; font-size: 30px; font-weight: 700; margin: 0 0 8px; text-shadow: 0 2px 8px rgba(0,0,0,.25); }
+.tk-breadcrumb .breadcrumb { display: flex; flex-wrap: wrap; list-style: none; margin: 0; padding: 0; }
+.tk-breadcrumb .breadcrumb-item { color: #fff; font-size: 14px; }
+.tk-breadcrumb .breadcrumb-item a { color: rgba(255,255,255,.9); text-decoration: none; }
+.tk-breadcrumb .breadcrumb-item + .breadcrumb-item::before { content: "/"; color: rgba(255,255,255,.7); padding: 0 8px; }
+.tk-breadcrumb .breadcrumb-item.active a { color: #fff; font-weight: 600; cursor: default; }
+
+/* ---------- FOOTER ---------- */
+.tk-footer { background: var(--tk-dark); color: #cfd8e0; padding: 46px 0 30px; }
+.tk-footer a { color: #cfd8e0; text-decoration: none; }
+.tk-foot-logo img { max-height: 54px; margin-bottom: 14px; }
+.tk-foot-company p { margin: 5px 0; font-size: 14px; line-height: 1.6; }
+.tk-foot-company i { color: var(--tk-main); width: 18px; }
+.tk-foot-name { font-weight: 700; color: #fff; font-size: 16px; margin-bottom: 8px; text-transform: uppercase; }
+.tk-foot-social { margin-top: 14px; }
+.tk-foot-social a { display: inline-block; margin-right: 8px; }
+.tk-foot-social img { height: 30px; width: auto; }
+.tk-foot-title { color: #fff; font-weight: 700; font-size: 16px; text-transform: uppercase; margin-bottom: 16px; position: relative; padding-bottom: 8px; }
+.tk-foot-title::after { content: ""; position: absolute; left: 0; bottom: 0; width: 40px; height: 3px; background: var(--tk-main); }
+.tk-foot-links { list-style: none; margin: 0; padding: 0; }
+.tk-foot-links li a { display: block; padding: 7px 0; font-size: 14px; }
+.tk-foot-links li a i { color: var(--tk-main); margin-right: 6px; }
+.tk-foot-links li a:hover { color: #fff; padding-left: 5px; transition: .2s; }
+.tk-foot-follow { display: flex; flex-direction: column; gap: 10px; }
+.tk-follow-item { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,.08); padding: 9px 14px; border-radius: 6px; font-size: 14px; width: fit-content; }
+.tk-follow-item:hover { background: var(--tk-main); color: #fff; }
+.tk-foot-bottom { background: #16212e; color: #9fb0bd; padding: 14px 0; font-size: 13px; }
+.tk-foot-bottom a { color: #cfd8e0; }
+
+/* ---------- FLOAT BUTTONS ---------- */
+.tk-floatbtn { position: fixed; bottom: 22px; right: 18px; z-index: 998; display: flex; flex-direction: column; gap: 12px; }
+.tk-float { width: 52px; height: 52px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 22px; box-shadow: 0 4px 14px rgba(0,0,0,.25); position: relative; }
+.tk-float-phone { background: var(--tk-cta); animation: tkPulse 1.6s infinite; }
+.tk-float-zalo { background: #0068ff; }
+.tk-float-zalo img { width: 30px; height: 30px; }
+.tk-float-label { position: absolute; right: 60px; white-space: nowrap; background: rgba(0,0,0,.78); color: #fff; padding: 5px 10px; border-radius: 4px; font-size: 13px; opacity: 0; pointer-events: none; transition: .2s; }
+.tk-float:hover .tk-float-label { opacity: 1; }
+@keyframes tkPulse { 0% { box-shadow: 0 0 0 0 rgba(247,148,30,.6); } 70% { box-shadow: 0 0 0 14px rgba(247,148,30,0); } 100% { box-shadow: 0 0 0 0 rgba(247,148,30,0); } }
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 991px) {
+    .tk-nav { display: none; }          /* menu desktop ẩn, dùng menu mobile (JS clone) */
+    .tk-burger { display: block; order: 3; }
+    .tk-header .fixwidth { justify-content: space-between; }
+    .tk-pagebanner-title { font-size: 24px; }
+    .tk-foot-col { margin-bottom: 26px; }
+}
+@media (max-width: 767px) {
+    .tk-top-hdsd span, .tk-topbar { font-size: 13px; }
+    .tk-slideshow .control-slideshow { width: 36px; height: 36px; line-height: 36px; }
+}
+
+/* Fix: ẩn mũi tên angle-down (desktop) khi menu được clone sang mobile (JS tự thêm chevron) */
+.menu_mobi_add .fa-angle-down { display: none; }
