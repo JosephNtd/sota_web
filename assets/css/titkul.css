@@ -40,7 +40,12 @@
 .tk-menu > li.active > a { border-bottom: 3px solid var(--tk-main); }
 
 /* dropdown — !important cần vì style.css gốc dùng !important cho color/padding/background */
+/* dropdown — !important cần vì style.css gốc dùng !important cho color/padding/background */
 .tk-menu .menu_cap_con {
+    position: absolute !important; top: 100% !important; left: 0 !important; min-width: 230px;
+    background: #fff !important; box-shadow: 0 8px 24px rgba(0,0,0,.12); border-radius: 0 0 8px 8px;
+    list-style: none; margin: 0; padding: 6px 0 !important; z-index: 50;
+    display: block !important; /* luôn block, dùng opacity thay display */
     position: absolute !important; top: 100% !important; left: 0 !important; min-width: 230px;
     background: #fff !important; box-shadow: 0 8px 24px rgba(0,0,0,.12); border-radius: 0 0 8px 8px;
     list-style: none; margin: 0; padding: 6px 0 !important; z-index: 50;
@@ -49,10 +54,16 @@
 }
 .tk-menu > li:hover .menu_cap_con { opacity: 1; visibility: visible; transform: translateY(0); }
 .tk-menu .menu_cap_con li { padding: 0 !important; background: transparent !important; }
+.tk-menu .menu_cap_con li { padding: 0 !important; background: transparent !important; }
 .tk-menu .menu_cap_con li a {
     display: block; padding: 9px 18px !important; color: var(--tk-text) !important;
     font-size: 14px; text-decoration: none; border-bottom: 1px solid var(--tk-line) !important;
+    display: block; padding: 9px 18px !important; color: var(--tk-text) !important;
+    font-size: 14px; text-decoration: none; border-bottom: 1px solid var(--tk-line) !important;
 }
+.tk-menu .menu_cap_con li:last-child a { border-bottom: 0 !important; }
+.tk-menu .menu_cap_con li a:hover { background: var(--tk-soft) !important; color: var(--tk-main) !important; padding-left: 23px !important; }
+.tk-menu .menu_cap_con li:hover { background: transparent !important; }
 .tk-menu .menu_cap_con li:last-child a { border-bottom: 0 !important; }
 .tk-menu .menu_cap_con li a:hover { background: var(--tk-soft) !important; color: var(--tk-main) !important; padding-left: 23px !important; }
 .tk-menu .menu_cap_con li:hover { background: transparent !important; }

@@ -6,7 +6,7 @@ $logo = $d->rawQueryOne("select id, photo from #_photo where type = ? and act = 
 
 // $banner = $d->rawQueryOne("select id, photo from #_photo where type = ? and act = ? limit 0,1",array('banner','photo_static'));
 
-$splistmenu = $d->rawQuery("select ten$lang, tenkhongdauvi, id,photo from #_product_list where type = ? and hienthi > 0 order by stt,id desc", array('san-pham'));
+$splistmenu = $d->rawQuery("select ten$lang, tenkhongdauvi, id, photo from #_product where type = ? and hienthi > 0 order by stt,id desc", array('san-pham'));
 $dv_listmenu = $d->rawQuery("select ten$lang, tenkhongdauvi, id,photo from #_news_list where type = ? and hienthi > 0 order by stt,id desc", array('dich-vu'));
 
 /* Menu dropdown titkul: Tính năng nổi bật + Hướng dẫn sử dụng */

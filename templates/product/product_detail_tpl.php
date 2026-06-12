@@ -80,12 +80,7 @@
                         </a>
                     </li>
                     <?php } ?>
-                    <li class="w-clear">
-                        <label class="attr-label-pro-detail">Mã sản phẩm :</label>
-                        <div class="attr-content-pro-detail">
-                            <?= (isset($row_detail['masp']) && $row_detail['masp'] != '') ? $row_detail['masp'] : 0 ?>
-                        </div>
-                    </li>
+                    <?php /* Mã sản phẩm — ẩn vì titkul là app SaaS, không có mã SP */ ?>
 
                     <?php if (isset($mau)) { ?>
                     <li class="w-clear">
@@ -108,21 +103,20 @@
                     </li>
                     <?php } ?>
 
-                    <li class="w-clear">
-                        <label class="attr-label-pro-detail">Giá bán:</label>
-                        <div class="attr-content-pro-detail">
-                            <span class="price-new-pro-detail"><?= $func->format_money($row_detail['gia']) ?></span>
-                        </div>
-                    </li>
+                    <?php /* Giá — đã tắt cho titkul (SaaS không bán online) */ ?>
 
                     <li class="w-clear">
                         <label class="attr-label-pro-detail"><?= luotxem ?>:</label>
                         <div class="attr-content-pro-detail"><?= $row_detail['luotxem'] ?></div>
                     </li>
-                    <div class="contact_pro d-flex justify-content-around mt-2">
+                    <div class="contact_pro">
+                        <div class="contact_tuvan"
+                            onclick="window.location='lien-he'">
+                            <i class="fas fa-edit"></i> Đăng ký tư vấn
+                        </div>
                         <div class="contact_zalo"
                             onclick="window.location='http\:/\/zalo.me/<?=preg_replace('/[^0-9]/','',$optsetting['zalo']);?>'">
-                            <i class="fas fa-comments"></i> Chat zalo
+                            <i class="fas fa-comments"></i> Chat Zalo
                         </div>
                         <div class="contact_hotline"
                             onclick="window.location='tel:<?=preg_replace('/[^0-9]/','',$optsetting['hotline']);?>'">
@@ -206,7 +200,7 @@
     </div>
 </div>
 
-<div class="title">Sản phẩm cùng loại</div>
+<div class="title">Ứng dụng khác</div>
 <div class="content-main w-clear">
     <?php if (isset($product) && count($product) > 0) { ?>
     <div class="loadkhung_product1 mainkhung_product">
@@ -219,8 +213,7 @@
             <div class="boxproduct_info">
                 <div class="boxproduct_name"><a href="<?= $v['tenkhongdauvi'] ?>"
                         title="<?= $v['tenvi'] ?>"><?= $v['ten' . $lang] ?></a></div>
-                <div class="boxproduct_price">Giá: <span><?= $func->format_money($v['gia']) ?></span></div>
-
+                <a class="boxproduct_more" href="<?= $v['tenkhongdauvi'] ?>">Tìm hiểu thêm <i class="fas fa-arrow-right"></i></a>
             </div>
         </div>
         <?php } ?>
