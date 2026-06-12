@@ -3,6 +3,9 @@
 <!-- SECTION 2 — GIỚI THIỆU CÔNG TY + 2 ỨNG DỤNG -->
 <section class="tk-sec tk-intro">
     <div class="fixwidth">
+        <img src="<?= !empty($gioithieu['photo']) ? UPLOAD_PHOTO_L . $gioithieu['photo'] : 'assets/images/titkul/cropped-Titkul-logo-header.png' ?>"
+                    alt="Titkul" onerror="this.src='assets/images/titkul/cropped-Titkul-logo-header.png';" 
+                    style="display: block; margin: 0 auto;"/>
         <p class="tk-intro-lead">
             Công ty sản xuất phần mềm ứng dụng Quản lý trường học, theo định hướng chuyển đổi số,
             có kết nối trục dữ liệu dùng chung của Ngành. Phần mềm của Titkul đã được Sở GD &amp; ĐT Tp.HCM
@@ -10,7 +13,7 @@
         </p>
         <div class="tk-intro-grid">
             <div class="tk-intro-left">
-                <h2 class="tk-intro-h2">PHẦN MỀM ỨNG DỤNG</h2>
+                <h2 class="tk-intro-h2 mb-3">PHẦN MỀM ỨNG DỤNG</h2>
                 <h2 class="tk-intro-h2 tk-accent">CHUYỂN ĐỔI SỐ TRƯỜNG HỌC</h2>
                 <p class="tk-intro-desc">
                     Phần mềm ứng dụng của Titkul là nền tảng số hoá, giúp nhà trường dễ dàng quản lý điều hành
@@ -151,7 +154,7 @@ $tk_doituong = (isset($huongdan) && count($huongdan) > 0) ? $huongdan : $tk_fall
             <?php foreach ($tk_doituong as $v) { ?>
                 <div class="tk-forwho-card">
                     <div class="tk-forwho-ico">
-                        <img src="<?= !empty($v['photo']) ? UPLOAD_PHOTO_L . $v['photo'] : (isset($v['ico']) ? $v['ico'] : '') ?>"
+                        <img src="<?= !empty($v['photo']) ? UPLOAD_NEWS_L . $v['photo'] : (isset($v['ico']) ? $v['ico'] : '') ?>"
                             alt="<?= $v['ten' . $lang] ?>" onerror="this.style.display='none';" />
                     </div>
                     <h3 class="tk-forwho-name"><?= $v['ten' . $lang] ?></h3>
@@ -213,8 +216,8 @@ $tk_doituong = (isset($huongdan) && count($huongdan) > 0) ? $huongdan : $tk_fall
                 <?php foreach ($doitac as $v) { ?>
                     <div class="tk-partner-item">
                         <?php if (!empty($v['link'])) { ?><a href="<?= $v['link'] ?>" target="_blank" rel="nofollow" title="<?= $v['ten' . $lang] ?>"><?php } ?>
-                            <img onerror="this.src='<?= THUMBS ?>/150x100x2/assets/images/noimage.png';"
-                                src="<?= THUMBS ?>/150x100x2/<?= UPLOAD_PHOTO_L . $v['photo'] ?>" alt="<?= $v['ten' . $lang] ?>" />
+                            <img onerror="this.src='assets/images/noimage.png';"
+                                src="<?= UPLOAD_PHOTO_L . $v['photo'] ?>" alt="<?= $v['ten' . $lang] ?>" />
                             <?php if (!empty($v['link'])) { ?></a><?php } ?>
                     </div>
                 <?php } ?>
@@ -251,11 +254,11 @@ $tk_doituong = (isset($huongdan) && count($huongdan) > 0) ? $huongdan : $tk_fall
             <h2 class="tk-sec-title">TIN TỨC SỰ KIỆN</h2>
             <div class="tk-news-grid">
                 <?php foreach ($tintuc as $k => $v) {
-                    if ($k >= 6) break; ?>
+                    if ($k >= 8) break; ?>
                     <div class="tk-news-card">
                         <a class="tk-news-thumb" href="<?= $v['tenkhongdau' . $lang] ?>" title="<?= $v['ten' . $lang] ?>">
-                            <img onerror="this.src='<?= THUMBS ?>/400x240x2/assets/images/noimage.png';"
-                                src="<?= THUMBS ?>/400x240x2/<?= UPLOAD_PHOTO_L . $v['photo'] ?>" alt="<?= $v['ten' . $lang] ?>" />
+                            <img onerror="this.src='<?= THUMBS ?>/400x240x1/assets/images/noimage.png';"
+                                src="<?= THUMBS ?>/400x240x1/<?= UPLOAD_NEWS_L . $v['photo'] ?>" alt="<?= $v['ten' . $lang] ?>" />
                         </a>
                         <div class="tk-news-body">
                             <a class="tk-news-name" href="<?= $v['tenkhongdau' . $lang] ?>" title="<?= $v['ten' . $lang] ?>"><?= $v['ten' . $lang] ?></a>
@@ -271,31 +274,13 @@ $tk_doituong = (isset($huongdan) && count($huongdan) > 0) ? $huongdan : $tk_fall
     </section>
 <?php } ?>
 
-<!-- OWL INIT (trường tiêu biểu) -->
+<!-- OWL INIT (trường tiêu biểu) — chạy sau window load để chắc chắn jQuery+owl đã nạp -->
 <script>
-    $(document).ready(function() {
-        if ($('#doitac_slider').length) {
-            $('#doitac_slider').owlCarousel({
-                loop: true,
-                margin: 20,
-                nav: false,
-                dots: false,
-                autoplay: true,
-                autoplayTimeout: 2500,
-                responsive: {
-                    0: {
-                        items: 2
-                    },
-                    480: {
-                        items: 3
-                    },
-                    768: {
-                        items: 4
-                    },
-                    1024: {
-                        items: 6
-                    }
-                }
+    window.addEventListener('load', function () {
+        if (window.jQuery && jQuery('#doitac_slider').length) {
+            jQuery('#doitac_slider').owlCarousel({
+                loop: true, margin: 24, nav: false, dots: false, autoplay: true, autoplayTimeout: 2500,
+                responsive: { 0: { items: 2 }, 480: { items: 3 }, 768: { items: 4 }, 1024: { items: 6 } }
             });
         }
     });
