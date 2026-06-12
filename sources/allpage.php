@@ -9,6 +9,10 @@ $logo = $d->rawQueryOne("select id, photo from #_photo where type = ? and act = 
 $splistmenu = $d->rawQuery("select ten$lang, tenkhongdauvi, id,photo from #_product_list where type = ? and hienthi > 0 order by stt,id desc", array('san-pham'));
 $dv_listmenu = $d->rawQuery("select ten$lang, tenkhongdauvi, id,photo from #_news_list where type = ? and hienthi > 0 order by stt,id desc", array('dich-vu'));
 
+/* Menu dropdown titkul: Tính năng nổi bật + Hướng dẫn sử dụng */
+$tinhnang_menu = $d->rawQuery("select ten$lang, tenkhongdauvi, id from #_news where type = ? and hienthi > 0 order by stt,id desc", array('tinh-nang'));
+$huongdan_menu = $d->rawQuery("select ten$lang, tenkhongdauvi, id from #_news where type = ? and hienthi > 0 order by stt,id desc", array('huong-dan'));
+
 $footer = $d->rawQueryOne("select ten$lang, noidung$lang from #_static where type = ? limit 0,1", array('footer'));
 $social1 = $d->rawQuery("select ten$lang, photo, link from #_photo where type = ? and hienthi > 0 order by stt,id desc", array('mxh'));
 // $socialpage = $d->rawQuery("select ten$lang, photo, link,mota$lang from #_photo where type = ? and hienthi > 0 order by stt,id desc",array('social-page'));

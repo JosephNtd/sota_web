@@ -61,3 +61,5 @@ assets/dflip/dflip/.git/
 *.sql
 
 !sota_db.sql
+*.jpg
+*.png

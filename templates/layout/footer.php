@@ -1,65 +1,83 @@
-<div class="boxfooter_container " id="background-footer">
+<?php
+/*
+ * FOOTER (titkul) - 3 cột
+ * Cột 1: logo + thông tin công ty ($footer static / $optsetting) + social ($social1)
+ * Cột 2: TRUY CẬP NHANH
+ * Cột 3: THEO DÕI (Zalo OA + Facebook + Youtube)
+ * youtube đọc từ JSON options: $optsetting['youtube'] (thêm ở Phase 2)
+ */
+?>
+<div class="tk-footer" id="background-footer">
     <div class="fixwidth">
         <div class="row">
-            <div class="col-md-4">
-                <div class="tit_ft"><?= $footer['ten' . $lang] ?></div>
-                <div class="des_footer">
-                    <?= htmlspecialchars_decode($footer['noidung' . $lang]) ?>
+
+            <!-- Cột 1: Thông tin công ty -->
+            <div class="col-md-5 tk-foot-col">
+                <a class="tk-foot-logo" href="" title="<?= $setting['ten' . $lang] ?>">
+                    <img onerror="this.src='assets/images/noimage.png';"
+                        src="<?= UPLOAD_PHOTO_L . $logo['photo'] ?>" alt="<?= $setting['ten' . $lang] ?>" />
+                </a>
+                <div class="tk-foot-company">
+                    <?php if (!empty($footer['noidung' . $lang])) { ?>
+                        <?= htmlspecialchars_decode($footer['noidung' . $lang]) ?>
+                    <?php } else { ?>
+                        <div class="tk-foot-name"><?= !empty($footer['ten' . $lang]) ? $footer['ten' . $lang] : $setting['ten' . $lang] ?></div>
+                        <?php if (!empty($optsetting['diachi'])) { ?><p><i class="fas fa-map-marker-alt"></i> <?= $optsetting['diachi'] ?></p><?php } ?>
+                        <?php if (!empty($optsetting['hotline'])) { ?><p><i class="fas fa-phone-alt"></i> <?= $optsetting['hotline'] ?><?= !empty($optsetting['dienthoai']) ? ' - ' . $optsetting['dienthoai'] : '' ?></p><?php } ?>
+                        <?php if (!empty($optsetting['email'])) { ?><p><i class="fas fa-envelope"></i> <?= $optsetting['email'] ?></p><?php } ?>
+                    <?php } ?>
                 </div>
-                <div class="mt-3">
+                <?php if (!empty($social1)) { ?>
+                <div class="tk-foot-social">
                     <?php foreach ($social1 as $v) { ?>
-                    <a href="<?= $v['link'] ?>" class="ftmxh" target="_blank" title="<?= $v['ten' . $lang] ?>"><img
-                            onerror="this.src='<?= THUMBS ?>/30x30x2/assets/images/noimage.png';"
-                            src="<?= THUMBS ?>/0x30x2/<?= UPLOAD_PHOTO_L . $v['photo'] ?>"
-                            alt="<?= $v['ten' . $lang] ?>" title="<?= $v['ten' . $lang] ?>" /></a>
+                    <a href="<?= $v['link'] ?>" target="_blank" rel="nofollow" title="<?= $v['ten' . $lang] ?>">
+                        <img onerror="this.src='<?= THUMBS ?>/32x32x2/assets/images/noimage.png';"
+                            src="<?= THUMBS ?>/0x32x2/<?= UPLOAD_PHOTO_L . $v['photo'] ?>" alt="<?= $v['ten' . $lang] ?>" />
+                    </a>
                     <?php } ?>
                 </div>
+                <?php } ?>
             </div>
-            <div class="col-md-4">
-                <div class="tit_ft">Chính sách hỗ trợ</div>
-                <div class="box_cs">
-                    <?php foreach ($cs as $v) { ?>
-                    <p>
-                        <a href="<?= $v['tenkhongdauvi'] ?>"><i class="fa fa-angle-double-right"
-                                aria-hidden="true"></i><?= $v['ten' . $lang] ?></a>
-                    </p>
+
+            <!-- Cột 2: Truy cập nhanh -->
+            <div class="col-md-3 tk-foot-col">
+                <div class="tk-foot-title">Truy Cập Nhanh</div>
+                <ul class="tk-foot-links">
+                    <li><a href="van-ban-phap-ly"><i class="fas fa-angle-right"></i> Văn Bản Pháp Lý</a></li>
+                    <li><a href="HDSchool"><i class="fas fa-angle-right"></i> Ứng Dụng HDSchool</a></li>
+                    <li><a href="H2School"><i class="fas fa-angle-right"></i> Ứng Dụng H2School</a></li>
+                    <li><a href="huong-dan-su-dung"><i class="fas fa-angle-right"></i> Hướng Dẫn Sử Dụng</a></li>
+                </ul>
+            </div>
+
+            <!-- Cột 3: Theo dõi -->
+            <div class="col-md-4 tk-foot-col">
+                <div class="tk-foot-title">Theo Dõi Chúng Tôi</div>
+                <div class="tk-foot-follow">
+                    <?php if (!empty($optsetting['zalo'])) { ?>
+                    <a class="tk-follow-item" href="https://zalo.me/<?= preg_replace('/[^0-9]/', '', $optsetting['zalo']) ?>" target="_blank" rel="nofollow" title="Zalo OA">
+                        <i class="fas fa-comment-dots"></i> Zalo OA
+                    </a>
                     <?php } ?>
-                    <p>
-                        <a href="#"><i class="fa fa-angle-double-right" aria-hidden="true"></i>Đổi
-                            Trả Hàng</a>
-                    </p>
-                    <p>
-                        <a href="#"><i class="fa fa-angle-double-right" aria-hidden="true"></i>Đối Tác Công Trình Tiêu
-                            Biểu</a>
-                    </p>
-                    <p>
-                        <a href="#"><i class="fa fa-angle-double-right" aria-hidden="true"></i>Tuyển
-                            Dụng</a>
-                    </p>
-                    <p>
-                        <a href="#"><i class="fa fa-angle-double-right" aria-hidden="true"></i>Chính Sách Bảo Mật</a>
-                    </p>
-                    <p>
-                        <a href="#"><i class="fa fa-angle-double-right" aria-hidden="true"></i>Miễn Phí Vận Chuyển</a>
-                    </p>
+                    <?php if (!empty($optsetting['fanpage'])) { ?>
+                    <a class="tk-follow-item" href="<?= $optsetting['fanpage'] ?>" target="_blank" rel="nofollow" title="Facebook">
+                        <i class="fab fa-facebook-f"></i> Facebook
+                    </a>
+                    <?php } ?>
+                    <?php if (!empty($optsetting['youtube'])) { ?>
+                    <a class="tk-follow-item" href="<?= $optsetting['youtube'] ?>" target="_blank" rel="nofollow" title="Youtube">
+                        <i class="fab fa-youtube"></i> Youtube
+                    </a>
+                    <?php } ?>
                 </div>
-            </div>
-            <div class="col-md-4">
-                <div class="tit_ft">Fanpage</div>
-                <iframe
-                    src="https://www.facebook.com/plugins/page.php?href=<?= $optsetting['fanpage'] ?>&tabs=timeline&width=380&height=130&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId"
-                    width="380" height="130" style="border:none;overflow:hidden" scrolling="no" frameborder="0"
-                    allowfullscreen="true"
-                    allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
             </div>
         </div>
     </div>
 </div>
-<div class="boxfooter_bottom">
+
+<div class="tk-foot-bottom">
     <div class="fixwidth d-flex justify-content-between flex-wrap">
-        <!-- <div>2025 @ All rights reserved. Design by sotagroup.vn</div> -->
-        <div>Copyright © 2025. Design by <a href="https://sotagroup.vn/thiet-ke-website" title="Thiết Kế Web SOTA"
-                style="color: #000;">Thiết Kế Web SOTA</a></div>
+        <div>Copyright © <?= date('Y') ?> <?= $setting['ten' . $lang] ?></div>
         <div>Online: <?= $online ?> | Hôm nay: <?= $counter['today'] ?> | Tổng: <?= $counter['total'] ?></div>
     </div>
 </div>
