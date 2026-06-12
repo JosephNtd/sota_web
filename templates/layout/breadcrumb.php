@@ -14,7 +14,7 @@ $tk_h1 = $seo->getSeo('h1');
 if (empty($tk_h1)) $tk_h1 = (isset($title_crumb)) ? $title_crumb : '';
 ?>
 <div class="tk-pagebanner<?= (!empty($banner)) ? ' has-img' : '' ?>"
-    <?php if (!empty($banner)) { ?>style="background-image:url('<?= UPLOAD_PHOTO_L . $banner ?>');"<?php } ?>>
+    <?php if (!empty($banner)) { ?>style="background-image:url('<?= UPLOAD_SEOPAGE_L . $banner ?>');"<?php } ?>>
     <div class="tk-pagebanner-overlay">
         <div class="fixwidth">
             <?php if (!empty($tk_h1)) { ?><h1 class="tk-pagebanner-title"><?= $tk_h1 ?></h1><?php } ?>
