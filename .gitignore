@@ -63,3 +63,5 @@ assets/dflip/dflip/.git/
 !sota_db.sql
 *.jpg
 *.png
+
+*copy.php
