@@ -58,15 +58,15 @@ if ($error == '') {
 		$row = $d->rawQueryOne("select * from #_user where username = ? and hienthi>0 limit 0,1", array($username));
 
 		if (isset($row['id'])) {
-			// DEBUG TẠM
-			$debug_hash = $func->encrypt_password($config['website']['secret'], $password, $config['website']['salt']);
-			file_put_contents('debug_login.txt', 
-				"DB password: " . $row['password'] . "\n" .
-				"Generated:   " . $debug_hash . "\n" .
-				"Input pass: " . $password . "\n" .
-				"Match: " . ($row['password'] == $debug_hash ? 'YES' : 'NO') . "\n"
-			);
-			// END DEBUG
+			// // DEBUG TẠM
+			// $debug_hash = $func->encrypt_password($config['website']['secret'], $password, $config['website']['salt']);
+			// file_put_contents('debug_login.txt', 
+			// 	"DB password: " . $row['password'] . "\n" .
+			// 	"Generated:   " . $debug_hash . "\n" .
+			// 	"Input pass: " . $password . "\n" .
+			// 	"Match: " . ($row['password'] == $debug_hash ? 'YES' : 'NO') . "\n"
+			// );
+			// // END DEBUG
 			if (isset($_COOKIE['login_admin'], $_COOKIE['login_session']) && (int)$_COOKIE['login_admin'] == $row['id'] && $_COOKIE['login_session'] == $row['login_session']) {				
 				/* Tạo Session login */
 				$_SESSION[$login_admin]['active'] = true;
