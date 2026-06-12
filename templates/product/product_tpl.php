@@ -7,8 +7,7 @@
                 <a class="boxproduct_img" href="<?=$v['tenkhongdauvi']?>"><span><img onerror="this.src='<?=THUMBS?>/380x270x2/assets/images/noimage.png';" src="<?=THUMBS?>/380x270x2/<?=UPLOAD_PRODUCT_L.$v['photo']?>" alt="<?=$v['ten'.$lang]?>"/></span></a>
                 <div class="boxproduct_info">
                     <div class="boxproduct_name"><a href="<?=$v['tenkhongdauvi']?>" title="<?=$v['tenvi']?>"><?=$v['ten'.$lang]?></a></div>
-                    <div class="boxproduct_price">Giá: <span><?=$func->format_money($v['gia'])?></span></div>
-
+                    <a class="boxproduct_more" href="<?=$v['tenkhongdauvi']?>">Tìm hiểu thêm <i class="fas fa-arrow-right"></i></a>
                 </div>
             </div>
         <?php } ?>
