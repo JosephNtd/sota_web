@@ -14,7 +14,7 @@
         <div class="fixwidth d-flex justify-content-between align-items-center">
             <div class="tk-top-left">
                 <a class="tk-top-phone" href="tel:<?= preg_replace('/[^0-9]/', '', $optsetting['hotline']) ?>">
-                    <i class="fas fa-phone-alt"></i> <?= $optsetting['hotline'] ?>
+                    <i class="fas fa-phone-alt"></i> <?= $optsetting['hotline'] ?> 094.242.9989
                 </a>
             </div>
             <div class="tk-top-right">

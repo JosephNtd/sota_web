@@ -16,6 +16,8 @@
     $dichvu = $d->rawQuery("select ten$lang, tenkhongdau$lang, id, photo, mota$lang from #_news where type = ? and noibat > 0 and hienthi > 0 order by stt,id desc ",array('dich-vu'));
    
     $video = $d->rawQuery("select ten$lang, id, video from #_news where type = ? and noibat > 0 and hienthi > 0 order by stt,id desc ",array('video'));
+
+    $huongdan = $d->rawQuery("select ten$lang, tenkhongdauvi, mota$lang, photo, id from #_news where type = ? and hienthi > 0 order by stt,id desc ",array('huong-dan'));
  
     /* SEO */
     $seoDB = $seo->getSeoDB(0,'setting','capnhat','setting');
