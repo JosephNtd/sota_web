@@ -1,26 +1,7 @@
 <?php if(!empty($static)) { ?>
 
-<!-- Banner trang -->
-<?php if(isset($banner) && $banner != '') { ?>
-<div style="position: relative; overflow: hidden; max-height: 320px; width: 100vw; margin-left: calc(-50vw + 50%);">
-    <img src="<?= UPLOAD_PHOTO_L . $banner ?>" alt="<?= $static['ten' . $lang] ?>" 
-        style="width: 100%; object-fit: cover; display: block;" />
-    <div style="position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,.55), transparent); display: flex; align-items: flex-end;">
-        <div class="fixwidth" style="padding: 30px 15px;">
-            <h1 style="color: #fff; font-size: 32px; font-weight: 700; margin: 0; text-shadow: 0 2px 8px rgba(0,0,0,.3);">
-                <?= $static['ten' . $lang] ?>
-            </h1>
-        </div>
-    </div>
-</div>
-<?php } ?>
-
-<div class="fixwidth" style="padding: 40px 15px 50px;">
-
-    <!-- Tiêu đề (nếu không có banner) -->
-    <?php if(!isset($banner) || $banner == '') { ?>
-    <div class="title"><span><?= (@$title_cat != '') ? $title_cat : @$title_crumb ?></span></div>
-    <?php } ?>
+<?php /* Banner + H1 + breadcrumb do templates/layout/breadcrumb.php lo (dùng chung mọi trang con) */ ?>
+<div class="tk-static fixwidth">
 
     <div class="row">
         <!-- Nội dung chính -->
