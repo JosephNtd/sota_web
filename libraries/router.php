@@ -206,7 +206,7 @@ switch ($com) {
 		$template = isset($_GET['id']) ? "product/product_detail" : "product/product";
 		$seo->setSeo('type', 'article');
 		$type = 'san-pham';
-		$title_crumb = 'Sản phẩm';
+		$title_crumb = 'SẢN PHẨM';
 		break;
 
 	case 'tim-kiem':

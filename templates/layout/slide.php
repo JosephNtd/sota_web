@@ -25,11 +25,13 @@
                 <h1 class="tk-hero-brand">TitKul</h1>
                 <p class="tk-hero-sub">Ứng dụng chuyển đổi số Trường học<br>từ cấp Mầm non đến Phổ thông</p>
                 <a class="tk-hero-cta" href="#dangkytuvan">Đăng Ký Tư Vấn Ngay</a>
-                <p class="tk-hero-tagline">Năng động - Chuyên nghiệp - Thực tiễn</p>
+                
             </div>
             <div class="tk-hero-graphic">
                 <img src="assets/images/titkul/hexagon.png" alt="Titkul" onerror="this.style.display='none';" />
+                 <p class="tk-hero-tagline">Năng động - Chuyên nghiệp - Thực tiễn</p>
             </div>
+           
         </div>
     </div>
 </div>
