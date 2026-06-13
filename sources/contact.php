@@ -568,6 +568,7 @@ if (isset($_POST['submit-baogia'])) {
 /* SEO */
 $seopage = $d->rawQueryOne("select * from #_seopage where type = ? limit 0,1", array('lien-he'));
 $banner = $seopage['banner'];
+$mota_page = $seopage['mota' . $lang];
 $seo->setSeo('h1', $title_crumb);
 if (!empty($seopage['title' . $seolang])) $seo->setSeo('title', $seopage['title' . $seolang]);
 else $seo->setSeo('title', $title_crumb);

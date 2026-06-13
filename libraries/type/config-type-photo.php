@@ -56,6 +56,20 @@
     $config['photo']['man_photo'][$nametype]['thumb_photo'] = '30x30x2';
     $config['photo']['man_photo'][$nametype]['img_type_photo'] = '.jpg|.gif|.png|.jpeg|.gif|.JPG|.PNG|.JPEG|.Png|.GIF';
 
+    // Tạo thêm 1 mục mới trong trang admin sota
+    $nametype = "tieu-chi";
+    $config['photo']['man_photo'][$nametype]['title_main_photo'] = "Tiêu chí";
+    $config['photo']['man_photo'][$nametype]['number_photo'] = 1;
+    $config['photo']['man_photo'][$nametype]['images_photo'] = true;
+    $config['photo']['man_photo'][$nametype]['avatar_photo'] = true;
+    $config['photo']['man_photo'][$nametype]['link_photo'] = true;
+    $config['photo']['man_photo'][$nametype]['tieude_photo'] = true;
+    $config['photo']['man_photo'][$nametype]['mota_photo'] = false;
+    $config['photo']['man_photo'][$nametype]['width_photo'] = 30;
+    $config['photo']['man_photo'][$nametype]['height_photo'] = 30;
+    $config['photo']['man_photo'][$nametype]['thumb_photo'] = '30x30x2';
+    $config['photo']['man_photo'][$nametype]['img_type_photo'] = '.jpg|.gif|.png|.jpeg|.gif|.JPG|.PNG|.JPEG|.Png|.GIF';
+
     /* Slideshow */
     // $nametype = "social-page";
     // $config['photo']['man_photo'][$nametype]['title_main_photo'] = "Social page";

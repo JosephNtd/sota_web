@@ -113,32 +113,32 @@
 <?php
 $tk_fallback = array(
     array(
-        'ten' => 'ĐỐI VỚI BAN GIÁM HIỆU',
+        'tenvi' => 'ĐỐI VỚI BAN GIÁM HIỆU',
         'tenkhongdauvi' => 'hdsd-danh-cho-ban-giam-hieu',
         'photo' => '',
         'ico' => 'assets/images/titkul/bgh.png',
-        'mota' => 'Quản lý tình hình hoạt động của Trường theo thời gian thực, nắm bắt dữ liệu, tương tác và báo cáo một cách nhanh chóng. Dễ dàng đánh giá và đưa ra các quyết định quản lý nhà Trường, tiết kiệm thời gian, công sức'
+        'motavi' => 'Quản lý tình hình hoạt động của Trường theo thời gian thực, nắm bắt dữ liệu, tương tác và báo cáo một cách nhanh chóng. Dễ dàng đánh giá và đưa ra các quyết định quản lý nhà Trường, tiết kiệm thời gian, công sức'
     ),
     array(
-        'ten' => 'ĐỐI VỚI GIÁO VIÊN',
+        'tenvi' => 'ĐỐI VỚI GIÁO VIÊN',
         'tenkhongdauvi' => 'hdsd-danh-cho-giao-vien',
         'photo' => '',
         'ico' => 'assets/images/titkul/gv.png',
-        'mota' => 'Hỗ trợ công tác giảng dạy, nghiệp vụ chuyên môn. Tương tác với Phụ huynh nhanh chóng. Giúp Giáo viên hiện đại hoá công tác giảng dạy, đồng thời hỗ trợ trong công tác kiểm tra và đánh giá năng lực một cách dễ dàng.'
+        'motavi' => 'Hỗ trợ công tác giảng dạy, nghiệp vụ chuyên môn. Tương tác với Phụ huynh nhanh chóng. Giúp Giáo viên hiện đại hoá công tác giảng dạy, đồng thời hỗ trợ trong công tác kiểm tra và đánh giá năng lực một cách dễ dàng.'
     ),
     array(
-        'ten' => 'ĐỐI VỚI PHỤ HUYNH HỌC SINH',
+        'tenvi' => 'ĐỐI VỚI PHỤ HUYNH HỌC SINH',
         'tenkhongdauvi' => 'hdsd-danh-cho-phhs',
         'photo' => '',
         'ico' => 'assets/images/titkul/phhs.png',
-        'mota' => 'Hỗ trợ nắm bắt lịch học, kết quả học tập của con (điểm số, điểm danh, …) nhanh chóng theo thời gian thực và tình hình sức khỏe học đường. Phụ huynh dễ dàng tương tác trực tiếp với nhà trường, giáo viên mọi lúc'
+        'motavi' => 'Hỗ trợ nắm bắt lịch học, kết quả học tập của con (điểm số, điểm danh, …) nhanh chóng theo thời gian thực và tình hình sức khỏe học đường. Phụ huynh dễ dàng tương tác trực tiếp với nhà trường, giáo viên mọi lúc'
     ),
     array(
-        'ten' => 'ĐỐI VỚI HỌC SINH',
+        'tenvi' => 'ĐỐI VỚI HỌC SINH',
         'tenkhongdauvi' => 'hdsd-danh-cho-hoc-sinh',
         'photo' => '',
         'ico' => 'assets/images/titkul/hs.png',
-        'mota' => 'Nắm bắt kết quả học tập và rèn luyện các kỹ năng công nghệ: Kỹ năng khoa học, công nghệ, kỹ thuật. Tương tác, thông tin với giáo viên, phụ huynh về tình hình học tập, sức khoẻ học đường'
+        'motavi' => 'Nắm bắt kết quả học tập và rèn luyện các kỹ năng công nghệ: Kỹ năng khoa học, công nghệ, kỹ thuật. Tương tác, thông tin với giáo viên, phụ huynh về tình hình học tập, sức khoẻ học đường'
     ),
 );
 $tk_doituong = (isset($huongdan) && count($huongdan) > 0) ? $huongdan : $tk_fallback;
@@ -171,7 +171,8 @@ $tk_doituong = (isset($huongdan) && count($huongdan) > 0) ? $huongdan : $tk_fall
     Field name khớp handler newsletter (allpage.php):
     name-newsletter / phone-newsletter / truong-newsletter(chude) / diachi-newsletter
 -->
-<section class="tk-sec tk-register" id="dangkytuvan">
+    <?php include TEMPLATE . LAYOUT . "form_dangky.php"; ?>
+<!-- <section class="tk-sec tk-register" id="dangkytuvan">
     <div class="fixwidth tk-register-grid">
         <div class="tk-register-left">
             <h2 class="tk-register-title">Đăng Ký Tư Vấn Ngay</h2>
@@ -205,7 +206,7 @@ $tk_doituong = (isset($huongdan) && count($huongdan) > 0) ? $huongdan : $tk_fall
             <img src="assets/images/titkul/dangky-side.webp" alt="Đăng ký tư vấn Titkul" onerror="this.style.display='none';" />
         </div>
     </div>
-</section>
+</section> -->
 
 <!-- SECTION 8 — CÁC TRƯỜNG TIÊU BIỂU -->
 <?php if (isset($doitac) && count($doitac) > 0) { ?>

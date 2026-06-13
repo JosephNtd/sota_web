@@ -85,16 +85,33 @@
 .tk-slideshow .next-slideshow { right: 18px; }
 .tk-slideshow .control-slideshow:hover { background: var(--tk-main); color: #fff; }
 
-/*  BANNER + BREADCRUMB  */
-.tk-pagebanner { background: var(--tk-main); background-size: cover; background-position: center; }
-.tk-pagebanner.has-img .tk-pagebanner-overlay { background: linear-gradient(to right, rgba(0,0,0,.55), rgba(0,0,0,.2)); }
-.tk-pagebanner-overlay { padding: 34px 0; }
-.tk-pagebanner-title { color: #fff; font-size: 30px; font-weight: 700; margin: 0 0 8px; text-shadow: 0 2px 8px rgba(0,0,0,.25); }
-.tk-breadcrumb .breadcrumb { display: flex; flex-wrap: wrap; list-style: none; margin: 0; padding: 0; }
-.tk-breadcrumb .breadcrumb-item { color: #fff; font-size: 14px; }
-.tk-breadcrumb .breadcrumb-item a { color: rgba(255,255,255,.9); text-decoration: none; }
-.tk-breadcrumb .breadcrumb-item + .breadcrumb-item::before { content: "/"; color: rgba(255,255,255,.7); padding: 0 8px; }
-.tk-breadcrumb .breadcrumb-item.active a { color: #fff; font-weight: 600; cursor: default; }
+/*  BANNER trang con — kiểu a2 (nền nhạt, text đậm, không breadcrumb trail)  */
+.tk-pagebanner { background: #e8eff8; background-size: cover; background-position: center; }
+.tk-pagebanner.has-img { background-size: cover; }
+.tk-pagebanner.has-img .tk-pagebanner-overlay { background: rgba(232,239,248,.82); }
+.tk-pagebanner-overlay { padding: 44px 0; text-align: center; }
+.tk-pagebanner-title { color: var(--tk-main); font-size: 32px; font-weight: 700; margin: 0 0 8px; text-transform: uppercase; text-shadow: none; }
+.tk-pagebanner-desc { color: var(--tk-main); font-size: 17px; font-weight: 400; margin: 0; letter-spacing: 1.5px; text-transform: uppercase; }
+
+/*  PRODUCT LIST — full-width rows, 2 cột, xen kẽ màu nền  */
+.tk-product-list { }
+.tk-product-row { background: #e8eff8; padding: 60px 0; }
+.tk-product-row--alt { background: #eaf6d8; }
+.tk-product-row__inner { display: flex; align-items: center; gap: 40px; }
+.tk-product-row__text { flex: 1; }
+.tk-product-row__img { flex: 1; text-align: center; }
+.tk-product-row__img img { max-width: 100%; max-height: 420px; object-fit: contain; }
+.tk-product-row__name { font-size: 42px; font-weight: 700; margin: 0 0 12px; }
+.tk-product-row__name a { color: var(--tk-main); text-decoration: none; }
+.tk-product-row__desc { font-size: 16px; color: #444; margin: 0 0 24px; line-height: 1.6; }
+.tk-product-row__btn { display: inline-block; padding: 10px 28px; border: 2px solid var(--tk-main); color: var(--tk-main); border-radius: 24px; font-size: 14px; font-weight: 600; text-decoration: none; transition: all .25s; }
+.tk-product-row__btn:hover { background: var(--tk-main); color: #fff; }
+@media (max-width: 767px) {
+    .tk-product-row { padding: 36px 0; }
+    .tk-product-row__inner { flex-direction: column; gap: 24px; text-align: center; }
+    .tk-product-row__name { font-size: 28px; }
+    .tk-product-row__img img { max-height: 280px; }
+}
 
 /*  FOOTER  */
 .tk-footer { background: var(--tk-dark); color: #cfd8e0; padding: 46px 0 30px; }
@@ -136,6 +153,7 @@
     .tk-burger { display: block; order: 3; }
     .tk-header .fixwidth { justify-content: space-between; }
     .tk-pagebanner-title { font-size: 24px; }
+    .tk-pagebanner-desc { font-size: 14px; letter-spacing: 1px; }
     .tk-foot-col { margin-bottom: 26px; }
 }
 @media (max-width: 767px) {
@@ -146,9 +164,7 @@
 /* ẩn mũi tên angle-down (desktop) khi menu được clone sang mobile (JS tự thêm chevron) */
 .menu_mobi_add .fa-angle-down { display: none; }
 
-/* 
-   HOMEPAGE (P4.3)
-    */
+/* HOMEPAGE (P4.3) */
 .tk-sec { padding: 60px 0; }
 .tk-sec-title { text-align: center; font-size: 30px; font-weight: 800; color: var(--tk-dark); text-transform: uppercase; margin: 0 0 14px; }
 .tk-sec-desc { text-align: center; max-width: 820px; margin: 0 auto 36px; color: #555; font-size: 16px; line-height: 1.7; }
@@ -226,19 +242,39 @@
 .tk-forwho-link { color: var(--tk-cta); font-weight: 700; text-decoration: none; font-size: 14px; }
 .tk-forwho-link:hover { text-decoration: underline; }
 
+/*  HỖ TRỢ LIÊN HỆ  */
+.tk-support { background: #fff; border-top: 1px solid #eee; padding: 50px 0; }
+.tk-support-title { color: #e60000; font-size: 28px; font-weight: 700; font-style: italic; text-align: center; line-height: 1.5; margin: 0 0 30px; }
+.tk-support-content { max-width: 900px; margin: 0 auto; }
+.tk-support-list { list-style: square; padding-left: 20px; margin: 0 0 20px; }
+.tk-support-list li { font-size: 15px; line-height: 1.8; color: #333; margin-bottom: 6px; }
+.tk-support-list li a { color: var(--tk-main); }
+.tk-support-steps { padding-left: 20px; }
+.tk-support-steps p { font-size: 15px; line-height: 1.7; color: #333; margin: 0 0 16px; }
+.tk-support-steps a { color: var(--tk-main); text-decoration: underline; }
+.tk-support-qr { text-align: center; margin: 20px 0; }
+.tk-support-qr img { max-width: 200px; height: auto; }
+@media (max-width: 767px) {
+    .tk-support-title { font-size: 22px; }
+}
+
 /* ---- SECTION 7 REGISTER ---- */
-.tk-register { background: linear-gradient(135deg, #0d8b84, var(--tk-main)); }
-.tk-register-grid { display: flex; align-items: center; gap: 50px; }
+.tk-register { background: #fde8e8; padding: 50px 0; }
+.tk-register-grid { display: flex; align-items: flex-start; gap: 50px; }
 .tk-register-left { flex: 1; }
 .tk-register-right { flex: 1; text-align: center; }
-.tk-register-right img { max-width: 100%; height: auto; border-radius: 14px; }
-.tk-register-title { color: #fff; font-size: 32px; font-weight: 800; text-transform: uppercase; margin: 0 0 10px; }
-.tk-register-desc { color: rgba(255,255,255,.9); font-size: 16px; line-height: 1.7; margin-bottom: 24px; }
-.tk-register-form .tk-field { margin-bottom: 14px; }
-.tk-register-form .form-control { width: 100%; height: 48px; border: none; border-radius: 8px; padding: 0 16px; font-size: 15px; }
-.tk-register-form .invalid-feedback { color: #ffd9d9; font-size: 13px; margin-top: 4px; }
-.tk-field-submit { margin-top: 6px; }
-.tk-register-form .tk-btn-cta { width: auto; min-width: 180px; height: 48px; border: none; }
+.tk-register-right img { max-width: 100%; height: auto; border-radius: 8px; }
+.tk-register-title { color: #e60000; font-size: 36px; font-weight: 700; font-style: italic; text-align: center; margin: 0 0 10px; }
+.tk-register-desc { color: #333; font-size: 15px; line-height: 1.7; margin-bottom: 30px; text-align: center; }
+.tk-register-form .tk-field { margin-bottom: 20px; }
+.tk-register-form label { display: block; font-size: 14px; color: #333; margin-bottom: 6px; font-weight: 500; }
+.tk-register-form label .required { color: #e60000; }
+.tk-register-form .form-control { width: 100%; height: 44px; border: 1px solid #ddd; border-radius: 0; padding: 0 12px; font-size: 15px; background: #fff; }
+.tk-register-form .form-control:focus { border-color: var(--tk-main); outline: none; }
+.tk-register-form .invalid-feedback { color: #e60000; font-size: 13px; margin-top: 4px; }
+.tk-field-submit { margin-top: 10px; }
+.tk-register-form .tk-btn-cta { min-width: 160px; height: 44px; border: 2px solid var(--tk-main); background: var(--tk-main); color: #fff; font-size: 15px; font-weight: 600; cursor: pointer; border-radius: 4px; }
+.tk-register-form .tk-btn-cta:hover { background: transparent; color: var(--tk-main); }
 
 /* ---- SECTION 8 PARTNERS ---- */
 .tk-partner-item { text-align: center; padding: 10px; }
@@ -535,8 +571,14 @@
 
 /* — VMV trên trang giới thiệu (nền sáng) — */
 .tk-about-vmv {
-    background: var(--tk-soft); margin-top: 0;
+    background: #e2f6fb;
+    margin-top: 0;
+    margin-left: calc(-50vw + 50%);
+    margin-right: calc(-50vw + 50%);
+    padding-left: calc(50vw - 50%);
+    padding-right: calc(50vw - 50%);
 }
+.tk-about-vmv .fixwidth { max-width: 800px; }
 .tk-about-vmv .tk-sec-title { margin-bottom: 42px; }
 
 /* — Share dưới cùng — */

@@ -9,7 +9,7 @@
 <body>
 
     <div id="wrapper">
-        <div id="preloader">
+        <!-- <div id="preloader">
             <div class="spinner">
                 <div class="rect1"></div>
                 <div class="rect2"></div>
@@ -17,15 +17,15 @@
                 <div class="rect4"></div>
                 <div class="rect5"></div>
             </div>
-        </div>
+        </div> -->
         <div class="content1">
         <?php
         include TEMPLATE . LAYOUT . "seo.php";
         include TEMPLATE . LAYOUT . "menu.php";
         include TEMPLATE . LAYOUT . "slide.php";
-        if ($source != 'index') include TEMPLATE . LAYOUT . "breadcrumb.php";
+        if ($source != 'index' && $source != 'static') include TEMPLATE . LAYOUT . "breadcrumb.php";
         ?>
-        <div class="<?= ($source == 'index') ? 'wrap-home' : 'wrap-main' ?> w-clear"><?php include TEMPLATE . $template . "_tpl.php"; ?></div>
+        <div class="<?= ($source == 'static') ? 'wrap-main' : 'wrap-home' ?> w-clear"><?php include TEMPLATE . $template . "_tpl.php"; ?></div>
         <?php
         include TEMPLATE . LAYOUT . "footer.php";
         //include TEMPLATE.LAYOUT."mmenu.php";
