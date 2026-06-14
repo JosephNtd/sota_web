@@ -22,12 +22,27 @@ if ($id != '') {
 	}
 
 	/* Lấy sản phẩm detail */
-	$row_detail = $d->rawQueryOne("select type, id, ten$lang, tenkhongdauvi, tenkhongdauen, mota$lang, noidung$lang, masp, luotxem, id_brand, id_mau, id_size,id_doday, id_list, id_cat, id_item, id_sub, id_tags, photo, options, giakm, giamoi, gia from #_product where id = ? and type = ? and hienthi > 0 limit 0,1", array($id, $type));
+	$row_detail = $d->rawQueryOne("select type, id, ten$lang, tenkhongdau$lang, mota$lang, noidung$lang, masp, luotxem, photo, options from #_product where id = ? and type = ? and hienthi > 0 limit 0,1", array($id, $type));
 	$getRating = $d->rawQuery("select id,rating,id_product from #_danhgia where id_product = ? order by id asc", array($id));
 	/* Cập nhật lượt xem */
 	$data_luotxem['luotxem'] = $row_detail['luotxem'] + 1;
+	$seopage_product = $d->rawQueryOne("select title$lang, mota$lang from #_seopage where type = ? limit 0,1", array($type));
 	$d->where('id', $row_detail['id']);
 	$d->update('product', $data_luotxem);
+
+	$hdsd_article = array();
+	$hdsh_list_row = $d->rawQueryOne("select id 
+									from #_news_list 
+									where tenkhongdauvi = ? and type = 'huong-dan' and hienthi > 0 
+									limit 0,1", array($row_detail['tenkhongdauvi']));
+	if($hdsh_list_row){
+		$hdsd_article = $d->rawQuery("select id, ten$lang, tenkhongdauvi, photo 
+									from #_news 
+									where id_list = ? and type = 'huong-dan' and hienthi > 0 
+									order by stt, 
+									id desc", array($hdsh_list_row['id']));
+		if(!$hdsd_article) $hdsd_article = array();
+	}
 
 	/* $pro_brand = $d->rawQueryOne("select id,ten$lang from #_product_brand where id = ? and type = ? and hienthi > 0",array($row_detail['id_brand'],$type));
 	$pro_size = $d->rawQueryOne("select id,ten$lang from #_product_size where id = ? and type = ? and hienthi > 0",array($row_detail['id_size'],$type));

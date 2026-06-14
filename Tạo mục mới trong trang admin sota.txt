@@ -1,0 +1,9 @@
+Tạo mục mới trong trang admin sota: type/config-type-*.php
+Lấy dữ liệu từ database: sources/
+Hiển thị dữ liệu lên websites: templates
+Router: librabries/router.php
+
+Mô hình MVC: 
+Model: sources
+View: templates
+Controller: router

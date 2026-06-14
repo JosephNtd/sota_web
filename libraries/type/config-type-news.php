@@ -218,7 +218,9 @@
     $config['news'][$nametype]['title_main'] = "Hướng dẫn sử dụng";
     $config['news'][$nametype]['check'] = array('noibat'=> 'Nổi bật');
     $config['news'][$nametype]['dropdown'] = false;
-    $config['news'][$nametype]['list'] = false;
+    $config['news'][$nametype]['list'] = true;
+    $config['news'][$nametype]['title_main_list'] = "Danh mục HDSD";
+    $config['news'][$nametype]['slug_list'] = true;
     $config['news'][$nametype]['view'] = true;
     $config['news'][$nametype]['slug'] = true;
     $config['news'][$nametype]['copy'] = true;
