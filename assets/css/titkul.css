@@ -113,6 +113,146 @@
     .tk-product-row__img img { max-height: 280px; }
 }
 
+/* 
+   PRODUCT DETAIL — Hero + Info (Phase 4.4b)
+ */
+/* --- Section 1: Hero 2 cột --- */
+.tk-prodetail-hero { background: #e8eff8; padding: 60px 0 50px; }
+.tk-prodetail-hero__inner { display: flex; align-items: center; gap: 40px; }
+.tk-prodetail-hero__left { flex: 1; }
+.tk-prodetail-hero__right { flex: 1; text-align: center; }
+.tk-prodetail-hero__right img { max-width: 100%; max-height: 500px; object-fit: contain; }
+
+.tk-prodetail-hero__tagline {
+    font-size: 28px; font-weight: 800; font-style: italic;
+    color: var(--tk-dark); text-transform: uppercase;
+    line-height: 1.35; margin: 0 0 24px;
+}
+.tk-prodetail-hero__name {
+    font-size: 48px; font-weight: 900; font-style: italic;
+    color: #c0392b; margin: 0 0 14px; line-height: 1.15;
+}
+.tk-prodetail-hero__subtitle {
+    font-size: 18px; font-weight: 600; font-style: italic;
+    color: var(--tk-dark); margin: 0 0 30px;
+}
+.tk-prodetail-hero__dltext {
+    font-size: 14px; font-style: italic; color: #666; margin: 0 0 16px;
+}
+.tk-prodetail-hero__badges { display: flex; gap: 24px; align-items: center; flex-wrap: nowrap; }
+.tk-prodetail-hero__badges a { display: inline-block; transition: transform .2s; }
+.tk-prodetail-hero__badges a:hover { transform: scale(1.05); }
+.tk-prodetail-hero__badges img { height: 52px; width: auto; }
+
+/* --- Section 2: Logo + Mô tả --- */
+.tk-prodetail-info { padding: 50px 0 40px; background: #fff; text-align: center; }
+.tk-prodetail-info__name {
+    font-size: 46px; font-weight: 900; color: var(--tk-dark);
+    margin: 0 0 24px; line-height: 1.2;
+}
+.tk-prodetail-info__desc {
+    max-width: 860px; margin: 0 auto; text-align: left;
+    font-size: 16px; line-height: 1.8; color: var(--tk-text);
+}
+
+/* --- Section 3: Heading HDSD --- */
+.tk-prodetail-hdsd-heading { padding: 50px 0 10px; background: #fff; text-align: center; }
+.tk-prodetail-hdsd-heading__title {
+    font-size: 32px; font-weight: 800; font-style: italic;
+    color: var(--tk-main); text-transform: uppercase;
+    margin: 0; line-height: 1.3;
+}
+ 
+/* --- Section 4: Cards HDSD --- */
+.tk-prodetail-hdsd-cards { padding: 20px 0 40px; background: #fff; }
+.tk-prodetail-hdsd-cards__grid {
+    display: flex; justify-content: center; gap: 28px; flex-wrap: wrap;
+}
+.tk-prodetail-hdsd-card {
+    display: flex; flex-direction: column; align-items: center;
+    width: 200px; padding: 24px 16px;
+    border: 2px solid var(--tk-main); border-radius: 14px;
+    text-decoration: none; transition: transform .25s, box-shadow .25s;
+    background: #fff;
+}
+.tk-prodetail-hdsd-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 28px rgba(0,0,0,.1);
+}
+.tk-prodetail-hdsd-card__icon { margin-bottom: 16px; }
+.tk-prodetail-hdsd-card__icon img { width: 72px; height: 72px; object-fit: contain; }
+.tk-prodetail-hdsd-card__name {
+    font-size: 14px; font-weight: 700; text-transform: uppercase;
+    color: var(--tk-dark); text-align: center;
+    margin: 0; line-height: 1.5;
+}
+ 
+/* --- Section 5: Gallery ảnh --- */
+.tk-prodetail-gallery { padding: 40px 0; background: #fff; }
+.tk-prodetail-gallery__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+}
+.tk-prodetail-gallery__item { overflow: hidden; border-radius: 8px; }
+.tk-prodetail-gallery__item img {
+    width: 100%; height: 100%; object-fit: cover;
+    display: block; transition: transform .4s;
+}
+.tk-prodetail-gallery__item:hover img { transform: scale(1.05); }
+ 
+@media (max-width: 767px) {
+    .tk-prodetail-hdsd-heading__title { font-size: 24px; }
+    .tk-prodetail-hdsd-cards__grid { gap: 16px; }
+    .tk-prodetail-hdsd-card { width: 160px; padding: 18px 12px; }
+    .tk-prodetail-hdsd-card__icon img { width: 56px; height: 56px; }
+    .tk-prodetail-gallery__grid { grid-template-columns: repeat(2, 1fr); }
+}
+ 
+/* --- Related products wrapper --- */
+.tk-prodetail-related { padding: 40px 0 50px; background: var(--tk-soft); }
+.tk-prodetail-related .title {
+    font-size: 28px; font-weight: 800; color: var(--tk-dark);
+    text-align: center; margin-bottom: 30px;
+}
+.tk-prodetail-related .mainkhung_product { display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px; }
+.tk-prodetail-related .boxproduct_item {
+    background: #fff; border-radius: 14px; overflow: hidden;
+    box-shadow: 0 4px 18px rgba(0,0,0,.07); transition: transform .25s, box-shadow .25s;
+    display: flex; flex-direction: column;
+}
+.tk-prodetail-related .boxproduct_item:hover { transform: translateY(-6px); box-shadow: 0 16px 34px rgba(0,0,0,.12); }
+.tk-prodetail-related .boxproduct_img { display: block; overflow: hidden; }
+.tk-prodetail-related .boxproduct_img img { width: 100%; height: 230px; object-fit: cover; display: block; transition: .4s; }
+.tk-prodetail-related .boxproduct_item:hover .boxproduct_img img { transform: scale(1.05); }
+.tk-prodetail-related .boxproduct_info { padding: 20px; display: flex; flex-direction: column; flex: 1; }
+.tk-prodetail-related .boxproduct_name { margin-bottom: 14px; }
+.tk-prodetail-related .boxproduct_name a { font-size: 19px; font-weight: 800; color: var(--tk-dark); text-decoration: none; line-height: 1.4; }
+.tk-prodetail-related .boxproduct_name a:hover { color: var(--tk-main); }
+.tk-prodetail-related .boxproduct_more {
+    display: inline-block; margin-top: auto; padding: 8px 20px; border-radius: 20px;
+    background: var(--tk-main); color: #fff; font-weight: 600; font-size: 14px; text-decoration: none; text-align: center;
+}
+.tk-prodetail-related .boxproduct_more:hover { filter: brightness(1.08); }
+
+@media (max-width: 991px) {
+    .tk-prodetail-hero__inner { gap: 30px; }
+    .tk-prodetail-hero__tagline { font-size: 22px; }
+    .tk-prodetail-hero__name { font-size: 36px; }
+    .tk-prodetail-related .mainkhung_product { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 767px) {
+    .tk-prodetail-hero { padding: 36px 0 30px; }
+    .tk-prodetail-hero__inner { flex-direction: column; text-align: center; }
+    .tk-prodetail-hero__tagline { font-size: 20px; }
+    .tk-prodetail-hero__name { font-size: 32px; }
+    .tk-prodetail-hero__subtitle { font-size: 16px; margin-bottom: 20px; }
+    .tk-prodetail-hero__badges { justify-content: center; }
+    .tk-prodetail-hero__right img { max-height: 320px; }
+    .tk-prodetail-info__name { font-size: 32px; }
+    .tk-prodetail-related .mainkhung_product { grid-template-columns: 1fr; }
+}
+
 /*  FOOTER  */
 .tk-footer { background: var(--tk-dark); color: #cfd8e0; padding: 46px 0 30px; }
 .tk-footer a { color: #cfd8e0; text-decoration: none; }
@@ -324,10 +464,10 @@
     .tk-hero-sub { font-size: 17px; }
 }
 /* 
-   INNER PAGES (P4.4)
+   INNER PAGES
    - Kế thừa token homepage (--tk-main/--tk-cta/--tk-dark/--tk-soft…)
    - TẤT CẢ scope dưới .wrap-main → KHÔNG đụng homepage (.wrap-home)
-    */
+*/
 .wrap-main { padding-top: 42px; }
 
 /* ---- Tiêu đề khối dùng chung (.title) ---- */
