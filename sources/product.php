@@ -45,12 +45,16 @@ if ($id != '') {
 	}
 
 	/* Chức năng SP (từ photo module, type=chuc-nang, link=product_slug) */
-	$chucnang_items = $d->rawQuery("select id, ten$lang, photo from #_photo where type = 'chuc-nang' and link = ? and act <> 'photo_static' and hienthi > 0 order by stt, id desc", array($row_detail['tenkhongdauvi']));
+	$chucnang_items = $d->rawQuery("select id, ten$lang, mota$lang, photo from #_photo where type = 'chuc-nang' and link = ? and act <> 'photo_static' and hienthi > 0 order by stt, id desc", array($row_detail['tenkhongdauvi']));
 	if(!$chucnang_items) $chucnang_items = array();
-
+	
 	/* Tính năng nổi bật SP (từ photo module, type=tinh-nang-sp, link=product_slug) */
 	$tinhnangsp_items = $d->rawQuery("select id, ten$lang, photo from #_photo where type = 'tinh-nang-sp' and link = ? and act <> 'photo_static' and hienthi > 0 order by stt, id desc", array($row_detail['tenkhongdauvi']));
 	if(!$tinhnangsp_items) $tinhnangsp_items = array();
+
+	/* Lợi ích SP (từ photo module, type=loi-ich, link=product_slug) */
+	$loiich_items = $d->rawQuery("select id, ten$lang, mota$lang, photo from #_photo where type = 'loi-ich' and link = ? and act <> 'photo_static' and hienthi > 0 order by stt, id desc", array($row_detail['tenkhongdauvi']));
+	if(!$loiich_items) $loiich_items = array();
 
 	/* $pro_brand = $d->rawQueryOne("select id,ten$lang from #_product_brand where id = ? and type = ? and hienthi > 0",array($row_detail['id_brand'],$type));
 	$pro_size = $d->rawQueryOne("select id,ten$lang from #_product_size where id = ? and type = ? and hienthi > 0",array($row_detail['id_size'],$type));
@@ -98,6 +102,11 @@ if ($id != '') {
 	/* Banner tính năng (2 ảnh: background + mockup) */
 	$banner_tinhnang = $d->rawQuery("select photo, ten$lang from #_gallery where id_photo = ? and com='product' and type = ? and kind='man' and val = 'banner-tinhnang' and hienthi > 0 order by stt, id desc", array($row_detail['id'], $type));
 	if(!$banner_tinhnang) $banner_tinhnang = array();
+
+
+	/* Video sản phẩm (gallery kind=video) */
+	$video_sp = $d->rawQuery("select ten$lang, link_video from #_gallery where id_photo = ? and com='product' and type = ? and kind='man' and val = 'video' and hienthi > 0 order by stt, id desc", array($row_detail['id'], $type));
+	if(!$video_sp) $video_sp = array();
 
 	/* Lấy sản phẩm cùng loại */
 	/*$where = "";

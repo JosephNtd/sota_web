@@ -307,3 +307,32 @@ $tk_doituong = (isset($huongdan) && count($huongdan) > 0) ? $huongdan : $tk_fall
     }
 });
 </script>
+<script>
+    window.addEventListener('DOMContentLoaded', function() {
+        // Lấy tất cả các section có class tk-sec trên trang chủ
+        const allSections = document.querySelectorAll('section.tk-sec');
+        
+        // Cấu hình bộ nhận diện IntersectionObserver
+        const sectionObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // Khi section lọt vào tầm mắt -> Thêm class kích hoạt hiệu ứng
+                    entry.target.classList.add('is-revealed'); 
+                } else {
+                    // Khi section khuất khỏi tầm mắt -> Xóa class để lần sau cuộn lại vẫn chạy tiếp
+                    entry.target.classList.remove('is-revealed');
+                }
+            });
+        }, {
+            root: null,
+            // Đổi rootMargin một chút để trải nghiệm cuộn lên/xuống mượt mà, không bị khựng giữa chừng
+            rootMargin: '-40px 0px -40px 0px', 
+            threshold: 0.1 // Đạt 10% diện tích xuất hiện là kích hoạt
+        });
+
+        // Bắt đầu theo dõi từng section
+        allSections.forEach(section => {
+            sectionObserver.observe(section);
+        });
+    });
+</script>
