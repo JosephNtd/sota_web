@@ -108,7 +108,7 @@
     $config['photo']['man_photo'][$nametype]['select_photo'] = array('hdschool'=>'HDSchool', 'h2school'=>'H2School', 'zalo-mini-app'=>'Zalo Mini App');
     $config['photo']['man_photo'][$nametype]['select_label'] = "Sản phẩm";
     $config['photo']['man_photo'][$nametype]['tieude_photo'] = true;
-    $config['photo']['man_photo'][$nametype]['mota_photo'] = false;
+    $config['photo']['man_photo'][$nametype]['mota_photo'] = true;
     $config['photo']['man_photo'][$nametype]['width_photo'] = 80;
     $config['photo']['man_photo'][$nametype]['height_photo'] = 80;
     $config['photo']['man_photo'][$nametype]['thumb_photo'] = '80x80x2';
@@ -125,6 +125,22 @@
     $config['photo']['man_photo'][$nametype]['select_label'] = "Sản phẩm";
     $config['photo']['man_photo'][$nametype]['tieude_photo'] = true;
     $config['photo']['man_photo'][$nametype]['mota_photo'] = false;
+    $config['photo']['man_photo'][$nametype]['width_photo'] = 80;
+    $config['photo']['man_photo'][$nametype]['height_photo'] = 80;
+    $config['photo']['man_photo'][$nametype]['thumb_photo'] = '80x80x2';
+    $config['photo']['man_photo'][$nametype]['img_type_photo'] = '.jpg|.gif|.png|.jpeg|.gif|.JPG|.PNG|.JPEG|.Png|.GIF';
+
+    /* Lợi ích sản phẩm (icon grid section "Lợi ích của phần mềm") */
+    $nametype = "loi-ich";
+    $config['photo']['man_photo'][$nametype]['title_main_photo'] = "Lợi ích SP";
+    $config['photo']['man_photo'][$nametype]['number_photo'] = 1;
+    $config['photo']['man_photo'][$nametype]['images_photo'] = true;
+    $config['photo']['man_photo'][$nametype]['avatar_photo'] = true;
+    $config['photo']['man_photo'][$nametype]['link_photo'] = false;
+    $config['photo']['man_photo'][$nametype]['select_photo'] = array('hdschool'=>'HDSchool', 'h2school'=>'H2School', 'zalo-mini-app'=>'Zalo Mini App');
+    $config['photo']['man_photo'][$nametype]['select_label'] = "Sản phẩm";
+    $config['photo']['man_photo'][$nametype]['tieude_photo'] = true;
+    $config['photo']['man_photo'][$nametype]['mota_photo'] = true;
     $config['photo']['man_photo'][$nametype]['width_photo'] = 80;
     $config['photo']['man_photo'][$nametype]['height_photo'] = 80;
     $config['photo']['man_photo'][$nametype]['thumb_photo'] = '80x80x2';

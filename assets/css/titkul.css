@@ -334,18 +334,21 @@
     padding: 50px 0 60px;
 }
 .tk-prodetail-tnb-grid__wrap {
-    display: flex; flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
     justify-content: center;
+    justify-items: center;
     gap: 40px 60px;
     max-width: 1000px;
     margin: 0 auto;
 }
 .tk-prodetail-tnb-item {
     width: 200px;
+    width: 100%;    
     text-align: center;
 }
 .tk-prodetail-tnb-item__icon {
-    width: 64px; height: 64px;
+    width: 50px; height: 50px;
     margin: 0 auto 14px;
     display: flex; align-items: center; justify-content: center;
     background: var(--tk-main);
@@ -376,11 +379,196 @@
     .tk-prodetail-tnb-banner__text h2 { font-size: 22px; }
     .tk-prodetail-tnb-banner__text .tk-brand-name { font-size: 34px; }
     .tk-prodetail-tnb-grid { padding: 30px 0 40px; }
-    .tk-prodetail-tnb-grid__wrap { gap: 24px 30px; }
-    .tk-prodetail-tnb-item { width: 140px; }
+    .tk-prodetail-tnb-grid__wrap { gap: 24px 30px; grid-template-columns: repeat(2, 1fr); }
+    .tk-prodetail-tnb-item { max-width: 140px; }
     .tk-prodetail-tnb-item__icon { width: 50px; height: 50px; border-radius: 10px; padding: 10px; }
     .tk-prodetail-tnb-item__name { font-size: 13px; }
 }
+/* --- Section 11: Lợi ích của phần mềm --- */
+.tk-prodetail-benefits {
+    background: #e8eff8;
+    padding: 60px 0;
+}
+.tk-prodetail-benefits__inner {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+}
+.tk-prodetail-benefits__left {
+    flex: 1;
+    min-width: 0;
+}
+.tk-prodetail-benefits__heading {
+    font-size: 28px;
+    font-weight: 800;
+    font-style: italic;
+    color: var(--tk-dark);
+    text-transform: uppercase;
+    margin: 0 0 6px;
+    letter-spacing: 0.5px;
+}
+.tk-prodetail-benefits__brand {
+    font-size: 44px;
+    font-weight: 900;
+    color: var(--tk-main);
+    margin: 0 0 18px;
+    line-height: 1.1;
+}
+.tk-prodetail-benefits__desc {
+    font-size: 15px;
+    line-height: 1.75;
+    color: var(--tk-text);
+    margin-bottom: 30px;
+}
+.tk-prodetail-benefits__grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+}
+.tk-prodetail-benefit-card {
+    flex: 1 1 140px;
+    max-width: 200px;
+    text-align: center;
+}
+.tk-prodetail-benefit-card__icon {
+    width: 56px;
+    height: 56px;
+    margin: 0 auto 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.tk-prodetail-benefit-card__icon img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+.tk-prodetail-benefit-card__name {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--tk-dark);
+    line-height: 1.4;
+    margin: 0;
+}
+.tk-prodetail-benefits__right {
+    flex: 0 0 380px;
+    max-width: 380px;
+}
+.tk-prodetail-benefits__right img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+@media (max-width: 767px) {
+    .tk-prodetail-benefits { padding: 36px 0; }
+    .tk-prodetail-benefits__inner {
+        flex-direction: column-reverse;
+        gap: 28px;
+    }
+    .tk-prodetail-benefits__right { flex: none; max-width: 260px; margin: 0 auto; }
+    .tk-prodetail-benefits__left { text-align: center; }
+    .tk-prodetail-benefits__heading { font-size: 22px; }
+    .tk-prodetail-benefits__brand { font-size: 32px; }
+    .tk-prodetail-benefits__grid { justify-content: center; }
+    .tk-prodetail-benefit-card { flex: 0 0 120px; }
+    .tk-prodetail-benefit-card__icon { width: 44px; height: 44px; }
+    .tk-prodetail-benefit-card__name { font-size: 13px; }
+}
+
+/* --- Section 12+13: Video header (tên SP + subtitle) --- */
+.tk-prodetail-video-header {
+    padding: 50px 0 10px;
+    text-align: center;
+    background: #fff;
+}
+.tk-prodetail-video-header__name {
+    font-size: 48px;
+    font-weight: 900;
+    color: var(--tk-main);
+    margin: 0 0 8px;
+    line-height: 1.1;
+}
+.tk-prodetail-video-header__sub {
+    font-size: 22px;
+    font-weight: 700;
+    font-style: italic;
+    color: var(--tk-dark);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin: 0;
+}
+
+/* --- Section 14: Video grid --- */
+.tk-prodetail-videos {
+    padding: 30px 0 60px;
+    background: #fff;
+}
+.tk-prodetail-videos__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+}
+.tk-prodetail-video-card {
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: box-shadow .25s;
+}
+.tk-prodetail-video-card:hover {
+    box-shadow: 0 6px 24px rgba(0,0,0,.1);
+}
+.tk-prodetail-video-card__thumb {
+    position: relative;
+    aspect-ratio: 16/9;
+    overflow: hidden;
+    background: #000;
+}
+.tk-prodetail-video-card__thumb a {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+.tk-prodetail-video-card__thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: opacity .2s;
+}
+.tk-prodetail-video-card:hover .tk-prodetail-video-card__thumb img {
+    opacity: .85;
+}
+.tk-prodetail-video-card__play {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    opacity: .85;
+    transition: opacity .2s, transform .2s;
+}
+.tk-prodetail-video-card:hover .tk-prodetail-video-card__play {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.1);
+}
+.tk-prodetail-video-card__title {
+    padding: 14px 16px;
+    margin: 0;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--tk-dark);
+    text-align: center;
+    line-height: 1.4;
+}
+
+@media (max-width: 767px) {
+    .tk-prodetail-video-header { padding: 36px 0 8px; }
+    .tk-prodetail-video-header__name { font-size: 32px; }
+    .tk-prodetail-video-header__sub { font-size: 16px; }
+    .tk-prodetail-videos__grid { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; }
+    .tk-prodetail-video-card__title { font-size: 14px; padding: 10px 12px; }
+}
+
 /* --- Related products wrapper --- */
 .tk-prodetail-related { padding: 40px 0 50px; background: var(--tk-soft); }
 .tk-prodetail-related .title {
@@ -1016,4 +1204,28 @@
     -webkit-transition-timing-function: linear !important;
     -o-transition-timing-function: linear !important;
     transition-timing-function: linear !important;
+}
+/* ==========================================================================
+   HỆ THỐNG HIỆU ỨNG CUỘN TRANG (SCROLL REVEAL ANIMATION)
+   ========================================================================== */
+
+/* 1. Trạng thái mặc định khi trang web vừa tải xong: ẩn bớt và đẩy nhẹ xuống */
+section.tk-sec {
+    opacity: 0;
+    transform: scale(0.95);
+    transition: opacity 0.8s cubic-bezier(0.215, 0.610, 0.355, 1), 
+                transform 0.8s cubic-bezier(0.215, 0.610, 0.355, 1);
+    will-change: opacity, transform; /* Tối ưu phần cứng trình duyệt, chống giật */
+}
+
+/* 2. Trạng thái khi người dùng cuộn chuột tới vị trí của section */
+section.tk-sec.is-revealed {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* 3. Ngoại lệ: Giữ nguyên Section đầu tiên (Intro) hiển thị ngay lập tức */
+section.tk-sec.tk-intro {
+    opacity: 1;
+    transform: translateY(0);
 }

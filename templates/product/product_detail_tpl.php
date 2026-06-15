@@ -131,12 +131,17 @@ $pd_subtitle = (!empty($row_detail['masp'])) ? $row_detail['masp'] : '';
     </div>
 <?php } ?>
 
-<!-- Section 6: Mô tả chức năng (trường motavi của product) -->
-<?php if ($pd_mota) { ?>
+<!-- Section 6: Mô tả chức năng (lấy từ motavi của item chức năng đầu tiên) -->
+<?php 
+    $func_intro = '';
+    if (isset($chucnang_items[0]['mota' . $lang]) && $chucnang_items[0]['mota' . $lang] != '') {
+        $func_intro = htmlspecialchars_decode($chucnang_items[0]['mota' . $lang]);
+    }
+    if ($func_intro) { ?>
 <div class="tk-prodetail-func-intro">
     <div class="fixwidth">
         <div class="tk-prodetail-func-intro__text">
-            <?= htmlspecialchars_decode($pd_mota) ?>
+            <?= $func_intro ?>
         </div>
     </div>
 </div>
@@ -163,20 +168,19 @@ $pd_subtitle = (!empty($row_detail['masp'])) ? $row_detail['masp'] : '';
 </div>
 <?php } ?>
 
-<!-- Section 9: Banner tính năng nổi bật (background + mockup + title) -->
-<?php if (count($banner_tinhnang) > 0) { 
-    $tn_bg = isset($banner_tinhnang[0]) ? UPLOAD_PRODUCT_L . $banner_tinhnang[0]['photo'] : '';
-    $tn_mockup = isset($banner_tinhnang[1]) ? UPLOAD_PRODUCT_L . $banner_tinhnang[1]['photo'] : '';
+<!-- Section 9: Banner tính năng nổi bật (background + product photo + title) -->
+<?php 
+    $tn_bg = (count($banner_tinhnang) > 0 && isset($banner_tinhnang[0])) ? UPLOAD_PRODUCT_L . $banner_tinhnang[0]['photo'] : '';
 ?>
 <div class="tk-prodetail-tnb-banner" <?php if ($tn_bg) { ?>style="background-image: url('<?= $tn_bg ?>');"<?php } ?>>
     <div class="tk-prodetail-tnb-banner__overlay"></div>
     <div class="fixwidth">
         <div class="tk-prodetail-tnb-banner__inner">
-            <?php if ($tn_mockup) { ?>
             <div class="tk-prodetail-tnb-banner__mockup">
-                <img src="<?= $tn_mockup ?>" alt="<?= $pd_name ?>">
+                <img src="<?= $pd_photo ?>"
+                     onerror="this.src='assets/images/noimage.png';"
+                     alt="<?= $pd_name ?>">
             </div>
-            <?php } ?>
             <div class="tk-prodetail-tnb-banner__text">
                 <h2>TÍNH NĂNG NỔI BẬT CỦA</h2>
                 <p class="tk-brand-name"><?= $pd_name ?></p>
@@ -184,7 +188,6 @@ $pd_subtitle = (!empty($row_detail['masp'])) ? $row_detail['masp'] : '';
         </div>
     </div>
 </div>
-<?php } ?>
 
 <!-- Section 10: Grid tính năng nổi bật SP (từ photo module tinh-nang-sp) -->
 <?php if (isset($tinhnangsp_items) && count($tinhnangsp_items) > 0) { ?>
@@ -199,6 +202,95 @@ $pd_subtitle = (!empty($row_detail['masp'])) ? $row_detail['masp'] : '';
                          alt="<?= $tnsp['ten' . $lang] ?>">
                 </div>
                 <p class="tk-prodetail-tnb-item__name"><?= $tnsp['ten' . $lang] ?></p>
+            </div>
+            <?php } ?>
+        </div>
+    </div>
+</div>
+<?php } ?>
+
+<!-- Section 11: Lợi ích của phần mềm (2 cột: text+icons trái, ảnh SP phải) -->
+<?php if (isset($loiich_items) && count($loiich_items) > 0) { 
+    /* Lấy mô tả section từ motavi của item đầu tiên (admin nhập ở ô "Mô tả" của item #1) */
+    $loiich_desc = '';
+    if (isset($loiich_items[0]['mota' . $lang]) && $loiich_items[0]['mota' . $lang] != '') {
+        $loiich_desc = htmlspecialchars_decode($loiich_items[0]['mota' . $lang]);
+    }
+?>
+<div class="tk-prodetail-benefits">
+    <div class="fixwidth">
+        <div class="tk-prodetail-benefits__inner">
+
+            <!-- Cột trái: tiêu đề + mô tả + icon grid -->
+            <div class="tk-prodetail-benefits__left">
+                <h2 class="tk-prodetail-benefits__heading">LỢI ÍCH CỦA PHẦN MỀM</h2>
+                <p class="tk-prodetail-benefits__brand tk-brand-name"><?= $pd_name ?></p>
+
+                <?php if ($loiich_desc) { ?>
+                    <div class="tk-prodetail-benefits__desc"><?= $loiich_desc ?></div>
+                <?php } ?>
+
+                <div class="tk-prodetail-benefits__grid">
+                    <?php foreach ($loiich_items as $li) { ?>
+                    <div class="tk-prodetail-benefit-card">
+                        <div class="tk-prodetail-benefit-card__icon">
+                            <img src="<?= UPLOAD_PHOTO_L . $li['photo'] ?>"
+                                 onerror="this.style.display='none';"
+                                 alt="<?= $li['ten' . $lang] ?>">
+                        </div>
+                        <p class="tk-prodetail-benefit-card__name"><?= $li['ten' . $lang] ?></p>
+                    </div>
+                    <?php } ?>
+                </div>
+            </div>
+
+            <!-- Cột phải: ảnh sản phẩm -->
+            <div class="tk-prodetail-benefits__right">
+                <img src="<?= $pd_photo ?>"
+                     onerror="this.src='assets/images/noimage.png';"
+                     alt="<?= $pd_name ?>">
+            </div>
+
+        </div>
+    </div>
+</div>
+<?php } ?>
+
+<!-- Section 12 + 13: Tên SP + Subtitle per-product -->
+<div class="tk-prodetail-video-header">
+    <div class="fixwidth">
+        <h2 class="tk-prodetail-video-header__name tk-brand-name"><?= $pd_name ?></h2>
+        <?php if ($pd_subtitle) { ?>
+            <p class="tk-prodetail-video-header__sub"><?= $pd_subtitle ?></p>
+        <?php } ?>
+    </div>
+</div>
+
+<!-- Section 14: Video sản phẩm -->
+<?php if (isset($video_sp) && count($video_sp) > 0) { ?>
+<div class="tk-prodetail-videos">
+    <div class="fixwidth">
+        <div class="tk-prodetail-videos__grid">
+            <?php foreach ($video_sp as $vid) {
+                /* Trích YouTube ID từ link_video */
+                $yt_id = '';
+                $yt_link = isset($vid['link_video']) ? $vid['link_video'] : '';
+                if (preg_match('/(?:youtu\.be\/|youtube\.com\/(?:watch\?.*v=|embed\/|shorts\/))([a-zA-Z0-9_-]{11})/', $yt_link, $m)) {
+                    $yt_id = $m[1];
+                }
+                if (!$yt_id) continue;
+            ?>
+            <div class="tk-prodetail-video-card">
+                <div class="tk-prodetail-video-card__thumb">
+                    <a href="<?= $yt_link ?>" target="_blank" rel="noopener">
+                        <img src="https://img.youtube.com/vi/<?= $yt_id ?>/hqdefault.jpg"
+                             alt="<?= $vid['ten' . $lang] ?>">
+                        <span class="tk-prodetail-video-card__play">
+                            <svg viewBox="0 0 68 48" width="68" height="48"><path d="M66.52 7.74c-.78-2.93-2.49-5.41-5.42-6.19C55.79.13 34 0 34 0S12.21.13 6.9 1.55c-2.93.78-4.64 3.26-5.42 6.19C.06 13.05 0 24 0 24s.06 10.95 1.48 16.26c.78 2.93 2.49 5.41 5.42 6.19C12.21 47.87 34 48 34 48s21.79-.13 27.1-1.55c2.93-.78 4.64-3.26 5.42-6.19C67.94 34.95 68 24 68 24s-.06-10.95-1.48-16.26z" fill="red"/><path d="M45 24L27 14v20" fill="#fff"/></svg>
+                        </span>
+                    </a>
+                </div>
+                <p class="tk-prodetail-video-card__title"><?= $vid['ten' . $lang] ?></p>
             </div>
             <?php } ?>
         </div>

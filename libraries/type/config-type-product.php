@@ -45,8 +45,8 @@
         "banner-tinhnang" => array
         (
             "title_main_photo" => "Banner tính năng",
-            "title_sub_photo" => "Tính năng (BG + Mockup)",
-            "number_photo" => 2,
+            "title_sub_photo" => "Ảnh nền tính năng",
+            "number_photo" => 1,
             "images_photo" => true,
             "avatar_photo" => true,
             "tieude_photo" => true,
@@ -55,7 +55,15 @@
             "thumb_photo" => '400x150x1',
             "img_type_photo" => '.jpg|.gif|.png|.jpeg|.gif|.JPG|.PNG|.JPEG|.Png|.GIF'
         ),
-        /*"video" => array
+        "video" => array
+        (
+            "title_main_photo" => "Video sản phẩm",
+            "title_sub_photo" => "Video",
+            "number_photo" => 3,
+            "video_photo" => true,
+            "tieude_photo" => true
+        ),
+        /*"video" => array  
         (
             "title_main_photo" => "Video sản phẩm",
             "title_sub_photo" => "Video",
