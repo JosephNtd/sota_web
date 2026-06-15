@@ -34,7 +34,7 @@ if ($id != '') {
 	$hdsh_list_row = $d->rawQueryOne("select id 
 									from #_news_list 
 									where tenkhongdauvi = ? and type = 'huong-dan' and hienthi > 0 
-									limit 0,1", array($row_detail['tenkhongdauvi']));
+									limit 0,1", array('hdsd-' . $row_detail['tenkhongdauvi']));
 	if($hdsh_list_row){
 		$hdsd_article = $d->rawQuery("select id, ten$lang, tenkhongdauvi, photo 
 									from #_news 
