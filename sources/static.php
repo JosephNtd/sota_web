@@ -4,10 +4,6 @@
 	/* Lấy bài viết tĩnh */
 	$static = $d->rawQueryOne("select id, type, ten$lang, noidung$lang, photo, ngaytao, ngaysua, options from #_static where type = ? limit 0,1",array($type));
 
-	// Lấy dữ liêu từ db
-	$tieuchi = $d->rawQuery("select * from #_photo where type = ? order by stt,id ",array('tieu-chi'));
-	// var_dump($tieuchi);
-
 	$seopage = $d->rawQueryOne("select * from #_seopage where type = ? limit 0,1",array($type));
 	$banner=$seopage['banner']; 
 	$mota_page = $seopage['mota' . $lang];

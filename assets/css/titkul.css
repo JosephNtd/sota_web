@@ -200,6 +200,70 @@
     display: block; transition: transform .4s;
 }
 .tk-prodetail-gallery__item:hover img { transform: scale(1.05); }
+
+/* --- Section 6: Mô tả chức năng (func-intro) --- */
+.tk-prodetail-func-intro {
+    background: #e8eff8;
+    padding: 50px 0;
+}
+.tk-prodetail-func-intro__text {
+    max-width: 900px;
+    margin: 0 auto;
+    font-size: 16px;
+    line-height: 1.8;
+    color: var(--tk-text);
+    text-align: center;
+}
+
+/* --- Section 7+8: Grid chức năng (features) --- */
+.tk-prodetail-features {
+    background: #e8eff8;
+    padding: 50px 0 60px;
+    text-align: center;
+}
+.tk-prodetail-features__title {
+    font-size: 30px;
+    font-weight: 800;
+    color: var(--tk-dark);
+    text-transform: uppercase;
+    margin-bottom: 40px;
+    letter-spacing: 0.5px;
+}
+.tk-prodetail-features__title .tk-brand-name {
+    color: var(--tk-main);
+}
+.tk-prodetail-features__grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px 50px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+.tk-prodetail-feature-item {
+    width: 160px;
+    text-align: center;
+}
+.tk-prodetail-feature-item__icon {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.tk-prodetail-feature-item__icon img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+.tk-prodetail-feature-item__name {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--tk-dark);
+    line-height: 1.4;
+    margin: 0;
+}
  
 @media (max-width: 767px) {
     .tk-prodetail-hdsd-heading__title { font-size: 24px; }
@@ -207,8 +271,116 @@
     .tk-prodetail-hdsd-card { width: 160px; padding: 18px 12px; }
     .tk-prodetail-hdsd-card__icon img { width: 56px; height: 56px; }
     .tk-prodetail-gallery__grid { grid-template-columns: repeat(2, 1fr); }
+    .tk-prodetail-func-intro { padding: 30px 0; }
+    .tk-prodetail-func-intro__text { font-size: 14px; padding: 0 10px; }
+    .tk-prodetail-features { padding: 30px 0 40px; }
+    .tk-prodetail-features__title { font-size: 22px; margin-bottom: 28px; }
+    .tk-prodetail-features__grid { gap: 20px 30px; }
+    .tk-prodetail-feature-item { width: 130px; }
+    .tk-prodetail-feature-item__icon { width: 50px; height: 50px; }
+    .tk-prodetail-feature-item__name { font-size: 13px; }
+}
+
+/* --- Section 9: Banner tính năng nổi bật --- */
+.tk-prodetail-tnb-banner {
+    position: relative;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: #eaf0f7;
+    min-height: 380px;
+    overflow: hidden;
+}
+.tk-prodetail-tnb-banner__overlay {
+    position: absolute; inset: 0;
+    background: rgba(255,255,255,0.25);
+}
+.tk-prodetail-tnb-banner__inner {
+    position: relative; z-index: 1;
+    display: flex; align-items: center; justify-content: center;
+    gap: 40px;
+    min-height: 380px;
+    padding: 40px 0;
+}
+.tk-prodetail-tnb-banner__mockup {
+    flex: 0 0 auto;
+    max-width: 420px;
+}
+.tk-prodetail-tnb-banner__mockup img {
+    width: 100%; height: auto;
+    display: block;
+}
+.tk-prodetail-tnb-banner__text {
+    text-align: left;
+}
+.tk-prodetail-tnb-banner__text h2 {
+    font-size: 34px; font-weight: 800;
+    color: var(--tk-dark);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin: 0 0 8px;
+    font-style: italic;
+}
+.tk-prodetail-tnb-banner__text .tk-brand-name {
+    font-size: 50px; font-weight: 900;
+    color: var(--tk-main);
+    margin: 0;
+    line-height: 1.1;
 }
  
+/* --- Section 10: Grid tính năng nổi bật SP --- */
+.tk-prodetail-tnb-grid {
+    background: #f0f5e6;
+    padding: 50px 0 60px;
+}
+.tk-prodetail-tnb-grid__wrap {
+    display: flex; flex-wrap: wrap;
+    justify-content: center;
+    gap: 40px 60px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+.tk-prodetail-tnb-item {
+    width: 200px;
+    text-align: center;
+}
+.tk-prodetail-tnb-item__icon {
+    width: 64px; height: 64px;
+    margin: 0 auto 14px;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--tk-main);
+    border-radius: 14px;
+    padding: 12px;
+}
+.tk-prodetail-tnb-item__icon img {
+    max-width: 100%; max-height: 100%;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
+}
+.tk-prodetail-tnb-item__name {
+    font-size: 15px; font-weight: 600;
+    color: var(--tk-dark);
+    line-height: 1.4;
+    margin: 0;
+}
+ 
+@media (max-width: 767px) {
+    .tk-prodetail-tnb-banner { min-height: 260px; }
+    .tk-prodetail-tnb-banner__inner {
+        flex-direction: column; gap: 20px;
+        min-height: 260px; padding: 30px 0;
+        text-align: center;
+    }
+    .tk-prodetail-tnb-banner__mockup { max-width: 280px; }
+    .tk-prodetail-tnb-banner__text { text-align: center; }
+    .tk-prodetail-tnb-banner__text h2 { font-size: 22px; }
+    .tk-prodetail-tnb-banner__text .tk-brand-name { font-size: 34px; }
+    .tk-prodetail-tnb-grid { padding: 30px 0 40px; }
+    .tk-prodetail-tnb-grid__wrap { gap: 24px 30px; }
+    .tk-prodetail-tnb-item { width: 140px; }
+    .tk-prodetail-tnb-item__icon { width: 50px; height: 50px; border-radius: 10px; padding: 10px; }
+    .tk-prodetail-tnb-item__name { font-size: 13px; }
+}
 /* --- Related products wrapper --- */
 .tk-prodetail-related { padding: 40px 0 50px; background: var(--tk-soft); }
 .tk-prodetail-related .title {
@@ -373,8 +545,45 @@
 /* ---- SECTION 6 FOR WHO ---- */
 .tk-forwho { background: var(--tk-soft); }
 .tk-forwho-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
-.tk-forwho-card { background: #fff; border-radius: 14px; padding: 30px 22px; text-align: center; box-shadow: 0 8px 26px rgba(0,0,0,.06); transition: .25s; display: flex; flex-direction: column; }
-.tk-forwho-card:hover { transform: translateY(-6px); box-shadow: 0 14px 34px rgba(0,0,0,.12); }
+
+/* 1. ĐỊNH NGHĨA HIỆU ỨNG TRÔI NỔI (FLOAT) */
+@keyframes tkFloating {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-10px); } /* Đỉnh cao nhất khi trôi lên */
+    100% { transform: translateY(0); }
+}
+
+/* 2. ÁP DỤNG ANIMATION VÀO CARD */
+.tk-forwho-card { 
+    background: #fff; 
+    border-radius: 14px; 
+    padding: 30px 22px; 
+    text-align: center; 
+    box-shadow: 0 8px 26px rgba(0,0,0,.06); 
+    display: flex; 
+    flex-direction: column; 
+    
+    /* Thay đổi transition để mượt mà hơn khi ăn theo animation */
+    transition: transform 0.3s ease-out, box-shadow 0.3s ease-out; 
+    
+    /* Chạy hiệu ứng trôi nổi: chu kỳ 4 giây, lặp vô hạn, mượt ở 2 đầu */
+    animation: tkFloating 4s ease-in-out infinite; 
+}
+
+/* 3. XỬ LÝ KHI DI CHUỘT VÀO (HOVER) */
+.tk-forwho-card:hover { 
+    animation-play-state: paused; /* Đóng băng hiệu ứng tự động để không bị giật lag */
+    transform: translateY(-16px); /* Đẩy hẳn card lên cao hơn mức trôi bình thường */
+    box-shadow: 0 16px 38px rgba(0,0,0,.14); /* Làm đổ bóng đậm hơn tạo cảm giác card bay gần mắt hơn */
+}
+
+/* 4. MẸO XỊN: CHO CÁC CARD TRÔI LỆCH PHA NHAU (SO LE) */
+.tk-forwho-grid .tk-forwho-card:nth-child(1) { animation-delay: 0s; }
+.tk-forwho-grid .tk-forwho-card:nth-child(2) { animation-delay: 0.7s; }
+.tk-forwho-grid .tk-forwho-card:nth-child(3) { animation-delay: 1.4s; }
+.tk-forwho-grid .tk-forwho-card:nth-child(4) { animation-delay: 2.1s; }
+
+/* Các thuộc tính text bên dưới giữ nguyên của bạn */
 .tk-forwho-ico { height: 96px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px; }
 .tk-forwho-ico img { max-height: 90px; width: auto; }
 .tk-forwho-name { font-size: 17px; font-weight: 800; color: var(--tk-main); text-transform: uppercase; margin: 0 0 12px; }
@@ -801,4 +1010,10 @@
     font-style: italic;
     color: var(--tk-main);
     margin: 0;
+}       
+/* Ép thanh trượt chuyển động tuyến tính liên tục, không ngắt quãng */
+#doitac_slider .owl-stage {
+    -webkit-transition-timing-function: linear !important;
+    -o-transition-timing-function: linear !important;
+    transition-timing-function: linear !important;
 }

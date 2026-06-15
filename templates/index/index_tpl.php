@@ -276,7 +276,7 @@ $tk_doituong = (isset($huongdan) && count($huongdan) > 0) ? $huongdan : $tk_fall
 <?php } ?>
 
 <!-- OWL INIT (trường tiêu biểu) — chạy sau window load để chắc chắn jQuery+owl đã nạp -->
-<script>
+<!-- <script>
     window.addEventListener('load', function () {
         if (window.jQuery && jQuery('#doitac_slider').length) {
             jQuery('#doitac_slider').owlCarousel({
@@ -285,4 +285,25 @@ $tk_doituong = (isset($huongdan) && count($huongdan) > 0) ? $huongdan : $tk_fall
             });
         }
     });
+</script> -->
+<script>
+    window.addEventListener('load', function () {
+    if (window.jQuery && jQuery('#doitac_slider').length) {
+        jQuery('#doitac_slider').owlCarousel({
+            loop: true,
+            margin: 24,
+            nav: false,
+            dots: false,
+            autoplay: true,
+            
+            // --- CẤU HÌNH ĐỂ CHẠY LIÊN TỤC ---
+            autoplayTimeout: 3000,     // Đặt thời gian chờ bằng với tốc độ trượt
+            autoplaySpeed: 3000,       // Tốc độ trượt (3000ms = 3 giây để dịch chuyển)
+            slideTransition: 'linear', // Ép hiệu ứng chạy đều, không nhanh chậm
+            // ---------------------------------
+            
+            responsive: { 0: { items: 2 }, 480: { items: 3 }, 768: { items: 4 }, 1024: { items: 6 } }
+        });
+    }
+});
 </script>

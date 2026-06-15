@@ -58,6 +58,18 @@
 		                    <input type="text" class="form-control" name="dataMulti[<?=$i?>][link]" id="link<?=$i?>" placeholder="Link">
 		                </div>
 		            <?php } ?>
+		            <?php if(isset($config['photo']['man_photo'][$type]['select_photo']) && is_array($config['photo']['man_photo'][$type]['select_photo'])) { 
+		                $selectLabel = isset($config['photo']['man_photo'][$type]['select_label']) ? $config['photo']['man_photo'][$type]['select_label'] : 'Danh mục';
+		            ?>
+		                <div class="form-group">
+		                    <label for="link<?=$i?>"><?=$selectLabel?>:</label>
+		                    <select class="form-control" name="dataMulti[<?=$i?>][link]" id="link<?=$i?>">
+		                        <?php foreach($config['photo']['man_photo'][$type]['select_photo'] as $sk => $sv) { ?>
+		                            <option value="<?=$sk?>"><?=$sv?></option>
+		                        <?php } ?>
+		                    </select>
+		                </div>
+		            <?php } ?>
 		            <?php if(isset($config['photo']['man_photo'][$type]['video_photo']) && $config['photo']['man_photo'][$type]['video_photo'] == true) { ?>
 		                <div class="form-group">
 		                    <label for="link_video<?=$i?>">Video:</label>

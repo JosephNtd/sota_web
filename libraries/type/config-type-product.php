@@ -42,6 +42,19 @@
             "thumb_photo" => '100x100x1',
             "img_type_photo" => '.jpg|.gif|.png|.jpeg|.gif|.JPG|.PNG|.JPEG|.Png|.GIF'
         ),
+        "banner-tinhnang" => array
+        (
+            "title_main_photo" => "Banner tính năng",
+            "title_sub_photo" => "Tính năng (BG + Mockup)",
+            "number_photo" => 2,
+            "images_photo" => true,
+            "avatar_photo" => true,
+            "tieude_photo" => true,
+            "width_photo" => 1366,
+            "height_photo" => 500,
+            "thumb_photo" => '400x150x1',
+            "img_type_photo" => '.jpg|.gif|.png|.jpeg|.gif|.JPG|.PNG|.JPEG|.Png|.GIF'
+        ),
         /*"video" => array
         (
             "title_main_photo" => "Video sản phẩm",
