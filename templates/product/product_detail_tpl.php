@@ -21,6 +21,7 @@ if (isset($seopage_product['mota' . $lang]) && $seopage_product['mota' . $lang] 
 }
 /* Subtitle hero: lấy từ trường masp (tận dụng trường "Mã SP" làm phụ đề) */
 $pd_subtitle = (!empty($row_detail['masp'])) ? $row_detail['masp'] : '';
+
 ?>
 
 <!-- SECTION 1 — HERO 2 CỘT -->
