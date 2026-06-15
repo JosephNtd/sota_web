@@ -131,6 +131,81 @@ $pd_subtitle = (!empty($row_detail['masp'])) ? $row_detail['masp'] : '';
     </div>
 <?php } ?>
 
+<!-- Section 6: Mô tả chức năng (trường motavi của product) -->
+<?php if ($pd_mota) { ?>
+<div class="tk-prodetail-func-intro">
+    <div class="fixwidth">
+        <div class="tk-prodetail-func-intro__text">
+            <?= htmlspecialchars_decode($pd_mota) ?>
+        </div>
+    </div>
+</div>
+<?php } ?>
+
+<!-- Section 7 + 8: Tiêu đề + Grid chức năng (từ photo module chuc-nang) -->
+<?php if (isset($chucnang_items) && count($chucnang_items) > 0) { ?>
+<div class="tk-prodetail-features">
+    <div class="fixwidth">
+        <h2 class="tk-prodetail-features__title">CHỨC NĂNG CỦA <span class="tk-brand-name"><?= $pd_name ?></span></h2>
+        <div class="tk-prodetail-features__grid">
+            <?php foreach ($chucnang_items as $cn) { ?>
+            <div class="tk-prodetail-feature-item">
+                <div class="tk-prodetail-feature-item__icon">
+                    <img src="<?= UPLOAD_PHOTO_L . $cn['photo'] ?>"
+                         onerror="this.style.display='none';"
+                         alt="<?= $cn['ten' . $lang] ?>">
+                </div>
+                <p class="tk-prodetail-feature-item__name"><?= $cn['ten' . $lang] ?></p>
+            </div>
+            <?php } ?>
+        </div>
+    </div>
+</div>
+<?php } ?>
+
+<!-- Section 9: Banner tính năng nổi bật (background + mockup + title) -->
+<?php if (count($banner_tinhnang) > 0) { 
+    $tn_bg = isset($banner_tinhnang[0]) ? UPLOAD_PRODUCT_L . $banner_tinhnang[0]['photo'] : '';
+    $tn_mockup = isset($banner_tinhnang[1]) ? UPLOAD_PRODUCT_L . $banner_tinhnang[1]['photo'] : '';
+?>
+<div class="tk-prodetail-tnb-banner" <?php if ($tn_bg) { ?>style="background-image: url('<?= $tn_bg ?>');"<?php } ?>>
+    <div class="tk-prodetail-tnb-banner__overlay"></div>
+    <div class="fixwidth">
+        <div class="tk-prodetail-tnb-banner__inner">
+            <?php if ($tn_mockup) { ?>
+            <div class="tk-prodetail-tnb-banner__mockup">
+                <img src="<?= $tn_mockup ?>" alt="<?= $pd_name ?>">
+            </div>
+            <?php } ?>
+            <div class="tk-prodetail-tnb-banner__text">
+                <h2>TÍNH NĂNG NỔI BẬT CỦA</h2>
+                <p class="tk-brand-name"><?= $pd_name ?></p>
+            </div>
+        </div>
+    </div>
+</div>
+<?php } ?>
+
+<!-- Section 10: Grid tính năng nổi bật SP (từ photo module tinh-nang-sp) -->
+<?php if (isset($tinhnangsp_items) && count($tinhnangsp_items) > 0) { ?>
+<div class="tk-prodetail-tnb-grid">
+    <div class="fixwidth">
+        <div class="tk-prodetail-tnb-grid__wrap">
+            <?php foreach ($tinhnangsp_items as $tnsp) { ?>
+            <div class="tk-prodetail-tnb-item">
+                <div class="tk-prodetail-tnb-item__icon">
+                    <img src="<?= UPLOAD_PHOTO_L . $tnsp['photo'] ?>"
+                         onerror="this.style.display='none';"
+                         alt="<?= $tnsp['ten' . $lang] ?>">
+                </div>
+                <p class="tk-prodetail-tnb-item__name"><?= $tnsp['ten' . $lang] ?></p>
+            </div>
+            <?php } ?>
+        </div>
+    </div>
+</div>
+<?php } ?>
+
 <!--  ỨNG DỤNG KHÁC (related products)  -->
 <div class="tk-prodetail-related">
     <div class="fixwidth">

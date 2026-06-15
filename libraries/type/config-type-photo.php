@@ -98,6 +98,38 @@
     $config['photo']['man_photo'][$nametype]['thumb_photo'] = '55x55x2';
     $config['photo']['man_photo'][$nametype]['img_type_photo'] = '.jpg|.gif|.png|.jpeg|.gif|.JPG|.PNG|.JPEG|.Png|.GIF';
 
+    /* Chức năng sản phẩm (icon grid trên trang product detail) */
+    $nametype = "chuc-nang";
+    $config['photo']['man_photo'][$nametype]['title_main_photo'] = "Chức năng SP";
+    $config['photo']['man_photo'][$nametype]['number_photo'] = 1;
+    $config['photo']['man_photo'][$nametype]['images_photo'] = true;
+    $config['photo']['man_photo'][$nametype]['avatar_photo'] = true;
+    $config['photo']['man_photo'][$nametype]['link_photo'] = false;
+    $config['photo']['man_photo'][$nametype]['select_photo'] = array('hdschool'=>'HDSchool', 'h2school'=>'H2School', 'zalo-mini-app'=>'Zalo Mini App');
+    $config['photo']['man_photo'][$nametype]['select_label'] = "Sản phẩm";
+    $config['photo']['man_photo'][$nametype]['tieude_photo'] = true;
+    $config['photo']['man_photo'][$nametype]['mota_photo'] = false;
+    $config['photo']['man_photo'][$nametype]['width_photo'] = 80;
+    $config['photo']['man_photo'][$nametype]['height_photo'] = 80;
+    $config['photo']['man_photo'][$nametype]['thumb_photo'] = '80x80x2';
+    $config['photo']['man_photo'][$nametype]['img_type_photo'] = '.jpg|.gif|.png|.jpeg|.gif|.JPG|.PNG|.JPEG|.Png|.GIF';
+
+    /* Tính năng nổi bật sản phẩm (icon grid section 2 trên trang product detail) */
+    $nametype = "tinh-nang-sp";
+    $config['photo']['man_photo'][$nametype]['title_main_photo'] = "Tính năng nổi bật SP";
+    $config['photo']['man_photo'][$nametype]['number_photo'] = 1;
+    $config['photo']['man_photo'][$nametype]['images_photo'] = true;
+    $config['photo']['man_photo'][$nametype]['avatar_photo'] = true;
+    $config['photo']['man_photo'][$nametype]['link_photo'] = false;
+    $config['photo']['man_photo'][$nametype]['select_photo'] = array('hdschool'=>'HDSchool', 'h2school'=>'H2School', 'zalo-mini-app'=>'Zalo Mini App');
+    $config['photo']['man_photo'][$nametype]['select_label'] = "Sản phẩm";
+    $config['photo']['man_photo'][$nametype]['tieude_photo'] = true;
+    $config['photo']['man_photo'][$nametype]['mota_photo'] = false;
+    $config['photo']['man_photo'][$nametype]['width_photo'] = 80;
+    $config['photo']['man_photo'][$nametype]['height_photo'] = 80;
+    $config['photo']['man_photo'][$nametype]['thumb_photo'] = '80x80x2';
+    $config['photo']['man_photo'][$nametype]['img_type_photo'] = '.jpg|.gif|.png|.jpeg|.gif|.JPG|.PNG|.JPEG|.Png|.GIF';
+
     $nametype = "background-footer";
     $config['photo']['photo_static'][$nametype]['title_main'] = "Background footer";
     $config['photo']['photo_static'][$nametype]['watermark-advanced'] = false;

@@ -126,9 +126,7 @@
 </div><!-- /.tk-about -->
 
 <?php } elseif (!empty($static)) { ?>
-<!-- ============================================================
-     TRANG TĨNH CHUNG (van-ban-phap-ly, v.v.)
-============================================================ -->
+<!--     TRANG TĨNH CHUNG (van-ban-phap-ly, v.v.) -->
 <div class="tk-static fixwidth">
 
     <div class="row">

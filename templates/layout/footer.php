@@ -17,7 +17,7 @@
                     <img onerror="this.src='assets/images/noimage.png';"
                         src="<?= UPLOAD_PHOTO_L . $logo['photo'] ?>" alt="<?= $setting['ten' . $lang] ?>" />
                 </a>
-                <div class="tk-foot-company">
+                <!-- <div class="tk-foot-company">
                     <?php if (!empty($footer['noidung' . $lang])) { ?>
                         <?= htmlspecialchars_decode($footer['noidung' . $lang]) ?>
                     <?php } else { ?>
@@ -28,15 +28,20 @@
                     <?php } ?>
                 </div>
                 <?php if (!empty($social1)) { ?>
-                <div class="tk-foot-social">
-                    <?php foreach ($social1 as $v) { ?>
-                    <a href="<?= $v['link'] ?>" target="_blank" rel="nofollow" title="<?= $v['ten' . $lang] ?>">
-                        <img onerror="this.src='<?= THUMBS ?>/32x32x2/assets/images/noimage.png';"
-                            src="<?= THUMBS ?>/0x32x2/<?= UPLOAD_PHOTO_L . $v['photo'] ?>" alt="<?= $v['ten' . $lang] ?>" />
-                    </a>
-                    <?php } ?>
-                </div>
-                <?php } ?>
+                    <div class="tk-foot-social">
+                        <?php foreach ($social1 as $v) { ?>
+                            <a href="<?= $v['link'] ?>" target="_blank" rel="nofollow" title="<?= $v['ten' . $lang] ?>">
+                                <img onerror="this.src='<?= THUMBS ?>/32x32x2/assets/images/noimage.png';"
+                                    src="<?= THUMBS ?>/0x32x2/<?= UPLOAD_PHOTO_L . $v['photo'] ?>" alt="<?= $v['ten' . $lang] ?>" />
+                            </a>
+                        <?php } ?>
+                    </div>
+                <?php } ?> -->
+                <p>CÔNG TY CỔ PHẦN TITKUL </p>
+                <p>572/14B Âu Cơ, Phường Bảy Hiền, Tp.HCM </p>
+                <p>Tel: (028) 7778.7972 - 094.242.9989 </p>
+                <p>Phòng KD: kinhdoanh@titkul.com </p>
+                <p>CSKH: support@titkul.com</p>
             </div>
 
             <!-- Cột 2: Truy cập nhanh -->
@@ -55,19 +60,19 @@
                 <div class="tk-foot-title">Theo Dõi Chúng Tôi</div>
                 <div class="tk-foot-follow">
                     <?php if (!empty($optsetting['zalo'])) { ?>
-                    <a class="tk-follow-item" href="https://zalo.me/<?= preg_replace('/[^0-9]/', '', $optsetting['zalo']) ?>" target="_blank" rel="nofollow" title="Zalo OA">
-                        <i class="fas fa-comment-dots"></i> Zalo OA
-                    </a>
+                        <a class="tk-follow-item" href="https://zalo.me/<?= preg_replace('/[^0-9]/', '', $optsetting['zalo']) ?>" target="_blank" rel="nofollow" title="Zalo OA">
+                            <i class="fas fa-comment-dots"></i> Zalo OA
+                        </a>
                     <?php } ?>
                     <?php if (!empty($optsetting['fanpage'])) { ?>
-                    <a class="tk-follow-item" href="<?= $optsetting['fanpage'] ?>" target="_blank" rel="nofollow" title="Facebook">
-                        <i class="fab fa-facebook-f"></i> Facebook
-                    </a>
+                        <a class="tk-follow-item" href="<?= $optsetting['fanpage'] ?>" target="_blank" rel="nofollow" title="Facebook">
+                            <i class="fab fa-facebook-f"></i> Facebook
+                        </a>
                     <?php } ?>
                     <?php if (!empty($optsetting['youtube'])) { ?>
-                    <a class="tk-follow-item" href="<?= $optsetting['youtube'] ?>" target="_blank" rel="nofollow" title="Youtube">
-                        <i class="fab fa-youtube"></i> Youtube
-                    </a>
+                        <a class="tk-follow-item" href="<?= $optsetting['youtube'] ?>" target="_blank" rel="nofollow" title="Youtube">
+                            <i class="fab fa-youtube"></i> Youtube
+                        </a>
                     <?php } ?>
                 </div>
             </div>
@@ -77,7 +82,6 @@
 
 <div class="tk-foot-bottom">
     <div class="fixwidth d-flex justify-content-between flex-wrap">
-        <div>Copyright © <?= date('Y') ?> <?= $setting['ten' . $lang] ?></div>
-        <div>Online: <?= $online ?> | Hôm nay: <?= $counter['today'] ?> | Tổng: <?= $counter['total'] ?></div>
+        <div>Copyright © <?= date('Y') ?> Công Ty Cổ Phần Titkul</div>
     </div>
 </div>

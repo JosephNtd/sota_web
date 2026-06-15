@@ -53,6 +53,18 @@
                         <input type="text" class="form-control" name="data[link]" id="link" placeholder="Link" value="<?=@$item['link']?>">
                     </div>
                 <?php } ?>
+                <?php if(isset($config['photo']['man_photo'][$type]['select_photo']) && is_array($config['photo']['man_photo'][$type]['select_photo'])) { 
+                    $selectLabel = isset($config['photo']['man_photo'][$type]['select_label']) ? $config['photo']['man_photo'][$type]['select_label'] : 'Danh mục';
+                ?>
+                    <div class="form-group">
+                        <label for="link"><?=$selectLabel?>:</label>
+                        <select class="form-control" name="data[link]" id="link">
+                            <?php foreach($config['photo']['man_photo'][$type]['select_photo'] as $sk => $sv) { ?>
+                                <option value="<?=$sk?>" <?=(@$item['link']==$sk)?'selected':''?>><?=$sv?></option>
+                            <?php } ?>
+                        </select>
+                    </div>
+                <?php } ?>
                 <?php if(isset($config['photo']['man_photo'][$type]['video_photo']) && $config['photo']['man_photo'][$type]['video_photo'] == true) { ?>
                     <div class="form-group">
                         <label for="link_video">Video:</label>
