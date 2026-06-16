@@ -1387,6 +1387,170 @@ section.tk-sec.tk-intro {
 
 
 /* ==========================================================================
+   HƯỚNG DẪN SỬ DỤNG — Glass Card Grid  (P4 — news type: huong-dan)
+   Premium Scholastic Modernism — Montserrat headings, Inter body
+   ========================================================================== */
+
+/* --- Hero --- */
+.tk-hdsd-hero {
+    padding: 80px 0 40px;
+    text-align: center;
+}
+.tk-hdsd-hero__banner {
+    display: none; /* ẩn banner nếu muốn hiện thì display:block */
+}
+.tk-hdsd-hero__title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 40px;
+    font-weight: 700;
+    line-height: 48px;
+    letter-spacing: -0.01em;
+    color: #001f3f;
+    margin-bottom: 12px;
+}
+.tk-hdsd-hero__sub {
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
+    line-height: 32px;
+    color: #43474e;
+}
+
+/* --- Section wrapper --- */
+.tk-hdsd-section {
+    padding: 0 0 80px;
+}
+.tk-hdsd-section .fixwidth {
+    max-width: 1280px;
+}
+
+/* --- Glass card grid --- */
+.tk-hdsd-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    background: #eff4ff;
+    border-radius: 16px;
+    padding: 48px 32px;
+}
+
+/* --- Individual card --- */
+.tk-hdsd-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    text-decoration: none;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(226, 232, 240, 0.8);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    border-radius: 12px;
+    padding: 48px 24px 36px;
+    transition: all 0.3s ease;
+}
+.tk-hdsd-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(0, 6, 19, 0.1);
+    border-color: #001f3f;
+}
+
+/* --- Icon circle --- */
+.tk-hdsd-card__icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: #dce9ff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 24px;
+    overflow: hidden;
+    transition: background 0.3s ease;
+}
+.tk-hdsd-card:hover .tk-hdsd-card__icon {
+    background: #d4e3ff;
+}
+.tk-hdsd-card__icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+.tk-hdsd-card__icon i {
+    font-size: 32px;
+    color: #001f3f;
+}
+
+/* --- Card title --- */
+.tk-hdsd-card__title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 28px;
+    color: #001f3f;
+    margin-bottom: 12px;
+}
+
+/* --- Card description --- */
+.tk-hdsd-card__desc {
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    line-height: 26px;
+    color: #43474e;
+    flex-grow: 1;
+    margin-bottom: 24px;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* --- Card link --- */
+.tk-hdsd-card__link {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    color: #bb0021;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+.tk-hdsd-card:hover .tk-hdsd-card__link {
+    text-decoration: underline;
+}
+.tk-hdsd-card__link i {
+    font-size: 12px;
+    transition: transform 0.3s ease;
+}
+.tk-hdsd-card:hover .tk-hdsd-card__link i {
+    transform: translateX(4px);
+}
+
+/* --- Responsive --- */
+@media (max-width: 1024px) {
+    .tk-hdsd-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+@media (max-width: 767px) {
+    .tk-hdsd-hero { padding: 60px 0 24px; }
+    .tk-hdsd-hero__title {
+        font-size: 28px;
+        line-height: 36px;
+    }
+    .tk-hdsd-grid {
+        grid-template-columns: 1fr;
+        padding: 32px 16px;
+        gap: 16px;
+    }
+    .tk-hdsd-card { padding: 32px 20px 28px; }
+    .tk-hdsd-section { padding-bottom: 48px; }
+}
+
+
+/* ==========================================================================
    TIN TỨC / HƯỚNG DẪN — Blog Card Grid  (P4 — news type: tin-tuc, huong-dan)
    ========================================================================== */
 

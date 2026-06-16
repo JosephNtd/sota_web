@@ -32,6 +32,7 @@ caches/*
 # ========================
 uploads/
 images/uploads/
+*.mp4
 
 # ========================
 # Config chứa thông tin nhạy cảm
