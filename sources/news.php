@@ -14,7 +14,7 @@ if ($id != '') {
 	// $qrFile = 'qr_code.png';
 	// QRcode::png($url, $qrFile);
 	/* Lấy bài viết detail */
-	$row_detail = $d->rawQueryOne("select id, luotxem, ngaytao, id_list, id_cat, id_item, id_sub, type, ten$lang, tenkhongdauvi, tenkhongdauen, noidung$lang, photo, options from #_news where id = ? and type = ? and hienthi > 0 limit 0,1", array($id, $type));
+	$row_detail = $d->rawQueryOne("select id, luotxem, ngaytao, id_list, id_cat, id_item, id_sub, type, ten$lang, tenkhongdauvi, tenkhongdauen, mota$lang, noidung$lang, photo, icon, options from #_news where id = ? and type = ? and hienthi > 0 limit 0,1", array($id, $type));
 
 	/* Cập nhật lượt xem */
 	$data_luotxem['luotxem'] = $row_detail['luotxem'] + 1;
@@ -34,7 +34,13 @@ if ($id != '') {
 	$news_sub = $d->rawQueryOne("select id, ten$lang, tenkhongdauvi, tenkhongdauen from #_news_sub where id = ? and type = ? and hienthi > 0 limit 0,1", array($row_detail['id_sub'], $type));
 
 	/* Lấy hình ảnh con */
-	$hinhanhtt = $d->rawQuery("select photo,tenvi from #_gallery where id_photo = ? and com='news' and type = ? and kind='man' and val = ? and hienthi > 0 order by stt,id desc", array($row_detail['id'], $type, $type));
+	$hinhanhtt = $d->rawQuery("select photo,tenvi,tenen from #_gallery where id_photo = ? and com='news' and type = ? and kind='man' and val = ? and hienthi > 0 order by stt,id desc", array($row_detail['id'], $type, $type));
+
+	/* Banner tính năng (gallery kind=banner-tinhnang) */
+	$banner_tinhnang = $d->rawQuery("select photo, ten$lang from #_gallery where id_photo = ? and com='news' and type = ? and kind='man' and val = 'banner-tinhnang' and hienthi > 0 order by stt, id desc", array($row_detail['id'], $type));
+
+	/* Video (gallery kind=video) */
+	$video_tinhnang = $d->rawQuery("select ten$lang, link_video, taptin, photo from #_gallery where id_photo = ? and com='news' and type = ? and kind='man' and val = 'video' and hienthi > 0 order by stt, id desc", array($row_detail['id'], $type));
 
 	/* Lấy bài viết cùng loại */
 	$where = "";
@@ -318,7 +324,7 @@ if ($id != '') {
 
 	/* Lấy tất cả bài viết */
 	$where = "";
-	$where = "type = ? and hienthi > 0";
+	$where = "type = ? and hienthi > 0 and noibat > 0";
 	$params = array($type);
 
 	$curPage = $get_page;

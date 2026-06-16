@@ -1229,3 +1229,901 @@ section.tk-sec.tk-intro {
     opacity: 1;
     transform: translateY(0);
 }
+/* ==========================================================================
+   TÍNH NĂNG NỔI BẬT — Full-bleed Zigzag (Light)  (P4 — news type: tinh-nang)
+   Design: Premium Scholastic Modernism — DESIGN.md
+   ========================================================================== */
+
+.tk-feature-list { padding: 0; }
+
+/* --- Mỗi row: 2 cột full-viewport, nền trắng/xám xen kẽ --- */
+.tk-feat {
+    display: flex;
+    min-height: 480px;
+    background: #fff;
+    overflow: hidden;
+}
+.tk-feat:nth-child(even) { background: var(--tk-soft, #f5f8fa); }
+
+/* --- Cột ảnh: 50% viewport, full-bleed + viền mờ 4 cạnh --- */
+.tk-feat__img {
+    flex: 0 0 50%;
+    position: relative;
+    overflow: hidden;
+}
+.tk-feat__img img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    transition: transform 0.6s cubic-bezier(.25,.46,.45,.94);
+}
+.tk-feat:hover .tk-feat__img img {
+    transform: scale(1.04);
+}
+/* Viền mờ 4 cạnh — inset box-shadow khớp màu nền */
+.tk-feat__img::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    box-shadow: inset 0 0 70px 35px #fff;
+    pointer-events: none;
+    z-index: 1;
+}
+.tk-feat:nth-child(even) .tk-feat__img::after {
+    box-shadow: inset 0 0 70px 35px var(--tk-soft, #f5f8fa);
+}
+
+/* --- Cột text: 50%, căn giữa dọc --- */
+.tk-feat__body {
+    flex: 0 0 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 60px;
+}
+.tk-feat__content {
+    max-width: 480px;
+}
+
+/* Zigzag: row lẻ đảo chiều */
+.tk-feat--flip { flex-direction: row-reverse; }
+
+/* --- Badge --- */
+.tk-feat__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--tk-main);
+    margin-bottom: 20px;
+}
+.tk-feat__badge i {
+    font-size: 14px;
+    color: var(--tk-cta, #f7941e);
+}
+
+/* --- Title --- */
+.tk-feat__title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 1.2;
+    margin: 0;
+    color: var(--tk-dark, #1f2d3d);
+}
+
+/* --- Đường kẻ accent --- */
+.tk-feat__line {
+    width: 48px;
+    height: 3px;
+    background: var(--tk-main);
+    border-radius: 2px;
+    margin: 20px 0 24px;
+}
+
+/* --- Mô tả --- */
+.tk-feat__desc {
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    line-height: 1.75;
+    color: #43474e;
+    margin: 0 0 32px;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* --- Link "Xem thêm" --- */
+.tk-feat__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--tk-dark, #1f2d3d);
+    text-decoration: none;
+    border-bottom: 2px solid var(--tk-line, #e6ebef);
+    padding-bottom: 4px;
+    transition: border-color .3s, gap .3s, color .3s;
+}
+.tk-feat__link:hover {
+    border-color: var(--tk-main);
+    color: var(--tk-main);
+    gap: 14px;
+}
+.tk-feat__link i { font-size: 13px; transition: transform .3s; }
+.tk-feat__link:hover i { transform: translateX(3px); }
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
+    .tk-feat {
+        flex-direction: column !important;
+        min-height: auto;
+    }
+    .tk-feat__img {
+        flex: none;
+        height: 260px;
+    }
+    .tk-feat__img::after {
+        box-shadow: inset 0 0 40px 20px #fff;
+    }
+    .tk-feat:nth-child(even) .tk-feat__img::after {
+        box-shadow: inset 0 0 40px 20px var(--tk-soft, #f5f8fa);
+    }
+    .tk-feat__body {
+        flex: none;
+        padding: 36px 24px 44px;
+    }
+    .tk-feat__title { font-size: 26px; }
+    .tk-feat__desc { -webkit-line-clamp: 3; }
+}
+
+
+/* ==========================================================================
+   TIN TỨC / HƯỚNG DẪN — Blog Card Grid  (P4 — news type: tin-tuc, huong-dan)
+   ========================================================================== */
+
+.tk-news-section { padding: 60px 0; }
+
+.tk-news-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    margin-top: 32px;
+}
+
+.tk-news-card {
+    background: #fff;
+    border-radius: 12px;
+    border: 1px solid var(--tk-line, #e6ebef);
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    transition: transform .3s ease, box-shadow .3s ease;
+    display: flex;
+    flex-direction: column;
+}
+.tk-news-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.10);
+}
+
+.tk-news-card__img {
+    display: block;
+    overflow: hidden;
+}
+.tk-news-card__img img {
+    width: 100%;
+    height: auto;
+    display: block;
+    aspect-ratio: 3 / 2;
+    object-fit: cover;
+    transition: transform .4s ease;
+}
+.tk-news-card:hover .tk-news-card__img img {
+    transform: scale(1.05);
+}
+
+.tk-news-card__body {
+    padding: 20px 24px 24px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.tk-news-card__date {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    color: #74777f;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.tk-news-card__title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 1.4;
+    margin: 0 0 10px;
+    color: var(--tk-dark, #1f2d3d);
+}
+.tk-news-card__title a { color: inherit; text-decoration: none; transition: color .25s; }
+.tk-news-card__title a:hover { color: var(--tk-main); }
+
+.tk-news-card__desc {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    line-height: 1.65;
+    color: #43474e;
+    margin: 0 0 16px;
+    flex: 1;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.tk-news-card__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--tk-main);
+    text-decoration: none;
+    transition: gap .25s;
+}
+.tk-news-card__link:hover { gap: 10px; }
+.tk-news-card__link i { font-size: 11px; }
+
+/* --- Responsive --- */
+@media (max-width: 1024px) {
+    .tk-news-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+}
+@media (max-width: 600px) {
+    .tk-news-section { padding: 40px 0; }
+    .tk-news-grid { grid-template-columns: 1fr; gap: 20px; }
+    .tk-news-card__title { font-size: 16px; }
+}
+
+
+/* ==========================================================================
+   PAGINATION — Shared style
+   ========================================================================== */
+
+.tk-paging {
+    text-align: center;
+    padding: 48px 0 0;
+}
+.tk-paging .pagination { display: inline-flex; gap: 6px; list-style: none; margin: 0; padding: 0; }
+.tk-paging .pagination li a,
+.tk-paging .pagination li span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 40px;
+    height: 40px;
+    padding: 0 12px;
+    border-radius: 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--tk-dark, #1f2d3d);
+    background: #fff;
+    border: 1px solid var(--tk-line, #e6ebef);
+    text-decoration: none;
+    transition: all .25s;
+}
+.tk-paging .pagination li a:hover {
+    background: var(--tk-main);
+    color: #fff;
+    border-color: var(--tk-main);
+}
+.tk-paging .pagination li.active span,
+.tk-paging .pagination li.active a {
+    background: var(--tk-dark, #1f2d3d);
+    color: #fff;
+    border-color: var(--tk-dark, #1f2d3d);
+}
+
+/* --- Nội dung SEO page cuối trang --- */
+.tk-content-page {
+    padding: 40px 0;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    line-height: 1.75;
+    color: #43474e;
+}
+.tk-content-page h1, .tk-content-page h2, .tk-content-page h3 {
+    font-family: 'Montserrat', sans-serif;
+    color: var(--tk-dark, #1f2d3d);
+    margin: 24px 0 12px;
+}
+
+/* ==========================================================================
+   CHI TIẾT TÍNH NĂNG — Hero + Article Body  (P4 — news_detail type: tinh-nang)
+   Design: Premium Scholastic Modernism — DESIGN.md
+   ========================================================================== */
+
+/* ---- HERO 2 CỘT ---- */
+.tk-nd-hero {
+    position: relative;
+    padding: 48px 0 80px;
+    background: #f8f9ff;
+    overflow: hidden;
+}
+/* Decorative gradient blobs */
+.tk-nd-hero__blob {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    filter: blur(120px);
+}
+.tk-nd-hero__blob--1 {
+    width: 800px; height: 800px;
+    top: -25%; right: -10%;
+    background: #d3e4fe;
+    opacity: 0.4;
+}
+.tk-nd-hero__blob--2 {
+    width: 600px; height: 600px;
+    bottom: -25%; left: -10%;
+    background: rgba(187,0,33,0.05);
+    opacity: 0.5;
+}
+
+.tk-nd-hero__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+}
+
+/* --- Text column --- */
+.tk-nd-hero__text {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.tk-nd-hero__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 16px;
+    background: #d3e4fe;
+    color: #001f3f;
+    border: 1px solid #E2E8F0;
+    border-radius: 9999px;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    width: max-content;
+}
+.tk-nd-hero__badge i { font-size: 13px; color: #476083; }
+
+.tk-nd-hero__title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 40px;
+    font-weight: 700;
+    line-height: 1.2;
+    color: #000613;
+    margin: 0;
+    background: linear-gradient(135deg, #001f3f, #000613);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+.tk-nd-hero__desc {
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
+    line-height: 1.75;
+    color: #43474e;
+    margin: 0;
+}
+
+.tk-nd-hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-top: 8px;
+}
+.tk-nd-hero__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 32px;
+    border-radius: 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all .3s ease;
+}
+.tk-nd-hero__btn--primary {
+    background: #bb0021;
+    color: #fff;
+    box-shadow: 0 4px 14px rgba(187,0,33,0.35);
+}
+.tk-nd-hero__btn--primary:hover {
+    background: #e61730;
+    box-shadow: 0 6px 20px rgba(187,0,33,0.25);
+    transform: translateY(-2px);
+}
+.tk-nd-hero__btn--primary i { font-size: 13px; }
+
+/* --- Ảnh glass panel --- */
+.tk-nd-hero__media {
+    display: flex;
+    justify-content: flex-end;
+}
+.tk-nd-hero__glass {
+    position: relative;
+    background: rgba(255,255,255,0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.5);
+    border-radius: 16px;
+    padding: 8px;
+    box-shadow: 0 8px 32px rgba(0,31,63,0.08);
+    overflow: hidden;
+    max-width: 520px;
+    width: 100%;
+}
+.tk-nd-hero__glass::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.4), transparent);
+    pointer-events: none;
+    z-index: 1;
+    border-radius: 16px;
+}
+.tk-nd-hero__glass img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 12px;
+    object-fit: cover;
+    position: relative;
+    z-index: 0;
+    transition: transform .6s ease;
+}
+.tk-nd-hero__glass:hover img {
+    transform: scale(1.03);
+}
+
+/* --- Hero responsive --- */
+@media (max-width: 900px) {
+    .tk-nd-hero__grid {
+        grid-template-columns: 1fr;
+        gap: 36px;
+    }
+    .tk-nd-hero__title { font-size: 30px; }
+    .tk-nd-hero__media { justify-content: center; }
+    .tk-nd-hero__glass { max-width: 400px; }
+    .tk-nd-hero { padding: 32px 0 48px; }
+}
+
+
+/* ---- SECTION 2: NỘI DUNG CHÍNH — 2 cột (7:5) ---- */
+.tk-nd-main {
+    position: relative;
+    padding: 80px 0;
+    background: #f8f9ff;
+    border-top: 1px solid #E2E8F0;
+    overflow: hidden;
+}
+.tk-nd-main__blob {
+    position: absolute;
+    width: 500px; height: 500px;
+    top: -100px; right: -50px;
+    background: #dce9ff;
+    border-radius: 50%;
+    filter: blur(120px);
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+/* Grid 2 cột: 7/12 trái + 5/12 phải */
+.tk-nd-main__grid {
+    display: grid;
+    grid-template-columns: 7fr 5fr;
+    gap: 64px;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+}
+.tk-nd-main__grid--full {
+    grid-template-columns: 1fr;
+}
+
+/* --- Cột trái: CKEditor + Feature items --- */
+.tk-nd-main__left {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+/* CKEditor article styles */
+.tk-nd-article {
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    line-height: 1.8;
+    color: #43474e;
+}
+.tk-nd-article h1,
+.tk-nd-article h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    color: #001f3f;
+    margin: 0 0 12px;
+    line-height: 1.25;
+}
+.tk-nd-article h1 { font-size: 36px; }
+.tk-nd-article h2 { font-size: 30px; }
+.tk-nd-article h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 20px;
+    color: #0b1c30;
+    margin: 28px 0 10px;
+    line-height: 1.35;
+}
+.tk-nd-article p { margin: 0 0 16px; }
+.tk-nd-article strong, .tk-nd-article b { color: #0b1c30; font-weight: 600; }
+.tk-nd-article ul, .tk-nd-article ol { margin: 12px 0 20px; padding-left: 24px; }
+.tk-nd-article ul li, .tk-nd-article ol li { margin-bottom: 8px; line-height: 1.7; }
+.tk-nd-article ul li::marker { color: var(--tk-main); }
+.tk-nd-article img {
+    max-width: 100%; height: auto;
+    border-radius: 12px; margin: 20px 0;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+}
+.tk-nd-article table {
+    width: 100%; border-collapse: collapse; margin: 20px 0;
+    font-size: 15px; border-radius: 8px; overflow: hidden;
+}
+.tk-nd-article table th {
+    background: #001f3f; color: #fff;
+    font-weight: 600; padding: 12px 16px; text-align: left;
+}
+.tk-nd-article table td {
+    padding: 12px 16px; border-bottom: 1px solid #E2E8F0;
+}
+.tk-nd-article table tr:nth-child(even) { background: #f8f9ff; }
+.tk-nd-article blockquote {
+    border-left: 4px solid var(--tk-main);
+    background: #f8f9ff; padding: 20px 24px;
+    margin: 20px 0; border-radius: 0 8px 8px 0;
+    font-style: italic; color: #476083;
+}
+
+/* --- Step Cards: <ol> trong CKEditor tự động thành glass cards --- */
+.tk-nd-article ol {
+    list-style: none;
+    counter-reset: step-counter;
+    padding-left: 0;
+    margin: 28px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    position: relative;
+}
+/* Vertical timeline */
+.tk-nd-article ol::before {
+    content: '';
+    position: absolute;
+    left: 23px;
+    top: 36px;
+    bottom: 36px;
+    width: 2px;
+    background: #E2E8F0;
+    z-index: 0;
+}
+.tk-nd-article ol > li {
+    counter-increment: step-counter;
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    background: rgba(255,255,255,0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.5);
+    box-shadow: 0 4px 20px rgba(0,31,63,0.05);
+    border-radius: 12px;
+    padding: 24px 28px;
+    margin-bottom: 0;
+    transition: border-color .3s, box-shadow .3s;
+    z-index: 1;
+}
+.tk-nd-article ol > li:hover {
+    border-color: rgba(175,200,240,0.6);
+    box-shadow: 0 8px 28px rgba(0,31,63,0.08);
+}
+/* Numbered circle */
+.tk-nd-article ol > li::before {
+    content: counter(step-counter);
+    flex-shrink: 0;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: #e5eeff;
+    color: #001f3f;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background .3s, color .3s;
+}
+.tk-nd-article ol > li:hover::before {
+    background: #bb0021;
+    color: #fff;
+}
+/* Step title (strong/b inside li) */
+.tk-nd-article ol > li strong,
+.tk-nd-article ol > li b {
+    display: block;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: #001f3f;
+    margin-bottom: 6px;
+    line-height: 1.3;
+    transition: color .3s;
+}
+.tk-nd-article ol > li:hover strong,
+.tk-nd-article ol > li:hover b {
+    color: #bb0021;
+}
+
+@media (max-width: 768px) {
+    .tk-nd-article ol > li { padding: 18px 20px; gap: 14px; }
+    .tk-nd-article ol > li::before { width: 40px; height: 40px; font-size: 18px; }
+    .tk-nd-article ol::before { left: 19px; }
+}
+
+/* --- Feature items grid (từ gallery) --- */
+.tk-nd-features {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin-top: 8px;
+}
+.tk-nd-feat-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 14px;
+    border-radius: 10px;
+    transition: background .25s;
+}
+.tk-nd-feat-item:hover { background: #fff; }
+
+.tk-nd-feat-item__icon {
+    flex-shrink: 0;
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    background: #e5eeff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+.tk-nd-feat-item__icon img {
+    width: 26px; height: 26px;
+    object-fit: contain;
+}
+.tk-nd-feat-item__icon i {
+    font-size: 18px;
+    color: #001f3f;
+}
+
+.tk-nd-feat-item__text h3 {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: #001f3f;
+    margin: 0 0 2px;
+    line-height: 1.3;
+}
+.tk-nd-feat-item__text p {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: #43474e;
+    margin: 0;
+    line-height: 1.4;
+}
+
+
+/* --- Cột phải: Glass panel ảnh --- */
+.tk-nd-main__right {
+    position: relative;
+}
+.tk-nd-main__glass {
+    position: relative;
+    background: rgba(255,255,255,0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.5);
+    border-radius: 16px;
+    padding: 8px;
+    box-shadow: 0 8px 32px rgba(0,31,63,0.08);
+    overflow: hidden;
+    z-index: 2;
+}
+.tk-nd-main__glass::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.4), transparent);
+    pointer-events: none;
+    z-index: 1;
+    border-radius: 16px;
+}
+.tk-nd-main__glass img {
+    width: 100%; height: auto;
+    display: block;
+    border-radius: 12px;
+    object-fit: cover;
+    position: relative; z-index: 0;
+    transition: transform .6s ease;
+}
+.tk-nd-main__glass:hover img { transform: scale(1.03); }
+
+/* Hào quang mờ phía sau glass */
+.tk-nd-main__glass-glow {
+    position: absolute;
+    top: 20px; right: -20px;
+    width: 100%; height: 100%;
+    background: #dce9ff;
+    border-radius: 16px;
+    z-index: -1;
+    filter: blur(40px);
+    opacity: 0.6;
+}
+
+/* --- Responsive --- */
+@media (max-width: 900px) {
+    .tk-nd-main { padding: 48px 0; }
+    .tk-nd-main__grid {
+        grid-template-columns: 1fr;
+        gap: 36px;
+    }
+    .tk-nd-features { grid-template-columns: 1fr; }
+    .tk-nd-article h1 { font-size: 28px; }
+    .tk-nd-article h2 { font-size: 24px; }
+}
+
+
+/* ---- SECTION 3: CÁC BƯỚC — ảnh TRÁI (5) | steps PHẢI (7) ---- */
+.tk-nd-steps {
+    position: relative;
+    padding: 80px 0;
+    background: #fff;
+    border-top: 1px solid #E2E8F0;
+    overflow: hidden;
+}
+.tk-nd-steps__blob {
+    position: absolute;
+    width: 500px; height: 500px;
+    top: -80px; left: -80px;
+    background: #d3e4fe;
+    border-radius: 50%;
+    filter: blur(120px);
+    opacity: 0.35;
+    pointer-events: none;
+}
+.tk-nd-steps__grid {
+    display: grid;
+    grid-template-columns: 5fr 7fr;
+    gap: 64px;
+    align-items: start;
+    position: relative;
+    z-index: 2;
+}
+.tk-nd-steps__grid--full {
+    grid-template-columns: 1fr;
+}
+
+/* Ảnh bên trái — sticky khi scroll */
+.tk-nd-steps__media {
+    position: sticky;
+    top: 120px;
+}
+.tk-nd-steps__media-caption {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    color: #74777f;
+    text-align: center;
+    margin-top: 12px;
+}
+
+/* Steps content bên phải */
+.tk-nd-steps__content {
+    display: flex;
+    flex-direction: column;
+}
+
+@media (max-width: 900px) {
+    .tk-nd-steps { padding: 48px 0; }
+    .tk-nd-steps__grid {
+        grid-template-columns: 1fr;
+        gap: 36px;
+    }
+    .tk-nd-steps__media {
+        position: static;
+        max-width: 360px;
+        margin: 0 auto;
+    }
+}
+
+/* ---- VIDEO GRID ---- */
+.tk-nd-video {
+    padding: 64px 0;
+    background: #fff;
+    border-top: 1px solid #E2E8F0;
+}
+.tk-nd-video__heading {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 26px;
+    font-weight: 700;
+    color: #001f3f;
+    text-align: center;
+    margin: 0 0 36px;
+}
+.tk-nd-video__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+    gap: 28px;
+}
+.tk-nd-video__item {
+    background: #f8f9ff;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid #E2E8F0;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+}
+.tk-nd-video__frame {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 */
+    height: 0;
+    overflow: hidden;
+}
+.tk-nd-video__frame iframe,
+.tk-nd-video__frame video {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+.tk-nd-video__caption {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: #0b1c30;
+    padding: 14px 20px;
+    margin: 0;
+    text-align: center;
+}
+@media (max-width: 480px) {
+    .tk-nd-video__grid { grid-template-columns: 1fr; }
+    .tk-nd-video { padding: 40px 0; }
+}
