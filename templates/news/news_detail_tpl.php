@@ -158,9 +158,9 @@
                                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
                                 <?php } elseif ($has_file) { ?>
                                     <!-- Video file local -->
-                                    <video controls preload="metadata"
-                                        <?= $poster ? 'poster="' . $poster . '"' : '' ?>>
-                                        <source src="<?= UPLOAD_NEWS_L . $vid['taptin'] ?>" type="video/mp4">
+                                    <video controls preload="metadata" playsinline
+                                        style="background:#000">
+                                        <source src="<?= $config_base ?>upload/file/<?= $vid['taptin'] ?>" type="video/mp4">
                                         Trình duyệt không hỗ trợ video.
                                     </video>
                                 <?php } elseif ($has_url) { ?>
