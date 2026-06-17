@@ -539,32 +539,6 @@
         </div>
     </section>
 
-    <!-- SECTION 2: Article Body — single-column reading -->
-    <section class="tknews-detail-body">
-        <div class="fixwidth">
-            <article class="tknews-detail-article">
-                <?php if (!empty($row_detail['mota' . $lang])) { ?>
-                    <p class="tknews-detail-article__lead"><?= $row_detail['mota' . $lang] ?></p>
-                <?php } ?>
-
-                <?php if (!empty($row_detail['noidung' . $lang])) { ?>
-                    <div class="tknews-detail-article__content" id="toc-content">
-                        <?= htmlspecialchars_decode($row_detail['noidung' . $lang]) ?>
-                    </div>
-                <?php } else { ?>
-                    <div class="alert alert-warning"><strong><?= noidungdangcapnhat ?></strong></div>
-                <?php } ?>
-
-                <div class="tknews-detail-article__footer">
-                    <a class="tknews-detail-back" href="tin-tuc">
-                        <i class="fas fa-arrow-left"></i> Quay lại danh sách tin tức
-                    </a>
-                </div>
-            </article>
-        </div>
-    </section>
-
-
     <?php if ($has_tt_gallery) { ?>
 
         <!-- GALLERY v2  -->
@@ -657,7 +631,7 @@
         </div>
 
         <script>
-            $(document).ready(function() {
+            window.addEventListener('load', function() {
             (function($) {
                 /* ── Dữ liệu ảnh ── */
                 var galleryData = [
@@ -812,10 +786,35 @@
                 startAutoplay();
 
             })(jQuery);
-            }); // $(document).ready
+            }); // window load
         </script>
 
     <?php }  ?>
+
+    <!-- SECTION 2: Article Body — single-column reading -->
+    <section class="tknews-detail-body">
+        <div class="fixwidth">
+            <article class="tknews-detail-article">
+                <?php if (!empty($row_detail['mota' . $lang])) { ?>
+                    <p class="tknews-detail-article__lead"><?= $row_detail['mota' . $lang] ?></p>
+                <?php } ?>
+
+                <?php if (!empty($row_detail['noidung' . $lang])) { ?>
+                    <div class="tknews-detail-article__content" id="toc-content">
+                        <?= htmlspecialchars_decode($row_detail['noidung' . $lang]) ?>
+                    </div>
+                <?php } else { ?>
+                    <div class="alert alert-warning"><strong><?= noidungdangcapnhat ?></strong></div>
+                <?php } ?>
+
+                <div class="tknews-detail-article__footer">
+                    <a class="tknews-detail-back" href="tin-tuc">
+                        <i class="fas fa-arrow-left"></i> Quay lại danh sách tin tức
+                    </a>
+                </div>
+            </article>
+        </div>
+    </section>
     
     <!-- SECTION 3: Related Articles -->
     <?php if (isset($news) && count($news) > 0) { ?>
