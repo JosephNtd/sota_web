@@ -10,7 +10,7 @@ $splistmenu = $d->rawQuery("select ten$lang, tenkhongdauvi, id, photo, mota$lang
 $dv_listmenu = $d->rawQuery("select ten$lang, tenkhongdauvi, id,photo from #_news_list where type = ? and hienthi > 0 order by stt,id desc", array('dich-vu'));
 
 /* Menu dropdown titkul: Tính năng nổi bật + Hướng dẫn sử dụng */
-$tinhnang_menu = $d->rawQuery("select ten$lang, tenkhongdauvi, id from #_news where type = ? and hienthi > 0 order by stt,id desc", array('tinh-nang'));
+$tinhnang_menu = $d->rawQuery("select ten$lang, tenkhongdauvi, id, link from #_news where type = ? and hienthi > 0 order by stt,id desc", array('tinh-nang'));
 $huongdan_menu = $d->rawQuery("select ten$lang, tenkhongdauvi, id from #_news where type = ? and hienthi > 0 and noibat > 0 order by stt,id desc", array('huong-dan'));
 
 $footer = $d->rawQueryOne("select ten$lang, noidung$lang from #_static where type = ? limit 0,1", array('footer'));

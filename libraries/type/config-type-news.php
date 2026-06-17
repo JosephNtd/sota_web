@@ -223,6 +223,7 @@ $config['news'][$nametype]['mota'] = true;
 $config['news'][$nametype]['noidung'] = true;
 $config['news'][$nametype]['noidung_cke'] = true;
 $config['news'][$nametype]['seo'] = true;
+$config['news'][$nametype]['link']    = true;
 $config['news'][$nametype]['width'] = 240;
 $config['news'][$nametype]['height'] = 200;
 $config['news'][$nametype]['thumb'] = '240x200x1';
