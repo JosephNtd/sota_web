@@ -324,7 +324,8 @@ if ($id != '') {
 
 	/* Lấy tất cả bài viết */
 	$where = "";
-	$where = "type = ? and hienthi > 0 and noibat > 0";
+	// $where = "type = ? and hienthi > 0 and noibat > 0";
+	$where = "type = ? and hienthi > 0";
 	$params = array($type);
 
 	$curPage = $get_page;

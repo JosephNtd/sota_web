@@ -134,7 +134,7 @@ switch ($act) {
 		break;
 
 	/* Gallery */
-	case "	":
+	case "man_photo":
 	case "add_photo":
 	case "edit_photo":
 	case "save_photo":
