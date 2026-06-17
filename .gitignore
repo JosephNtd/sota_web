@@ -1,42 +1,29 @@
-# ========================
 # OS
-# ========================
 .DS_Store
 Thumbs.db
 desktop.ini
 
-# ========================
 # IDE
-# ========================
 .vscode/
 .idea/
 *.suo
 *.user
 
-# ========================
 # Logs
-# ========================
 *.log
 logs/
 
-# ========================
 # Cache
-# ========================
 caches/*
 !caches/.htaccess
-
 *.cache
 
-# ========================
 # Uploads (nếu người dùng upload ảnh)
-# ========================
 uploads/
 images/uploads/
 *.mp4
 
-# ========================
 # Config chứa thông tin nhạy cảm
-# ========================
 config.local.php
 .env
 .env.*
@@ -44,26 +31,18 @@ config.local.php
 # Nếu file này chứa password DB
 libraries/config.php
 
-# ========================
 # Nested Git Repository
-# ========================
 assets/dflip/dflip/.git/
 
-# ========================
 # Backup
-# ========================
 *.bak
 *.old
 *.tmp
 
-# ========================
 # Database
-# ========================
 *.sql
-
 !sota_db.sql
 *.jpg
 *.png
 *.pdf
-
 *copy.php

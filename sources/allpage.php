@@ -205,4 +205,4 @@ if (isset($_POST['submit-newsletter'])) {
     } else {
         $func->transfer("Đăng ký nhận tin thất bại. Vui lòng thử lại sau.", $config_base, false);
     }
-}
+}   

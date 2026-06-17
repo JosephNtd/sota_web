@@ -511,54 +511,87 @@
     </script>
 
 <?php } else { ?>
-    <section class="tk-nd-article-section">
-        <div class="fixwidth">
-            <div class="tk-nd-article-header">
-                <time class="tk-nd-article-header__date"><i class="far fa-calendar-alt"></i> <?= date("d/m/Y", $row_detail['ngaytao']) ?></time>
-                <h1 class="tk-nd-article-header__title"><?= $row_detail['ten' . $lang] ?></h1>
+    <!-- ════════ CHI TIẾT TIN TỨC — Magazine Article Layout ════════ -->
+
+    <!-- SECTION 1: Article Hero — ảnh cover full-width + overlay navy + title -->
+    <section class="tknews-detail-hero">
+        <?php if (!empty($row_detail['photo'])) { ?>
+            <img class="tknews-detail-hero__bg"
+                 src="<?= UPLOAD_NEWS_L . $row_detail['photo'] ?>"
+                 onerror="this.style.display='none'"
+                 alt="<?= $row_detail['ten' . $lang] ?>" />
+        <?php } ?>
+        <div class="tknews-detail-hero__overlay"></div>
+        <div class="fixwidth tknews-detail-hero__inner">
+            <span class="tknews-detail-hero__badge">
+                <i class="far fa-newspaper"></i> Tin tức
+            </span>
+            <h1 class="tknews-detail-hero__title"><?= $row_detail['ten' . $lang] ?></h1>
+            <div class="tknews-detail-hero__meta">
+                <span><i class="far fa-calendar-alt"></i> <?= date("d/m/Y", $row_detail['ngaytao']) ?></span>
+                <?php if (!empty($row_detail['luotxem'])) { ?>
+                    <span><i class="far fa-eye"></i> <?= number_format($row_detail['luotxem']) ?> lượt xem</span>
+                <?php } ?>
             </div>
-            <?php if (!empty($row_detail['photo'])) { ?>
-                <div class="tk-nd-article-cover">
-                    <img src="<?= THUMBS ?>/1200x630x1/<?= UPLOAD_NEWS_L . $row_detail['photo'] ?>" alt="<?= $row_detail['ten' . $lang] ?>" />
-                </div>
-            <?php } ?>
-            <?php if (!empty($row_detail['noidung' . $lang])) { ?>
-                <div class="tk-nd-article" id="toc-content"><?= htmlspecialchars_decode($row_detail['noidung' . $lang]) ?></div>
-            <?php } else { ?>
-                <div class="alert alert-warning"><strong><?= noidungdangcapnhat ?></strong></div>
-            <?php } ?>
-            <!-- <div class="tk-nd-share__inner">
-                <b><?= chiase ?>:</b>
-                <div class="social-plugin w-clear">
-                    <div class="website_share d-flex align-items-center pr-2">
-                        <div class="zalo-share-button" data-href="<?= $func->getCurrentPageURL() ?>"
-                            data-oaid="<?= (!empty($optsetting['oaidzalo'])) ? $optsetting['oaidzalo'] : '579745863508352884' ?>"
-                            data-layout="1" data-color="blue" data-customize=true>
-                            <img width="20" height="20" src="../../assets/images/zalo1.png">
-                            <span style="color:#fff;font-size:11px;font-weight:500;letter-spacing:.5px">Share</span>
-                        </div>
-                    </div>
-                    <div class="sharethis-inline-share-buttons"></div>
-                </div>
-            </div> -->
         </div>
     </section>
+
+    <!-- SECTION 2: Article Body — single-column reading -->
+    <section class="tknews-detail-body">
+        <div class="fixwidth">
+            <article class="tknews-detail-article">
+                <?php if (!empty($row_detail['mota' . $lang])) { ?>
+                    <p class="tknews-detail-article__lead"><?= $row_detail['mota' . $lang] ?></p>
+                <?php } ?>
+
+                <?php if (!empty($row_detail['noidung' . $lang])) { ?>
+                    <div class="tknews-detail-article__content" id="toc-content">
+                        <?= htmlspecialchars_decode($row_detail['noidung' . $lang]) ?>
+                    </div>
+                <?php } else { ?>
+                    <div class="alert alert-warning"><strong><?= noidungdangcapnhat ?></strong></div>
+                <?php } ?>
+
+                <div class="tknews-detail-article__footer">
+                    <a class="tknews-detail-back" href="tin-tuc">
+                        <i class="fas fa-arrow-left"></i> Quay lại danh sách tin tức
+                    </a>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <!-- SECTION 3: Related Articles -->
     <?php if (isset($news) && count($news) > 0) { ?>
-        <section class="tk-nd-related">
+        <section class="tknews-detail-related">
             <div class="fixwidth">
-                <h2 class="tk-nd-related__heading"><?= baivietkhac ?></h2>
-                <div class="tk-news-grid">
+                <div class="tknews-detail-related__header">
+                    <h2 class="tknews-detail-related__heading">Bài viết liên quan</h2>
+                    <a class="tknews-detail-related__all" href="tin-tuc">
+                        Xem tất cả <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+                <div class="tknews-listing__grid">
                     <?php foreach ($news as $v) { ?>
-                        <article class="tk-news-card">
-                            <a class="tk-news-card__img" href="<?= $v[$sluglang] ?>">
+                        <article class="tknews-card">
+                            <a class="tknews-card__img" href="<?= $v[$sluglang] ?>" title="<?= $v['ten' . $lang] ?>">
                                 <img src="<?= THUMBS ?>/480x320x1/<?= UPLOAD_NEWS_L . $v['photo'] ?>"
-                                    onerror="this.src='<?= THUMBS ?>/480x320x1/assets/images/noimage.png';"
-                                    alt="<?= $v['ten' . $lang] ?>" loading="lazy" />
+                                     onerror="this.src='<?= THUMBS ?>/480x320x1/assets/images/noimage.png';"
+                                     alt="<?= $v['ten' . $lang] ?>" loading="lazy" />
                             </a>
-                            <div class="tk-news-card__body">
-                                <time class="tk-news-card__date"><i class="far fa-calendar-alt"></i> <?= date("d/m/Y", $v['ngaytao']) ?></time>
-                                <h3 class="tk-news-card__title"><a href="<?= $v[$sluglang] ?>"><?= $v['ten' . $lang] ?></a></h3>
-                                <a class="tk-news-card__link" href="<?= $v[$sluglang] ?>">Đọc thêm <i class="fas fa-chevron-right"></i></a>
+                            <div class="tknews-card__body">
+                                <h3 class="tknews-card__title">
+                                    <a href="<?= $v[$sluglang] ?>"><?= $v['ten' . $lang] ?></a>
+                                </h3>
+                                <?php if (!empty($v['mota' . $lang])) { ?>
+                                    <p class="tknews-card__desc"><?= $v['mota' . $lang] ?></p>
+                                <?php } ?>
+                                <div class="tknews-card__foot">
+                                    <time class="tknews-card__date">
+                                        <i class="far fa-calendar-alt"></i> <?= date("d/m/Y", $v['ngaytao']) ?>
+                                    </time>
+                                    <a class="tknews-card__link" href="<?= $v[$sluglang] ?>">Xem thêm</a>
+                                </div>
                             </div>
                         </article>
                     <?php } ?>
@@ -566,6 +599,7 @@
             </div>
         </section>
     <?php } ?>
+
     <?php include TEMPLATE . LAYOUT . "form_dangky.php"; ?>
     <?php include TEMPLATE . LAYOUT . "hotro_lienhe.php"; ?>
     <script>

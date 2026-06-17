@@ -19,24 +19,26 @@
             </div>
         </div> -->
         <div class="content1">
-        <?php
-        include TEMPLATE . LAYOUT . "seo.php";
-        include TEMPLATE . LAYOUT . "menu.php";
-        include TEMPLATE . LAYOUT . "slide.php";
-        if ($source != 'index' && $source != 'static') include TEMPLATE . LAYOUT . "breadcrumb.php";
-        ?>
-        <div class="<?= ($source == 'static') ? 'wrap-main' : 'wrap-home' ?> w-clear"><?php include TEMPLATE . $template . "_tpl.php"; ?></div>
-        <?php
-        include TEMPLATE . LAYOUT . "footer.php";
-        //include TEMPLATE.LAYOUT."mmenu.php";
-        // include TEMPLATE . LAYOUT . "phone_mobile.php";
-        // include TEMPLATE . LAYOUT . "phone-vr.php";
-        include TEMPLATE . LAYOUT . "bonut.php";
-        include TEMPLATE . LAYOUT . "nhantin_btn.php";
-        include TEMPLATE . LAYOUT . "modal.php";
-        include TEMPLATE . LAYOUT . "js.php";
-        // if($deviceType=='mobile') include TEMPLATE.LAYOUT."phone.php";
-        ?>
+            <?php
+            include TEMPLATE . LAYOUT . "seo.php";
+            include TEMPLATE . LAYOUT . "menu.php";
+            include TEMPLATE . LAYOUT . "slide.php";
+            $__hideBread = ($source == 'index' || $source == 'static');
+            if (!$__hideBread && $source == 'news' && in_array(@$type, ['tin-tuc', 'huong-dan']) && empty($_GET['id'])) $__hideBread = true;
+            if (!$__hideBread) include TEMPLATE . LAYOUT . "breadcrumb.php";
+            ?>
+            <div class="<?= ($source == 'static') ? 'wrap-main' : 'wrap-home' ?> w-clear"><?php include TEMPLATE . $template . "_tpl.php"; ?></div>
+            <?php
+            include TEMPLATE . LAYOUT . "footer.php";
+            //include TEMPLATE.LAYOUT."mmenu.php";
+            // include TEMPLATE . LAYOUT . "phone_mobile.php";
+            // include TEMPLATE . LAYOUT . "phone-vr.php";
+            include TEMPLATE . LAYOUT . "bonut.php";
+            include TEMPLATE . LAYOUT . "nhantin_btn.php";
+            include TEMPLATE . LAYOUT . "modal.php";
+            include TEMPLATE . LAYOUT . "js.php";
+            // if($deviceType=='mobile') include TEMPLATE.LAYOUT."phone.php";
+            ?>
         </div>
     </div>
 
