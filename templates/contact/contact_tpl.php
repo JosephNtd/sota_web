@@ -229,7 +229,7 @@ $ct_banner_src = (isset($banner) && $banner != '')
                                 <div class="g-recaptcha" data-sitekey="<?= $config['googleAPI']['recaptcha']['sitekey'] ?>"></div>
                                 <input type="hidden" name="recaptcha_response_contact" id="recaptchaResponseContact" />
                             <?php endif; ?>
-
+                            <div class="tk-form-msg" id="tkct-msg" style="display:none;"></div>
                             <!-- Submit -->
                             <div class="tkct-form__submit">
                                 <button class="tkct-btn-primary" type="submit" name="submit-contact" disabled>
@@ -290,7 +290,7 @@ $ct_banner_src = (isset($banner) && $banner != '')
 <!-- /.wrap-main.tkct-page -->
 
 <!-- FAQ Accordion + Form Submit Enable Script -->
-<script>
+<!-- <script>
 (function(){
     /* Accordion */
     window.tkctToggleFaq = function(btn){
@@ -333,5 +333,101 @@ $ct_banner_src = (isset($banner) && $banner != '')
         });
         checkForm();
     }
+})();
+</script> -->
+<!-- FAQ Accordion + AJAX Form Submit Script -->
+<script>
+(function(){
+    /* Accordion */
+    window.tkctToggleFaq = function(btn){
+        var item = btn.parentElement;
+        var body = btn.nextElementSibling;
+        var isOpen = body.getAttribute('data-state') === 'open';
+        document.querySelectorAll('.tkct-faq__body').forEach(function(el){
+            if (el !== body) {
+                el.setAttribute('data-state', 'closed');
+                el.previousElementSibling.classList.remove('is-open');
+            }
+        });
+        if (isOpen) {
+            body.setAttribute('data-state', 'closed');
+            btn.classList.remove('is-open');
+        } else {
+            body.setAttribute('data-state', 'open');
+            btn.classList.add('is-open');
+        }
+    };
+
+    /* Form AJAX */
+    var form = document.querySelector('.tkct-form');
+    if (!form) return;
+    var submitBtn = form.querySelector('button[type="submit"]');
+    var btnLabel  = submitBtn ? submitBtn.querySelector('span') : null;
+    var msg       = document.getElementById('tkct-msg');
+    var required  = form.querySelectorAll('[required]');
+
+    function checkForm() {
+        var ok = true;
+        required.forEach(function(f){ if (!f.value.trim()) ok = false; });
+        if (submitBtn) submitBtn.disabled = !ok;
+    }
+    required.forEach(function(f){
+        f.addEventListener('input', checkForm);
+        f.addEventListener('blur', checkForm);
+    });
+    checkForm();
+
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        if (submitBtn.disabled) return;
+
+        submitBtn.disabled = true;
+        if (btnLabel) btnLabel.textContent = 'Đang gửi...';
+        msg.style.display = 'none';
+
+        var fd = new FormData(form);
+
+        var sendForm = function() {
+            fetch('ajax/ajax_contact.php', {
+                method: 'POST',
+                body: fd
+            })
+            .then(function(r){ return r.json(); })
+            .then(function(data){
+                msg.style.display = 'block';
+                if (data.success) {
+                    msg.className = 'tk-form-msg tk-form-msg--ok';
+                    msg.innerHTML = '<i class="fas fa-check-circle"></i> ' + data.message;
+                    form.reset();
+                } else {
+                    msg.className = 'tk-form-msg tk-form-msg--err';
+                    msg.innerHTML = '<i class="fas fa-exclamation-circle"></i> ' + data.message;
+                }
+                if (btnLabel) btnLabel.textContent = 'Gửi Thông Tin';
+                submitBtn.disabled = false;
+                checkForm();
+            })
+            .catch(function(){
+                msg.style.display = 'block';
+                msg.className = 'tk-form-msg tk-form-msg--err';
+                msg.innerHTML = '<i class="fas fa-exclamation-circle"></i> Lỗi kết nối. Vui lòng thử lại.';
+                if (btnLabel) btnLabel.textContent = 'Gửi Thông Tin';
+                submitBtn.disabled = false;
+                checkForm();
+            });
+        };
+
+        /* Refresh reCAPTCHA v3 token nếu có */
+        if (window.grecaptcha && typeof grecaptcha.execute === 'function') {
+            try {
+                grecaptcha.execute('<?= isset($config["googleAPI"]["recaptcha"]["sitekey"]) ? $config["googleAPI"]["recaptcha"]["sitekey"] : "" ?>', {action: 'contact'}).then(function(token){
+                    fd.set('recaptcha_response_contact', token);
+                    sendForm();
+                });
+            } catch(ex) { sendForm(); }
+        } else {
+            sendForm();
+        }
+    });
 })();
 </script>

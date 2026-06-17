@@ -4,8 +4,8 @@
 <section class="tk-sec tk-intro">
     <div class="fixwidth">
         <img src="<?= !empty($gioithieu['photo']) ? UPLOAD_PHOTO_L . $gioithieu['photo'] : 'assets/images/titkul/cropped-Titkul-logo-header.png' ?>"
-                    alt="Titkul" onerror="this.src='assets/images/titkul/cropped-Titkul-logo-header.png';" 
-                    style="display: block; margin: 0 auto;"/>
+            alt="Titkul" onerror="this.src='assets/images/titkul/cropped-Titkul-logo-header.png';"
+            style="display: block; margin: 0 auto;" />
         <p class="tk-intro-lead">
             Công ty sản xuất phần mềm ứng dụng Quản lý trường học, theo định hướng chuyển đổi số,
             có kết nối trục dữ liệu dùng chung của Ngành. Phần mềm của Titkul đã được Sở GD &amp; ĐT Tp.HCM
@@ -171,7 +171,7 @@ $tk_doituong = (isset($huongdan) && count($huongdan) > 0) ? $huongdan : $tk_fall
     Field name khớp handler newsletter (allpage.php):
     name-newsletter / phone-newsletter / truong-newsletter(chude) / diachi-newsletter
 -->
-    <?php include TEMPLATE . LAYOUT . "form_dangky.php"; ?>
+<?php include TEMPLATE . LAYOUT . "form_dangky.php"; ?>
 <!-- <section class="tk-sec tk-register" id="dangkytuvan">
     <div class="fixwidth tk-register-grid">
         <div class="tk-register-left">
@@ -248,28 +248,57 @@ $tk_doituong = (isset($huongdan) && count($huongdan) > 0) ? $huongdan : $tk_fall
     </section>
 <?php } ?>
 
-<!-- SECTION 10 — TIN TỨC SỰ KIỆN -->
+<!-- SECTION 10 — TIN TỨC SỰ KIỆN (mini bento) -->
 <?php if (isset($tintuc) && count($tintuc) > 0) { ?>
+    <?php
+    $tt_main  = $tintuc[0];
+    $tt_sides = array_slice($tintuc, 1, 2);
+    ?>
     <section class="tk-sec tk-news">
         <div class="fixwidth">
             <h2 class="tk-sec-title">TIN TỨC SỰ KIỆN</h2>
-            <div class="tk-news-grid">
-                <?php foreach ($tintuc as $k => $v) {
-                    if ($k >= 8) break; ?>
-                    <div class="tk-news-card">
-                        <a class="tk-news-thumb" href="<?= $v['tenkhongdau' . $lang] ?>" title="<?= $v['ten' . $lang] ?>">
-                            <img onerror="this.src='<?= THUMBS ?>/400x240x1/assets/images/noimage.png';"
-                                src="<?= THUMBS ?>/400x240x1/<?= UPLOAD_NEWS_L . $v['photo'] ?>" alt="<?= $v['ten' . $lang] ?>" />
-                        </a>
-                        <div class="tk-news-body">
-                            <a class="tk-news-name" href="<?= $v['tenkhongdau' . $lang] ?>" title="<?= $v['ten' . $lang] ?>"><?= $v['ten' . $lang] ?></a>
-                            <?php if (!empty($v['mota' . $lang])) { ?><p class="tk-news-excerpt"><?= $v['mota' . $lang] ?></p><?php } ?>
-                        </div>
+
+            <div class="tk-news-bento">
+                <!-- Main card -->
+                <a class="tk-news-bento__main" href="<?= $tt_main['tenkhongdau' . $lang] ?>" title="<?= $tt_main['ten' . $lang] ?>">
+                    <img class="tk-news-bento__main-img"
+                        src="<?= UPLOAD_NEWS_L . $tt_main['photo'] ?>"
+                        onerror="this.src='<?= THUMBS ?>/720x450x1/assets/images/noimage.png';"
+                        alt="<?= $tt_main['ten' . $lang] ?>" loading="lazy" />
+                    <div class="tk-news-bento__main-overlay"></div>
+                    <div class="tk-news-bento__main-caption">
+                        <span class="tk-news-bento__badge">Nổi bật</span>
+                        <h3 class="tk-news-bento__main-title"><?= $tt_main['ten' . $lang] ?></h3>
+                        <time class="tk-news-bento__main-date">
+                            <i class="far fa-calendar-alt"></i> <?= date("d/m/Y", $tt_main['ngaytao']) ?>
+                        </time>
+                    </div>
+                </a>
+
+                <!-- Side cards -->
+                <?php if (count($tt_sides) > 0) { ?>
+                    <div class="tk-news-bento__side">
+                        <?php foreach ($tt_sides as $sv) { ?>
+                            <a class="tk-news-bento__side-card" href="<?= $sv['tenkhongdau' . $lang] ?>" title="<?= $sv['ten' . $lang] ?>">
+                                <div class="tk-news-bento__side-img">
+                                    <img src="<?= THUMBS ?>/400x260x1/<?= UPLOAD_NEWS_L . $sv['photo'] ?>"
+                                        onerror="this.src='<?= THUMBS ?>/400x260x1/assets/images/noimage.png';"
+                                        alt="<?= $sv['ten' . $lang] ?>" loading="lazy" />
+                                </div>
+                                <div class="tk-news-bento__side-body">
+                                    <time class="tk-news-bento__side-date">
+                                        <i class="far fa-calendar-alt"></i> <?= date("d/m/Y", $sv['ngaytao']) ?>
+                                    </time>
+                                    <h3 class="tk-news-bento__side-title"><?= $sv['ten' . $lang] ?></h3>
+                                </div>
+                            </a>
+                        <?php } ?>
                     </div>
                 <?php } ?>
             </div>
+
             <div class="tk-news-more">
-                <a class="tk-btn tk-btn-outline" href="tin-tuc">Xem tất cả tin tức</a>
+                <a class="tk-btn tk-btn-outline" href="tin-tuc">Xem tất cả tin tức &raquo;</a>
             </div>
         </div>
     </section>
@@ -287,37 +316,50 @@ $tk_doituong = (isset($huongdan) && count($huongdan) > 0) ? $huongdan : $tk_fall
     });
 </script> -->
 <script>
-    window.addEventListener('load', function () {
-    if (window.jQuery && jQuery('#doitac_slider').length) {
-        jQuery('#doitac_slider').owlCarousel({
-            loop: true,
-            margin: 24,
-            nav: false,
-            dots: false,
-            autoplay: true,
-            
-            // --- CẤU HÌNH ĐỂ CHẠY LIÊN TỤC ---
-            autoplayTimeout: 3000,     // Đặt thời gian chờ bằng với tốc độ trượt
-            autoplaySpeed: 3000,       // Tốc độ trượt (3000ms = 3 giây để dịch chuyển)
-            slideTransition: 'linear', // Ép hiệu ứng chạy đều, không nhanh chậm
-            // ---------------------------------
-            
-            responsive: { 0: { items: 2 }, 480: { items: 3 }, 768: { items: 4 }, 1024: { items: 6 } }
-        });
-    }
-});
+    window.addEventListener('load', function() {
+        if (window.jQuery && jQuery('#doitac_slider').length) {
+            jQuery('#doitac_slider').owlCarousel({
+                loop: true,
+                margin: 24,
+                nav: false,
+                dots: false,
+                autoplay: true,
+
+                // --- CẤU HÌNH ĐỂ CHẠY LIÊN TỤC ---
+                autoplayTimeout: 3000, // Đặt thời gian chờ bằng với tốc độ trượt
+                autoplaySpeed: 3000, // Tốc độ trượt (3000ms = 3 giây để dịch chuyển)
+                slideTransition: 'linear', // Ép hiệu ứng chạy đều, không nhanh chậm
+                // ---------------------------------
+
+                responsive: {
+                    0: {
+                        items: 2
+                    },
+                    480: {
+                        items: 3
+                    },
+                    768: {
+                        items: 4
+                    },
+                    1024: {
+                        items: 6
+                    }
+                }
+            });
+        }
+    });
 </script>
 <script>
     window.addEventListener('DOMContentLoaded', function() {
         // Lấy tất cả các section có class tk-sec trên trang chủ
         const allSections = document.querySelectorAll('section.tk-sec');
-        
+
         // Cấu hình bộ nhận diện IntersectionObserver
         const sectionObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     // Khi section lọt vào tầm mắt -> Thêm class kích hoạt hiệu ứng
-                    entry.target.classList.add('is-revealed'); 
+                    entry.target.classList.add('is-revealed');
                 } else {
                     // Khi section khuất khỏi tầm mắt -> Xóa class để lần sau cuộn lại vẫn chạy tiếp
                     entry.target.classList.remove('is-revealed');
@@ -326,7 +368,7 @@ $tk_doituong = (isset($huongdan) && count($huongdan) > 0) ? $huongdan : $tk_fall
         }, {
             root: null,
             // Đổi rootMargin một chút để trải nghiệm cuộn lên/xuống mượt mà, không bị khựng giữa chừng
-            rootMargin: '-40px 0px -40px 0px', 
+            rootMargin: '-40px 0px -40px 0px',
             threshold: 0.1 // Đạt 10% diện tích xuất hiện là kích hoạt
         });
 

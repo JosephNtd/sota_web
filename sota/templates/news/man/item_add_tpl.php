@@ -302,6 +302,16 @@ if (
                                                     frameborder="0" allowfullscreen></iframe></div>
                                         </div>
                                     <?php } ?>
+                                     <?php if (isset($config['news'][$type]['link']) && $config['news'][$type]['link'] == true) { ?>
+                                        <div class="form-group mt-3">
+                                            <label for="link_ext">
+                                                <i class="fas fa-external-link-alt mr-1"></i>
+                                                Link ngoài <small class="text-muted">(nếu có, bấm vào mục này sẽ chuyển đến URL này thay vì trang chi tiết)</small>
+                                            </label>
+                                            <input type="text" class="form-control" name="data[link]" id="link_ext"
+                                                placeholder="https://..." value="<?= @$item['link'] ?>">
+                                        </div>
+                                    <?php } ?>
                                 </div>
                             </div>
                         </div>

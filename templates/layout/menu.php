@@ -68,7 +68,7 @@
                         <?php if (!empty($tinhnang_menu)) { ?>
                         <ul class="menu_cap_con">
                             <?php foreach ($tinhnang_menu as $tn) { ?>
-                            <li><a href="<?= $tn[$sluglang] ?>" title="<?= $tn['ten' . $lang] ?>"><?= $tn['ten' . $lang] ?></a></li>
+                            <li><a href="<?= !empty($tn['link']) ? $tn['link'] : $tn[$sluglang] ?>"<?= !empty($tn['link']) ? ' target="_blank" rel="noopener noreferrer"' : '' ?> title="<?= $tn['ten' . $lang] ?>"><?= $tn['ten' . $lang] ?></a></li>
                             <?php } ?>
                         </ul>
                         <?php } ?>

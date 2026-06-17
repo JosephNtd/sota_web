@@ -23,7 +23,11 @@
                             <?php if (!empty($v['mota' . $lang])) { ?>
                                 <p class="tk-feat__desc"><?= $v['mota' . $lang] ?></p>
                             <?php } ?>
-                            <a class="tk-feat__link" href="<?= $v[$sluglang] ?>">
+                            <?php
+                            $feat_href   = (!empty($v['link'])) ? $v['link'] : $v[$sluglang];
+                            $feat_target = (!empty($v['link'])) ? ' target="_blank" rel="noopener noreferrer"' : '';
+                            ?>
+                            <a class="tk-feat__link" href="<?= $feat_href ?>" <?= $feat_target ?>>
                                 Xem thêm <i class="fas fa-arrow-right"></i>
                             </a>
                         </div>
@@ -136,20 +140,20 @@
 
 <?php } else { ?>
     <?php
-        /* Tách hero (trang 1, ≥ 3 bài) vs grid */
-        $is_page1   = (!isset($get_page) || $get_page <= 1);
-        $show_bento = ($is_page1 && isset($news) && count($news) >= 3);
-        $hero_items = $show_bento ? array_slice($news, 0, 3) : array();
-        $grid_items = $show_bento ? array_slice($news, 3) : (isset($news) ? $news : array());
+    /* Tách hero (trang 1, ≥ 3 bài) vs grid */
+    $is_page1   = (!isset($get_page) || $get_page <= 1);
+    $show_bento = ($is_page1 && isset($news) && count($news) >= 3);
+    $hero_items = $show_bento ? array_slice($news, 0, 3) : array();
+    $grid_items = $show_bento ? array_slice($news, 3) : (isset($news) ? $news : array());
     ?>
 
     <!-- Page Header -->
     <section class="tknews-header">
         <?php if (!empty($banner)) { ?>
             <img class="tknews-header__bg"
-                 src="<?= UPLOAD_SEOPAGE_L . $banner ?>"
-                 onerror="this.style.display='none'"
-                 alt="Tin tức TitKul" loading="lazy" />
+                src="<?= UPLOAD_SEOPAGE_L . $banner ?>"
+                onerror="this.style.display='none'"
+                alt="Tin tức TitKul" loading="lazy" />
         <?php } ?>
         <div class="tknews-header__overlay"></div>
         <div class="fixwidth tknews-header__inner">
@@ -166,7 +170,9 @@
 
         <!-- Hero Bento (trang 1) -->
         <?php if ($show_bento) { ?>
-            <?php $main = $hero_items[0]; $side1 = $hero_items[1]; $side2 = $hero_items[2]; ?>
+            <?php $main = $hero_items[0];
+            $side1 = $hero_items[1];
+            $side2 = $hero_items[2]; ?>
             <section class="tknews-bento">
                 <div class="fixwidth">
                     <div class="tknews-bento__grid">
@@ -174,8 +180,8 @@
                         <a class="tknews-bento__main" href="<?= $main[$sluglang] ?>" title="<?= $main['ten' . $lang] ?>">
                             <div class="tknews-bento__img">
                                 <img src="<?= UPLOAD_NEWS_L . $main['photo'] ?>"
-                                     onerror="this.src='<?= THUMBS ?>/960x540x1/assets/images/noimage.png';"
-                                     alt="<?= $main['ten' . $lang] ?>" loading="lazy" />
+                                    onerror="this.src='<?= THUMBS ?>/960x540x1/assets/images/noimage.png';"
+                                    alt="<?= $main['ten' . $lang] ?>" loading="lazy" />
                                 <div class="tknews-bento__gradient"></div>
                             </div>
                             <div class="tknews-bento__caption">
@@ -194,8 +200,8 @@
                                 <a class="tknews-bento__side-card" href="<?= $sv[$sluglang] ?>" title="<?= $sv['ten' . $lang] ?>">
                                     <div class="tknews-bento__side-img">
                                         <img src="<?= THUMBS ?>/480x320x1/<?= UPLOAD_NEWS_L . $sv['photo'] ?>"
-                                             onerror="this.src='<?= THUMBS ?>/480x320x1/assets/images/noimage.png';"
-                                             alt="<?= $sv['ten' . $lang] ?>" loading="lazy" />
+                                            onerror="this.src='<?= THUMBS ?>/480x320x1/assets/images/noimage.png';"
+                                            alt="<?= $sv['ten' . $lang] ?>" loading="lazy" />
                                     </div>
                                     <div class="tknews-bento__side-body">
                                         <time class="tknews-bento__side-date">
@@ -226,8 +232,8 @@
                             <article class="tknews-card">
                                 <a class="tknews-card__img" href="<?= $v[$sluglang] ?>" title="<?= $v['ten' . $lang] ?>">
                                     <img src="<?= THUMBS ?>/480x320x1/<?= UPLOAD_NEWS_L . $v['photo'] ?>"
-                                         onerror="this.src='<?= THUMBS ?>/480x320x1/assets/images/noimage.png';"
-                                         alt="<?= $v['ten' . $lang] ?>" loading="lazy" />
+                                        onerror="this.src='<?= THUMBS ?>/480x320x1/assets/images/noimage.png';"
+                                        alt="<?= $v['ten' . $lang] ?>" loading="lazy" />
                                 </a>
                                 <div class="tknews-card__body">
                                     <h3 class="tknews-card__title">
