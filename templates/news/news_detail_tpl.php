@@ -513,13 +513,16 @@
 <?php } else { ?>
     <!-- ════════ CHI TIẾT TIN TỨC — Magazine Article Layout ════════ -->
 
+    <?php
+    $has_tt_gallery = (isset($hinhanhtt) && count($hinhanhtt) > 0);
+    ?>
     <!-- SECTION 1: Article Hero — ảnh cover full-width + overlay navy + title -->
     <section class="tknews-detail-hero">
         <?php if (!empty($row_detail['photo'])) { ?>
             <img class="tknews-detail-hero__bg"
-                 src="<?= UPLOAD_NEWS_L . $row_detail['photo'] ?>"
-                 onerror="this.style.display='none'"
-                 alt="<?= $row_detail['ten' . $lang] ?>" />
+                src="<?= UPLOAD_NEWS_L . $row_detail['photo'] ?>"
+                onerror="this.style.display='none'"
+                alt="<?= $row_detail['ten' . $lang] ?>" />
         <?php } ?>
         <div class="tknews-detail-hero__overlay"></div>
         <div class="fixwidth tknews-detail-hero__inner">
@@ -561,6 +564,259 @@
         </div>
     </section>
 
+
+    <?php if ($has_tt_gallery) { ?>
+
+        <!-- GALLERY v2  -->
+        <section class="tknews-gallery">
+            <div class="fixwidth">
+                <div class="tknews-gallery__inner">
+
+                    <!-- Header -->
+                    <div class="tknews-gallery__header">
+                        <h2 class="tknews-gallery__title">
+                            <span class="tknews-gallery__title-accent"></span>
+                            Hình ảnh
+                        </h2>
+                        <span class="tknews-gallery__count"><?= count($hinhanhtt) ?> ảnh</span>
+                    </div>
+
+                    <div class="tknews-gallery__layout">
+
+                        <!-- ── STAGE ── -->
+                        <div class="tknews-gallery__stage" id="tknewsStage">
+                            <?php
+                            $first    = $hinhanhtt[0];
+                            $firstSrc = UPLOAD_NEWS_L . $first['photo'];
+                            $firstAlt = !empty($first['tenvi']) ? $first['tenvi'] : $row_detail['ten' . $lang];
+                            ?>
+                            <img
+                                class="tknews-gallery__stage-img"
+                                id="tknewsStageImg"
+                                src="<?= $firstSrc ?>"
+                                onerror="this.src='<?= THUMBS ?>/800x450x1/assets/images/noimage.png';"
+                                alt="<?= htmlspecialchars($firstAlt) ?>" />
+
+                            <!-- Autoplay progress bar -->
+                            <div class="tknews-gallery__progress" id="tknewsProgress"></div>
+
+                            <!-- Zoom hint -->
+                            <div class="tknews-gallery__stage-zoom">
+                                <i class="fas fa-expand-alt"></i>
+                            </div>
+
+                            <!-- Caption + counter -->
+                            <div class="tknews-gallery__caption">
+                                <span class="tknews-gallery__caption-text" id="tknewsCaption">
+                                    <?= htmlspecialchars($firstAlt) ?>
+                                </span>
+                                <span class="tknews-gallery__stage-counter">
+                                    <b id="tknewsCurIdx">1</b> / <?= count($hinhanhtt) ?>
+                                </span>
+                            </div>
+                        </div>
+                        <!-- /.stage -->
+
+                        <!-- ── THUMBNAIL GRID ── -->
+                        <div class="tknews-gallery__thumbs" id="tknewsThumbs">
+                            <?php foreach ($hinhanhtt as $i => $img) {
+                                $imgSrc   = UPLOAD_NEWS_L . $img['photo'];
+                                $thumbSrc = THUMBS . '/200x134x1/' . $imgSrc;
+                                $altText  = !empty($img['tenvi']) ? $img['tenvi'] : $row_detail['ten' . $lang];
+                                $isActive = ($i === 0) ? 'is-active' : '';
+                            ?>
+                                <div class="tknews-thumb-item <?= $isActive ?>"
+                                    data-full="<?= $imgSrc ?>"
+                                    data-caption="<?= htmlspecialchars($altText) ?>"
+                                    data-index="<?= $i ?>"
+                                    title="<?= htmlspecialchars($altText) ?>">
+                                    <img
+                                        src="<?= $thumbSrc ?>"
+                                        onerror="this.src='<?= THUMBS ?>/200x134x1/assets/images/noimage.png';"
+                                        alt="<?= htmlspecialchars($altText) ?>"
+                                        loading="<?= $i === 0 ? 'eager' : 'lazy' ?>" />
+                                    <span class="tknews-thumb-item__num"><?= $i + 1 ?></span>
+                                </div>
+                            <?php } ?>
+                        </div>
+                        <!-- /.thumbs -->
+
+                    </div><!-- /.layout -->
+
+                </div><!-- /.inner -->
+            </div><!-- /.fixwidth -->
+        </section>
+
+        <!-- Lightbox -->
+        <div class="tknews-lightbox" id="tknewsLightbox" role="dialog" aria-modal="true" aria-label="Xem ảnh lớn">
+            <img class="tknews-lightbox__img" id="tknewsLbImg" src="" alt="" />
+            <button class="tknews-lightbox__close" id="tknewsLbClose" aria-label="Đóng"><i class="fas fa-times"></i></button>
+            <button class="tknews-lightbox__nav tknews-lightbox__nav--prev" id="tknewsLbPrev" aria-label="Ảnh trước"><i class="fas fa-chevron-left"></i></button>
+            <button class="tknews-lightbox__nav tknews-lightbox__nav--next" id="tknewsLbNext" aria-label="Ảnh tiếp"><i class="fas fa-chevron-right"></i></button>
+            <div class="tknews-lightbox__caption" id="tknewsLbCaption"></div>
+        </div>
+
+        <script>
+            $(document).ready(function() {
+            (function($) {
+                /* ── Dữ liệu ảnh ── */
+                var galleryData = [
+                    <?php foreach ($hinhanhtt as $i => $img) {
+                        $imgSrc  = UPLOAD_NEWS_L . $img['photo'];
+                        $altText = !empty($img['tenvi']) ? $img['tenvi'] : $row_detail['ten' . $lang];
+                        echo '{ src: ' . json_encode($imgSrc) . ', caption: ' . json_encode($altText) . ' }';
+                        if ($i < count($hinhanhtt) - 1) echo ',';
+                        echo "\n        ";
+                    } ?>
+                ];
+
+                var AUTOPLAY_MS = 3000; /* đổi ảnh mỗi 3 giây */
+                var FADE_MS = 280; /* thời gian fade */
+
+                var $stageImg = $('#tknewsStageImg');
+                var $caption = $('#tknewsCaption');
+                var $curIdx = $('#tknewsCurIdx');
+                var $stage = $('#tknewsStage');
+                var $progress = $('#tknewsProgress');
+                var $thumbs = $('#tknewsThumbs');
+
+                var currentIdx = 0;
+                var autoTimer = null;
+                var userPaused = false; /* tạm dừng khi người dùng hover */
+
+                /* ĐỔI ẢNH STAGE */
+                function switchTo(idx, fromAuto) {
+                    idx = ((idx % galleryData.length) + galleryData.length) % galleryData.length;
+                    if (!fromAuto && idx === currentIdx) return;
+
+                    var d = galleryData[idx];
+
+                    /* Fade out */
+                    $stageImg.addClass('is-transitioning');
+                    setTimeout(function() {
+                        $stageImg.attr('src', d.src).attr('alt', d.caption);
+                        $caption.text(d.caption);
+                        $curIdx.text(idx + 1);
+                        $stageImg.removeClass('is-transitioning');
+                    }, FADE_MS);
+
+                    /* Thumb active */
+                    $thumbs.find('.tknews-thumb-item').removeClass('is-active');
+                    $thumbs.find('.tknews-thumb-item[data-index="' + idx + '"]').addClass('is-active');
+
+                    currentIdx = idx;
+
+                    /* Reset progress bar */
+                    resetProgress();
+                }
+
+                /* PROGRESS BAR (visual timer) */
+                function resetProgress() {
+                    /* reset ngay */
+                    $progress.css({
+                        transition: 'none',
+                        width: '0%'
+                    });
+                    /* trigger reflow rồi animate */
+                    $progress[0].offsetWidth; /* eslint-disable-line */
+                    $progress.css({
+                        transition: 'width ' + AUTOPLAY_MS + 'ms linear',
+                        width: '100%'
+                    });
+                }
+
+                /* AUTOPLAY */
+                function startAutoplay() {
+                    clearInterval(autoTimer);
+                    resetProgress();
+                    autoTimer = setInterval(function() {
+                        if (!userPaused) {
+                            switchTo(currentIdx + 1, true);
+                        }
+                    }, AUTOPLAY_MS);
+                }
+
+                /* Hover stage/thumbs → tạm dừng */
+                $stage.add($thumbs)
+                    .on('mouseenter', function() {
+                        userPaused = true;
+                        $progress.css('transition', 'none'); /* đóng băng thanh */
+                    })
+                    .on('mouseleave', function() {
+                        userPaused = false;
+                        /* restart từ đầu ảnh hiện tại */
+                        startAutoplay();
+                    });
+
+                /* CLICK THUMBNAIL */
+                $thumbs.on('click', '.tknews-thumb-item', function() {
+                    var idx = parseInt($(this).data('index'), 10);
+                    switchTo(idx, false);
+                    startAutoplay(); /* restart timer */
+                });
+
+                /* CLICK STAGE → LIGHTBOX */
+                $stage.on('click', function() {
+                    openLightbox(currentIdx);
+                });
+
+                /* LIGHTBOX */
+                var $lb = $('#tknewsLightbox');
+                var $lbImg = $('#tknewsLbImg');
+                var $lbCaption = $('#tknewsLbCaption');
+                var lbIdx = 0;
+
+                function openLightbox(idx) {
+                    lbIdx = idx;
+                    var d = galleryData[lbIdx];
+                    $lbImg.attr('src', d.src).attr('alt', d.caption);
+                    $lbCaption.text(d.caption + '  (' + (lbIdx + 1) + ' / ' + galleryData.length + ')');
+                    $lb.addClass('is-open');
+                    $('body').css('overflow', 'hidden');
+                }
+
+                function closeLightbox() {
+                    $lb.removeClass('is-open');
+                    $('body').css('overflow', '');
+                    setTimeout(function() {
+                        $lbImg.attr('src', '');
+                    }, 300);
+                }
+
+                function lbGo(dir) {
+                    lbIdx = (lbIdx + dir + galleryData.length) % galleryData.length;
+                    var d = galleryData[lbIdx];
+                    $lbImg.attr('src', d.src).attr('alt', d.caption);
+                    $lbCaption.text(d.caption + '  (' + (lbIdx + 1) + ' / ' + galleryData.length + ')');
+                }
+
+                $('#tknewsLbClose').on('click', closeLightbox);
+                $('#tknewsLbPrev').on('click', function() {
+                    lbGo(-1);
+                });
+                $('#tknewsLbNext').on('click', function() {
+                    lbGo(1);
+                });
+                $lb.on('click', function(e) {
+                    if ($(e.target).is($lb)) closeLightbox();
+                });
+
+                $(document).on('keydown.tknewslb', function(e) {
+                    if (!$lb.hasClass('is-open')) return;
+                    if (e.key === 'Escape' || e.keyCode === 27) closeLightbox();
+                    if (e.key === 'ArrowLeft' || e.keyCode === 37) lbGo(-1);
+                    if (e.key === 'ArrowRight' || e.keyCode === 39) lbGo(1);
+                });
+
+                /* KHỞI ĐỘNG */
+                startAutoplay();
+
+            })(jQuery);
+            }); // $(document).ready
+        </script>
+
+    <?php }  ?>
+    
     <!-- SECTION 3: Related Articles -->
     <?php if (isset($news) && count($news) > 0) { ?>
         <section class="tknews-detail-related">
@@ -576,8 +832,8 @@
                         <article class="tknews-card">
                             <a class="tknews-card__img" href="<?= $v[$sluglang] ?>" title="<?= $v['ten' . $lang] ?>">
                                 <img src="<?= THUMBS ?>/480x320x1/<?= UPLOAD_NEWS_L . $v['photo'] ?>"
-                                     onerror="this.src='<?= THUMBS ?>/480x320x1/assets/images/noimage.png';"
-                                     alt="<?= $v['ten' . $lang] ?>" loading="lazy" />
+                                    onerror="this.src='<?= THUMBS ?>/480x320x1/assets/images/noimage.png';"
+                                    alt="<?= $v['ten' . $lang] ?>" loading="lazy" />
                             </a>
                             <div class="tknews-card__body">
                                 <h3 class="tknews-card__title">

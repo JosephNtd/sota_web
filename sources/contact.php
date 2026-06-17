@@ -32,7 +32,16 @@ if (isset($_POST['submit-contact'])) {
 		$data['dienthoai'] = (isset($_POST['dienthoai']) && $_POST['dienthoai'] != '') ? htmlspecialchars($_POST['dienthoai']) : '';
 		$data['email'] = (isset($_POST['email']) && $_POST['email'] != '') ? htmlspecialchars($_POST['email']) : '';
 		$data['tieude'] = (isset($_POST['tieude']) && $_POST['tieude'] != '') ? htmlspecialchars($_POST['tieude']) : '';
+		// $data['noidung'] = (isset($_POST['noidung']) && $_POST['noidung'] != '') ? htmlspecialchars($_POST['noidung']) : '';
+		// $data['ngaytao'] = time();
 		$data['noidung'] = (isset($_POST['noidung']) && $_POST['noidung'] != '') ? htmlspecialchars($_POST['noidung']) : '';
+		/* Lĩnh vực hoạt động — checkbox group → CSV string */
+		if (isset($_POST['linhvuc']) && is_array($_POST['linhvuc'])) {
+			$linhvuc_clean = array_map(function($v){ return htmlspecialchars(trim($v)); }, $_POST['linhvuc']);
+			$data['linhvuc'] = implode(', ', $linhvuc_clean);
+		} else {
+			$data['linhvuc'] = '';
+		}
 		$data['ngaytao'] = time();
 		$data['type'] = 'contact';
 		$data['stt'] = 1;
@@ -46,6 +55,7 @@ if (isset($_POST['submit-contact'])) {
 		$emailer->setEmail('diachinguoigui', $data['diachi']);
 		$emailer->setEmail('tieudelienhe', $data['tieude']);
 		$emailer->setEmail('noidunglienhe', $data['noidung']);
+		$emailer->setEmail('linhvuclienhe', $data['linhvuc']);
 		if ($emailer->getEmail('tennguoigui')) {
 			$strThongtin .= '<span style="text-transform:capitalize">' . $emailer->getEmail('tennguoigui') . '</span><br>';
 		}
@@ -590,6 +600,11 @@ if (!empty($seopage['photo'])) {
 }
 
 $lienhe = $d->rawQueryOne("select noidung$lang from #_static where type = ? limit 0,1", array('lienhe'));
+$faqs = $d->rawQuery("select ten$lang, noidung$lang 
+					from #_news 
+					where type = ? and hienthi > 0 
+					order by stt,id desc",
+					array('faq'));
 
 /* breadCrumbs */
 if (isset($title_crumb) && $title_crumb != '') $breadcr->setBreadCrumbs($com, $title_crumb);

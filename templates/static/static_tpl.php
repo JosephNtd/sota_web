@@ -108,7 +108,7 @@
     </section><!-- /.tk-vmv (KHỐI 4) -->
 
     <!-- Chia sẻ -->
-    <div class="fixwidth">
+    <!-- <div class="fixwidth">
         <div class="share">
             <b><?= chiase ?>:</b>
             <div class="social-plugin w-clear">
@@ -121,7 +121,7 @@
                 <div class="sharethis-inline-share-buttons"></div>
             </div>
         </div>
-    </div>
+    </div> -->
 
 </div><!-- /.tk-about -->
 
@@ -198,3 +198,6 @@
     <p style="color: #999; font-size: 16px;">Nội dung đang được cập nhật...</p>
 </div>
 <?php } ?>
+<script>
+document.querySelectorAll('.tk-sec').forEach(function(el){ el.classList.add('is-revealed'); });
+</script>

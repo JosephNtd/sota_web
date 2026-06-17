@@ -1,0 +1,447 @@
+/*
+ * ============================================================
+ *  TKNEWS GALLERY CAROUSEL v2
+ *  - Stage thu 50% (max-width: 50% container, căn giữa)
+ *  - Thumbnail grid dưới stage, autoplay 3s tuần tự
+ *  - Click thumb → nhảy lên stage
+ *  Style: Premium Scholastic Modernism (DESIGN.md)
+ * ============================================================
+ */
+
+/* ── Design tokens ── */
+:root {
+    --tkg-primary:        #001F3F;
+    --tkg-secondary:      #bb0021;
+    --tkg-secondary-deep: #8a0017;
+    --tkg-white:          #ffffff;
+    --tkg-surface:        #f8f9ff;
+    --tkg-surface-low:    #eff4ff;
+    --tkg-surface-high:   #dce9ff;
+    --tkg-border:         #E2E8F0;
+    --tkg-on-variant:     #43474e;
+    --tkg-glass:          rgba(255,255,255,0.72);
+    --tkg-shadow-sm:      rgba(0,31,63,0.10);
+    --tkg-shadow-md:      rgba(0,31,63,0.20);
+    --tkg-radius:         0.5rem;
+    --tkg-radius-lg:      1rem;
+    --tkg-radius-xl:      1.5rem;
+    --tkg-font-head:      'Montserrat', sans-serif;
+    --tkg-font-body:      'Inter', sans-serif;
+
+    /* Thumb kích thước */
+    --tkg-thumb-h:        72px;
+    --tkg-thumb-cols:     6;   /* số cột thumb mặc định */
+}
+
+/* ══════════════════════════════════════════════════════
+   SECTION WRAPPER
+══════════════════════════════════════════════════════ */
+.tknews-gallery {
+    background: var(--tkg-surface);
+    padding: 48px 0 56px;
+    position: relative;
+    overflow: hidden;
+}
+
+.tknews-gallery::before {
+    content: '';
+    position: absolute;
+    top: -100px; right: -140px;
+    width: 500px; height: 500px;
+    background: var(--tkg-surface-high);
+    border-radius: 50%;
+    filter: blur(90px);
+    opacity: 0.40;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.tknews-gallery__inner {
+    position: relative;
+    z-index: 1;
+}
+
+/* ── Header ── */
+.tknews-gallery__header {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    margin-bottom: 20px;
+}
+
+.tknews-gallery__title {
+    font-family: var(--tkg-font-head);
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--tkg-primary);
+    letter-spacing: -0.01em;
+    margin: 0;
+    text-transform: uppercase;
+}
+
+.tknews-gallery__title-accent {
+    display: inline-block;
+    width: 32px; height: 4px;
+    background: var(--tkg-secondary);
+    border-radius: 9999px;
+    vertical-align: middle;
+    margin-right: 10px;
+    flex-shrink: 0;
+}
+
+.tknews-gallery__count {
+    font-family: var(--tkg-font-body);
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--tkg-on-variant);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+/* ══════════════════════════════════════════════════════
+   LAYOUT: stage 50% — căn giữa
+══════════════════════════════════════════════════════ */
+.tknews-gallery__layout {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+}
+
+/* ══════════════════════════════════════════════════════
+   MAIN STAGE — 50% chiều rộng container
+══════════════════════════════════════════════════════ */
+.tknews-gallery__stage {
+    width: 50%;
+    position: relative;
+    border-radius: var(--tkg-radius-xl);
+    overflow: hidden;
+    background: var(--tkg-primary);
+    aspect-ratio: 16 / 9;
+    box-shadow:
+        0 2px 0 0 rgba(255,255,255,0.06) inset,
+        0 8px 32px var(--tkg-shadow-md);
+    cursor: zoom-in;
+    flex-shrink: 0;
+}
+
+.tknews-gallery__stage-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: opacity 0.3s ease, transform 0.4s cubic-bezier(0.25,0.46,0.45,0.94);
+}
+
+.tknews-gallery__stage-img.is-transitioning {
+    opacity: 0;
+    transform: scale(1.04);
+}
+
+/* Caption overlay */
+.tknews-gallery__caption {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    padding: 12px 16px 14px;
+    background: linear-gradient(to top, rgba(0,31,63,0.80) 0%, rgba(0,31,63,0) 100%);
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 10px;
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity 0.28s ease, transform 0.28s ease;
+}
+
+.tknews-gallery__stage:hover .tknews-gallery__caption {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.tknews-gallery__caption-text {
+    font-family: var(--tkg-font-body);
+    font-size: 13px;
+    color: rgba(255,255,255,0.92);
+    line-height: 1.4;
+    flex: 1;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.tknews-gallery__stage-counter {
+    flex-shrink: 0;
+    font-family: var(--tkg-font-head);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    color: rgba(255,255,255,0.55);
+    white-space: nowrap;
+}
+.tknews-gallery__stage-counter b {
+    color: #fff;
+    font-size: 15px;
+}
+
+/* Zoom icon */
+.tknews-gallery__stage-zoom {
+    position: absolute;
+    top: 12px; right: 12px;
+    width: 32px; height: 32px;
+    background: var(--tkg-glass);
+    border-radius: var(--tkg-radius);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--tkg-primary);
+    font-size: 13px;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    box-shadow: 0 2px 6px var(--tkg-shadow-sm);
+    opacity: 0;
+    transform: scale(0.82);
+    transition: opacity 0.22s ease, transform 0.22s ease;
+    pointer-events: none;
+}
+
+.tknews-gallery__stage:hover .tknews-gallery__stage-zoom {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* Autoplay progress bar */
+.tknews-gallery__progress {
+    position: absolute;
+    bottom: 0; left: 0;
+    height: 3px;
+    width: 0%;
+    background: var(--tkg-secondary);
+    border-radius: 0 2px 2px 0;
+    transition: width linear;   /* duration set via JS */
+    z-index: 5;
+}
+
+/* ══════════════════════════════════════════════════════
+   THUMBNAIL GRID — cùng chiều rộng stage (50%)
+══════════════════════════════════════════════════════ */
+.tknews-gallery__thumbs {
+    width: 50%;
+    display: grid;
+    grid-template-columns: repeat(var(--tkg-thumb-cols), 1fr);
+    gap: 6px;
+}
+
+/* ── Từng thumb ── */
+.tknews-thumb-item {
+    cursor: pointer;
+    border-radius: var(--tkg-radius);
+    overflow: hidden;
+    position: relative;
+    height: var(--tkg-thumb-h);
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+    background: var(--tkg-primary);
+    transition:
+        outline-color 0.18s ease,
+        transform     0.18s ease,
+        box-shadow    0.18s ease;
+}
+
+.tknews-thumb-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 14px var(--tkg-shadow-sm);
+    outline-color: rgba(0,31,63,0.35);
+}
+
+.tknews-thumb-item.is-active {
+    outline-color: var(--tkg-secondary);
+    box-shadow:
+        0 0 0 2px var(--tkg-secondary),
+        0 5px 16px var(--tkg-shadow-md);
+    transform: translateY(-3px);
+}
+
+.tknews-thumb-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.32s ease;
+}
+
+.tknews-thumb-item:hover img {
+    transform: scale(1.07);
+}
+
+/* Red bottom bar khi active */
+.tknews-thumb-item::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--tkg-secondary);
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 0.22s ease;
+}
+
+.tknews-thumb-item.is-active::after {
+    transform: scaleX(1);
+}
+
+/* Số thứ tự nhỏ trên thumb */
+.tknews-thumb-item__num {
+    position: absolute;
+    top: 4px; left: 5px;
+    font-family: var(--tkg-font-head);
+    font-size: 10px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.85);
+    text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+    line-height: 1;
+    pointer-events: none;
+}
+
+/* ══════════════════════════════════════════════════════
+   LIGHTBOX
+══════════════════════════════════════════════════════ */
+.tknews-lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0,6,19,0.93);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.28s ease, visibility 0.28s ease;
+    padding: 24px;
+}
+
+.tknews-lightbox.is-open {
+    opacity: 1;
+    visibility: visible;
+}
+
+.tknews-lightbox__img {
+    max-width: 90vw;
+    max-height: 85vh;
+    border-radius: var(--tkg-radius-lg);
+    object-fit: contain;
+    box-shadow: 0 32px 80px rgba(0,0,0,0.6);
+    transform: scale(0.91);
+    transition: transform 0.32s cubic-bezier(0.34,1.56,0.64,1);
+}
+
+.tknews-lightbox.is-open .tknews-lightbox__img {
+    transform: scale(1);
+}
+
+.tknews-lightbox__close {
+    position: fixed;
+    top: 18px; right: 18px;
+    width: 42px; height: 42px;
+    background: rgba(255,255,255,0.10);
+    border: 1px solid rgba(255,255,255,0.20);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    color: #fff;
+    font-size: 17px;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.2s ease;
+    z-index: 10000;
+}
+
+.tknews-lightbox__close:hover {
+    background: var(--tkg-secondary);
+    border-color: var(--tkg-secondary);
+    transform: rotate(90deg) scale(1.1);
+}
+
+.tknews-lightbox__nav {
+    position: fixed;
+    top: 50%; transform: translateY(-50%);
+    width: 46px; height: 46px;
+    background: rgba(255,255,255,0.10);
+    border: 1px solid rgba(255,255,255,0.20);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    color: #fff;
+    font-size: 15px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+    z-index: 10000;
+    user-select: none;
+}
+
+.tknews-lightbox__nav:hover {
+    background: var(--tkg-secondary);
+    border-color: var(--tkg-secondary);
+}
+
+.tknews-lightbox__nav--prev { left: 14px; }
+.tknews-lightbox__nav--next { right: 14px; }
+
+.tknews-lightbox__caption {
+    position: fixed;
+    bottom: 22px;
+    left: 50%; transform: translateX(-50%);
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.14);
+    border-radius: 9999px;
+    padding: 7px 18px;
+    font-family: var(--tkg-font-body);
+    font-size: 12px;
+    color: rgba(255,255,255,0.72);
+    white-space: nowrap;
+    max-width: 80vw;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    z-index: 10000;
+}
+
+/* ══════════════════════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════════════════════ */
+
+/* Tablet */
+@media (max-width: 1024px) {
+    .tknews-gallery__stage,
+    .tknews-gallery__thumbs {
+        width: 65%;
+    }
+    :root { --tkg-thumb-cols: 5; }
+}
+
+/* Mobile landscape */
+@media (max-width: 767px) {
+    .tknews-gallery { padding: 32px 0 40px; }
+
+    .tknews-gallery__stage,
+    .tknews-gallery__thumbs {
+        width: 100%;
+    }
+
+    .tknews-gallery__stage {
+        border-radius: var(--tkg-radius-lg);
+        aspect-ratio: 4 / 3;
+    }
+
+    :root {
+        --tkg-thumb-h:    58px;
+        --tkg-thumb-cols: 4;
+    }
+}
+
+/* Mobile portrait */
+@media (max-width: 480px) {
+    :root {
+        --tkg-thumb-h:    50px;
+        --tkg-thumb-cols: 3;
+    }
+
+    .tknews-lightbox__nav--prev { left: 6px; }
+    .tknews-lightbox__nav--next { right: 6px; }
+}

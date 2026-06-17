@@ -23,11 +23,12 @@
             include TEMPLATE . LAYOUT . "seo.php";
             include TEMPLATE . LAYOUT . "menu.php";
             include TEMPLATE . LAYOUT . "slide.php";
-            $__hideBread = ($source == 'index' || $source == 'static');
+            $__hideBread = ($source == 'index' || $source == 'static' || $source == 'contact');
             if (!$__hideBread && $source == 'news' && in_array(@$type, ['tin-tuc', 'huong-dan']) && empty($_GET['id'])) $__hideBread = true;
             if (!$__hideBread) include TEMPLATE . LAYOUT . "breadcrumb.php";
             ?>
-            <div class="<?= ($source == 'static') ? 'wrap-main' : 'wrap-home' ?> w-clear"><?php include TEMPLATE . $template . "_tpl.php"; ?></div>
+            <!-- <div class="<?= ($source == 'static') ? 'wrap-main' : 'wrap-home' ?> w-clear"><?php include TEMPLATE . $template . "_tpl.php"; ?></div> -->
+             <div class="wrap-home w-clear"><?php include TEMPLATE . $template . "_tpl.php"; ?></div>
             <?php
             include TEMPLATE . LAYOUT . "footer.php";
             //include TEMPLATE.LAYOUT."mmenu.php";

@@ -35,6 +35,7 @@
     $css->setCss("./assets/css/cart.css");
     $css->setCss("./assets/css/style_media.css");
     $css->setCss("./assets/css/titkul.css");
+    $css->setCss("./assets/css/tknews-gallery-carousel.css");
     // $css->setCss("./assets/login/login.css");
 
     
@@ -42,8 +43,6 @@
 
    
 ?>
- <!-- //  Titkul custom CSS (load sau cùng để override; Phase 8 gộp vào cached) -->
-    <link rel="stylesheet" href="assets/css/titkul.css?v=<?= @filemtime('assets/css/titkul.css') ?>">
 <!-- Background -->
 <?php
  
