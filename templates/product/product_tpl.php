@@ -40,3 +40,7 @@
 <?php } ?>
 <?php include TEMPLATE . LAYOUT . "form_dangky.php"; ?>
 <?php include TEMPLATE . LAYOUT . "hotro_lienhe.php"; ?>
+
+<script>
+document.querySelectorAll('.tk-sec').forEach(function(el){ el.classList.add('is-revealed'); });
+</script>
