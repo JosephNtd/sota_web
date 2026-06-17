@@ -68,6 +68,11 @@
 .tk-menu .menu_cap_con li a:hover { background: var(--tk-soft) !important; color: var(--tk-main) !important; padding-left: 23px !important; }
 .tk-menu .menu_cap_con li:hover { background: transparent !important; }
 
+.tk-nd-share__inner{
+    display: flex;
+    justify-content: center;
+}
+
 /* burger (mobile) */
 .tk-burger { display: none; }
 .tk-burger .icon_menu_mobi { font-size: 24px; color: var(--tk-dark); cursor: pointer; margin: 0; }
@@ -1229,10 +1234,10 @@ section.tk-sec.tk-intro {
     opacity: 1;
     transform: translateY(0);
 }
-/* ==========================================================================
+/* 
    TÍNH NĂNG NỔI BẬT — Full-bleed Zigzag (Light)  (P4 — news type: tinh-nang)
    Design: Premium Scholastic Modernism — DESIGN.md
-   ========================================================================== */
+    */
 
 .tk-feature-list { padding: 0; }
 
@@ -1254,8 +1259,12 @@ section.tk-sec.tk-intro {
 .tk-feat__img img {
     width: 100%;
     height: 100%;
+    width: auto;
+    height: auto;
     display: block;
-    object-fit: cover;
+    margin: 0 auto;
+    object-fit: contain;
+    opacity: 0.9;
     transition: transform 0.6s cubic-bezier(.25,.46,.45,.94);
 }
 .tk-feat:hover .tk-feat__img img {
@@ -1549,6 +1558,416 @@ section.tk-sec.tk-intro {
     .tk-hdsd-section { padding-bottom: 48px; }
 }
 
+
+/* ==========================================================================
+   CHI TIẾT HƯỚNG DẪN SỬ DỤNG — Premium Scholastic Modernism
+   Sections: Hero → Product Select → HDSchool → H2School → Content → Related
+   ========================================================================== */
+
+/* --- Common helpers --- */
+.tk-hd-navy { color: #001f3f; }
+.tk-hd-red  { color: #bb0021; }
+.tk-hd-empty {
+    text-align: center;
+    padding: 40px 0;
+    color: #74777f;
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    font-style: italic;
+}
+
+/* ===== SECTION 1: HERO — Dark Navy ===== */
+.tk-hd-hero {
+    position: relative;
+    background: #001f3f;
+    padding: 80px 0;
+    overflow: hidden;
+    color: #fff;
+}
+.tk-hd-hero__radial {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at top right, rgba(220,233,255,0.15), transparent 60%);
+    pointer-events: none;
+}
+.tk-hd-hero__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+}
+.tk-hd-hero__text {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+.tk-hd-hero__title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 48px;
+    font-weight: 700;
+    line-height: 56px;
+    letter-spacing: -0.01em;
+    color: #fff;
+}
+.tk-hd-hero__sub {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 22px;
+    font-weight: 600;
+    line-height: 32px;
+    color: #6f88ad;
+    letter-spacing: 0.02em;
+}
+.tk-hd-hero__media {
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+    border: 1px solid rgba(111,136,173,0.3);
+}
+.tk-hd-hero__media img {
+    width: 100%;
+    max-height: 400px;
+    width: auto;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    object-fit: contain;
+    opacity: 0.9;
+}
+
+/* ===== SECTION 2: PRODUCT SELECTION ===== */
+.tk-hd-select {
+    padding: 80px 0 60px;
+    background: #f8f9ff;
+}
+.tk-hd-select__heading {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 22px;
+    font-weight: 600;
+    line-height: 32px;
+    color: #001f3f;
+    text-align: center;
+    margin-bottom: 40px;
+}
+.tk-hd-select__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+.tk-hd-select__card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 16px;
+    text-decoration: none;
+    background: #fff;
+    border-radius: 16px;
+    padding: 40px 28px;
+    border: 1px solid #E2E8F0;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+.tk-hd-select__card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, #eff4ff 0%, transparent 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+.tk-hd-select__card:hover::before { opacity: 1; }
+.tk-hd-select__card:hover {
+    box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+    border-color: #001f3f;
+}
+.tk-hd-select__name {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 36px;
+    position: relative;
+    z-index: 1;
+}
+.tk-hd-select__desc {
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    line-height: 28px;
+    color: #43474e;
+    position: relative;
+    z-index: 1;
+}
+.tk-hd-select__link {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    color: #bb0021;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: auto;
+    position: relative;
+    z-index: 1;
+}
+.tk-hd-select__card:hover .tk-hd-select__link { text-decoration: underline; }
+.tk-hd-select__link i {
+    font-size: 12px;
+    transition: transform 0.3s;
+}
+.tk-hd-select__card:hover .tk-hd-select__link i { transform: translateX(4px); }
+
+/* ===== SECTION 3 & 4: PRODUCT SECTIONS ===== */
+.tk-hd-product { padding: 80px 0; scroll-margin-top: 80px; }
+.tk-hd-product--light { background: #eff4ff; }
+.tk-hd-product--dim   { background: #e5eeff; }
+
+.tk-hd-product__header {
+    text-align: center;
+    margin-bottom: 48px;
+}
+.tk-hd-product__name {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 40px;
+    font-weight: 700;
+    line-height: 48px;
+    margin-bottom: 12px;
+}
+.tk-hd-product__sub {
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 28px;
+    color: #43474e;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+}
+
+/* --- Platform guide cards (HDSchool) --- */
+.tk-hd-platform-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    max-width: 960px;
+    margin: 0 auto;
+}
+.tk-hd-platform-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 12px;
+    background: #fff;
+    border-radius: 12px;
+    padding: 32px 20px;
+    border: 1px solid #E2E8F0;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+.tk-hd-platform-card:hover {
+    border-color: #001f3f;
+    box-shadow: 0 6px 24px rgba(0,6,19,0.1);
+}
+.tk-hd-platform-card--disabled {
+    opacity: 0.65;
+    cursor: default;
+}
+.tk-hd-platform-card--disabled:hover {
+    border-color: #E2E8F0;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+}
+.tk-hd-platform-card__icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: #e5eeff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    transition: all 0.3s;
+}
+.tk-hd-platform-card:not(.tk-hd-platform-card--disabled):hover .tk-hd-platform-card__icon {
+    background: #001f3f;
+}
+.tk-hd-platform-card__icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+.tk-hd-platform-card__icon i {
+    font-size: 28px;
+    color: #001f3f;
+    transition: color 0.3s;
+}
+.tk-hd-platform-card:not(.tk-hd-platform-card--disabled):hover .tk-hd-platform-card__icon i {
+    color: #fff;
+}
+.tk-hd-platform-card__title {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 20px;
+    color: #001f3f;
+}
+.tk-hd-platform-card--disabled .tk-hd-platform-card__title { color: #43474e; }
+.tk-hd-platform-card__link {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    color: #bb0021;
+    text-decoration: none;
+    margin-top: auto;
+}
+.tk-hd-platform-card__link:hover { text-decoration: underline; }
+.tk-hd-platform-card__coming {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: #74777f;
+    font-style: italic;
+    margin-top: auto;
+}
+
+/* --- H2School: Phone mockup + Guide list --- */
+.tk-hd-h2-grid {
+    display: flex;
+    gap: 64px;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.tk-hd-phone {
+    flex-shrink: 0;
+}
+.tk-hd-phone__img {
+    max-width: 300px;
+    height: auto;
+    border-radius: 16px;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.1);
+    display: block;
+}
+
+/* Guide list */
+.tk-hd-guides {
+    flex: 1;
+    min-width: 0;
+    max-width: 560px;
+}
+.tk-hd-guides__list {
+    background: #fff;
+    border-radius: 16px;
+    border: 1px solid #E2E8F0;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    overflow: hidden;
+}
+.tk-hd-guides__item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 20px 24px;
+    text-decoration: none;
+    color: #001f3f;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 24px;
+    border-bottom: 1px solid #E2E8F0;
+    transition: background 0.2s;
+}
+.tk-hd-guides__item:last-child { border-bottom: none; }
+.tk-hd-guides__item:hover { background: #eff4ff; }
+.tk-hd-guides__play {
+    font-size: 14px;
+    color: #bb0021;
+    transition: transform 0.2s;
+    flex-shrink: 0;
+}
+.tk-hd-guides__play.fa-file-pdf { color: #d32f2f; font-size: 18px; }
+.tk-hd-guides__play.fa-file-word { color: #1565c0; font-size: 18px; }
+.tk-hd-guides__item:hover .tk-hd-guides__play { transform: translateX(3px); }
+
+/* Disabled guide item + toast */
+.tk-hd-guides__item--disabled {
+    cursor: default;
+    opacity: 0.6;
+    position: relative;
+}
+.tk-hd-guides__item--disabled:hover {
+    background: transparent;
+}
+.tk-hd-guides__toast {
+    display: none;
+    position: absolute;
+    right: 16px;
+    background: #001f3f;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 6px 14px;
+    border-radius: 8px;
+    white-space: nowrap;
+    pointer-events: none;
+}
+.tk-hd-guides__toast.show {
+    display: block;
+    animation: tkToastFade 2s ease forwards;
+}
+@keyframes tkToastFade {
+    0%   { opacity: 0; transform: translateY(4px); }
+    15%  { opacity: 1; transform: translateY(0); }
+    85%  { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+/* --- CKEditor content --- */
+.tk-hd-content {
+    padding: 60px 0;
+    background: #f8f9ff;
+}
+
+/* --- Related section override for HDSD grid --- */
+.tk-nd-related .tk-hdsd-grid {
+    grid-template-columns: repeat(3, 1fr);
+    margin: 15px;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 1024px) {
+    .tk-hd-hero__grid { grid-template-columns: 1fr; gap: 32px; }
+    .tk-hd-hero__title { font-size: 36px; line-height: 44px; }
+    .tk-hd-hero__media { max-width: 560px; margin: 0 auto; }
+    .tk-hd-select__grid { grid-template-columns: 1fr; max-width: 480px; }
+    .tk-hd-platform-grid { grid-template-columns: repeat(2, 1fr); }
+    .tk-hd-h2-grid { flex-direction: column; gap: 40px; }
+    .tk-hd-guides { max-width: 100%; }
+    .tk-nd-related .tk-hdsd-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 767px) {
+    .tk-hd-hero { padding: 48px 0; }
+    .tk-hd-hero__title { font-size: 28px; line-height: 36px; }
+    .tk-hd-hero__sub { font-size: 16px; line-height: 24px; }
+    .tk-hd-select { padding: 48px 0 40px; }
+    .tk-hd-select__heading { font-size: 18px; line-height: 28px; }
+    .tk-hd-product { padding: 48px 0; }
+    .tk-hd-product__name { font-size: 28px; line-height: 36px; }
+    .tk-hd-platform-grid { grid-template-columns: 1fr; max-width: 320px; margin: 0 auto; }
+    .tk-hd-phone__frame { width: 220px; height: 420px; }
+    .tk-hd-guides__item { padding: 16px 18px; font-size: 14px; }
+    .tk-nd-related .tk-hdsd-grid { grid-template-columns: 1fr; }
+}
+
+.tk-nd-related__heading{
+    text-align: center;
+    margin-top: 15px;
+}
 
 /* ==========================================================================
    TIN TỨC / HƯỚNG DẪN — Blog Card Grid  (P4 — news type: tin-tuc, huong-dan)
@@ -1856,11 +2275,15 @@ section.tk-sec.tk-intro {
     border-radius: 16px;
 }
 .tk-nd-hero__glass img {
-    width: 100%;
+    max-width: 100%;
+    max-height: 400px;
+    width: auto;
     height: auto;
     display: block;
+    margin: 0 auto;
     border-radius: 12px;
-    object-fit: cover;
+    object-fit: contain;
+    opacity: 0.9;
     position: relative;
     z-index: 0;
     transition: transform .6s ease;
@@ -2142,10 +2565,14 @@ section.tk-sec.tk-intro {
     border-radius: 16px;
 }
 .tk-nd-main__glass img {
-    width: 100%; height: auto;
+    max-width: 100%;
+    max-height: 400px;
+    width: auto;
+    height: auto;
     display: block;
     border-radius: 12px;
-    object-fit: cover;
+    object-fit: contain;
+    opacity: 0.9;   
     position: relative; z-index: 0;
     transition: transform .6s ease;
 }
@@ -2290,4 +2717,35 @@ section.tk-sec.tk-intro {
 @media (max-width: 480px) {
     .tk-nd-video__grid { grid-template-columns: 1fr; }
     .tk-nd-video { padding: 40px 0; }
+}
+/* Fix: giữ màu chữ khi click */
+.tk-hd-select__card:active,
+.tk-hd-select__card:focus,
+.tk-hd-select__card:visited {
+    color: inherit;
+}
+.tk-hd-select__card:active *,
+.tk-hd-select__card:focus *,
+.tk-hd-select__card:visited * {
+    color: inherit;
+}
+.tk-hd-select__link:active,
+.tk-hd-select__link:focus,
+.tk-hd-select__link:visited {
+    color: #bb0021;
+}
+.tk-hd-guides__item:active,
+.tk-hd-guides__item:focus,
+.tk-hd-guides__item:visited {
+    color: #001f3f;
+}
+.tk-hd-guides__item:active *,
+.tk-hd-guides__item:focus *,
+.tk-hd-guides__item:visited * {
+    color: inherit;
+}
+.tk-hd-platform-card__link:active,
+.tk-hd-platform-card__link:focus,
+.tk-hd-platform-card__link:visited {
+    color: #bb0021;
 }
