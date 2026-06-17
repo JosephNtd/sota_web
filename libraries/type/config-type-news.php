@@ -275,8 +275,44 @@ $config['news'][$nametype]['width'] = 240;
 $config['news'][$nametype]['height'] = 200;
 $config['news'][$nametype]['thumb'] = '240x200x1';
 $config['news'][$nametype]['img_type'] = '.jpg|.gif|.png|.jpeg|.gif|.JPG|.PNG|.JPEG|.Png|.GIF';
-
-/* Quản lý mục (Không cấp) */
+$config['news'][$nametype]['gallery'] = array(
+    $nametype => array(
+        "title_main_photo" => "HDSchool — Nền tảng HDSD",
+        "title_sub_photo" => "Card nền tảng (máy tính / mobile / zalo)",
+        "number_photo" => 3,
+        "images_photo" => true,
+        "avatar_photo" => true,
+        "tieude_photo" => true,
+        "video_photo" => true,
+        "file_photo" => true,
+        "file_type_photo" => '.pdf|.PDF|.doc|.docx|.DOC|.DOCX',
+        "width_photo" => 64,
+        "height_photo" => 64,
+        "thumb_photo" => '64x64x1',
+        "img_type_photo" => '.jpg|.gif|.png|.jpeg|.gif|.JPG|.PNG|.JPEG|.Png|.GIF'
+    ),
+    "banner-tinhnang" => array(
+        "title_main_photo" => "H2School — Phone Mockup",
+        "title_sub_photo" => "Ảnh screenshot app (hiển thị trong khung điện thoại)",
+        "number_photo" => 1,
+        "images_photo" => true,
+        "avatar_photo" => true,
+        "tieude_photo" => true,
+        "width_photo" => 300,
+        "height_photo" => 600,
+        "thumb_photo" => '150x300x1',
+        "img_type_photo" => '.jpg|.gif|.png|.jpeg|.gif|.JPG|.PNG|.JPEG|.Png|.GIF'
+    ),
+    "video" => array(
+        "title_main_photo" => "H2School — Tài liệu hướng dẫn",
+        "title_sub_photo" => "File PDF hoặc link hướng dẫn",
+        "number_photo" => 3,
+        "tieude_photo" => true,
+        "video_photo" => true,
+        "file_photo" => true,
+        "file_type_photo" => '.pdf|.PDF|.doc|.docx|.DOC|.DOCX|.mp4|.webm',
+    )
+);
 if (isset($config['news'])) {
     foreach ($config['news'] as $key => $value) {
         if (!isset($value['dropdown']) || (isset($value['dropdown']) && $value['dropdown'] == false)) {

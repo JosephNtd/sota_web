@@ -7,7 +7,7 @@
             <?php foreach ($news as $k => $v) { ?>
                 <div class="tk-feat <?= ($k % 2 == 1) ? 'tk-feat--flip' : '' ?>">
                     <div class="tk-feat__img">
-                        <img src="<?= THUMBS ?>/800x600x1/<?= UPLOAD_NEWS_L . $v['photo'] ?>"
+                        <img src="<?= UPLOAD_NEWS_L . $v['photo'] ?>"
                             onerror="this.src='<?= THUMBS ?>/800x600x1/assets/images/noimage.png';"
                             alt="<?= $v['ten' . $lang] ?>"
                             loading="lazy" />

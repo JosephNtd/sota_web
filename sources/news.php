@@ -34,7 +34,7 @@ if ($id != '') {
 	$news_sub = $d->rawQueryOne("select id, ten$lang, tenkhongdauvi, tenkhongdauen from #_news_sub where id = ? and type = ? and hienthi > 0 limit 0,1", array($row_detail['id_sub'], $type));
 
 	/* Lấy hình ảnh con */
-	$hinhanhtt = $d->rawQuery("select photo,tenvi,tenen from #_gallery where id_photo = ? and com='news' and type = ? and kind='man' and val = ? and hienthi > 0 order by stt,id desc", array($row_detail['id'], $type, $type));
+	$hinhanhtt = $d->rawQuery("select photo,tenvi,tenen,link_video, taptin from #_gallery where id_photo = ? and com='news' and type = ? and kind='man' and val = ? and hienthi > 0 order by stt,id desc", array($row_detail['id'], $type, $type));
 
 	/* Banner tính năng (gallery kind=banner-tinhnang) */
 	$banner_tinhnang = $d->rawQuery("select photo, ten$lang from #_gallery where id_photo = ? and com='news' and type = ? and kind='man' and val = 'banner-tinhnang' and hienthi > 0 order by stt, id desc", array($row_detail['id'], $type));
