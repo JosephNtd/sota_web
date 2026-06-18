@@ -11,7 +11,7 @@ $tk_zalo = !empty($optsetting['zalo']) ? $optsetting['zalo']: '';
 $tk_zalo_link = !empty($tk_zalo) ? 'https://zalo.me/' . preg_replace('/[^0-9]/', '', $tk_zalo) : '#';
 ?>
 
-<section class="tk-sec tk-support">
+<section class="tk-support">
     <div class="fixwidth">
         <h2 class="tk-support-title">
             Mọi thắc mắc về phần mềm quản lý trường học,<br>
