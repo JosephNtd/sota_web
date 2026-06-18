@@ -23,8 +23,16 @@
 .tk-header { background: #fff; padding: 10px 0; box-shadow: 0 2px 10px rgba(0,0,0,.06); }
 .tk-header-wrap.tk-sticky .tk-header { position: fixed; top: 0; left: 0; right: 0; z-index: 999; animation: tkDrop .3s; }
 @keyframes tkDrop { from { transform: translateY(-100%); } to { transform: translateY(0); } }
-.tk-logo img { max-height: 56px; width: auto; display: block; }
+.tk-logo img {
+    width: auto !important;
+}
 
+@media (max-width: 991px) {
+    .tk-logo.header_left {
+        width: 500px;
+        max-width: 80%;
+    }
+}
 /*  NAV  */
 .tk-nav { }
 .tk-menu { list-style: none; margin: 0; padding: 0; align-items: center; }
@@ -76,6 +84,19 @@
 /* burger (mobile) */
 .tk-burger { display: none; }
 .tk-burger .icon_menu_mobi { font-size: 24px; color: var(--tk-dark); cursor: pointer; margin: 0; }
+.tk-burger,
+.tk-burger .icon_menu_mobi,
+.tk-burger .icon_menu_mobi i {
+    color: var(--tk-dark) !important;
+}
+@media (max-width: 1024px) {
+    .tk-burger.menu_mobi {
+        background: transparent;
+        width: auto;
+        height: auto;
+        border-radius: 0;
+    }
+}
 
 /*  HERO  */
 .tk-hero { position: relative; }
@@ -737,7 +758,7 @@
 
 /* ---- SECTION 6 FOR WHO ---- */
 .tk-forwho { background: var(--tk-soft); }
-.tk-forwho-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+.tk-forwho-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
 
 /* 1. ĐỊNH NGHĨA HIỆU ỨNG TRÔI NỔI (FLOAT) */
 @keyframes tkFloating {
@@ -770,17 +791,27 @@
     box-shadow: 0 16px 38px rgba(0,0,0,.14); /* Làm đổ bóng đậm hơn tạo cảm giác card bay gần mắt hơn */
 }
 
-/* 4. MẸO XỊN: CHO CÁC CARD TRÔI LỆCH PHA NHAU (SO LE) */
+/* 4. CHO CÁC CARD TRÔI LỆCH PHA NHAU (SO LE) */
 .tk-forwho-grid .tk-forwho-card:nth-child(1) { animation-delay: 0s; }
 .tk-forwho-grid .tk-forwho-card:nth-child(2) { animation-delay: 0.7s; }
 .tk-forwho-grid .tk-forwho-card:nth-child(3) { animation-delay: 1.4s; }
 .tk-forwho-grid .tk-forwho-card:nth-child(4) { animation-delay: 2.1s; }
 
-/* Các thuộc tính text bên dưới giữ nguyên của bạn */
+
 .tk-forwho-ico { height: 96px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px; }
 .tk-forwho-ico img { max-height: 90px; width: auto; }
 .tk-forwho-name { font-size: 17px; font-weight: 800; color: var(--tk-main); text-transform: uppercase; margin: 0 0 12px; }
 .tk-forwho-desc { color: #666; font-size: 14px; line-height: 1.6; flex: 1; margin-bottom: 18px; text-align: left; }
+@media (max-width: 767px) {
+    .tk-forwho-desc {
+        display: -webkit-box;
+        -webkit-line-clamp: 4;
+        line-clamp: 4;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+}
 .tk-forwho-link { color: var(--tk-cta); font-weight: 700; text-decoration: none; font-size: 14px; }
 .tk-forwho-link:hover { text-decoration: underline; }
 
@@ -817,6 +848,7 @@
 .tk-field-submit { margin-top: 10px; }
 .tk-register-form .tk-btn-cta { min-width: 160px; height: 44px; border: 2px solid var(--tk-main); background: var(--tk-main); color: #fff; font-size: 15px; font-weight: 600; cursor: pointer; border-radius: 4px; }
 .tk-register-form .tk-btn-cta:hover { background: transparent; color: var(--tk-main); }
+
 
 /* ---- SECTION 8 PARTNERS ---- */
 .tk-partner-item { text-align: center; padding: 10px; }
@@ -947,6 +979,11 @@
     .tk-stat { max-width: 100%; width: 100%; }
     .tk-forwho-grid, .tk-video-grid { grid-template-columns: repeat(2, 1fr); }
     .tk-sec-title { font-size: 24px; }
+}
+@media (max-width: 991px) {
+    .tk-register-grid {
+        align-items: stretch;
+    }
 }
 @media (max-width: 575px) {
     .tk-sec { padding: 40px 0; }
