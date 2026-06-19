@@ -355,6 +355,53 @@ $config['news'][$nametype]['height'] = 0;
 $config['news'][$nametype]['thumb'] = '';
 $config['news'][$nametype]['img_type'] = '';
 
+/* Case Study — Trường học / dự án triển khai thực tế */
+$nametype = "case-study";
+$config['news'][$nametype]['title_main']  = "Case Study";
+$config['news'][$nametype]['check']       = array('noibat' => 'Nổi bật');
+$config['news'][$nametype]['dropdown']    = false;
+$config['news'][$nametype]['list']        = false;
+$config['news'][$nametype]['view']        = true;
+$config['news'][$nametype]['slug']        = true;
+$config['news'][$nametype]['copy']        = true;
+$config['news'][$nametype]['images']      = true;   // Ảnh chính (tùy người dùng)
+$config['news'][$nametype]['show_images'] = true;
+$config['news'][$nametype]['mota']        = true;   // Mô tả tóm tắt (hiển thị trang chủ)
+$config['news'][$nametype]['noidung']     = true;
+$config['news'][$nametype]['noidung_cke'] = true;   // Nội dung chi tiết (trang riêng)
+$config['news'][$nametype]['diachi']      = true;   // Trường + địa điểm (VD: "Quận 1, TP.HCM")
+$config['news'][$nametype]['nghenghiep']  = true;   // Năm/loại (VD: "Triển khai 2024")
+$config['news'][$nametype]['link']        = true;   // Loại badge (VD: "Trường học" hoặc "Dự án")
+$config['news'][$nametype]['seo']         = true;
+$config['news'][$nametype]['width']       = 760;
+$config['news'][$nametype]['height']      = 510;
+$config['news'][$nametype]['thumb']       = '760x510x1';
+$config['news'][$nametype]['img_type']    = '.jpg|.gif|.png|.jpeg|.JPG|.PNG|.JPEG|.Png|.GIF';
+$config['news'][$nametype]['gallery']     = array(
+    /*
+     * Stat chips: mỗi row = 1 số liệu
+     *   tenvi      = giá trị hiển thị  (VD: "75%",  "1.200",  "3 tuần")
+     *   tenen      = nhãn mô tả        (VD: "Giảm thời gian báo cáo")
+     *   number_photo = 3  → tối đa 3 chip
+     */
+    "stats" => array(
+        "title_main_photo" => "Số liệu nổi bật",
+        "title_sub_photo"  => "Mỗi dòng = 1 số liệu (tối đa 3 chip)",
+        "number_photo"     => 3,
+        "tieude_photo"     => true,    // tenvi = giá trị (VD: "75%")
+        "video_photo"      => true,    // link_video = nhãn mô tả
+        "video_label"      => "Giá trị số liệu",  // ← đổi label "Video" → "Nhãn số liệu"
+    ),
+    "quote" => array(
+        "title_main_photo" => "Trích dẫn nhận xét",
+        "title_sub_photo"  => "Lời nhận xét từ giáo viên / hiệu trưởng",
+        "number_photo"     => 1,
+        "tieude_photo"     => true,    // tenvi = nội dung quote
+        "video_photo"      => true,    // link_video = tác giả
+        "video_label"      => "Tác giả",
+    ),
+);
+
 if (isset($config['news'])) {
     foreach ($config['news'] as $key => $value) {
         if (!isset($value['dropdown']) || (isset($value['dropdown']) && $value['dropdown'] == false)) {

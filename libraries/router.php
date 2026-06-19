@@ -97,6 +97,7 @@ $requick = array(
 	array("tbl" => "news", "field" => "id", "source" => "news", "com" => "tin-tuc", "type" => "tin-tuc", 'menu' => true),
 	array("tbl" => "news", "field" => "id", "source" => "news", "com" => "tinh-nang-noi-bat", "type" => "tinh-nang", 'menu' => true),
 	array("tbl" => "news", "field" => "id", "source" => "news", "com" => "huong-dan-su-dung", "type" => "huong-dan", 'menu' => true),
+	array("tbl" => "news", "field" => "id", "source" => "news", "com" => "case-study", "type" => "case-study", 'menu' => true),
 
 	/* Trang tĩnh */
 	array("tbl" => "static", "field" => "id", "source" => "static", "com" => "gioi-thieu", "type" => "gioi-thieu", 'menu' => true),
@@ -191,6 +192,14 @@ switch ($com) {
 		$seo->setSeo('type', isset($_GET['id']) ? "article" : "object");
 		$type = 'huong-dan';
 		$title_crumb = "Hướng dẫn sử dụng";
+		break;
+		
+	case 'case-study':
+		$source   = "news";
+		$template = isset($_GET['id']) ? "news/news_detail" : "news/case_study";
+		$seo->setSeo('type', isset($_GET['id']) ? "article" : "object");
+		$type         = $com;
+		$title_crumb  = "Case Study";
 		break;
 
 	case 'video':
