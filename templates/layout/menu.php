@@ -90,6 +90,10 @@
                         <a href="tin-tuc" title="Tin Tức">Tin Tức</a>
                     </li>
 
+                    <li class="menulicha <?= $com == 'case-study' ? 'active' : '' ?>">
+                        <a href="case-study" title="Case Study">Case Study</a>
+                    </li>
+
                     <li class="menulicha <?= $com == 'lien-he' ? 'active' : '' ?>">
                         <a href="lien-he" title="Liên Hệ">Liên Hệ</a>
                     </li>

@@ -4,7 +4,7 @@
    Có thể chỉnh nhanh accent ở :root bên dưới.
  */
 :root {
-    --tk-main: var(--color-main, #16b1a9);
+    --tk-main: var(--color-main, #001f3f);
     --tk-cta: #f7941e;          /* cam CTA - chỉnh cho khớp titkul nếu cần */
     --tk-dark: #1f2d3d;
     --tk-soft: #f5f8fa;
@@ -66,12 +66,7 @@
 .tk-menu > li.active > a { border-bottom: 3px solid var(--tk-main); }
 
 /* dropdown — !important cần vì style.css gốc dùng !important cho color/padding/background */
-/* dropdown — !important cần vì style.css gốc dùng !important cho color/padding/background */
 .tk-menu .menu_cap_con {
-    position: absolute !important; top: 100% !important; left: 0 !important; min-width: 230px;
-    background: #fff !important; box-shadow: 0 8px 24px rgba(0,0,0,.12); border-radius: 0 0 8px 8px;
-    list-style: none; margin: 0; padding: 6px 0 !important; z-index: 50;
-    display: block !important; /* luôn block, dùng opacity thay display */
     position: absolute !important; top: 100% !important; left: 0 !important; min-width: 230px;
     background: #fff !important; box-shadow: 0 8px 24px rgba(0,0,0,.12); border-radius: 0 0 8px 8px;
     list-style: none; margin: 0; padding: 6px 0 !important; z-index: 50;
@@ -80,16 +75,10 @@
 }
 .tk-menu > li:hover .menu_cap_con { opacity: 1; visibility: visible; transform: translateY(0); }
 .tk-menu .menu_cap_con li { padding: 0 !important; background: transparent !important; }
-.tk-menu .menu_cap_con li { padding: 0 !important; background: transparent !important; }
 .tk-menu .menu_cap_con li a {
     display: block; padding: 9px 18px !important; color: var(--tk-text) !important;
     font-size: 14px; text-decoration: none; border-bottom: 1px solid var(--tk-line) !important;
-    display: block; padding: 9px 18px !important; color: var(--tk-text) !important;
-    font-size: 14px; text-decoration: none; border-bottom: 1px solid var(--tk-line) !important;
 }
-.tk-menu .menu_cap_con li:last-child a { border-bottom: 0 !important; }
-.tk-menu .menu_cap_con li a:hover { background: var(--tk-soft) !important; color: var(--tk-main) !important; padding-left: 23px !important; }
-.tk-menu .menu_cap_con li:hover { background: transparent !important; }
 .tk-menu .menu_cap_con li:last-child a { border-bottom: 0 !important; }
 .tk-menu .menu_cap_con li a:hover { background: var(--tk-soft) !important; color: var(--tk-main) !important; padding-left: 23px !important; }
 .tk-menu .menu_cap_con li:hover { background: transparent !important; }
@@ -134,8 +123,8 @@
 .tk-pagebanner.has-img { background-size: cover; }
 .tk-pagebanner.has-img .tk-pagebanner-overlay { background: rgba(232,239,248,.82); }
 .tk-pagebanner-overlay { padding: 44px 0; text-align: center; }
-.tk-pagebanner-title { color: var(--tk-main); font-size: 32px; font-weight: 700; margin: 0 0 8px; text-transform: uppercase; text-shadow: none; }
-.tk-pagebanner-desc { color: var(--tk-main); font-size: 17px; font-weight: 400; margin: 0; letter-spacing: 1.5px; text-transform: uppercase; }
+.tk-pagebanner-title { color: var(--tk-navy); font-size: 32px; font-weight: 700; margin: 0 0 8px; text-transform: uppercase; text-shadow: none; }
+.tk-pagebanner-desc { color: var(--tk-navy); font-size: 17px; font-weight: 400; margin: 0; letter-spacing: 1.5px; text-transform: uppercase; }
 
 /*  PRODUCT LIST — full-width rows, 2 cột, xen kẽ màu nền  */
 .tk-product-list { }
@@ -725,35 +714,6 @@
 .tk-btn-cta:hover { filter: brightness(1.08); color: #fff; }
 
 /* ============================================================
-   DESIGN SYSTEM VARS (DESIGN.md — Premium Scholastic Modernism)
-   Thêm vào :root {} hiện tại trong titkul.css
-   ============================================================ */
-/*
-   Thêm các dòng sau vào block :root { } (bên cạnh --tk-main, --tk-cta...):
-
-    --tk-navy: #001f3f;
-    --tk-red: #bb0021;
-    --tk-bg: #f8f9ff;
-    --tk-surface-low: #eff4ff;
-    --tk-surface-container: #e5eeff;
-    --tk-surface-high: #dce9ff;
-    --tk-surface-variant: #d3e4fe;
-    --tk-on-surface: #0b1c30;
-    --tk-on-surface-variant: #43474e;
-    --tk-outline: #74777f;
-    --tk-border-subtle: #E2E8F0;
-    --tk-primary-fixed: #d4e3ff;
-    --tk-secondary-fixed: #ffdad7;
-    --tk-shadow-card: 0px 4px 20px rgba(0,0,0,0.05);
-    --tk-radius-card: 16px;
-    --tk-radius-xl: 24px;
-*/
-
-/* Shared accent */
-.tk-accent-red { color: #bb0021; }
-
-
-/* ============================================================
    SECTION 1 — HERO (Premium Scholastic)
    File: slide.php → .tk-hero2
    ============================================================ */
@@ -838,14 +798,23 @@
 }
 .tk-hex {
     position: absolute;
-    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
-    overflow: hidden; cursor: pointer; z-index: 20;
-    transition: transform .3s, z-index 0s;
+    cursor: pointer; z-index: 20;
 }
-.tk-hex:hover { transform: scale(1.08); z-index: 40; }
+.tk-hex:hover { z-index: 50; }
+/* Inner = phần hiển thị (clip lục giác). Wrapper .tk-hex giữ nguyên vị trí
+   để vùng hover không bị mất khi inner trượt vào giữa → hết giật. */
+.tk-hex-inner {
+    position: relative;
+    width: 100%; height: 100%;
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+    overflow: hidden;
+    background: #dce9ff;
+    transition: transform .35s ease;
+}
 .tk-hex img {
-    width: 100%; height: 100%; object-fit: cover;
-    opacity: 0.8; transition: opacity .3s;
+    position: absolute; inset: 0;
+    width: 100%; height: 100%; object-fit: cover; display: block;
+    opacity: 0.85; transition: opacity .3s;
 }
 .tk-hex:hover img { opacity: 1; }
 .tk-hex-hover {
@@ -890,7 +859,6 @@
 .tk-hex--pos1, .tk-hex--pos2, .tk-hex--pos3,
 .tk-hex--pos4, .tk-hex--pos5, .tk-hex--pos6 {
     width: 128px; height: 144px;
-    background: #dce9ff;
 }
 .tk-hex--pos1 { left:50%; top:50%; transform: translate(calc(-50% - 96px), calc(-50% - 96px)); }
 .tk-hex--pos2 { left:50%; top:50%; transform: translate(calc(-50% + 96px), calc(-50% - 96px)); }
@@ -898,6 +866,15 @@
 .tk-hex--pos4 { left:50%; top:50%; transform: translate(calc(-50% + 96px), calc(-50% + 96px)); }
 .tk-hex--pos5 { left:50%; top:50%; transform: translate(calc(-50% - 96px), calc(-50% + 96px)); }
 .tk-hex--pos6 { left:50%; top:50%; transform: translate(calc(-50% - 144px), -50%); }
+
+/* Hover: inner trượt vào chính giữa cluster (bù lại offset của từng vị trí),
+   wrapper đứng yên nên không bị giật vào/ra liên tục. */
+.tk-hex--pos1:hover .tk-hex-inner { transform: translate(96px, 96px) scale(1.12); }
+.tk-hex--pos2:hover .tk-hex-inner { transform: translate(-96px, 96px) scale(1.12); }
+.tk-hex--pos3:hover .tk-hex-inner { transform: translate(-144px, 0) scale(1.12); }
+.tk-hex--pos4:hover .tk-hex-inner { transform: translate(-96px, -96px) scale(1.12); }
+.tk-hex--pos5:hover .tk-hex-inner { transform: translate(96px, -96px) scale(1.12); }
+.tk-hex--pos6:hover .tk-hex-inner { transform: translate(144px, 0) scale(1.12); }
 
 
 /* ============================================================
@@ -1287,6 +1264,53 @@
 
 
 /* ============================================================
+   SECTION 5 ALT — VISION / MISSION / VALUES (About page — old layout)
+   ============================================================ */
+.tk-vmv { padding: 80px 0; }
+.tk-vmv-row {
+    display: flex;
+    align-items: center;
+    gap: 48px;
+    margin-bottom: 60px;
+}
+.tk-vmv-row.tk-reverse { flex-direction: row-reverse; }
+.tk-vmv-text { flex: 1; min-width: 0; }
+.tk-vmv-img { flex: 1; min-width: 0; overflow: hidden; border-radius: 16px; }
+.tk-vmv-img img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform .7s;
+}
+.tk-vmv-row:hover .tk-vmv-img img { transform: scale(1.05); }
+.tk-vmv-label {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--tk-red);
+    margin-bottom: 12px;
+}
+.tk-vmv-h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 40px;
+    color: var(--tk-navy);
+    margin: 0 0 16px;
+}
+.tk-vmv-text p {
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    line-height: 28px;
+    color: #43474e;
+    margin: 0;
+}
+
+
+/* ============================================================
    RESPONSIVE — Sections 1-5
    ============================================================ */
 @media (min-width: 1025px) {
@@ -1405,7 +1429,7 @@
 
 /*  HỖ TRỢ LIÊN HỆ  */
 .tk-support { background: #fff; border-top: 1px solid #eee; padding: 50px 0; }
-.tk-support-title { color: #e60000; font-size: 28px; font-weight: 700; font-style: italic; text-align: center; line-height: 1.5; margin: 0 0 30px; }
+.tk-support-title { color: var(--tk-red); font-size: 28px; font-weight: 700; font-style: italic; text-align: center; line-height: 1.5; margin: 0 0 30px; }
 .tk-support-content { max-width: 900px; margin: 0 auto; }
 .tk-support-list { list-style: square; padding-left: 20px; margin: 0 0 20px; }
 .tk-support-list li { font-size: 15px; line-height: 1.8; color: #333; margin-bottom: 6px; }
@@ -1420,19 +1444,19 @@
 }
 
 /* ---- SECTION 7 REGISTER ---- */
-.tk-register { background: #fde8e8; padding: 50px 0; }
+.tk-register { background: var(--tk-secondary-fixed); padding: 50px 0; }
 .tk-register-grid { display: flex; align-items: flex-start; gap: 50px; }
 .tk-register-left { flex: 1; }
 .tk-register-right { flex: 1; text-align: center; }
 .tk-register-right img { max-width: 100%; height: auto; border-radius: 8px; }
-.tk-register-title { color: #e60000; font-size: 36px; font-weight: 700; font-style: italic; text-align: center; margin: 0 0 10px; }
+.tk-register-title { color: var(--tk-red); font-size: 36px; font-weight: 700; font-style: italic; text-align: center; margin: 0 0 10px; }
 .tk-register-desc { color: #333; font-size: 15px; line-height: 1.7; margin-bottom: 30px; text-align: center; }
 .tk-register-form .tk-field { margin-bottom: 20px; }
 .tk-register-form label { display: block; font-size: 14px; color: #333; margin-bottom: 6px; font-weight: 500; }
-.tk-register-form label .required { color: #e60000; }
+.tk-register-form label .required { color: var(--tk-red); }
 .tk-register-form .form-control { width: 100%; height: 44px; border: 1px solid #ddd; border-radius: 0; padding: 0 12px; font-size: 15px; background: #fff; }
 .tk-register-form .form-control:focus { border-color: var(--tk-main); outline: none; }
-.tk-register-form .invalid-feedback { color: #e60000; font-size: 13px; margin-top: 4px; }
+.tk-register-form .invalid-feedback { color: var(--tk-red); font-size: 13px; margin-top: 4px; }
 .tk-field-submit { margin-top: 10px; }
 .tk-register-form .tk-btn-cta { min-width: 160px; height: 44px; border: 2px solid var(--tk-main); background: var(--tk-main); color: #fff; font-size: 15px; font-weight: 600; cursor: pointer; border-radius: 4px; }
 .tk-register-form .tk-btn-cta:hover { background: transparent; color: var(--tk-main); }
