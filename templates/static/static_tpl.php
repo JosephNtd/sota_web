@@ -147,7 +147,7 @@
 
                 <!-- Thông tin liên hệ nhanh -->
                 <?php if (isset($optsetting['hotline']) && $optsetting['hotline'] != '') { ?>
-                <div style="margin-top: 20px; background: var(--color-main); border-radius: 10px; padding: 24px; color: #fff;">
+                <div style="margin-top: 20px; background: var(--tk-main); border-radius: 10px; padding: 24px; color: #fff;">
                     <div style="font-size: 17px; font-weight: 600; margin-bottom: 12px;">
                         <i class="fas fa-headset" style="margin-right: 6px;"></i> Liên hệ tư vấn
                     </div>

@@ -45,9 +45,11 @@ if (!defined('SOURCES')) die("Error");
                         foreach ($tinhnang as $hk => $hv) {
                             if ($hk >= 6) break; ?>
                             <div class="tk-hex tk-hex--pos<?= $hk + 1 ?>">
-                                <img src="<?= UPLOAD_NEWS_L . $hv['photo'] ?>" alt="<?= $hv['ten' . $lang] ?>"
-                                    onerror="this.style.opacity=0;" />
-                                <div class="tk-hex-hover"><span><?= $hv['ten' . $lang] ?></span></div>
+                                <div class="tk-hex-inner">
+                                    <img src="<?= UPLOAD_NEWS_L . $hv['photo'] ?>" alt="<?= $hv['ten' . $lang] ?>"
+                                        onerror="this.style.opacity=0;" />
+                                    <div class="tk-hex-hover"><span><?= $hv['ten' . $lang] ?></span></div>
+                                </div>
                             </div>
                     <?php }
                     } ?>
