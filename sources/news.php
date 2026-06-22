@@ -14,7 +14,7 @@ if ($id != '') {
 	// $qrFile = 'qr_code.png';
 	// QRcode::png($url, $qrFile);
 	/* Lấy bài viết detail */
-	$row_detail = $d->rawQueryOne("select id, luotxem, ngaytao, id_list, id_cat, id_item, id_sub, type, ten$lang, tenkhongdauvi, tenkhongdauen, mota$lang, noidung$lang, photo, icon, options from #_news where id = ? and type = ? and hienthi > 0 limit 0,1", array($id, $type));
+	$row_detail = $d->rawQueryOne("select id, luotxem, ngaytao, id_list, id_cat, id_item, id_sub, type, ten$lang, tenkhongdauvi, tenkhongdauen, mota$lang, noidung$lang, photo, icon, options, diachi, nghenghiep, link from #_news where id = ? and type = ? and hienthi > 0 limit 0,1", array($id, $type));
 
 	/* Cập nhật lượt xem */
 	$data_luotxem['luotxem'] = $row_detail['luotxem'] + 1;
@@ -40,7 +40,19 @@ if ($id != '') {
 	$banner_tinhnang = $d->rawQuery("select photo, ten$lang from #_gallery where id_photo = ? and com='news' and type = ? and kind='man' and val = 'banner-tinhnang' and hienthi > 0 order by stt, id desc", array($row_detail['id'], $type));
 
 	/* Video (gallery kind=video) */
+	/* Video (gallery kind=video) */
 	$video_tinhnang = $d->rawQuery("select ten$lang, link_video, taptin, photo from #_gallery where id_photo = ? and com='news' and type = ? and kind='man' and val = 'video' and hienthi > 0 order by stt, id desc", array($row_detail['id'], $type));
+
+	if ($type == 'case-study') {
+		$cs_stats = $d->rawQuery(
+			"select tenvi, link_video from #_gallery where id_photo = ? and com='news' and type = 'case-study' and kind='man' and val = 'stats' and hienthi > 0 order by stt, id asc limit 0, 4",
+			array($row_detail['id'])
+		);
+		$cs_quote = $d->rawQueryOne(
+			"select tenvi, link_video from #_gallery where id_photo = ? and com='news' and type = 'case-study' and kind='man' and val = 'quote' and hienthi > 0 order by stt, id asc limit 0, 1",
+			array($row_detail['id'])
+		);
+	}
 
 	/* Lấy bài viết cùng loại */
 	$where = "";
