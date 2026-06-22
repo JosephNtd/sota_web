@@ -509,7 +509,218 @@
             });
         });
     </script>
+<?php } elseif ($type == 'case-study') { ?>
+    <!-- ════════ CHI TIẾT CASE STUDY — Premium Scholastic Modernism ════════ -->
 
+    <?php
+    /* ---------- prepare data ---------- */
+    $has_cs_stats   = (isset($cs_stats) && is_array($cs_stats) && count($cs_stats) > 0);
+    $has_cs_quote   = (isset($cs_quote) && !empty($cs_quote['tenvi']));
+    $has_cs_gallery = (isset($hinhanhtt) && is_array($hinhanhtt) && count($hinhanhtt) > 0);
+    $has_cs_content = !empty($row_detail['noidung' . $lang]);
+
+    $badge_type  = !empty($row_detail['link']) ? $row_detail['link'] : 'Case Study';
+    $badge_year  = !empty($row_detail['nghenghiep']) ? strip_tags(htmlspecialchars_decode($row_detail['nghenghiep'])) : '';
+    $cs_location = !empty($row_detail['diachi']) ? strip_tags(htmlspecialchars_decode($row_detail['diachi'])) : '';
+    $cs_title    = strip_tags(htmlspecialchars_decode($row_detail['ten' . $lang]));
+    $cs_desc     = strip_tags(htmlspecialchars_decode($row_detail['mota' . $lang]));
+    $cs_photo    = $row_detail['photo'];
+    ?>
+
+    <!-- SECTION 1: HERO — Blueprint pattern + chip + logo + title + description -->
+    <section class="tk-csd-hero">
+        <div class="fixwidth">
+            <div class="tk-csd-hero__inner">
+                <!-- Chip badge -->
+                <span class="tk-csd-hero__chip">
+                    <?= htmlspecialchars($badge_type) ?>
+                    <?php if ($badge_year) : ?>
+                        · <?= htmlspecialchars($badge_year) ?>
+                    <?php endif; ?>
+                </span>
+
+                <!-- Title -->
+                <h1 class="tk-csd-hero__title"><?= $cs_title ?></h1>
+
+                <!-- Logo circle -->
+                <?php if (!empty($cs_photo)) : ?>
+                    <div class="tk-csd-hero__logo">
+                        <img src="<?= $config_base . THUMBS . '/300x300x1/' . UPLOAD_NEWS_L . $cs_photo ?>"
+                             alt="<?= $cs_title ?>" loading="lazy">
+                    </div>
+                <?php endif; ?>
+
+                <!-- Location -->
+                <?php if ($cs_location) : ?>
+                    <p class="tk-csd-hero__location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <?= htmlspecialchars($cs_location) ?>
+                    </p>
+                <?php endif; ?>
+
+                <!-- Description -->
+                <?php if ($cs_desc) : ?>
+                    <p class="tk-csd-hero__desc"><?= $cs_desc ?></p>
+                <?php endif; ?>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 2: LEADERSHIP INSIGHT — Quote -->
+    <?php if ($has_cs_quote) : ?>
+    <section class="tk-csd-quote tk-sec">
+        <div class="fixwidth">
+            <div class="tk-csd-quote__card">
+                <div class="tk-csd-quote__mark">&ldquo;</div>
+                <blockquote class="tk-csd-quote__body">
+                    <p class="tk-csd-quote__text"><?= htmlspecialchars($cs_quote['tenvi']) ?></p>
+                    <?php if (!empty($cs_quote['link_video'])) : ?>
+                        <footer class="tk-csd-quote__footer">
+                            <span class="tk-csd-quote__dash"></span>
+                            <?= htmlspecialchars($cs_quote['link_video']) ?>
+                        </footer>
+                    <?php endif; ?>
+                </blockquote>
+            </div>
+        </div>
+    </section>
+    <?php endif; ?>
+
+    <!-- SECTION 3: IMPACT DASHBOARD — Stats grid -->
+    <?php if ($has_cs_stats) : ?>
+    <section class="tk-csd-stats tk-sec">
+        <div class="fixwidth">
+            <h2 class="tk-csd-stats__heading">Kết Quả Đột Phá</h2>
+            <div class="tk-csd-stats__grid tk-csd-stats__grid--<?= count($cs_stats) ?>">
+                <?php foreach ($cs_stats as $st) : ?>
+                    <div class="tk-csd-stat-card">
+                        <span class="tk-csd-stat-card__value"><?= htmlspecialchars($st['link_video']) ?></span>
+                        <span class="tk-csd-stat-card__label"><?= htmlspecialchars($st['tenvi']) ?></span>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+        </div>
+    </section>
+    <?php endif; ?>
+
+    <!-- SECTION 4: NỘI DUNG CHI TIẾT — CKEditor content -->
+    <?php if ($has_cs_content) : ?>
+    <section class="tk-csd-content tk-sec">
+        <div class="fixwidth">
+            <div class="tk-csd-content__body ckeditor-content">
+                <?= htmlspecialchars_decode($row_detail['noidung' . $lang]) ?>
+            </div>
+        </div>
+    </section>
+    <?php endif; ?>
+
+    <!-- SECTION 5: GALLERY SHOWCASE — Layered images -->
+    <?php if ($has_cs_gallery) : ?>
+    <section class="tk-csd-gallery tk-sec">
+        <div class="fixwidth">
+            <div class="tk-csd-gallery__header">
+                <h2 class="tk-csd-gallery__heading">Giao Diện Trực Quan, Dễ Dàng Sử Dụng</h2>
+                <p class="tk-csd-gallery__sub">Trải nghiệm thực tế từ góc nhìn của ban giám hiệu và giáo viên.</p>
+            </div>
+
+            <?php if (count($hinhanhtt) >= 3) : ?>
+                <!-- 3+ images: Layered showcase (center + left + right) -->
+                <div class="tk-csd-gallery__showcase">
+                    <!-- Center main image -->
+                    <div class="tk-csd-gallery__main">
+                        <img src="<?= $config_base . UPLOAD_NEWS_L . $hinhanhtt[0]['photo'] ?>"
+                             alt="<?= htmlspecialchars($hinhanhtt[0]['tenvi'] ?? $cs_title) ?>" loading="lazy">
+                    </div>
+                    <!-- Left floating image -->
+                    <div class="tk-csd-gallery__float tk-csd-gallery__float--left">
+                        <img src="<?= $config_base . UPLOAD_NEWS_L . $hinhanhtt[1]['photo'] ?>"
+                             alt="<?= htmlspecialchars($hinhanhtt[1]['tenvi'] ?? '') ?>" loading="lazy">
+                    </div>
+                    <!-- Right floating image -->
+                    <div class="tk-csd-gallery__float tk-csd-gallery__float--right">
+                        <img src="<?= $config_base . UPLOAD_NEWS_L . $hinhanhtt[2]['photo'] ?>"
+                             alt="<?= htmlspecialchars($hinhanhtt[2]['tenvi'] ?? '') ?>" loading="lazy">
+                    </div>
+                </div>
+            <?php elseif (count($hinhanhtt) == 2) : ?>
+                <!-- 2 images: side by side -->
+                <div class="tk-csd-gallery__duo">
+                    <?php foreach ($hinhanhtt as $img) : ?>
+                        <div class="tk-csd-gallery__duo-item">
+                            <img src="<?= $config_base . UPLOAD_NEWS_L . $img['photo'] ?>"
+                                 alt="<?= htmlspecialchars($img['tenvi'] ?? '') ?>" loading="lazy">
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+            <?php else : ?>
+                <!-- 1 image: single centered -->
+                <div class="tk-csd-gallery__single">
+                    <img src="<?= $config_base . UPLOAD_NEWS_L . $hinhanhtt[0]['photo'] ?>"
+                         alt="<?= htmlspecialchars($hinhanhtt[0]['tenvi'] ?? $cs_title) ?>" loading="lazy">
+                </div>
+            <?php endif; ?>
+        </div>
+    </section>
+    <?php endif; ?>
+
+    <!-- SECTION 6: CTA — Dark navy -->
+    <section class="tk-csd-cta tk-sec">
+        <div class="fixwidth">
+            <div class="tk-csd-cta__inner">
+                <h2 class="tk-csd-cta__title">Sẵn sàng để thay đổi?</h2>
+                <p class="tk-csd-cta__desc">Bắt đầu hành trình chuyển đổi số cho trường học của bạn cùng hệ sinh thái TitKul ngay hôm nay.</p>
+                <div class="tk-csd-cta__buttons">
+                    <a class="tk-csd-cta__btn tk-csd-cta__btn--primary" href="dang-ky-tu-van">Đăng ký tư vấn</a>
+                    <!-- <a class="tk-csd-cta__btn tk-csd-cta__btn--outline" href="case-study">Xem thêm dự án</a> -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 7: RELATED — Other case studies -->
+    <?php if (isset($news) && count($news) > 0) : ?>
+    <section class="tk-csd-related tk-sec">
+        <div class="fixwidth">
+            <h2 class="tk-csd-related__heading">Dự Án Tiêu Biểu Khác</h2>
+            <div class="tk-csd-related__grid">
+                <?php foreach ($news as $related) : ?>
+                    <a class="tk-csd-related__card" href="<?= $related['tenkhongdauvi'] ?>">
+                        <div class="tk-csd-related__img">
+                            <?php if (!empty($related['photo'])) : ?>
+                                <img src="<?= $config_base . THUMBS . '/480x320x1/' . UPLOAD_NEWS_L . $related['photo'] ?>"
+                                     alt="<?= htmlspecialchars($related['ten' . $lang]) ?>" loading="lazy">
+                            <?php else : ?>
+                                <div class="tk-csd-related__placeholder">
+                                    <i class="fas fa-school"></i>
+                                </div>
+                            <?php endif; ?>
+                        </div>
+                        <div class="tk-csd-related__body">
+                            <h3 class="tk-csd-related__title"><?= htmlspecialchars($related['ten' . $lang]) ?></h3>
+                            <?php if (!empty($related['mota' . $lang])) : ?>
+                                <p class="tk-csd-related__desc"><?= strip_tags(htmlspecialchars_decode($related['mota' . $lang])) ?></p>
+                            <?php endif; ?>
+                            <span class="tk-csd-related__link">
+                                Xem chi tiết <i class="fas fa-arrow-right"></i>
+                            </span>
+                        </div>
+                    </a>
+                <?php endforeach; ?>
+            </div>
+        </div>
+    </section>
+    <?php endif; ?>
+
+    <!-- Partials: Form + Support -->
+    <?php include TEMPLATE . LAYOUT . "form_dangky.php"; ?>
+    <?php include TEMPLATE . LAYOUT . "hotro_lienhe.php"; ?>
+
+    <!-- Reveal animation for .tk-sec -->
+    <script>
+        document.querySelectorAll('.tk-sec').forEach(function(el) {
+            el.classList.add('is-revealed');
+        });
+    </script>
 <?php } else { ?>
     <!-- ════════ CHI TIẾT TIN TỨC — Magazine Article Layout ════════ -->
 

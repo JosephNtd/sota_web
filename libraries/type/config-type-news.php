@@ -400,6 +400,12 @@ $config['news'][$nametype]['gallery']     = array(
         "video_photo"      => true,    // link_video = tác giả
         "video_label"      => "Tác giả",
     ),
+    "case-study" => array(
+        "title_main_photo" => "Ảnh minh họa triển khai",
+        "title_sub_photo"  => "Screenshots, ảnh giao diện, ảnh triển khai (tối đa 5)",
+        "number_photo"     => 5,
+        "tieude_photo"     => true,    // tenvi = caption ảnh (optional)
+    ),
 );
 
 if (isset($config['news'])) {
