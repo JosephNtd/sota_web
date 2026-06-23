@@ -348,13 +348,27 @@ if ($id != '') {
 	$per_page = 6;
 	$startpoint = ($curPage * $per_page) - $per_page;
 	$limit = " limit " . $startpoint . "," . $per_page;
-	$sql = "select id, ten$lang, tenkhongdauvi, tenkhongdauen, photo, ngaytao, mota$lang, icon, link from #_news where $where order by stt,id desc $limit";
+	$sql = "select id, ten$lang, tenkhongdauvi, tenkhongdauen, photo, ngaytao, mota$lang, icon, link, diachi, nghenghiep from #_news where $where order by stt,id desc $limit";
 	$news = $d->rawQuery($sql, $params);
 	$sqlNum = "select count(*) as 'num' from #_news where $where order by stt,id desc";
 	$count = $d->rawQueryOne($sqlNum, $params);
 	$total = $count['num'];
 	$url = $func->getCurrentPageURL();
 	$paging = $func->pagination($total, $per_page, $curPage, $url);
+
+	/* Load stats & quote for case-study listing */
+	if ($type == 'case-study' && isset($news) && count($news) > 0) {
+		foreach ($news as &$item) {
+			$item['stats'] = $d->rawQuery(
+				"select tenvi, link_video from #_gallery where id_photo = ? and com='news' and type = 'case-study' and kind='man' and val = 'stats' and hienthi > 0 order by stt, id asc limit 0, 4",
+				array($item['id'])
+			);
+			$item['quote'] = $d->rawQueryOne(
+				"select tenvi, link_video from #_gallery where id_photo = ? and com='news' and type = 'case-study' and kind='man' and val = 'quote' and hienthi > 0 order by stt, id asc limit 0, 1",
+				array($item['id'])
+			);
+		}
+	}
 
 	/* breadCrumbs */
 	if (isset($title_crumb) && $title_crumb != '') $breadcr->setBreadCrumbs($com, $title_crumb);

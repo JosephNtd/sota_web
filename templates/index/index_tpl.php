@@ -4,16 +4,16 @@
 <section class="tk-sec tk-apps">
     <div class="fixwidth">
         <div class="tk-apps-header">
-            <h3 class="tk-apps-heading">
+            <h3 class="tk-apps-heading tk-rv tk-rv--up">
                 Phần mềm ứng dụng <br/>
                 <span class="tk-apps-heading-accent">Chuyển đổi số trường học</span>
             </h3>
-            <p class="tk-apps-desc">
+            <p class="tk-apps-desc tk-rv tk-rv--up tk-d1">
                 Phần mềm ứng dụng của Titkul là nền tảng số hoá, giúp nhà trường dễ dàng quản lý điều hành
                 công tác chuyên môn, kết nối và tương tác giữa Gia đình và nhà trường và Cơ quan quản lý ngành
                 (Sở/Phòng giáo dục).
             </p>
-            <p class="tk-apps-note">
+            <p class="tk-apps-note tk-rv tk-rv--up tk-d2">
                 Công ty sản xuất phần mềm ứng dụng Quản lý trường học, theo định hướng chuyển đổi số,
                 có kết nối trục dữ liệu dùng chung của Ngành. Phần mềm của Titkul đã được Sở GD &amp; ĐT
                 Tp.HCM chấp thuận và đã triển khai tại nhiều cấp trường.
@@ -23,7 +23,7 @@
         <?php if (isset($sanpham_nb) && count($sanpham_nb) > 0) : ?>
         <div class="tk-apps-grid">
             <?php foreach ($sanpham_nb as $spk => $sp) { if ($spk >= 2) break; ?>
-            <a class="tk-app-card" href="<?= $sp['tenkhongdauvi'] ?>">
+            <a class="tk-app-card tk-rv tk-rv--up tk-d<?= $spk + 1 ?>" href="<?= $sp['tenkhongdauvi'] ?>">
                 <div class="tk-app-card-blob <?= ($spk == 0) ? 'tk-app-card-blob--primary' : 'tk-app-card-blob--surface' ?>"></div>
                 <div class="tk-app-card-body">
                     <div class="tk-app-card-top">
@@ -57,10 +57,10 @@
     </div>
     <div class="fixwidth tk-benefit2-content">
         <div class="tk-benefit2-header">
-            <h3 class="tk-benefit2-heading">
+            <h3 class="tk-benefit2-heading tk-rv tk-rv--up">
                 Tit<span class="tk-accent-red">Kul</span> mang lại lợi ích gì cho nhà trường?
             </h3>
-            <p class="tk-benefit2-desc">
+            <p class="tk-benefit2-desc tk-rv tk-rv--up tk-d1">
                 Phần mềm Quản Lý Trường Học của Titkul, cùng với hệ sinh thái ứng dụng tương tác học đường,
                 giúp tăng cường hiệu quả quản lý trường học theo đúng định hướng chuyển đổi số của Ngành Giáo dục.
             </p>
@@ -69,7 +69,7 @@
         <!-- Stats grid -->
         <div class="tk-stats2">
             <!-- Benefit Item -->
-            <div class="tk-stat2">
+            <div class="tk-stat2 tk-rv tk-rv--scale tk-d1">
                 <div class="tk-stat2-ico tk-stat2-ico--square">
                     <i class="fas fa-laptop"></i>
                 </div>
@@ -77,27 +77,27 @@
                 <p class="tk-stat2-text">Của Ngành Giáo Dục</p>
             </div>
             <!-- Stat 75% -->
-            <div class="tk-stat2 tk-stat2--bordered">
+            <div class="tk-stat2 tk-stat2--bordered tk-rv tk-rv--scale tk-d2">
                 <div class="tk-stat2-ico tk-stat2-ico--circle">
                     <i class="fas fa-clock"></i>
                 </div>
-                <div class="tk-stat2-num">75%</div>
+                <div class="tk-stat2-num" data-count="75" data-suffix="%">75%</div>
                 <h4 class="tk-stat2-title">Tiết kiệm thời gian</h4>
                 <p class="tk-stat2-text">Trong công tác quản lý</p>
             </div>
             <!-- Stat 85% -->
-            <div class="tk-stat2">
+            <div class="tk-stat2 tk-rv tk-rv--scale tk-d3">
                 <div class="tk-stat2-ico tk-stat2-ico--square">
                     <i class="fas fa-chart-line"></i>
                 </div>
-                <div class="tk-stat2-num">85%</div>
+                <div class="tk-stat2-num" data-count="85" data-suffix="%">85%</div>
                 <h4 class="tk-stat2-title">Tăng hiệu quả</h4>
                 <p class="tk-stat2-text">Quản lý trường học</p>
             </div>
         </div>
 
         <!-- Why TitKul floating card -->
-        <div class="tk-why2">
+        <div class="tk-why2 tk-rv tk-rv--right tk-d2">
             <div class="tk-why2-label">
                 <h3 class="tk-why2-heading">
                     Tại sao chọn Tit<span class="tk-accent-red">Kul</span>?
@@ -123,7 +123,7 @@
             <!-- Left Column: Vision + Mission (Stacked) -->
             <div class="tk-vmv2-left">
                 <!-- Vision -->
-                <div class="tk-vmv2-card">
+                <div class="tk-vmv2-card tk-rv tk-rv--left">
                     <div class="tk-vmv2-card-img">
                         <span class="tk-vmv2-badge">Tầm Nhìn</span>
                         <img src="assets/images/titkul/tamnhin.jpg" alt="Tầm nhìn"
@@ -142,7 +142,7 @@
                     </div>
                 </div>
                 <!-- Mission -->
-                <div class="tk-vmv2-card">
+                <div class="tk-vmv2-card tk-rv tk-rv--left tk-d1">
                     <div class="tk-vmv2-card-img">
                         <span class="tk-vmv2-badge">Sứ Mệnh</span>
                         <img src="assets/images/titkul/sumenh.jpg" alt="Sứ mệnh"
@@ -163,7 +163,7 @@
             </div>
 
             <!-- Right Column: Core Values (Featured) -->
-            <div class="tk-vmv2-right">
+            <div class="tk-vmv2-right tk-rv tk-rv--right tk-d2">
                 <img class="tk-vmv2-right-bg" src="assets/images/titkul/giatricotloi.jpg"
                      alt="Giá trị cốt lõi" onerror="this.style.opacity=0;" loading="lazy" />
                 <div class="tk-vmv2-right-overlay"></div>
@@ -225,14 +225,14 @@ $tk_doituong = (isset($huongdan) && count($huongdan) > 0) ? $huongdan : $tk_fall
 ?>
 <section class="tk-sec tk-forwho">
     <div class="fixwidth">
-        <h2 class="tk-sec-title">PHẦN MỀM TITKUL DÀNH CHO AI?</h2>
-        <p class="tk-sec-desc">
+        <h2 class="tk-sec-title tk-rv tk-rv--up">PHẦN MỀM TITKUL DÀNH CHO AI?</h2>
+        <p class="tk-sec-desc tk-rv tk-rv--up tk-d1">
             Phần mềm Quản Lý Trường Học của Titkul dành cho Nhà trường và gia đình với nhiều tính năng số hoá
             hữu ích cho công tác quản lý, tương tác và báo cáo
         </p>
         <div class="tk-forwho-grid">
-            <?php foreach ($tk_doituong as $v) { ?>
-                <div class="tk-forwho-card">
+            <?php foreach ($tk_doituong as $fwk => $v) { ?>
+                <div class="tk-forwho-card tk-rv tk-rv--up tk-d<?= ($fwk % 4) + 1 ?>">
                     <div class="tk-forwho-ico">
                         <img src="<?= !empty($v['photo']) ? UPLOAD_NEWS_L . $v['photo'] : (isset($v['ico']) ? $v['ico'] : '') ?>"
                             alt="<?= $v['ten' . $lang] ?>" onerror="this.style.display='none';" />
@@ -251,9 +251,9 @@ $tk_doituong = (isset($huongdan) && count($huongdan) > 0) ? $huongdan : $tk_fall
     <section class="tk-sec tk-casestudy">
         <div class="fixwidth">
             <div class="tk-cs-header">
-                <span class="tk-cs-eyebrow">Thực tế triển khai</span>
-                <h2 class="tk-sec-title">Trường học đã làm được gì với TitKul?</h2>
-                <p class="tk-sec-desc">Kết quả thực tế từ các đơn vị đang sử dụng phần mềm</p>
+                <span class="tk-cs-eyebrow tk-rv tk-rv--up">Thực tế triển khai</span>
+                <h2 class="tk-sec-title tk-rv tk-rv--up tk-d1">Trường học đã làm được gì với TitKul?</h2>
+                <p class="tk-sec-desc tk-rv tk-rv--up tk-d2">Kết quả thực tế từ các đơn vị đang sử dụng phần mềm</p>
             </div>
 
             <?php foreach ($casestudy as $idx => $cs) :
@@ -263,7 +263,7 @@ $tk_doituong = (isset($huongdan) && count($huongdan) > 0) ? $huongdan : $tk_fall
                 $badge_cls  = (mb_strtolower($badge_type) === 'dự án triển khai') ? 'tk-cs-tag--deploy' : 'tk-cs-tag--school';
             ?>
                 <div class="tk-cs-item <?= $flipped ?>">
-                    <div class="tk-cs-img-wrap">
+                    <div class="tk-cs-img-wrap tk-rv <?= $flipped ? 'tk-rv--right' : 'tk-rv--left' ?>">
                         <?php if (!empty($cs['photo'])) : ?>
                             <img src="<?= UPLOAD_NEWS_L . $cs['photo'] ?>"
                                 alt="<?= htmlspecialchars($cs['tenvi']) ?>" loading="lazy" />
@@ -271,7 +271,7 @@ $tk_doituong = (isset($huongdan) && count($huongdan) > 0) ? $huongdan : $tk_fall
                             <div class="tk-cs-img-placeholder"><i class="fas fa-school"></i></div>
                         <?php endif; ?>
                     </div>
-                    <div class="tk-cs-body">
+                    <div class="tk-cs-body tk-rv <?= $flipped ? 'tk-rv--left' : 'tk-rv--right' ?> tk-d1">
                         <span class="tk-cs-tag <?= $badge_cls ?>"><?= htmlspecialchars($badge_type) ?></span>
                         <h3 class="tk-cs-title"><?= htmlspecialchars($cs['tenvi']) ?></h3>
                         <?php if (!empty($cs['diachi'])) : ?>
@@ -319,8 +319,8 @@ $tk_doituong = (isset($huongdan) && count($huongdan) > 0) ? $huongdan : $tk_fall
 <?php if (isset($doitac) && count($doitac) > 0) { ?>
     <section class="tk-sec tk-partners">
         <div class="fixwidth">
-            <h2 class="tk-sec-title">CÁC TRƯỜNG TIÊU BIỂU</h2>
-            <div id="doitac_slider" class="owl-carousel owl-theme tk-partner-slider">
+            <h2 class="tk-sec-title tk-rv tk-rv--up">CÁC TRƯỜNG TIÊU BIỂU</h2>
+            <div id="doitac_slider" class="owl-carousel owl-theme tk-partner-slider tk-rv tk-rv--up tk-d1">
                 <?php foreach ($doitac as $v) { ?>
                     <div class="tk-partner-item">
                         <?php if (!empty($v['link'])) { ?><a href="<?= $v['link'] ?>" target="_blank" rel="nofollow" title="<?= $v['ten' . $lang] ?>"><?php } ?>
@@ -338,11 +338,11 @@ $tk_doituong = (isset($huongdan) && count($huongdan) > 0) ? $huongdan : $tk_fall
 <?php if (isset($video) && count($video) > 0) { ?>
     <section class="tk-sec tk-videos">
         <div class="fixwidth">
-            <h2 class="tk-sec-title">VIDEO GIỚI THIỆU &amp; HƯỚNG DẪN SỬ DỤNG</h2>
+            <h2 class="tk-sec-title tk-rv tk-rv--up">VIDEO GIỚI THIỆU &amp; HƯỚNG DẪN SỬ DỤNG</h2>
             <div class="tk-video-grid">
                 <?php foreach ($video as $k => $v) {
                     if ($k >= 4) break; ?>
-                    <div class="tk-video-item">
+                    <div class="tk-video-item tk-rv tk-rv--up tk-d<?= ($k % 4) + 1 ?>">
                         <a data-fancybox="video" class="tk-video-thumb" href="<?= $v['video'] ?>" title="<?= $v['ten' . $lang] ?>">
                             <img src="https://img.youtube.com/vi/<?= $func->getYoutube($v['video']) ?>/hqdefault.jpg" alt="<?= $v['ten' . $lang] ?>" />
                             <span class="tk-video-play"><i class="fas fa-play"></i></span>
@@ -363,9 +363,9 @@ $tk_doituong = (isset($huongdan) && count($huongdan) > 0) ? $huongdan : $tk_fall
     ?>
     <section class="tk-sec tk-news">
         <div class="fixwidth">
-            <h2 class="tk-sec-title">TIN TỨC SỰ KIỆN</h2>
+            <h2 class="tk-sec-title tk-rv tk-rv--up">TIN TỨC SỰ KIỆN</h2>
             <div class="tk-news-bento">
-                <a class="tk-news-bento__main" href="<?= $tt_main['tenkhongdau' . $lang] ?>" title="<?= $tt_main['ten' . $lang] ?>">
+                <a class="tk-news-bento__main tk-rv tk-rv--left" href="<?= $tt_main['tenkhongdau' . $lang] ?>" title="<?= $tt_main['ten' . $lang] ?>">
                     <img class="tk-news-bento__main-img"
                         src="<?= UPLOAD_NEWS_L . $tt_main['photo'] ?>"
                         onerror="this.src='<?= THUMBS ?>/720x450x1/assets/images/noimage.png';"
@@ -381,8 +381,8 @@ $tk_doituong = (isset($huongdan) && count($huongdan) > 0) ? $huongdan : $tk_fall
                 </a>
                 <?php if (count($tt_sides) > 0) { ?>
                     <div class="tk-news-bento__side">
-                        <?php foreach ($tt_sides as $sv) { ?>
-                            <a class="tk-news-bento__side-card" href="<?= $sv['tenkhongdau' . $lang] ?>" title="<?= $sv['ten' . $lang] ?>">
+                        <?php foreach ($tt_sides as $svk => $sv) { ?>
+                            <a class="tk-news-bento__side-card tk-rv tk-rv--right tk-d<?= $svk + 1 ?>" href="<?= $sv['tenkhongdau' . $lang] ?>" title="<?= $sv['ten' . $lang] ?>">
                                 <div class="tk-news-bento__side-img">
                                     <img src="<?= THUMBS ?>/400x260x1/<?= UPLOAD_NEWS_L . $sv['photo'] ?>"
                                         onerror="this.src='<?= THUMBS ?>/400x260x1/assets/images/noimage.png';"
@@ -426,10 +426,132 @@ $tk_doituong = (isset($huongdan) && count($huongdan) > 0) ? $huongdan : $tk_fall
         var allSections = document.querySelectorAll('section.tk-sec');
         var sectionObserver = new IntersectionObserver(function(entries) {
             entries.forEach(function(entry) {
-                if (entry.isIntersecting) { entry.target.classList.add('is-revealed'); }
-                else { entry.target.classList.remove('is-revealed'); }
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-revealed');
+                    sectionObserver.unobserve(entry.target); // entrance chỉ chạy 1 lần
+                }
             });
         }, { root: null, rootMargin: '-40px 0px -40px 0px', threshold: 0.1 });
         allSections.forEach(function(section) { sectionObserver.observe(section); });
+
+        // Counter-up cho số liệu thống kê (chỉ chạy khi cuộn tới, 1 lần)
+        var counters = document.querySelectorAll('.tk-stat2-num[data-count]');
+        if (counters.length) {
+            var countObserver = new IntersectionObserver(function(entries) {
+                entries.forEach(function(entry) {
+                    if (!entry.isIntersecting) return;
+                    var el = entry.target;
+                    countObserver.unobserve(el);
+                    var target = parseInt(el.getAttribute('data-count'), 10) || 0;
+                    var suffix = el.getAttribute('data-suffix') || '';
+                    var dur = 1200, start = null;
+                    function step(ts) {
+                        if (!start) start = ts;
+                        var p = Math.min((ts - start) / dur, 1);
+                        var eased = 1 - Math.pow(1 - p, 3); // easeOutCubic
+                        el.textContent = Math.round(eased * target) + suffix;
+                        if (p < 1) requestAnimationFrame(step);
+                    }
+                    requestAnimationFrame(step);
+                });
+            }, { threshold: 0.6 });
+            counters.forEach(function(c) { countObserver.observe(c); });
+        }
     });
+</script>
+<!-- Feature Carousel: 3D Coverflow Logic -->
+<script>
+window.addEventListener('load', function() {
+    var hexCenter  = document.getElementById('tkHexCenter');
+    var heroDefault = document.getElementById('tkHeroDefault');
+    var overlay    = document.getElementById('tkFeatOverlay');
+    var backBtn    = document.getElementById('tkFeatBack');
+
+    if (!hexCenter || !overlay) return;
+
+    var slides     = overlay.querySelectorAll('.tk-feat-slide');
+    var dots       = overlay.querySelectorAll('.tk-feat-dot');
+    var prevBtn    = document.getElementById('tkFeatPrev');
+    var nextBtn    = document.getElementById('tkFeatNext');
+    var currentIdx = 0;
+    var total      = slides.length;
+    if (total === 0) return;
+
+    function updateCarousel(idx) {
+        if (idx < 0) idx = total - 1;
+        if (idx >= total) idx = 0;
+        currentIdx = idx;
+
+        var prevIdx = (currentIdx - 1 + total) % total;
+        var nextIdx = (currentIdx + 1) % total;
+
+        for (var i = 0; i < total; i++) {
+            slides[i].className = 'tk-feat-slide';
+        }
+        slides[currentIdx].classList.add('active');
+        if (total > 1) slides[prevIdx].classList.add('prev');
+        if (total > 2) slides[nextIdx].classList.add('next');
+
+        for (var j = 0; j < dots.length; j++) {
+            dots[j].classList.toggle('is-active', j === currentIdx);
+        }
+    }
+
+    // Open carousel
+    hexCenter.addEventListener('click', function(e) {
+        e.preventDefault();
+        heroDefault.classList.add('is-hidden');
+        overlay.classList.add('is-active');
+        updateCarousel(0);
+    });
+
+    // Close carousel
+    backBtn.addEventListener('click', function() {
+        overlay.classList.remove('is-active');
+        heroDefault.classList.remove('is-hidden');
+    });
+
+    // Nav
+    prevBtn.addEventListener('click', function() { updateCarousel(currentIdx - 1); });
+    nextBtn.addEventListener('click', function() { updateCarousel(currentIdx + 1); });
+
+    // Dots
+    for (var d = 0; d < dots.length; d++) {
+        dots[d].addEventListener('click', function() {
+            updateCarousel(parseInt(this.getAttribute('data-dot')));
+        });
+    }
+
+    // Click prev/next slide to navigate
+    for (var s = 0; s < total; s++) {
+        (function(idx) {
+            slides[idx].addEventListener('click', function() {
+                if (this.classList.contains('prev') || this.classList.contains('next')) {
+                    updateCarousel(idx);
+                }
+            });
+        })(s);
+    }
+
+    // Keyboard nav
+    document.addEventListener('keydown', function(e) {
+        if (!overlay.classList.contains('is-active')) return;
+        if (e.key === 'ArrowLeft') updateCarousel(currentIdx - 1);
+        if (e.key === 'ArrowRight') updateCarousel(currentIdx + 1);
+        if (e.key === 'Escape') backBtn.click();
+    });
+
+    // Touch swipe
+    var touchStartX = 0;
+    overlay.addEventListener('touchstart', function(e) {
+        touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+    overlay.addEventListener('touchend', function(e) {
+        var diff = e.changedTouches[0].screenX - touchStartX;
+        if (Math.abs(diff) > 50) {
+            if (diff > 0) updateCarousel(currentIdx - 1);
+            else updateCarousel(currentIdx + 1);
+        }
+    }, { passive: true });
+});
 </script>

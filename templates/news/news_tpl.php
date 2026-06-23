@@ -1,6 +1,136 @@
 <?php if (!defined('SOURCES')) die("Error"); ?>
 
-<?php if ($type == 'tinh-nang') { ?>
+<?php if ($type == 'case-study') { ?>
+    <!-- CASE STUDY LISTING — Featured + Alternating Cards -->
+
+    <!-- Header -->
+    <section class="tkcsd-hero">
+        <div class="fixwidth">
+            <?php if (!empty($banner)) { ?>
+                <div class="tkcsd-hero__banner">
+                    <img src="<?= UPLOAD_SEOPAGE_L . $banner ?>"
+                        onerror="this.style.display='none'"
+                        alt="Case Study" loading="lazy" />
+                </div>
+            <?php } ?>
+            <div class="tkcsd-hero__content">
+                <span class="tkcsd-badge">Thực Tế Triển Khai</span>
+                <h1 class="tkcsd-hero__title">Trường Học Đã Làm Được Gì Với TitKul?</h1>
+                <p class="tkcsd-hero__desc">Kết quả thực tế từ các đơn vị đang sử dụng phần mềm quản lý giáo dục tiên tiến nhất.</p>
+            </div>
+        </div>
+    </section>
+
+    <?php if (isset($news) && count($news) > 0) { ?>
+
+        <!-- Case Study Cards -->
+        <section class="tkcsd-list">
+            <div class="fixwidth">
+                <?php foreach ($news as $k => $v) { ?>
+                    <div class="tkcsd-card <?= ($k % 2 == 1) ? 'tkcsd-card--flip' : '' ?>">
+                        <!-- Left: Image -->
+                        <div class="tkcsd-card__media">
+                            <img src="<?= UPLOAD_NEWS_L . $v['photo'] ?>"
+                                onerror="this.src='<?= THUMBS ?>/480x400x1/assets/images/noimage.png';"
+                                alt="<?= $v['ten' . $lang] ?>"
+                                loading="lazy" />
+                        </div>
+
+                        <!-- Right: Details -->
+                        <div class="tkcsd-card__body">
+                            <div class="tkcsd-card__content">
+                                <!-- Badge -->
+                                <?php if (!empty($v['link'])) { ?>
+                                    <span class="tkcsd-card__badge"><?= $v['link'] ?></span>
+                                <?php } ?>
+
+                                <!-- Title -->
+                                <h2 class="tkcsd-card__title"><?= $v['ten' . $lang] ?></h2>
+
+                                <!-- Location & Year -->
+                                <div class="tkcsd-card__meta">
+                                    <?php if (!empty($v['diachi'])) { ?>
+                                        <span class="tkcsd-card__location">
+                                            <i class="fas fa-map-marker-alt"></i> <?= $v['diachi'] ?>
+                                        </span>
+                                    <?php } ?>
+                                    <?php if (!empty($v['nghenghiep'])) { ?>
+                                        <span class="tkcsd-card__year">Triển khai <?= $v['nghenghiep'] ?></span>
+                                    <?php } ?>
+                                </div>
+
+                                <!-- Description -->
+                                <?php if (!empty($v['mota' . $lang])) { ?>
+                                    <p class="tkcsd-card__desc"><?= $v['mota' . $lang] ?></p>
+                                <?php } ?>
+
+                                <!-- Stats -->
+                                <?php if (isset($v['stats']) && count($v['stats']) > 0) { ?>
+                                    <div class="tkcsd-stats">
+                                        <?php foreach ($v['stats'] as $stat) { ?>
+                                            <div class="tkcsd-stat">
+                                                <div class="tkcsd-stat__value"><?= $stat['tenvi'] ?></div>
+                                                <div class="tkcsd-stat__label"><?= $stat['link_video'] ?></div>
+                                            </div>
+                                        <?php } ?>
+                                    </div>
+                                <?php } ?>
+
+                                <!-- Quote -->
+                                <?php if (isset($v['quote']) && $v['quote']) { ?>
+                                    <blockquote class="tkcsd-quote">
+                                        <p class="tkcsd-quote__text"><?= $v['quote']['tenvi'] ?></p>
+                                        <?php if (!empty($v['quote']['link_video'])) { ?>
+                                            <footer class="tkcsd-quote__author"><?= $v['quote']['link_video'] ?></footer>
+                                        <?php } ?>
+                                    </blockquote>
+                                <?php } ?>
+
+                                <!-- Link -->
+                                <a class="tkcsd-card__link" href="<?= $v[$sluglang] ?>">
+                                    Xem chi tiết dự án <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                <?php } ?>
+            </div>
+        </section>
+
+        <?php if (isset($paging) && $paging != '') { ?>
+            <div class="fixwidth">
+                <div class="tk-paging"><?= $paging ?></div>
+            </div>
+        <?php } ?>
+
+    <?php } else { ?>
+        <section class="tkcsd-list">
+            <div class="fixwidth" style="padding: 60px 0;">
+                <div class="alert alert-warning" role="alert">
+                    <strong><?= khongtimthayketqua ?></strong>
+                </div>
+            </div>
+        </section>
+    <?php } ?>
+
+    <?php if (!empty($noidung_page)) { ?>
+        <section class="tkcsd-content">
+            <div class="fixwidth">
+                <div class="tk-content-page"><?= htmlspecialchars_decode($noidung_page) ?></div>
+            </div>
+        </section>
+    <?php } ?>
+
+    <?php include TEMPLATE . LAYOUT . "form_dangky.php"; ?>
+    <?php include TEMPLATE . LAYOUT . "hotro_lienhe.php"; ?>
+
+    <script>
+        document.querySelectorAll('.tk-sec').forEach(function(el) {
+            el.classList.add('is-revealed');
+        });
+    </script>
+
+<?php } elseif ($type == 'tinh-nang') { ?>
     <!-- TÍNH NĂNG NỔI BẬT — Full-bleed Zigzag -->
     <section class="tk-feature-list">
         <?php if (isset($news) && count($news) > 0) { ?>

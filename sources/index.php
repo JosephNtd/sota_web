@@ -19,7 +19,7 @@ $video = $d->rawQuery("select ten$lang, id, video from #_news where type = ? and
 
 $huongdan = $d->rawQuery("select ten$lang, tenkhongdauvi, mota$lang, photo, id from #_news where type = ? and hienthi > 0 and noibat > 0 order by stt,id desc ", array('huong-dan'));
 
-$tinhnang = $d->rawQuery("select ten$lang, tenkhongdauvi, photo, id from #_news where type = ? and noibat > 0 and hienthi > 0 order by stt,id desc limit 0,6", array('tinh-nang'));
+$tinhnang = $d->rawQuery("select ten$lang, tenkhongdauvi, photo, id, mota$lang from #_news where type = ? and noibat > 0 and hienthi > 0 order by stt,id desc limit 0,6", array('tinh-nang'));
 
 $casestudy = $d->rawQuery(
     "select id, tenkhongdauvi, tenvi, motavi, photo, diachi, nghenghiep, link, noibat

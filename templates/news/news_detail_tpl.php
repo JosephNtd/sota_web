@@ -111,7 +111,7 @@
                         <div class="tk-nd-steps__media">
                             <div class="tk-nd-main__glass">
                                 <div class="tk-nd-main__glass-glow"></div>
-                                <img src="<?= THUMBS ?>/760x900x1/<?= UPLOAD_NEWS_L . $banner_img2['photo'] ?>"
+                                <img src="<?= THUMBS ?>/760x900x0/<?= UPLOAD_NEWS_L . $banner_img2['photo'] ?>"
                                     alt="<?= $banner_img2['ten' . $lang] ?>" />
                             </div>
                             <?php if (!empty($banner_img2['ten' . $lang])) { ?>
@@ -233,9 +233,17 @@
     <?php include TEMPLATE . LAYOUT . "form_dangky.php"; ?>
     <?php include TEMPLATE . LAYOUT . "hotro_lienhe.php"; ?>
     <script>
-        document.querySelectorAll('.tk-sec').forEach(function(el) {
-            el.classList.add('is-revealed');
-        });
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', function() {
+                document.querySelectorAll('.tk-sec').forEach(function(el) {
+                    el.classList.add('is-revealed');
+                });
+            });
+        } else {
+            document.querySelectorAll('.tk-sec').forEach(function(el) {
+                el.classList.add('is-revealed');
+            });
+        }
     </script>
 
 
@@ -493,9 +501,17 @@
 
     <?php include TEMPLATE . LAYOUT . "hotro_lienhe.php"; ?>
     <script>
-        document.querySelectorAll('.tk-sec').forEach(function(el) {
-            el.classList.add('is-revealed');
-        });
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', function() {
+                document.querySelectorAll('.tk-sec').forEach(function(el) {
+                    el.classList.add('is-revealed');
+                });
+            });
+        } else {
+            document.querySelectorAll('.tk-sec').forEach(function(el) {
+                el.classList.add('is-revealed');
+            });
+        }
         /* Smooth scroll for product anchor links */
         document.querySelectorAll('.tk-hd-select__card').forEach(function(a) {
             a.addEventListener('click', function(e) {
@@ -717,9 +733,17 @@
 
     <!-- Reveal animation for .tk-sec -->
     <script>
-        document.querySelectorAll('.tk-sec').forEach(function(el) {
-            el.classList.add('is-revealed');
-        });
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', function() {
+                document.querySelectorAll('.tk-sec').forEach(function(el) {
+                    el.classList.add('is-revealed');
+                });
+            });
+        } else {
+            document.querySelectorAll('.tk-sec').forEach(function(el) {
+                el.classList.add('is-revealed');
+            });
+        }
     </script>
 <?php } else { ?>
     <!-- ════════ CHI TIẾT TIN TỨC — Magazine Article Layout ════════ -->
@@ -1069,8 +1093,16 @@
     <?php include TEMPLATE . LAYOUT . "form_dangky.php"; ?>
     <?php include TEMPLATE . LAYOUT . "hotro_lienhe.php"; ?>
     <script>
-        document.querySelectorAll('.tk-sec').forEach(function(el) {
-            el.classList.add('is-revealed');
-        });
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', function() {
+                document.querySelectorAll('.tk-sec').forEach(function(el) {
+                    el.classList.add('is-revealed');
+                });
+            });
+        } else {
+            document.querySelectorAll('.tk-sec').forEach(function(el) {
+                el.classList.add('is-revealed');
+            });
+        }
     </script>
 <?php } ?>
