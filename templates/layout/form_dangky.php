@@ -6,47 +6,84 @@
  */
 ?>
 
-<section class="tk-sec tk-register" id="dangkytuvan">
-    <div class="fixwidth">
-        <h2 class="tk-register-title">Đăng ký tư vấn ngay</h2>
-        <p class="tk-register-desc">
-            Quý thầy/ cô vui lòng cung cấp thông tin, để được tư vấn miễn phí phần mềm quản lý trường học, chuyển đổi số nhà trường.
-        </p>
+<section class="tk-sec tk-register2" id="dangkytuvan">
+    <!-- Abstract background blobs -->
+    <div class="tk-reg2-bg" aria-hidden="true">
+        <span class="tk-reg2-blob tk-reg2-blob--a"></span>
+        <span class="tk-reg2-blob tk-reg2-blob--b"></span>
     </div>
-    <div class="fixwidth tk-register-grid">
-        <div class="tk-register-left">
-            <form class="tk-register-form" id="frmDangKyTuVan" novalidate method="post" autocomplete="on">
-                <div class="tk-field">
-                    <label for="ten-dktv">Họ & tên: <span class="require">*</span></label>
-                    <input type="text" class="form-control" autocomplete="name" id="ten-dktv" name="name-newsletter" required />
-                    <div class="invalid-feedback">Vui lòng nhập họ và tên</div>
-                </div>
-                <div class="tk-field">
-                    <label for="dienthoai-dktv">Số điện thoại: <span class="require">*</span></label>
-                    <input type="tel" class="form-control" autocomplete="tel" id="dienthoai-dktv" name="phone-newsletter" required />
-                    <div class="invalid-feedback">Vui lòng nhập số điện thoại</div>
-                </div>
-                <div class="tk-field">
-                    <label for="truong-dktv">Tên Trường đang công tác: <span class="require">*</span></label>
-                    <input type="text" class="form-control" id="truong-dktv" name="truong-newsletter" required />
-                    <div class="invalid-feedback">Vui lòng nhập tên trường</div>
-                </div>
-                <div class="tk-field">
-                    <label for="diachi-dktv">Địa chỉ:</label>
-                    <input type="text" class="form-control" id="diachi-dktv" name="diachi-newsletter" />
-                </div>
-                <input type="hidden" name="recaptcha_response_newsletter" id="recaptchaResponseNewsletter">
 
-                <!-- Thông báo kết quả -->
-                <div class="tk-form-msg" id="dktv-msg" style="display:none;"></div>
-
-                <div class="tk-field tk-field-submit">
-                    <button type="submit" class="tk-btn tk-btn-cta" id="dktv-btn" disabled>Gửi Tin</button>
-                </div>
-            </form>
+    <div class="fixwidth tk-reg2-wrap">
+        <!-- Header -->
+        <div class="tk-reg2-head">
+            <span class="tk-reg2-badge">Tư Vấn Miễn Phí</span>
+            <h2 class="tk-reg2-title">
+                Khởi Đầu Hành Trình Chuyển Đổi Số Cùng <span class="tk-reg2-accent">TitKul</span>
+            </h2>
+            <p class="tk-reg2-desc">
+                Quý Thầy/Cô vui lòng để lại thông tin, đội ngũ chuyên gia của chúng tôi sẽ liên hệ tư vấn giải pháp tối ưu nhất cho nhà trường.
+            </p>
         </div>
-        <div class="tk-register-right">
-            <img src="assets/images/titkul/dangky-side.webp" alt="Đăng ký tư vấn Titkul" onerror="this.style.display='none';" />
+
+        <!-- Card -->
+        <div class="tk-reg2-card">
+            <!-- Left: form -->
+            <div class="tk-reg2-formcol">
+                <form class="tk-reg2-form" id="frmDangKyTuVan" novalidate method="post" autocomplete="on">
+                    <div class="tk-reg2-row">
+                        <div class="tk-reg2-field">
+                            <label for="ten-dktv">Họ &amp; tên <span class="require">*</span></label>
+                            <input type="text" class="form-control" autocomplete="name" id="ten-dktv" name="name-newsletter" placeholder="Nhập họ và tên" required />
+                            <div class="invalid-feedback">Vui lòng nhập họ và tên</div>
+                        </div>
+                        <div class="tk-reg2-field">
+                            <label for="dienthoai-dktv">Số điện thoại <span class="require">*</span></label>
+                            <input type="tel" class="form-control" autocomplete="tel" id="dienthoai-dktv" name="phone-newsletter" placeholder="Nhập số điện thoại" required />
+                            <div class="invalid-feedback">Vui lòng nhập số điện thoại</div>
+                        </div>
+                    </div>
+                    <div class="tk-reg2-field">
+                        <label for="truong-dktv">Tên Trường đang công tác <span class="require">*</span></label>
+                        <input type="text" class="form-control" id="truong-dktv" name="truong-newsletter" placeholder="Nhập tên trường" required />
+                        <div class="invalid-feedback">Vui lòng nhập tên trường</div>
+                    </div>
+                    <div class="tk-reg2-field">
+                        <label for="email-dktv">Email</label>
+                        <input type="email" class="form-control" autocomplete="email" id="email-dktv" name="email-newsletter" placeholder="Nhập địa chỉ email (không bắt buộc)" />
+                    </div>
+                    <div class="tk-reg2-field">
+                        <label for="diachi-dktv">Địa chỉ</label>
+                        <textarea class="form-control" id="diachi-dktv" name="diachi-newsletter" rows="2" placeholder="Tỉnh/Thành phố, Quận/Huyện..."></textarea>
+                    </div>
+                    <div class="tk-reg2-field">
+                        <label for="noidung-dktv">Nội dung tư vấn</label>
+                        <textarea class="form-control" id="noidung-dktv" name="noidung-newsletter" rows="4" placeholder="Nhập nội dung bạn cần tư vấn..."></textarea>
+                    </div>
+
+                    <input type="hidden" name="recaptcha_response_newsletter" id="recaptchaResponseNewsletter">
+
+                    <!-- Thông báo kết quả -->
+                    <div class="tk-form-msg" id="dktv-msg" style="display:none;"></div>
+
+                    <button type="submit" class="tk-reg2-btn" id="dktv-btn" disabled>
+                        Gửi Yêu Cầu Tư Vấn
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                </form>
+            </div>
+
+            <!-- Right: editorial visual -->
+            <div class="tk-reg2-visual">
+                <img src="assets/images/titkul/dangky-side.webp" alt="Đăng ký tư vấn Titkul" onerror="this.style.display='none';" />
+                <span class="tk-reg2-visual-overlay" aria-hidden="true"></span>
+                <!-- <div class="tk-reg2-floatcard">
+                    <span class="tk-reg2-float-icon"><i class="fas fa-school"></i></span>
+                    <div>
+                        <p class="tk-reg2-float-title">Đồng Hành Cùng 1000+ Trường Học</p>
+                        <p class="tk-reg2-float-text">Giải pháp quản trị toàn diện, bảo mật tối đa, vận hành trơn tru.</p>
+                    </div>
+                </div> -->
+            </div>
         </div>
     </div>
 </section>
@@ -58,6 +95,7 @@ window.addEventListener('load', function() {
     var btn  = document.getElementById('dktv-btn');
     var msg  = document.getElementById('dktv-msg');
     var required = form.querySelectorAll('[required]');
+    var btnLabel = 'Gửi Yêu Cầu Tư Vấn <i class="fas fa-arrow-right"></i>';
 
     /* Enable/disable nút submit */
     function checkFields() {
@@ -76,7 +114,7 @@ window.addEventListener('load', function() {
         if (btn.disabled) return;
 
         btn.disabled = true;
-        btn.textContent = 'Đang gửi...';
+        btn.innerHTML = 'Đang gửi... <i class="fas fa-spinner fa-spin"></i>';
         msg.style.display = 'none';
 
         var fd = new FormData(form);
@@ -99,7 +137,7 @@ window.addEventListener('load', function() {
                     msg.className = 'tk-form-msg tk-form-msg--err';
                     msg.innerHTML = '<i class="fas fa-exclamation-circle"></i> ' + data.message;
                 }
-                btn.textContent = 'Gửi Tin';
+                btn.innerHTML = btnLabel;
                 btn.disabled = false;
                 checkFields();
             })
@@ -107,7 +145,7 @@ window.addEventListener('load', function() {
                 msg.style.display = 'block';
                 msg.className = 'tk-form-msg tk-form-msg--err';
                 msg.innerHTML = '<i class="fas fa-exclamation-circle"></i> Lỗi kết nối. Vui lòng thử lại.';
-                btn.textContent = 'Gửi Tin';
+                btn.innerHTML = btnLabel;
                 btn.disabled = false;
                 checkFields();
             });

@@ -196,7 +196,7 @@ switch ($com) {
 		
 	case 'case-study':
 		$source   = "news";
-		$template = isset($_GET['id']) ? "news/news_detail" : "news/case_study";
+		$template = isset($_GET['id']) ? "news/news_detail" : "news/news";
 		$seo->setSeo('type', isset($_GET['id']) ? "article" : "object");
 		$type         = $com;
 		$title_crumb  = "Case Study";

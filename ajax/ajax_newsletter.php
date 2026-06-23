@@ -41,6 +41,7 @@ $dienthoai = isset($_POST['phone-newsletter'])  ? trim(htmlspecialchars($_POST['
 $truong    = isset($_POST['truong-newsletter'])  ? trim(htmlspecialchars($_POST['truong-newsletter']))  : '';
 $diachi    = isset($_POST['diachi-newsletter'])  ? trim(htmlspecialchars($_POST['diachi-newsletter']))  : '';
 $email     = isset($_POST['email-newsletter'])   ? trim(htmlspecialchars($_POST['email-newsletter']))   : '';
+$noidung   = isset($_POST['noidung-newsletter']) ? trim(htmlspecialchars($_POST['noidung-newsletter'])) : '';
 
 if ($ten === '' || $dienthoai === '') {
     echo json_encode(['success' => false, 'message' => 'Vui lòng nhập đầy đủ họ tên và số điện thoại.']);
@@ -54,7 +55,7 @@ $data = [
     'email'     => $email,
     'diachi'    => $diachi,
     'chude'     => $truong,
-    'noidung'   => '',
+    'noidung'   => $noidung,
     'type'      => 'dang-ky-tu-van',
     'ngaytao'   => time(),
     'stt'       => 1,
@@ -79,14 +80,15 @@ try {
         $emailer->setEmail('dienthoainguoigui', $dienthoai);
         $emailer->setEmail('diachinguoigui', $diachi);
         $emailer->setEmail('tieudelienhe', 'Đăng ký tư vấn');
-        $emailer->setEmail('noidunglienhe', 'Trường: ' . $truong);
+        $emailer->setEmail('noidunglienhe', 'Trường: ' . $truong . ($noidung ? ' | Nội dung: ' . $noidung : ''));
 
         $strThongtin = '';
         if ($ten)       $strThongtin .= '<span style="text-transform:capitalize">' . $ten . '</span><br>';
         if ($email)     $strThongtin .= '<a href="mailto:' . $email . '">' . $email . '</a><br>';
         if ($dienthoai) $strThongtin .= 'Tel: ' . $dienthoai . '<br>';
         if ($diachi)    $strThongtin .= 'Địa chỉ: ' . $diachi . '<br>';
-        if ($truong)    $strThongtin .= 'Trường: ' . $truong;
+        if ($truong)    $strThongtin .= 'Trường: ' . $truong . '<br>';
+        if ($noidung)   $strThongtin .= 'Nội dung: ' . $noidung;
         $emailer->setEmail('thongtin', $strThongtin);
 
         $setting = $d->rawQueryOne("select tenvi from #_setting limit 0,1");
