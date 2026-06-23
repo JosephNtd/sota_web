@@ -25,27 +25,27 @@ $pd_subtitle = (!empty($row_detail['masp'])) ? $row_detail['masp'] : '';
 ?>
 
 <!-- SECTION 1 — HERO 2 CỘT -->
-<div class="tk-prodetail-hero">
+<section class="tk-sec tk-prodetail-hero">
     <div class="fixwidth">
         <div class="tk-prodetail-hero__inner">
 
             <!-- Cột trái: text + badges tải app -->
             <div class="tk-prodetail-hero__left">
                 <?php if ($pd_tagline) { ?>
-                    <p class="tk-prodetail-hero__tagline"><?= $pd_tagline ?></p>
+                    <p class="tk-prodetail-hero__tagline tk-rv tk-rv--up tk-d1"><?= $pd_tagline ?></p>
 
                 <?php } ?>
 
 
-                <h1 class="tk-prodetail-hero__name"><?= $pd_name ?></h1>
+                <h1 class="tk-prodetail-hero__name tk-rv tk-rv--up tk-d2"><?= $pd_name ?></h1>
 
                 <?php if ($pd_subtitle) { ?>
-                    <p class="tk-prodetail-hero__subtitle"><?= $pd_subtitle ?></p>
+                    <p class="tk-prodetail-hero__subtitle tk-rv tk-rv--up tk-d3"><?= $pd_subtitle ?></p>
                 <?php } ?>
 
-                <p class="tk-prodetail-hero__dltext">Tải ứng dụng vào điện thoại</p>
+                <p class="tk-prodetail-hero__dltext tk-rv tk-rv--up tk-d4">Tải ứng dụng vào điện thoại</p>
 
-                <div class="tk-prodetail-hero__badges">
+                <div class="tk-prodetail-hero__badges tk-rv tk-rv--up tk-d5">
                     <a href="#" target="_blank" rel="noopener">
                         <img src="assets/images/titkul/badge-googleplay.png"
                             onerror="this.style.display='none';"
@@ -60,7 +60,7 @@ $pd_subtitle = (!empty($row_detail['masp'])) ? $row_detail['masp'] : '';
             </div>
 
             <!-- Cột phải: ảnh chính sản phẩm -->
-            <div class="tk-prodetail-hero__right">
+            <div class="tk-prodetail-hero__right tk-rv tk-rv--right tk-d6">
                 <img src="<?= $pd_photo ?>"
                     onerror="this.src='assets/images/noimage.png';"
                     alt="<?= $pd_name ?>">
@@ -68,37 +68,37 @@ $pd_subtitle = (!empty($row_detail['masp'])) ? $row_detail['masp'] : '';
 
         </div>
     </div>
-</div>
+</section>
 
 <!-- SECTION 2 — LOGO + MÔ TẢ -->
-<div class="tk-prodetail-info">
+<section class="tk-sec tk-prodetail-info">
     <div class="fixwidth">
         <!-- Row 1: Tên sản phẩm (styled như logo) -->
-        <h2 class="tk-prodetail-info__name"><?= $pd_name ?></h2>
+        <h2 class="tk-prodetail-info__name tk-rv tk-rv--scale tk-d1"><?= $pd_name ?></h2>
 
         <!-- Row 2: Mô tả sản phẩm -->
         <?php if ($pd_noidung) { ?>
-            <div class="tk-prodetail-info__desc text-align-center fs-2">
+            <div class="tk-prodetail-info__desc text-align-center fs-2 tk-rv tk-rv--up tk-d2">
                 <?= $pd_noidung ?>
             </div>
         <?php } ?>
     </div>
-</div>
+</section>
 
 <!-- Section 3: Heading HƯỚNG DẪN SỬ DỤNG -->
 <?php if (isset($hdsd_article) && count($hdsd_article) > 0) { ?>
-    <div class="tk-prodetail-hdsd-heading">
+    <section class="tk-sec tk-prodetail-hdsd-heading">
         <div class="fixwidth">
-            <h2 class="tk-prodetail-hdsd-heading__title">HƯỚNG DẪN SỬ DỤNG</h2>
+            <h2 class="tk-prodetail-hdsd-heading__title tk-rv tk-rv--up">HƯỚNG DẪN SỬ DỤNG</h2>
         </div>
-    </div>
+    </section>
     <!-- Section 4: Cards HDSD -->
-    <div class="tk-prodetail-hdsd-cards">
+    <section class="tk-sec tk-prodetail-hdsd-cards">
         <div class="fixwidth">
             <div class="tk-prodetail-hdsd-cards__grid">
-                <?php foreach ($hdsd_article as $hdsd) { ?>
+                <?php foreach ($hdsd_article as $idx => $hdsd) { ?>
                     <a href="<?= $hdsd['tenkhongdauvi'] ?>"
-                        class="tk-prodetail-hdsd-card"
+                        class="tk-prodetail-hdsd-card tk-rv tk-rv--up tk-d<?= min(($idx % 6) + 1, 6) ?>"
                         title="<?= $hdsd['ten' . $lang] ?>">
                         <div class="tk-prodetail-hdsd-card__icon">
                             <img src="<?= UPLOAD_NEWS_L . $hdsd['photo'] ?>"
@@ -110,17 +110,17 @@ $pd_subtitle = (!empty($row_detail['masp'])) ? $row_detail['masp'] : '';
                 <?php } ?>
             </div>
         </div>
-    </div>
+    </section>
 <?php } ?>
 
 <!-- Section 5: Gallery ảnh liên quan đến sản phẩm -->
 
 <?php if (isset($hinhanhsp) && count($hinhanhsp) > 0) { ?>
-    <div class="tk-prodetail-gallery">
+    <section class="tk-sec tk-prodetail-gallery">
         <div class="fixwidth">
             <div class="tk-prodetail-gallery__grid">
-                <?php foreach ($hinhanhsp as $gimg) { ?>
-                    <div class="tk-prodetail-gallery__item">
+                <?php foreach ($hinhanhsp as $idx => $gimg) { ?>
+                    <div class="tk-prodetail-gallery__item tk-rv tk-rv--scale tk-d<?= min(($idx % 6) + 1, 6) ?>">
                         <img src="<?= UPLOAD_PRODUCT_L . $gimg['photo'] ?>"
                             onerror="this.style.display='none';"
                             alt="<?= $pd_name ?>">
@@ -128,33 +128,33 @@ $pd_subtitle = (!empty($row_detail['masp'])) ? $row_detail['masp'] : '';
                 <?php } ?>
             </div>
         </div>
-    </div>
+    </section>
 <?php } ?>
 
 <!-- Section 6: Mô tả chức năng (lấy từ motavi của item chức năng đầu tiên) -->
-<?php 
+<?php
     $func_intro = '';
     if (isset($chucnang_items[0]['mota' . $lang]) && $chucnang_items[0]['mota' . $lang] != '') {
         $func_intro = htmlspecialchars_decode($chucnang_items[0]['mota' . $lang]);
     }
     if ($func_intro) { ?>
-<div class="tk-prodetail-func-intro">
+<section class="tk-sec tk-prodetail-func-intro">
     <div class="fixwidth">
-        <div class="tk-prodetail-func-intro__text">
+        <div class="tk-prodetail-func-intro__text tk-rv tk-rv--up">
             <?= $func_intro ?>
         </div>
     </div>
-</div>
+</section>
 <?php } ?>
 
 <!-- Section 7 + 8: Tiêu đề + Grid chức năng (từ photo module chuc-nang) -->
 <?php if (isset($chucnang_items) && count($chucnang_items) > 0) { ?>
-<div class="tk-prodetail-features">
+<section class="tk-sec tk-prodetail-features">
     <div class="fixwidth">
-        <h2 class="tk-prodetail-features__title">CHỨC NĂNG CỦA <span class="tk-brand-name"><?= $pd_name ?></span></h2>
+        <h2 class="tk-prodetail-features__title tk-rv tk-rv--up">CHỨC NĂNG CỦA <span class="tk-brand-name"><?= $pd_name ?></span></h2>
         <div class="tk-prodetail-features__grid">
-            <?php foreach ($chucnang_items as $cn) { ?>
-            <div class="tk-prodetail-feature-item">
+            <?php foreach ($chucnang_items as $idx => $cn) { ?>
+            <div class="tk-prodetail-feature-item tk-rv tk-rv--up tk-d<?= min(($idx % 6) + 1, 6) ?>">
                 <div class="tk-prodetail-feature-item__icon">
                     <img src="<?= UPLOAD_PHOTO_L . $cn['photo'] ?>"
                          onerror="this.style.display='none';"
@@ -165,37 +165,37 @@ $pd_subtitle = (!empty($row_detail['masp'])) ? $row_detail['masp'] : '';
             <?php } ?>
         </div>
     </div>
-</div>
+</section>
 <?php } ?>
 
 <!-- Section 9: Banner tính năng nổi bật (background + product photo + title) -->
-<?php 
+<?php
     $tn_bg = (count($banner_tinhnang) > 0 && isset($banner_tinhnang[0])) ? UPLOAD_PRODUCT_L . $banner_tinhnang[0]['photo'] : '';
 ?>
-<div class="tk-prodetail-tnb-banner" <?php if ($tn_bg) { ?>style="background-image: url('<?= $tn_bg ?>');"<?php } ?>>
+<section class="tk-sec tk-prodetail-tnb-banner" <?php if ($tn_bg) { ?>style="background-image: url('<?= $tn_bg ?>');"<?php } ?>>
     <div class="tk-prodetail-tnb-banner__overlay"></div>
     <div class="fixwidth">
         <div class="tk-prodetail-tnb-banner__inner">
-            <div class="tk-prodetail-tnb-banner__mockup">
+            <div class="tk-prodetail-tnb-banner__mockup tk-rv tk-rv--left">
                 <img src="<?= $pd_photo ?>"
                      onerror="this.src='assets/images/noimage.png';"
                      alt="<?= $pd_name ?>">
             </div>
-            <div class="tk-prodetail-tnb-banner__text">
+            <div class="tk-prodetail-tnb-banner__text tk-rv tk-rv--up">
                 <h2>TÍNH NĂNG NỔI BẬT CỦA</h2>
                 <p class="tk-brand-name"><?= $pd_name ?></p>
             </div>
         </div>
     </div>
-</div>
+</section>
 
 <!-- Section 10: Grid tính năng nổi bật SP (từ photo module tinh-nang-sp) -->
 <?php if (isset($tinhnangsp_items) && count($tinhnangsp_items) > 0) { ?>
-<div class="tk-prodetail-tnb-grid">
+<section class="tk-sec tk-prodetail-tnb-grid">
     <div class="fixwidth">
         <div class="tk-prodetail-tnb-grid__wrap">
-            <?php foreach ($tinhnangsp_items as $tnsp) { ?>
-            <div class="tk-prodetail-tnb-item">
+            <?php foreach ($tinhnangsp_items as $idx => $tnsp) { ?>
+            <div class="tk-prodetail-tnb-item tk-rv tk-rv--up tk-d<?= min(($idx % 6) + 1, 6) ?>">
                 <div class="tk-prodetail-tnb-item__icon">
                     <img src="<?= UPLOAD_PHOTO_L . $tnsp['photo'] ?>"
                          onerror="this.style.display='none';"
@@ -206,33 +206,33 @@ $pd_subtitle = (!empty($row_detail['masp'])) ? $row_detail['masp'] : '';
             <?php } ?>
         </div>
     </div>
-</div>
+</section>
 <?php } ?>
 
 <!-- Section 11: Lợi ích của phần mềm (2 cột: text+icons trái, ảnh SP phải) -->
-<?php if (isset($loiich_items) && count($loiich_items) > 0) { 
+<?php if (isset($loiich_items) && count($loiich_items) > 0) {
     /* Lấy mô tả section từ motavi của item đầu tiên (admin nhập ở ô "Mô tả" của item #1) */
     $loiich_desc = '';
     if (isset($loiich_items[0]['mota' . $lang]) && $loiich_items[0]['mota' . $lang] != '') {
         $loiich_desc = htmlspecialchars_decode($loiich_items[0]['mota' . $lang]);
     }
 ?>
-<div class="tk-prodetail-benefits">
+<section class="tk-sec tk-prodetail-benefits">
     <div class="fixwidth">
         <div class="tk-prodetail-benefits__inner">
 
             <!-- Cột trái: tiêu đề + mô tả + icon grid -->
             <div class="tk-prodetail-benefits__left">
-                <h2 class="tk-prodetail-benefits__heading">LỢI ÍCH CỦA PHẦN MỀM</h2>
-                <p class="tk-prodetail-benefits__brand tk-brand-name"><?= $pd_name ?></p>
+                <h2 class="tk-prodetail-benefits__heading tk-rv tk-rv--left">LỢI ÍCH CỦA PHẦN MỀM</h2>
+                <p class="tk-prodetail-benefits__brand tk-brand-name tk-rv tk-rv--left tk-d1"><?= $pd_name ?></p>
 
                 <?php if ($loiich_desc) { ?>
-                    <div class="tk-prodetail-benefits__desc"><?= $loiich_desc ?></div>
+                    <div class="tk-prodetail-benefits__desc tk-rv tk-rv--left tk-d2"><?= $loiich_desc ?></div>
                 <?php } ?>
 
                 <div class="tk-prodetail-benefits__grid">
-                    <?php foreach ($loiich_items as $li) { ?>
-                    <div class="tk-prodetail-benefit-card">
+                    <?php foreach ($loiich_items as $idx => $li) { ?>
+                    <div class="tk-prodetail-benefit-card tk-rv tk-rv--up tk-d<?= min(($idx % 6) + 1, 6) ?>">
                         <div class="tk-prodetail-benefit-card__icon">
                             <img src="<?= UPLOAD_PHOTO_L . $li['photo'] ?>"
                                  onerror="this.style.display='none';"
@@ -245,7 +245,7 @@ $pd_subtitle = (!empty($row_detail['masp'])) ? $row_detail['masp'] : '';
             </div>
 
             <!-- Cột phải: ảnh sản phẩm -->
-            <div class="tk-prodetail-benefits__right">
+            <div class="tk-prodetail-benefits__right tk-rv tk-rv--right">
                 <img src="<?= $pd_photo ?>"
                      onerror="this.src='assets/images/noimage.png';"
                      alt="<?= $pd_name ?>">
@@ -253,25 +253,25 @@ $pd_subtitle = (!empty($row_detail['masp'])) ? $row_detail['masp'] : '';
 
         </div>
     </div>
-</div>
+</section>
 <?php } ?>
 
 <!-- Section 12 + 13: Tên SP + Subtitle per-product -->
-<div class="tk-prodetail-video-header">
+<section class="tk-sec tk-prodetail-video-header">
     <div class="fixwidth">
-        <h2 class="tk-prodetail-video-header__name tk-brand-name"><?= $pd_name ?></h2>
+        <h2 class="tk-prodetail-video-header__name tk-brand-name tk-rv tk-rv--up"><?= $pd_name ?></h2>
         <?php if ($pd_subtitle) { ?>
-            <p class="tk-prodetail-video-header__sub"><?= $pd_subtitle ?></p>
+            <p class="tk-prodetail-video-header__sub tk-rv tk-rv--up tk-d1"><?= $pd_subtitle ?></p>
         <?php } ?>
     </div>
-</div>
+</section>
 
 <!-- Section 14: Video sản phẩm -->
 <?php if (isset($video_sp) && count($video_sp) > 0) { ?>
-<div class="tk-prodetail-videos">
+<section class="tk-sec tk-prodetail-videos">
     <div class="fixwidth">
         <div class="tk-prodetail-videos__grid">
-            <?php foreach ($video_sp as $vid) {
+            <?php foreach ($video_sp as $idx => $vid) {
                 /* Trích YouTube ID từ link_video */
                 $yt_id = '';
                 $yt_link = isset($vid['link_video']) ? $vid['link_video'] : '';
@@ -280,7 +280,7 @@ $pd_subtitle = (!empty($row_detail['masp'])) ? $row_detail['masp'] : '';
                 }
                 if (!$yt_id) continue;
             ?>
-            <div class="tk-prodetail-video-card">
+            <div class="tk-prodetail-video-card tk-rv tk-rv--up tk-d<?= min(($idx % 6) + 1, 6) ?>">
                 <div class="tk-prodetail-video-card__thumb">
                     <a href="<?= $yt_link ?>" target="_blank" rel="noopener">
                         <img src="https://img.youtube.com/vi/<?= $yt_id ?>/hqdefault.jpg"
@@ -295,18 +295,18 @@ $pd_subtitle = (!empty($row_detail['masp'])) ? $row_detail['masp'] : '';
             <?php } ?>
         </div>
     </div>
-</div>
+</section>
 <?php } ?>
 
 <!--  ỨNG DỤNG KHÁC (related products)  -->
-<div class="tk-prodetail-related">
+<section class="tk-sec tk-prodetail-related">
     <div class="fixwidth">
-        <div class="title">Ứng dụng khác</div>
+        <div class="title tk-rv tk-rv--up">Ứng dụng khác</div>
         <div class="content-main w-clear">
             <?php if (isset($product) && count($product) > 0) { ?>
                 <div class="loadkhung_product1 mainkhung_product">
                     <?php foreach ($product as $k => $v) { ?>
-                        <div class="boxproduct_item">
+                        <div class="boxproduct_item tk-rv tk-rv--up tk-d<?= min(($k % 6) + 1, 6) ?>">
                             <a class="boxproduct_img" href="<?= $v['tenkhongdauvi'] ?>"><span><img
                                         onerror="this.src='<?= THUMBS ?>/380x270x2/assets/images/noimage.png';"
                                         src="<?= THUMBS ?>/380x270x2/<?= UPLOAD_PRODUCT_L . $v['photo'] ?>"
@@ -323,4 +323,20 @@ $pd_subtitle = (!empty($row_detail['masp'])) ? $row_detail['masp'] : '';
             <?php } ?>
         </div>
     </div>
-</div>
+</section>
+
+<!-- Scroll Reveal: Entrance animations cho tất cả sections -->
+<script>
+    window.addEventListener('DOMContentLoaded', function() {
+        var allSections = document.querySelectorAll('section.tk-sec');
+        var sectionObserver = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-revealed');
+                    sectionObserver.unobserve(entry.target);
+                }
+            });
+        }, { root: null, rootMargin: '-40px 0px -40px 0px', threshold: 0.1 });
+        allSections.forEach(function(section) { sectionObserver.observe(section); });
+    });
+</script>

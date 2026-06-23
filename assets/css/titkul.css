@@ -307,91 +307,223 @@
     text-transform: uppercase;
 }
 
-/*  PRODUCT LIST — full-width rows, 2 cột, xen kẽ màu nền  */
+/* ── PRODUCT HERO ── */
+.tk-product-hero {
+    background: linear-gradient(160deg, #e8eff8 0%, #f8f9ff 60%, #eef1f8 100%);
+    padding: 72px 0 56px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+.tk-product-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle at 20% 50%, rgba(0,31,63,.04) 0%, transparent 60%),
+                      radial-gradient(circle at 80% 20%, rgba(187,0,33,.04) 0%, transparent 50%);
+    pointer-events: none;
+}
+.tk-product-hero__eyebrow {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .14em;
+    color: var(--tk-red);
+    background: rgba(187,0,33,.08);
+    padding: 5px 16px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+}
+.tk-product-hero__title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: clamp(32px, 4vw, 52px);
+    font-weight: 800;
+    color: var(--tk-navy);
+    margin: 0 0 20px;
+    line-height: 1.15;
+}
+.tk-product-hero__accent {
+    color: var(--tk-red);
+}
+.tk-product-hero__desc {
+    font-size: 17px;
+    color: #4a5568;
+    max-width: 660px;
+    margin: 0 auto 28px;
+    line-height: 1.75;
+}
+.tk-product-hero__badges {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+.tk-product-hero__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--tk-navy);
+    background: rgba(255,255,255,.85);
+    border: 1px solid rgba(0,31,63,.12);
+    padding: 7px 16px;
+    border-radius: 24px;
+    backdrop-filter: blur(4px);
+}
+.tk-product-hero__badge i {
+    color: var(--tk-red);
+    font-size: 12px;
+}
+
+/* ── PRODUCT LIST — full-width rows, 2 cột, xen kẽ màu nền ── */
 .tk-product-list {}
+
+/* === ENTRANCE — Product listing rows === */
+.tk-product-list .tk-product-row {
+    opacity: 0;
+    transition: opacity .6s ease;
+}
+.tk-product-list .tk-product-row.is-revealed {
+    opacity: 1;
+}
 
 .tk-product-row {
     background: #e8eff8;
-    padding: 60px 0;
+    padding: 72px 0;
 }
 
 .tk-product-row--alt {
-    background: #eaf6d8;
+    background: #fff;
 }
 
 .tk-product-row__inner {
     display: flex;
     align-items: center;
-    gap: 40px;
+    gap: 56px;
 }
 
 .tk-product-row__text {
     flex: 1;
 }
 
+.tk-product-row__num {
+    display: block;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 72px;
+    font-weight: 900;
+    color: var(--tk-navy);
+    opacity: .07;
+    line-height: 1;
+    margin-bottom: -16px;
+    pointer-events: none;
+    user-select: none;
+}
+
 .tk-product-row__img {
     flex: 1;
     text-align: center;
+    overflow: hidden;
 }
 
 .tk-product-row__img img {
     max-width: 100%;
     max-height: 420px;
     object-fit: contain;
+    transition: transform .55s cubic-bezier(.215,.61,.355,1);
+}
+
+.tk-product-row__img:hover img {
+    transform: scale(1.04) translateY(-4px);
 }
 
 .tk-product-row__name {
-    font-size: 42px;
-    font-weight: 700;
-    margin: 0 0 12px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: clamp(28px, 3vw, 42px);
+    font-weight: 800;
+    margin: 0 0 16px;
+    line-height: 1.2;
 }
 
 .tk-product-row__name a {
-    color: var(--tk-main);
+    color: var(--tk-navy);
     text-decoration: none;
+    transition: color .25s;
+}
+
+.tk-product-row__name a:hover {
+    color: var(--tk-red);
 }
 
 .tk-product-row__desc {
     font-size: 16px;
-    color: #444;
-    margin: 0 0 24px;
-    line-height: 1.6;
+    color: #4a5568;
+    margin: 0 0 28px;
+    line-height: 1.75;
+    max-width: 500px;
 }
 
 .tk-product-row__btn {
-    display: inline-block;
-    padding: 10px 28px;
-    border: 2px solid var(--tk-main);
-    color: var(--tk-main);
-    border-radius: 24px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 13px 32px;
+    background: var(--tk-navy);
+    color: #fff;
+    border-radius: 8px;
     font-size: 14px;
     font-weight: 600;
     text-decoration: none;
-    transition: all .25s;
+    transition: background .25s, transform .25s;
+    border: none;
+}
+
+.tk-product-row__btn i {
+    font-size: 13px;
+    transition: transform .25s;
 }
 
 .tk-product-row__btn:hover {
-    background: var(--tk-main);
+    background: var(--tk-red);
     color: #fff;
+    transform: translateX(4px);
+}
+
+.tk-product-row__btn:hover i {
+    transform: translateX(4px);
+}
+
+@media (max-width: 1024px) {
+    .tk-product-row__inner {
+        gap: 40px;
+    }
 }
 
 @media (max-width: 767px) {
-    .tk-product-row {
-        padding: 36px 0;
+    .tk-product-hero {
+        padding: 48px 0 36px;
     }
-
+    .tk-product-row {
+        padding: 48px 0;
+    }
     .tk-product-row__inner {
         flex-direction: column;
-        gap: 24px;
+        gap: 28px;
         text-align: center;
     }
-
-    .tk-product-row__name {
-        font-size: 28px;
+    .tk-product-row__num {
+        font-size: 48px;
+        margin-bottom: -10px;
     }
-
+    .tk-product-row__desc {
+        max-width: 100%;
+    }
     .tk-product-row__img img {
-        max-height: 280px;
+        max-height: 260px;
+    }
+    .tk-product-hero__badges {
+        gap: 8px;
     }
 }
 
@@ -423,6 +555,16 @@
     max-width: 100%;
     max-height: 500px;
     object-fit: contain;
+    animation: tkFloating 3s ease-in-out infinite;
+}
+
+@keyframes tkFloating {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-8px);
+    }
 }
 
 .tk-prodetail-hero__tagline {
@@ -648,6 +790,11 @@
 .tk-prodetail-feature-item {
     width: 160px;
     text-align: center;
+    transition: transform .3s;
+}
+
+.tk-prodetail-feature-item:hover {
+    transform: translateY(-8px);
 }
 
 .tk-prodetail-feature-item__icon {
@@ -663,6 +810,11 @@
     max-width: 100%;
     max-height: 100%;
     object-fit: contain;
+    transition: filter .4s;
+}
+
+.tk-prodetail-feature-item:hover .tk-prodetail-feature-item__icon img {
+    filter: drop-shadow(0 0 8px rgba(0, 31, 63, 0.3));
 }
 
 .tk-prodetail-feature-item__name {
@@ -671,6 +823,11 @@
     color: var(--tk-dark);
     line-height: 1.4;
     margin: 0;
+    transition: color .3s;
+}
+
+.tk-prodetail-feature-item:hover .tk-prodetail-feature-item__name {
+    color: var(--tk-main);
 }
 
 @media (max-width: 767px) {
@@ -769,6 +926,7 @@
     width: 100%;
     height: auto;
     display: block;
+    animation: tkFloating 4s ease-in-out infinite;
 }
 
 .tk-prodetail-tnb-banner__text {
@@ -813,6 +971,16 @@
     width: 200px;
     width: 100%;
     text-align: center;
+    padding: 16px;
+    border: 2px solid transparent;
+    border-radius: 12px;
+    transition: transform .3s, border-color .3s, box-shadow .3s;
+}
+
+.tk-prodetail-tnb-item:hover {
+    transform: translateY(-6px);
+    border-color: var(--tk-main);
+    box-shadow: 0 0 16px rgba(0, 31, 63, 0.15);
 }
 
 .tk-prodetail-tnb-item__icon {
@@ -948,6 +1116,11 @@
     flex: 1 1 140px;
     max-width: 200px;
     text-align: center;
+    transition: transform .3s;
+}
+
+.tk-prodetail-benefit-card:hover {
+    transform: translateY(-6px);
 }
 
 .tk-prodetail-benefit-card__icon {
@@ -957,6 +1130,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: filter .3s;
 }
 
 .tk-prodetail-benefit-card__icon img {
@@ -965,12 +1139,21 @@
     object-fit: contain;
 }
 
+.tk-prodetail-benefit-card:hover .tk-prodetail-benefit-card__icon {
+    filter: drop-shadow(0 0 8px rgba(187, 0, 33, 0.2));
+}
+
 .tk-prodetail-benefit-card__name {
     font-size: 14px;
     font-weight: 600;
     color: var(--tk-dark);
     line-height: 1.4;
     margin: 0;
+    transition: color .3s;
+}
+
+.tk-prodetail-benefit-card:hover .tk-prodetail-benefit-card__name {
+    color: var(--tk-main);
 }
 
 .tk-prodetail-benefits__right {
@@ -982,6 +1165,7 @@
     width: 100%;
     height: auto;
     display: block;
+    animation: tkFloating 3.5s ease-in-out infinite;
 }
 
 @media (max-width: 767px) {
@@ -4860,13 +5044,25 @@ section.tk-sec.tk-intro {
 @media (prefers-reduced-motion: reduce) {
 
     section.tk-sec,
-    .tk-rv {
+    .tk-rv,
+    .tk-feature-list .tk-feat,
+    .tk-casestudy .tk-cs-item,
+    .tk-product-list .tk-product-row {
         transition: none !important;
     }
 
-    .tk-rv {
+    .tk-rv,
+    .tk-feature-list .tk-feat,
+    .tk-casestudy .tk-cs-item,
+    .tk-product-list .tk-product-row {
         opacity: 1 !important;
         transform: none !important;
+    }
+
+    .tk-prodetail-hero__right img,
+    .tk-prodetail-tnb-banner__mockup img,
+    .tk-prodetail-benefits__right img {
+        animation: none !important;
     }
 }
 
@@ -5062,7 +5258,24 @@ section.tk-sec.tk-intro {
 }
 
 
-/* 
+/* === ENTRANCE — Zigzag rows (Effect Map, tinh-nang listing) === */
+.tk-feature-list .tk-feat {
+    opacity: 0;
+    transform: translateX(-80px);
+    transition: opacity .7s cubic-bezier(.215,.61,.355,1),
+                transform .7s cubic-bezier(.215,.61,.355,1);
+}
+
+.tk-feature-list .tk-feat--flip {
+    transform: translateX(80px);
+}
+
+.tk-feature-list .tk-feat.is-revealed {
+    opacity: 1;
+    transform: none;
+}
+
+/*
    HƯỚNG DẪN SỬ DỤNG — Glass Card Grid  (P4 — news type: huong-dan)
    Premium Scholastic Modernism — Montserrat headings, Inter body
     */
@@ -5605,6 +5818,14 @@ section.tk-sec.tk-intro {
     border-radius: 16px;
     box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
     display: block;
+    /* Ambient: phone mockup trôi nhẹ (Effect Map — huong-dan detail) */
+    animation: tkFloating 4s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .tk-hd-phone__img {
+        animation: none !important;
+    }
 }
 
 /* Guide list */
@@ -6217,6 +6438,17 @@ section.tk-sec.tk-intro {
 
 .tk-nd-hero__glass:hover img {
     transform: scale(1.03);
+}
+
+/* Ambient: glass panel trôi nhẹ (Effect Map — tinh-nang detail hero) */
+.tk-nd-hero__glass {
+    animation: tkFloating 4s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .tk-nd-hero__glass {
+        animation: none !important;
+    }
 }
 
 /* --- Hero responsive --- */
@@ -7335,8 +7567,24 @@ section.tk-sec.tk-intro {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    opacity: .22;
+    opacity: 0;
+    transform: scale(1.06);
+    transition: opacity 1s ease, transform 1.4s ease;
     pointer-events: none;
+}
+
+/* Entrance: fade-in + slight scale thu nhỏ về vị trí thật */
+.tknews-detail-hero.is-revealed .tknews-detail-hero__bg {
+    opacity: .22;
+    transform: scale(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .tknews-detail-hero__bg {
+        opacity: .22 !important;
+        transform: none !important;
+        transition: none !important;
+    }
 }
 
 .tknews-detail-hero__overlay {
@@ -8675,6 +8923,18 @@ section.tk-sec.tk-intro {
     flex-direction: row-reverse;
 }
 
+/* === ENTRANCE — Case Study listing rows === */
+.tk-casestudy .tk-cs-item {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity .7s cubic-bezier(.215,.61,.355,1),
+                transform .7s cubic-bezier(.215,.61,.355,1);
+}
+.tk-casestudy .tk-cs-item.is-revealed {
+    opacity: 1;
+    transform: none;
+}
+
 /* Image */
 .tk-cs-img-wrap {
     flex: 0 0 420px;
@@ -9060,6 +9320,10 @@ section.tk-sec.tk-intro {
     font-family: Georgia, 'Times New Roman', serif;
     pointer-events: none;
     z-index: 0;
+    animation: tkFloating 4s ease-in-out infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+    .tk-csd-quote__mark { animation: none !important; }
 }
 
 .tk-csd-quote__body {
@@ -9514,8 +9778,18 @@ section.tk-sec.tk-intro {
 /* ---------- SECTION 6: CTA ---------- */
 .tk-csd-cta {
     padding: 80px 0;
-    background: #000613;
+    background: linear-gradient(135deg, #000613 0%, #001f3f 50%, #000613 100%);
+    background-size: 300% 300%;
+    animation: tkCsdCtaGradient 8s ease infinite;
     text-align: center;
+}
+@keyframes tkCsdCtaGradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .tk-csd-cta { animation: none !important; background: #000613; }
 }
 
 .tk-csd-cta__inner {
@@ -9954,6 +10228,86 @@ section.tk-sec.tk-intro {
 
     .tk-csd-related__img {
         height: 160px;
+    }
+}
+
+/* ============================================================
+   CASE STUDY LISTING PAGE HERO  —  prefix: tk-cs-hero
+   ============================================================ */
+.tk-cs-hero {
+    padding: 64px 0 48px;
+    background: linear-gradient(135deg, #001f3f 0%, #003366 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.tk-cs-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(255, 255, 255, .04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, .04) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+}
+
+.tk-cs-hero__banner {
+    margin-bottom: 32px;
+    border-radius: 12px;
+    overflow: hidden;
+    max-height: 280px;
+}
+
+.tk-cs-hero__banner img {
+    width: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.tk-cs-hero__content {
+    position: relative;
+    text-align: center;
+}
+
+.tk-cs-hero .tk-cs-eyebrow {
+    color: #ff6b7a;
+}
+
+.tk-cs-hero__title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 36px;
+    font-weight: 700;
+    color: #fff;
+    margin: 8px 0 16px;
+    line-height: 1.2;
+}
+
+.tk-cs-hero__desc {
+    font-size: 16px;
+    color: rgba(255, 255, 255, .75);
+    max-width: 640px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+    .tk-cs-hero {
+        padding: 48px 0 36px;
+    }
+
+    .tk-cs-hero__title {
+        font-size: 26px;
+    }
+
+    .tk-cs-hero__desc {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .tk-cs-hero__title {
+        font-size: 22px;
     }
 }
 

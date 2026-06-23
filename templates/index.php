@@ -24,7 +24,8 @@
             include TEMPLATE . LAYOUT . "menu.php";
             include TEMPLATE . LAYOUT . "slide.php";
             $__hideBread = ($source == 'index' || $source == 'static' || $source == 'contact');
-            if (!$__hideBread && $source == 'news' && in_array(@$type, ['tin-tuc', 'huong-dan']) && empty($_GET['id'])) $__hideBread = true;
+            if (!$__hideBread && $source == 'product' && empty($_GET['id'])) $__hideBread = true;
+            if (!$__hideBread && $source == 'news' && in_array(@$type, ['tin-tuc', 'huong-dan', 'case-study']) && empty($_GET['id'])) $__hideBread = true;
             if (!$__hideBread && $source == 'news' && !empty($_GET['id'])) $__hideBread = true;
             if (!$__hideBread) include TEMPLATE . LAYOUT . "breadcrumb.php";
             ?>

@@ -6,7 +6,7 @@
  */
 ?>
 
-<section class="tk-sec tk-register2" id="dangkytuvan">
+<section class="tk-register2" id="dangkytuvan">
     <!-- Abstract background blobs -->
     <div class="tk-reg2-bg" aria-hidden="true">
         <span class="tk-reg2-blob tk-reg2-blob--a"></span>
