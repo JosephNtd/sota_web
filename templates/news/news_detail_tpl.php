@@ -4,27 +4,27 @@
     <!--      CHI TIẾT TÍNH NĂNG — Premium Scholastic Modernism      -->
 
     <!-- SECTION 1: HERO — badge + title + motả + CTA | glass ảnh -->
-    <section class="tk-nd-hero">
+    <section class="tk-nd-hero tk-sec">
         <div class="tk-nd-hero__blob tk-nd-hero__blob--1"></div>
         <div class="tk-nd-hero__blob tk-nd-hero__blob--2"></div>
         <div class="fixwidth">
             <div class="tk-nd-hero__grid">
                 <div class="tk-nd-hero__text">
-                    <span class="tk-nd-hero__badge">
+                    <span class="tk-nd-hero__badge tk-rv tk-rv--up tk-d1">
                         <i class="<?= !empty($row_detail['icon']) ? $row_detail['icon'] : 'fas fa-star' ?>"></i>
                         <?= $title_crumb ?>
                     </span>
-                    <h1 class="tk-nd-hero__title"><?= $row_detail['ten' . $lang] ?></h1>
+                    <h1 class="tk-nd-hero__title tk-rv tk-rv--up tk-d2"><?= $row_detail['ten' . $lang] ?></h1>
                     <?php if (!empty($row_detail['mota' . $lang])) { ?>
-                        <p class="tk-nd-hero__desc"><?= $row_detail['mota' . $lang] ?></p>
+                        <p class="tk-nd-hero__desc tk-rv tk-rv--up tk-d3"><?= $row_detail['mota' . $lang] ?></p>
                     <?php } ?>
-                    <div class="tk-nd-hero__actions">
+                    <div class="tk-nd-hero__actions tk-rv tk-rv--up tk-d4">
                         <a class="tk-nd-hero__btn tk-nd-hero__btn--primary" href="#dangkytuvan">
                             Liên hệ tư vấn <i class="fas fa-arrow-right"></i>
                         </a>
                     </div>
                 </div>
-                <div class="tk-nd-hero__media">
+                <div class="tk-nd-hero__media tk-rv tk-rv--right tk-d3">
                     <div class="tk-nd-hero__glass">
                         <img src="<?= UPLOAD_NEWS_L . $row_detail['photo'] ?>"
                             onerror="this.src='<?= THUMBS ?>/800x600x1/assets/images/noimage.png';"
@@ -52,21 +52,21 @@
 
     <!-- SECTION 2: NỘI DUNG CHÍNH — CKEditor(phần 1) + Features | Banner 1 -->
     <?php if ($has_sec2 || $banner_img1) { ?>
-        <section class="tk-nd-main">
+        <section class="tk-nd-main tk-sec">
             <div class="tk-nd-main__blob"></div>
             <div class="fixwidth">
                 <div class="tk-nd-main__grid <?= !$banner_img1 ? 'tk-nd-main__grid--full' : '' ?>">
                     <div class="tk-nd-main__left">
                         <?php if ($ck_section2 !== '') { ?>
-                            <div class="tk-nd-article" id="toc-content">
+                            <div class="tk-nd-article tk-rv tk-rv--up tk-d1" id="toc-content">
                                 <?= $ck_section2 ?>
                             </div>
                         <?php } ?>
 
                         <?php if ($has_features) { ?>
                             <div class="tk-nd-features">
-                                <?php foreach ($hinhanhtt as $feat) { ?>
-                                    <div class="tk-nd-feat-item">
+                                <?php foreach ($hinhanhtt as $fidx => $feat) { ?>
+                                    <div class="tk-nd-feat-item tk-rv tk-rv--up tk-d<?= min(($fidx % 6) + 1, 6) ?>">
                                         <div class="tk-nd-feat-item__icon">
                                             <?php if (!empty($feat['photo'])) { ?>
                                                 <img src="<?= THUMBS ?>/64x64x1/<?= UPLOAD_NEWS_L . $feat['photo'] ?>"
@@ -88,7 +88,7 @@
                     </div>
 
                     <?php if ($banner_img1) { ?>
-                        <div class="tk-nd-main__right">
+                        <div class="tk-nd-main__right tk-rv tk-rv--right tk-d2">
                             <div class="tk-nd-main__glass">
                                 <div class="tk-nd-main__glass-glow"></div>
                                 <img src="<?= THUMBS ?>/760x540x1/<?= UPLOAD_NEWS_L . $banner_img1['photo'] ?>"
@@ -103,12 +103,12 @@
 
     <!-- SECTION 3: CÁC BƯỚC — Banner 2 bên TRÁI | CKEditor(phần 2) + steps bên PHẢI -->
     <?php if ($has_sec3) { ?>
-        <section class="tk-nd-steps">
+        <section class="tk-nd-steps tk-sec">
             <div class="tk-nd-steps__blob"></div>
             <div class="fixwidth">
                 <div class="tk-nd-steps__grid <?= !$banner_img2 ? 'tk-nd-steps__grid--full' : '' ?>">
                     <?php if ($banner_img2) { ?>
-                        <div class="tk-nd-steps__media">
+                        <div class="tk-nd-steps__media tk-rv tk-rv--left tk-d1">
                             <div class="tk-nd-main__glass">
                                 <div class="tk-nd-main__glass-glow"></div>
                                 <img src="<?= THUMBS ?>/760x900x0/<?= UPLOAD_NEWS_L . $banner_img2['photo'] ?>"
@@ -120,7 +120,7 @@
                         </div>
                     <?php } ?>
 
-                    <div class="tk-nd-steps__content">
+                    <div class="tk-nd-steps__content tk-rv tk-rv--up tk-d2">
                         <div class="tk-nd-article">
                             <?= $ck_section3 ?>
                         </div>
@@ -132,11 +132,11 @@
 
     <!-- SECTION 3: VIDEO (nếu có) -->
     <?php if (isset($video_tinhnang) && count($video_tinhnang) > 0) { ?>
-        <section class="tk-nd-video">
+        <section class="tk-nd-video tk-sec">
             <div class="fixwidth">
-                <h2 class="tk-nd-video__heading">Video giới thiệu</h2>
+                <h2 class="tk-nd-video__heading tk-rv tk-rv--up tk-d1">Video giới thiệu</h2>
                 <div class="tk-nd-video__grid">
-                    <?php foreach ($video_tinhnang as $vid) {
+                    <?php foreach ($video_tinhnang as $vidx => $vid) {
                         $has_url  = !empty($vid['link_video']);
                         $has_file = !empty($vid['taptin']);
                         if (!$has_url && !$has_file) continue;
@@ -150,7 +150,7 @@
                         // Poster image (thumbnail)
                         $poster = !empty($vid['photo']) ? THUMBS . '/640x360x1/' . UPLOAD_NEWS_L . $vid['photo'] : '';
                     ?>
-                        <div class="tk-nd-video__item">
+                        <div class="tk-nd-video__item tk-rv tk-rv--up tk-d<?= min(($vidx % 6) + 1, 6) ?>">
                             <div class="tk-nd-video__frame">
                                 <?php if ($ytid) { ?>
                                     <!-- YouTube embed -->
@@ -201,12 +201,12 @@
 
     <!-- BÀI VIẾT LIÊN QUAN -->
     <?php if (isset($news) && count($news) > 0) { ?>
-        <section class="tk-nd-related">
+        <section class="tk-nd-related tk-sec">
             <div class="fixwidth">
-                <h2 class="tk-nd-related__heading">Tính năng khác</h2>
+                <h2 class="tk-nd-related__heading tk-rv tk-rv--up tk-d1">Tính năng khác</h2>
                 <div class="tk-news-grid">
-                    <?php foreach ($news as $v) { ?>
-                        <article class="tk-news-card">
+                    <?php foreach ($news as $ridx => $v) { ?>
+                        <article class="tk-news-card tk-rv tk-rv--up tk-d<?= min(($ridx % 6) + 1, 6) ?>">
                             <a class="tk-news-card__img" href="<?= $v[$sluglang] ?>">
                                 <img src="<?= UPLOAD_NEWS_L . $v['photo'] ?>"
                                     onerror="this.src='<?= THUMBS ?>/480x320x1/assets/images/noimage.png';"
@@ -233,17 +233,37 @@
     <?php include TEMPLATE . LAYOUT . "form_dangky.php"; ?>
     <?php include TEMPLATE . LAYOUT . "hotro_lienhe.php"; ?>
     <script>
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', function() {
-                document.querySelectorAll('.tk-sec').forEach(function(el) {
-                    el.classList.add('is-revealed');
+        (function() {
+            function initReveal() {
+                var sections = document.querySelectorAll('section.tk-sec');
+                if (!('IntersectionObserver' in window)) {
+                    sections.forEach(function(el) {
+                        el.classList.add('is-revealed');
+                    });
+                    return;
+                }
+                var observer = new IntersectionObserver(function(entries) {
+                    entries.forEach(function(entry) {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('is-revealed');
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, {
+                    root: null,
+                    rootMargin: '-40px 0px -40px 0px',
+                    threshold: 0.1
                 });
-            });
-        } else {
-            document.querySelectorAll('.tk-sec').forEach(function(el) {
-                el.classList.add('is-revealed');
-            });
-        }
+                sections.forEach(function(el) {
+                    observer.observe(el);
+                });
+            }
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', initReveal);
+            } else {
+                initReveal();
+            }
+        })();
     </script>
 
 
@@ -269,16 +289,16 @@
     ?>
 
     <!-- SECTION 1: HERO — Dark Navy -->
-    <section class="tk-hd-hero">
+    <section class="tk-hd-hero tk-sec">
         <div class="tk-hd-hero__radial"></div>
         <div class="fixwidth">
             <div class="tk-hd-hero__grid">
                 <div class="tk-hd-hero__text">
-                    <h1 class="tk-hd-hero__title">HƯỚNG DẪN SỬ DỤNG</h1>
-                    <p class="tk-hd-hero__sub">DÀNH CHO <?= mb_strtoupper($hd_title, 'UTF-8') ?></p>
+                    <h1 class="tk-hd-hero__title tk-rv tk-rv--up tk-d1">HƯỚNG DẪN SỬ DỤNG</h1>
+                    <p class="tk-hd-hero__sub tk-rv tk-rv--up tk-d2">DÀNH CHO <?= mb_strtoupper($hd_title, 'UTF-8') ?></p>
                 </div>
                 <?php if (!empty($hd_photo)) { ?>
-                    <div class="tk-hd-hero__media">
+                    <div class="tk-hd-hero__media tk-rv tk-rv--right tk-d2">
                         <img src="<?= UPLOAD_NEWS_L . $hd_photo ?>"
                             onerror="this.parentElement.style.display='none'"
                             alt="<?= $hd_title ?>" loading="lazy" />
@@ -290,13 +310,13 @@
 
     <!-- SECTION 2: PRODUCT SELECTION -->
     <?php if ($prod1 || $prod2) { ?>
-        <section class="tk-hd-select">
+        <section class="tk-hd-select tk-sec">
             <div class="fixwidth">
-                <h2 class="tk-hd-select__heading">Quý Thầy/Cô hãy chọn ứng dụng cần xem hướng dẫn sử dụng</h2>
+                <h2 class="tk-hd-select__heading tk-rv tk-rv--up tk-d1">Quý Thầy/Cô hãy chọn ứng dụng cần xem hướng dẫn sử dụng</h2>
                 <div class="tk-hd-select__grid">
                     <?php foreach ($splistmenu as $si => $sp) {
                         if ($si >= 2) break; ?>
-                        <a class="tk-hd-select__card" href="#product-<?= $sp['id'] ?>">
+                        <a class="tk-hd-select__card tk-rv tk-rv--up tk-d<?= $si + 2 ?>" href="#product-<?= $sp['id'] ?>">
                             <span class="tk-hd-select__name">
                                 <?php
                                 $pname = $sp['ten' . $lang];
@@ -320,9 +340,9 @@
 
     <!-- SECTION 3: FIRST PRODUCT (HDSchool) — Platform Guide Cards -->
     <?php if ($prod1) { ?>
-        <section class="tk-hd-product tk-hd-product--light" id="product-<?= $prod1['id'] ?>">
+        <section class="tk-hd-product tk-hd-product--light tk-sec" id="product-<?= $prod1['id'] ?>">
             <div class="fixwidth">
-                <div class="tk-hd-product__header">
+                <div class="tk-hd-product__header tk-rv tk-rv--up tk-d1">
                     <h3 class="tk-hd-product__name">
                         <?php
                         $pn1 = $prod1['ten' . $lang];
@@ -344,7 +364,7 @@
                             $gal_href = $has_file_gal ? ($config_base . 'upload/file/' . $gal['taptin']) : ($has_link ? $gal['link_video'] : '');
                             $is_coming = empty($gal_href);
                         ?>
-                            <div class="tk-hd-platform-card <?= $is_coming ? 'tk-hd-platform-card--disabled' : '' ?>">
+                            <div class="tk-hd-platform-card tk-rv tk-rv--left tk-d<?= min(($gi % 6) + 1, 6) ?> <?= $is_coming ? 'tk-hd-platform-card--disabled' : '' ?>">
                                 <div class="tk-hd-platform-card__icon">
                                     <?php if (!empty($gal['photo'])) { ?>
                                         <img src="<?= UPLOAD_NEWS_L . $gal['photo'] ?>"
@@ -373,9 +393,9 @@
 
     <!-- SECTION 4: SECOND PRODUCT (H2School) — Phone Mockup + Guide List -->
     <?php if ($prod2 && ($has_banner || $has_videos)) { ?>
-        <section class="tk-hd-product tk-hd-product--dim" id="product-<?= $prod2['id'] ?>">
+        <section class="tk-hd-product tk-hd-product--dim tk-sec" id="product-<?= $prod2['id'] ?>">
             <div class="fixwidth">
-                <div class="tk-hd-product__header">
+                <div class="tk-hd-product__header tk-rv tk-rv--up tk-d1">
                     <h3 class="tk-hd-product__name">
                         <?php
                         $pn2 = $prod2['ten' . $lang];
@@ -391,7 +411,7 @@
 
                 <div class="tk-hd-h2-grid">
                     <?php if ($has_banner) { ?>
-                        <div class="tk-hd-phone">
+                        <div class="tk-hd-phone tk-rv tk-rv--right tk-d2">
                             <div class="tk-hd-phone__img">
                                 <img src="<?= UPLOAD_NEWS_L . $banner_tinhnang[0]['photo'] ?>"
                                     alt="<?= $banner_tinhnang[0]['ten' . $lang] ?? '' ?>" loading="lazy" />
@@ -402,7 +422,7 @@
                     <?php if ($has_videos) { ?>
                         <div class="tk-hd-guides">
                             <div class="tk-hd-guides__list">
-                                <?php foreach ($video_tinhnang as $vid) {
+                                <?php foreach ($video_tinhnang as $gvi => $vid) {
                                     /* Ưu tiên: taptin (file upload) → link_video (URL) → # */
                                     $has_file = !empty($vid['taptin']);
                                     $has_url  = !empty($vid['link_video']);
@@ -420,12 +440,12 @@
                                     $icon_class = $is_pdf ? 'fas fa-file-pdf' : ($is_doc ? 'fas fa-file-word' : 'fas fa-play');
                                 ?>
                                     <?php if ($has_file || $has_url) { ?>
-                                        <a class="tk-hd-guides__item" href="<?= $vid_link ?>" <?= ($has_file) ? ' target="_blank"' : '' ?>>
+                                        <a class="tk-hd-guides__item tk-rv tk-rv--up tk-d<?= min(($gvi % 6) + 1, 6) ?>" href="<?= $vid_link ?>" <?= ($has_file) ? ' target="_blank"' : '' ?>>
                                             <i class="<?= $icon_class ?> tk-hd-guides__play"></i>
                                             <span><?= $vid['ten' . $lang] ?></span>
                                         </a>
                                     <?php } else { ?>
-                                        <div class="tk-hd-guides__item tk-hd-guides__item--disabled" onclick="this.querySelector('.tk-hd-guides__toast').classList.add('show');setTimeout(()=>this.querySelector('.tk-hd-guides__toast').classList.remove('show'),2000)">
+                                        <div class="tk-hd-guides__item tk-hd-guides__item--disabled tk-rv tk-rv--up tk-d<?= min(($gvi % 6) + 1, 6) ?>" onclick="this.querySelector('.tk-hd-guides__toast').classList.add('show');setTimeout(()=>this.querySelector('.tk-hd-guides__toast').classList.remove('show'),2000)">
                                             <i class="fas fa-clock tk-hd-guides__play"></i>
                                             <span><?= $vid['ten' . $lang] ?></span>
                                             <span class="tk-hd-guides__toast">Đang cập nhật</span>
@@ -442,9 +462,9 @@
 
     <!--   CKEditor CONTENT (nếu có)   -->
     <?php if ($hd_content !== '') { ?>
-        <section class="tk-hd-content">
+        <section class="tk-hd-content tk-sec">
             <div class="fixwidth">
-                <div class="tk-nd-article" id="toc-content"><?= $hd_content ?></div>
+                <div class="tk-nd-article tk-rv tk-rv--up tk-d1" id="toc-content"><?= $hd_content ?></div>
             </div>
         </section>
     <?php } ?>
@@ -472,12 +492,12 @@
 
     <!--   BÀI VIẾT LIÊN QUAN (các đối tượng HDSD khác)   -->
     <?php if (isset($news) && count($news) > 0) { ?>
-        <section class="tk-nd-related">
+        <section class="tk-nd-related tk-sec">
             <div class="fixwidth">
-                <h2 class="tk-nd-related__heading">Hướng dẫn cho đối tượng khác</h2>
+                <h2 class="tk-nd-related__heading tk-rv tk-rv--up tk-d1">Hướng dẫn cho đối tượng khác</h2>
                 <div class="tk-hdsd-grid" style="padding:0; background:none;">
-                    <?php foreach ($news as $v) { ?>
-                        <a class="tk-hdsd-card" href="<?= $v[$sluglang] ?>" title="<?= $v['ten' . $lang] ?>">
+                    <?php foreach ($news as $rk => $v) { ?>
+                        <a class="tk-hdsd-card tk-rv tk-rv--up tk-d<?= min(($rk % 6) + 1, 6) ?>" href="<?= $v[$sluglang] ?>" title="<?= $v['ten' . $lang] ?>">
                             <div class="tk-hdsd-card__icon">
                                 <?php if (!empty($v['photo'])) { ?>
                                     <img src="<?= THUMBS ?>/150x150x1/<?= UPLOAD_NEWS_L . $v['photo'] ?>"
@@ -501,29 +521,50 @@
 
     <?php include TEMPLATE . LAYOUT . "hotro_lienhe.php"; ?>
     <script>
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', function() {
-                document.querySelectorAll('.tk-sec').forEach(function(el) {
-                    el.classList.add('is-revealed');
-                });
-            });
-        } else {
-            document.querySelectorAll('.tk-sec').forEach(function(el) {
-                el.classList.add('is-revealed');
-            });
-        }
-        /* Smooth scroll for product anchor links */
-        document.querySelectorAll('.tk-hd-select__card').forEach(function(a) {
-            a.addEventListener('click', function(e) {
-                var target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    e.preventDefault();
-                    target.scrollIntoView({
-                        behavior: 'smooth'
+        (function() {
+            function initReveal() {
+                var sections = document.querySelectorAll('section.tk-sec');
+                if (!('IntersectionObserver' in window)) {
+                    sections.forEach(function(el) {
+                        el.classList.add('is-revealed');
+                    });
+                } else {
+                    var observer = new IntersectionObserver(function(entries) {
+                        entries.forEach(function(entry) {
+                            if (entry.isIntersecting) {
+                                entry.target.classList.add('is-revealed');
+                                observer.unobserve(entry.target);
+                            }
+                        });
+                    }, {
+                        root: null,
+                        rootMargin: '-40px 0px -40px 0px',
+                        threshold: 0.1
+                    });
+                    sections.forEach(function(el) {
+                        observer.observe(el);
                     });
                 }
-            });
-        });
+
+                /* Smooth scroll for product anchor links */
+                document.querySelectorAll('.tk-hd-select__card').forEach(function(a) {
+                    a.addEventListener('click', function(e) {
+                        var target = document.querySelector(this.getAttribute('href'));
+                        if (target) {
+                            e.preventDefault();
+                            target.scrollIntoView({
+                                behavior: 'smooth'
+                            });
+                        }
+                    });
+                });
+            }
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', initReveal);
+            } else {
+                initReveal();
+            }
+        })();
     </script>
 <?php } elseif ($type == 'case-study') { ?>
     <!-- ════════ CHI TIẾT CASE STUDY — Premium Scholastic Modernism ════════ -->
@@ -544,11 +585,11 @@
     ?>
 
     <!-- SECTION 1: HERO — Blueprint pattern + chip + logo + title + description -->
-    <section class="tk-csd-hero">
+    <section class="tk-csd-hero tk-sec">
         <div class="fixwidth">
             <div class="tk-csd-hero__inner">
                 <!-- Chip badge -->
-                <span class="tk-csd-hero__chip">
+                <span class="tk-csd-hero__chip tk-rv tk-rv--up tk-d1">
                     <?= htmlspecialchars($badge_type) ?>
                     <?php if ($badge_year) : ?>
                         · <?= htmlspecialchars($badge_year) ?>
@@ -556,19 +597,19 @@
                 </span>
 
                 <!-- Title -->
-                <h1 class="tk-csd-hero__title"><?= $cs_title ?></h1>
+                <h1 class="tk-csd-hero__title tk-rv tk-rv--up tk-d2"><?= $cs_title ?></h1>
 
                 <!-- Logo circle -->
                 <?php if (!empty($cs_photo)) : ?>
-                    <div class="tk-csd-hero__logo">
+                    <div class="tk-csd-hero__logo tk-rv tk-rv--scale tk-d3">
                         <img src="<?= $config_base . THUMBS . '/300x300x1/' . UPLOAD_NEWS_L . $cs_photo ?>"
-                             alt="<?= $cs_title ?>" loading="lazy">
+                            alt="<?= $cs_title ?>" loading="lazy">
                     </div>
                 <?php endif; ?>
 
                 <!-- Location -->
                 <?php if ($cs_location) : ?>
-                    <p class="tk-csd-hero__location">
+                    <p class="tk-csd-hero__location tk-rv tk-rv--up tk-d4">
                         <i class="fas fa-map-marker-alt"></i>
                         <?= htmlspecialchars($cs_location) ?>
                     </p>
@@ -576,7 +617,7 @@
 
                 <!-- Description -->
                 <?php if ($cs_desc) : ?>
-                    <p class="tk-csd-hero__desc"><?= $cs_desc ?></p>
+                    <p class="tk-csd-hero__desc tk-rv tk-rv--up tk-d5"><?= $cs_desc ?></p>
                 <?php endif; ?>
             </div>
         </div>
@@ -584,108 +625,108 @@
 
     <!-- SECTION 2: LEADERSHIP INSIGHT — Quote -->
     <?php if ($has_cs_quote) : ?>
-    <section class="tk-csd-quote tk-sec">
-        <div class="fixwidth">
-            <div class="tk-csd-quote__card">
-                <div class="tk-csd-quote__mark">&ldquo;</div>
-                <blockquote class="tk-csd-quote__body">
-                    <p class="tk-csd-quote__text"><?= htmlspecialchars($cs_quote['tenvi']) ?></p>
-                    <?php if (!empty($cs_quote['link_video'])) : ?>
-                        <footer class="tk-csd-quote__footer">
-                            <span class="tk-csd-quote__dash"></span>
-                            <?= htmlspecialchars($cs_quote['link_video']) ?>
-                        </footer>
-                    <?php endif; ?>
-                </blockquote>
+        <section class="tk-csd-quote tk-sec">
+            <div class="fixwidth">
+                <div class="tk-csd-quote__card">
+                    <div class="tk-csd-quote__mark tk-rv tk-rv--scale tk-d1">&ldquo;</div>
+                    <blockquote class="tk-csd-quote__body">
+                        <p class="tk-csd-quote__text tk-rv tk-rv--left tk-d2"><?= htmlspecialchars($cs_quote['tenvi']) ?></p>
+                        <?php if (!empty($cs_quote['link_video'])) : ?>
+                            <footer class="tk-csd-quote__footer tk-rv tk-rv--up tk-d3">
+                                <span class="tk-csd-quote__dash"></span>
+                                <?= htmlspecialchars($cs_quote['link_video']) ?>
+                            </footer>
+                        <?php endif; ?>
+                    </blockquote>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
     <?php endif; ?>
 
     <!-- SECTION 3: IMPACT DASHBOARD — Stats grid -->
     <?php if ($has_cs_stats) : ?>
-    <section class="tk-csd-stats tk-sec">
-        <div class="fixwidth">
-            <h2 class="tk-csd-stats__heading">Kết Quả Đột Phá</h2>
-            <div class="tk-csd-stats__grid tk-csd-stats__grid--<?= count($cs_stats) ?>">
-                <?php foreach ($cs_stats as $st) : ?>
-                    <div class="tk-csd-stat-card">
-                        <span class="tk-csd-stat-card__value"><?= htmlspecialchars($st['link_video']) ?></span>
-                        <span class="tk-csd-stat-card__label"><?= htmlspecialchars($st['tenvi']) ?></span>
-                    </div>
-                <?php endforeach; ?>
+        <section class="tk-csd-stats tk-sec">
+            <div class="fixwidth">
+                <h2 class="tk-csd-stats__heading tk-rv tk-rv--up tk-d1">Kết Quả Đột Phá</h2>
+                <div class="tk-csd-stats__grid tk-csd-stats__grid--<?= count($cs_stats) ?>">
+                    <?php foreach ($cs_stats as $si => $st) : ?>
+                        <div class="tk-csd-stat-card tk-rv tk-rv--scale tk-d<?= min($si + 2, 6) ?>">
+                            <span class="tk-csd-stat-card__value tk-csd-counter" data-count="<?= htmlspecialchars($st['link_video']) ?>"><?= htmlspecialchars($st['link_video']) ?></span>
+                            <span class="tk-csd-stat-card__label"><?= htmlspecialchars($st['tenvi']) ?></span>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
     <?php endif; ?>
 
     <!-- SECTION 4: NỘI DUNG CHI TIẾT — CKEditor content -->
     <?php if ($has_cs_content) : ?>
-    <section class="tk-csd-content tk-sec">
-        <div class="fixwidth">
-            <div class="tk-csd-content__body ckeditor-content">
-                <?= htmlspecialchars_decode($row_detail['noidung' . $lang]) ?>
+        <section class="tk-csd-content tk-sec">
+            <div class="fixwidth">
+                <div class="tk-csd-content__body ckeditor-content tk-rv tk-rv--up tk-d1">
+                    <?= htmlspecialchars_decode($row_detail['noidung' . $lang]) ?>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
     <?php endif; ?>
 
     <!-- SECTION 5: GALLERY SHOWCASE — Layered images -->
     <?php if ($has_cs_gallery) : ?>
-    <section class="tk-csd-gallery tk-sec">
-        <div class="fixwidth">
-            <div class="tk-csd-gallery__header">
-                <h2 class="tk-csd-gallery__heading">Giao Diện Trực Quan, Dễ Dàng Sử Dụng</h2>
-                <p class="tk-csd-gallery__sub">Trải nghiệm thực tế từ góc nhìn của ban giám hiệu và giáo viên.</p>
-            </div>
+        <section class="tk-csd-gallery tk-sec">
+            <div class="fixwidth">
+                <div class="tk-csd-gallery__header tk-rv tk-rv--up tk-d1">
+                    <h2 class="tk-csd-gallery__heading">Giao Diện Trực Quan, Dễ Dàng Sử Dụng</h2>
+                    <p class="tk-csd-gallery__sub">Trải nghiệm thực tế từ góc nhìn của ban giám hiệu và giáo viên.</p>
+                </div>
 
-            <?php if (count($hinhanhtt) >= 3) : ?>
-                <!-- 3+ images: Layered showcase (center + left + right) -->
-                <div class="tk-csd-gallery__showcase">
-                    <!-- Center main image -->
-                    <div class="tk-csd-gallery__main">
-                        <img src="<?= $config_base . UPLOAD_NEWS_L . $hinhanhtt[0]['photo'] ?>"
-                             alt="<?= htmlspecialchars($hinhanhtt[0]['tenvi'] ?? $cs_title) ?>" loading="lazy">
-                    </div>
-                    <!-- Left floating image -->
-                    <div class="tk-csd-gallery__float tk-csd-gallery__float--left">
-                        <img src="<?= $config_base . UPLOAD_NEWS_L . $hinhanhtt[1]['photo'] ?>"
-                             alt="<?= htmlspecialchars($hinhanhtt[1]['tenvi'] ?? '') ?>" loading="lazy">
-                    </div>
-                    <!-- Right floating image -->
-                    <div class="tk-csd-gallery__float tk-csd-gallery__float--right">
-                        <img src="<?= $config_base . UPLOAD_NEWS_L . $hinhanhtt[2]['photo'] ?>"
-                             alt="<?= htmlspecialchars($hinhanhtt[2]['tenvi'] ?? '') ?>" loading="lazy">
-                    </div>
-                </div>
-            <?php elseif (count($hinhanhtt) == 2) : ?>
-                <!-- 2 images: side by side -->
-                <div class="tk-csd-gallery__duo">
-                    <?php foreach ($hinhanhtt as $img) : ?>
-                        <div class="tk-csd-gallery__duo-item">
-                            <img src="<?= $config_base . UPLOAD_NEWS_L . $img['photo'] ?>"
-                                 alt="<?= htmlspecialchars($img['tenvi'] ?? '') ?>" loading="lazy">
+                <?php if (count($hinhanhtt) >= 3) : ?>
+                    <!-- 3+ images: Layered showcase (center + left + right) -->
+                    <div class="tk-csd-gallery__showcase">
+                        <!-- Center main image -->
+                        <div class="tk-csd-gallery__main tk-rv tk-rv--scale tk-d2">
+                            <img src="<?= $config_base . UPLOAD_NEWS_L . $hinhanhtt[0]['photo'] ?>"
+                                alt="<?= htmlspecialchars($hinhanhtt[0]['tenvi'] ?? $cs_title) ?>" loading="lazy">
                         </div>
-                    <?php endforeach; ?>
-                </div>
-            <?php else : ?>
-                <!-- 1 image: single centered -->
-                <div class="tk-csd-gallery__single">
-                    <img src="<?= $config_base . UPLOAD_NEWS_L . $hinhanhtt[0]['photo'] ?>"
-                         alt="<?= htmlspecialchars($hinhanhtt[0]['tenvi'] ?? $cs_title) ?>" loading="lazy">
-                </div>
-            <?php endif; ?>
-        </div>
-    </section>
+                        <!-- Left floating image -->
+                        <div class="tk-csd-gallery__float tk-csd-gallery__float--left tk-rv tk-rv--left tk-d3">
+                            <img src="<?= $config_base . UPLOAD_NEWS_L . $hinhanhtt[1]['photo'] ?>"
+                                alt="<?= htmlspecialchars($hinhanhtt[1]['tenvi'] ?? '') ?>" loading="lazy">
+                        </div>
+                        <!-- Right floating image -->
+                        <div class="tk-csd-gallery__float tk-csd-gallery__float--right tk-rv tk-rv--right tk-d3">
+                            <img src="<?= $config_base . UPLOAD_NEWS_L . $hinhanhtt[2]['photo'] ?>"
+                                alt="<?= htmlspecialchars($hinhanhtt[2]['tenvi'] ?? '') ?>" loading="lazy">
+                        </div>
+                    </div>
+                <?php elseif (count($hinhanhtt) == 2) : ?>
+                    <!-- 2 images: side by side -->
+                    <div class="tk-csd-gallery__duo">
+                        <?php foreach ($hinhanhtt as $gi => $img) : ?>
+                            <div class="tk-csd-gallery__duo-item tk-rv tk-rv--scale tk-d<?= $gi + 2 ?>">
+                                <img src="<?= $config_base . UPLOAD_NEWS_L . $img['photo'] ?>"
+                                    alt="<?= htmlspecialchars($img['tenvi'] ?? '') ?>" loading="lazy">
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
+                <?php else : ?>
+                    <!-- 1 image: single centered -->
+                    <div class="tk-csd-gallery__single tk-rv tk-rv--scale tk-d2">
+                        <img src="<?= $config_base . UPLOAD_NEWS_L . $hinhanhtt[0]['photo'] ?>"
+                            alt="<?= htmlspecialchars($hinhanhtt[0]['tenvi'] ?? $cs_title) ?>" loading="lazy">
+                    </div>
+                <?php endif; ?>
+            </div>
+        </section>
     <?php endif; ?>
 
     <!-- SECTION 6: CTA — Dark navy -->
     <section class="tk-csd-cta tk-sec">
         <div class="fixwidth">
             <div class="tk-csd-cta__inner">
-                <h2 class="tk-csd-cta__title">Sẵn sàng để thay đổi?</h2>
-                <p class="tk-csd-cta__desc">Bắt đầu hành trình chuyển đổi số cho trường học của bạn cùng hệ sinh thái TitKul ngay hôm nay.</p>
-                <div class="tk-csd-cta__buttons">
+                <h2 class="tk-csd-cta__title tk-rv tk-rv--up tk-d1">Sẵn sàng để thay đổi?</h2>
+                <p class="tk-csd-cta__desc tk-rv tk-rv--up tk-d2">Bắt đầu hành trình chuyển đổi số cho trường học của bạn cùng hệ sinh thái TitKul ngay hôm nay.</p>
+                <div class="tk-csd-cta__buttons tk-rv tk-rv--up tk-d3">
                     <a class="tk-csd-cta__btn tk-csd-cta__btn--primary" href="dang-ky-tu-van">Đăng ký tư vấn</a>
                     <!-- <a class="tk-csd-cta__btn tk-csd-cta__btn--outline" href="case-study">Xem thêm dự án</a> -->
                 </div>
@@ -695,55 +736,91 @@
 
     <!-- SECTION 7: RELATED — Other case studies -->
     <?php if (isset($news) && count($news) > 0) : ?>
-    <section class="tk-csd-related tk-sec">
-        <div class="fixwidth">
-            <h2 class="tk-csd-related__heading">Dự Án Tiêu Biểu Khác</h2>
-            <div class="tk-csd-related__grid">
-                <?php foreach ($news as $related) : ?>
-                    <a class="tk-csd-related__card" href="<?= $related['tenkhongdauvi'] ?>">
-                        <div class="tk-csd-related__img">
-                            <?php if (!empty($related['photo'])) : ?>
-                                <img src="<?= $config_base . THUMBS . '/480x320x1/' . UPLOAD_NEWS_L . $related['photo'] ?>"
-                                     alt="<?= htmlspecialchars($related['ten' . $lang]) ?>" loading="lazy">
-                            <?php else : ?>
-                                <div class="tk-csd-related__placeholder">
-                                    <i class="fas fa-school"></i>
-                                </div>
-                            <?php endif; ?>
-                        </div>
-                        <div class="tk-csd-related__body">
-                            <h3 class="tk-csd-related__title"><?= htmlspecialchars($related['ten' . $lang]) ?></h3>
-                            <?php if (!empty($related['mota' . $lang])) : ?>
-                                <p class="tk-csd-related__desc"><?= strip_tags(htmlspecialchars_decode($related['mota' . $lang])) ?></p>
-                            <?php endif; ?>
-                            <span class="tk-csd-related__link">
-                                Xem chi tiết <i class="fas fa-arrow-right"></i>
-                            </span>
-                        </div>
-                    </a>
-                <?php endforeach; ?>
+        <section class="tk-csd-related tk-sec">
+            <div class="fixwidth">
+                <h2 class="tk-csd-related__heading tk-rv tk-rv--up tk-d1">Dự Án Tiêu Biểu Khác</h2>
+                <div class="tk-csd-related__grid">
+                    <?php foreach ($news as $ri => $related) : ?>
+                        <a class="tk-csd-related__card tk-rv tk-rv--up tk-d<?= min($ri + 2, 6) ?>" href="<?= $related['tenkhongdauvi'] ?>">
+                            <div class="tk-csd-related__img">
+                                <?php if (!empty($related['photo'])) : ?>
+                                    <img src="<?= $config_base . THUMBS . '/480x320x1/' . UPLOAD_NEWS_L . $related['photo'] ?>"
+                                        alt="<?= htmlspecialchars($related['ten' . $lang]) ?>" loading="lazy">
+                                <?php else : ?>
+                                    <div class="tk-csd-related__placeholder">
+                                        <i class="fas fa-school"></i>
+                                    </div>
+                                <?php endif; ?>
+                            </div>
+                            <div class="tk-csd-related__body">
+                                <h3 class="tk-csd-related__title"><?= htmlspecialchars($related['ten' . $lang]) ?></h3>
+                                <?php if (!empty($related['mota' . $lang])) : ?>
+                                    <p class="tk-csd-related__desc"><?= strip_tags(htmlspecialchars_decode($related['mota' . $lang])) ?></p>
+                                <?php endif; ?>
+                                <span class="tk-csd-related__link">
+                                    Xem chi tiết <i class="fas fa-arrow-right"></i>
+                                </span>
+                            </div>
+                        </a>
+                    <?php endforeach; ?>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
     <?php endif; ?>
 
     <!-- Partials: Form + Support -->
     <?php include TEMPLATE . LAYOUT . "form_dangky.php"; ?>
     <?php include TEMPLATE . LAYOUT . "hotro_lienhe.php"; ?>
 
-    <!-- Reveal animation for .tk-sec -->
     <script>
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', function() {
-                document.querySelectorAll('.tk-sec').forEach(function(el) {
-                    el.classList.add('is-revealed');
+        (function () {
+            function runCounters() {
+                document.querySelectorAll('.tk-csd-counter[data-count]').forEach(function (el) {
+                    if (el.dataset.counted) return;
+                    el.dataset.counted = '1';
+                    var raw = el.getAttribute('data-count');
+                    var num = parseFloat(raw.replace(/[^\d.]/g, ''));
+                    var suffix = raw.replace(/[\d.]/g, '');
+                    if (isNaN(num)) return;
+                    var duration = 1200, startTime = null;
+                    function easeOut(t) { return 1 - Math.pow(1 - t, 3); }
+                    function step(ts) {
+                        if (!startTime) startTime = ts;
+                        var progress = Math.min((ts - startTime) / duration, 1);
+                        el.textContent = Math.round(easeOut(progress) * num) + suffix;
+                        if (progress < 1) requestAnimationFrame(step);
+                    }
+                    requestAnimationFrame(step);
                 });
-            });
-        } else {
-            document.querySelectorAll('.tk-sec').forEach(function(el) {
-                el.classList.add('is-revealed');
-            });
-        }
+            }
+
+            function initReveal() {
+                var sections = document.querySelectorAll('section.tk-sec');
+                if (!('IntersectionObserver' in window)) {
+                    sections.forEach(function (el) { el.classList.add('is-revealed'); });
+                    runCounters();
+                    return;
+                }
+                var observer = new IntersectionObserver(function (entries) {
+                    entries.forEach(function (entry) {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('is-revealed');
+                            if (entry.target.classList.contains('tk-csd-stats')) {
+                                setTimeout(runCounters, 200);
+                            }
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, { root: null, rootMargin: '-40px 0px -40px 0px', threshold: 0.1 });
+                sections.forEach(function (el) { observer.observe(el); });
+            }
+
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', initReveal);
+            } else {
+                initReveal();
+            }
+        })();
     </script>
 <?php } else { ?>
     <!-- ════════ CHI TIẾT TIN TỨC — Magazine Article Layout ════════ -->
@@ -752,7 +829,7 @@
     $has_tt_gallery = (isset($hinhanhtt) && count($hinhanhtt) > 0);
     ?>
     <!-- SECTION 1: Article Hero — ảnh cover full-width + overlay navy + title -->
-    <section class="tknews-detail-hero">
+    <section class="tknews-detail-hero tk-sec">
         <?php if (!empty($row_detail['photo'])) { ?>
             <img class="tknews-detail-hero__bg"
                 src="<?= UPLOAD_NEWS_L . $row_detail['photo'] ?>"
@@ -761,11 +838,11 @@
         <?php } ?>
         <div class="tknews-detail-hero__overlay"></div>
         <div class="fixwidth tknews-detail-hero__inner">
-            <span class="tknews-detail-hero__badge">
+            <span class="tknews-detail-hero__badge tk-rv tk-rv--up tk-d1">
                 <i class="far fa-newspaper"></i> Tin tức
             </span>
-            <h1 class="tknews-detail-hero__title"><?= $row_detail['ten' . $lang] ?></h1>
-            <div class="tknews-detail-hero__meta">
+            <h1 class="tknews-detail-hero__title tk-rv tk-rv--up tk-d2"><?= $row_detail['ten' . $lang] ?></h1>
+            <div class="tknews-detail-hero__meta tk-rv tk-rv--up tk-d3">
                 <span><i class="far fa-calendar-alt"></i> <?= date("d/m/Y", $row_detail['ngaytao']) ?></span>
                 <?php if (!empty($row_detail['luotxem'])) { ?>
                     <span><i class="far fa-eye"></i> <?= number_format($row_detail['luotxem']) ?> lượt xem</span>
@@ -777,7 +854,7 @@
     <?php if ($has_tt_gallery) { ?>
 
         <!-- GALLERY v2  -->
-        <section class="tknews-gallery">
+        <section class="tknews-gallery tk-sec">
             <div class="fixwidth">
                 <div class="tknews-gallery__inner">
 
@@ -793,7 +870,7 @@
                     <div class="tknews-gallery__layout">
 
                         <!-- ── STAGE ── -->
-                        <div class="tknews-gallery__stage" id="tknewsStage">
+                        <div class="tknews-gallery__stage tk-rv tk-rv--scale tk-d1" id="tknewsStage">
                             <?php
                             $first    = $hinhanhtt[0];
                             $firstSrc = UPLOAD_NEWS_L . $first['photo'];
@@ -834,7 +911,7 @@
                                 $altText  = !empty($img['tenvi']) ? $img['tenvi'] : $row_detail['ten' . $lang];
                                 $isActive = ($i === 0) ? 'is-active' : '';
                             ?>
-                                <div class="tknews-thumb-item <?= $isActive ?>"
+                                <div class="tknews-thumb-item tk-rv tk-rv--scale tk-d<?= min(($i % 6) + 2, 6) ?> <?= $isActive ?>"
                                     data-full="<?= $imgSrc ?>"
                                     data-caption="<?= htmlspecialchars($altText) ?>"
                                     data-index="<?= $i ?>"
@@ -867,169 +944,169 @@
 
         <script>
             window.addEventListener('load', function() {
-            (function($) {
-                /* ── Dữ liệu ảnh ── */
-                var galleryData = [
-                    <?php foreach ($hinhanhtt as $i => $img) {
-                        $imgSrc  = UPLOAD_NEWS_L . $img['photo'];
-                        $altText = !empty($img['tenvi']) ? $img['tenvi'] : $row_detail['ten' . $lang];
-                        echo '{ src: ' . json_encode($imgSrc) . ', caption: ' . json_encode($altText) . ' }';
-                        if ($i < count($hinhanhtt) - 1) echo ',';
-                        echo "\n        ";
-                    } ?>
-                ];
+                (function($) {
+                    /* ── Dữ liệu ảnh ── */
+                    var galleryData = [
+                        <?php foreach ($hinhanhtt as $i => $img) {
+                            $imgSrc  = UPLOAD_NEWS_L . $img['photo'];
+                            $altText = !empty($img['tenvi']) ? $img['tenvi'] : $row_detail['ten' . $lang];
+                            echo '{ src: ' . json_encode($imgSrc) . ', caption: ' . json_encode($altText) . ' }';
+                            if ($i < count($hinhanhtt) - 1) echo ',';
+                            echo "\n        ";
+                        } ?>
+                    ];
 
-                var AUTOPLAY_MS = 3000; /* đổi ảnh mỗi 3 giây */
-                var FADE_MS = 280; /* thời gian fade */
+                    var AUTOPLAY_MS = 3000; /* đổi ảnh mỗi 3 giây */
+                    var FADE_MS = 280; /* thời gian fade */
 
-                var $stageImg = $('#tknewsStageImg');
-                var $caption = $('#tknewsCaption');
-                var $curIdx = $('#tknewsCurIdx');
-                var $stage = $('#tknewsStage');
-                var $progress = $('#tknewsProgress');
-                var $thumbs = $('#tknewsThumbs');
+                    var $stageImg = $('#tknewsStageImg');
+                    var $caption = $('#tknewsCaption');
+                    var $curIdx = $('#tknewsCurIdx');
+                    var $stage = $('#tknewsStage');
+                    var $progress = $('#tknewsProgress');
+                    var $thumbs = $('#tknewsThumbs');
 
-                var currentIdx = 0;
-                var autoTimer = null;
-                var userPaused = false; /* tạm dừng khi người dùng hover */
+                    var currentIdx = 0;
+                    var autoTimer = null;
+                    var userPaused = false; /* tạm dừng khi người dùng hover */
 
-                /* ĐỔI ẢNH STAGE */
-                function switchTo(idx, fromAuto) {
-                    idx = ((idx % galleryData.length) + galleryData.length) % galleryData.length;
-                    if (!fromAuto && idx === currentIdx) return;
+                    /* ĐỔI ẢNH STAGE */
+                    function switchTo(idx, fromAuto) {
+                        idx = ((idx % galleryData.length) + galleryData.length) % galleryData.length;
+                        if (!fromAuto && idx === currentIdx) return;
 
-                    var d = galleryData[idx];
+                        var d = galleryData[idx];
 
-                    /* Fade out */
-                    $stageImg.addClass('is-transitioning');
-                    setTimeout(function() {
-                        $stageImg.attr('src', d.src).attr('alt', d.caption);
-                        $caption.text(d.caption);
-                        $curIdx.text(idx + 1);
-                        $stageImg.removeClass('is-transitioning');
-                    }, FADE_MS);
+                        /* Fade out */
+                        $stageImg.addClass('is-transitioning');
+                        setTimeout(function() {
+                            $stageImg.attr('src', d.src).attr('alt', d.caption);
+                            $caption.text(d.caption);
+                            $curIdx.text(idx + 1);
+                            $stageImg.removeClass('is-transitioning');
+                        }, FADE_MS);
 
-                    /* Thumb active */
-                    $thumbs.find('.tknews-thumb-item').removeClass('is-active');
-                    $thumbs.find('.tknews-thumb-item[data-index="' + idx + '"]').addClass('is-active');
+                        /* Thumb active */
+                        $thumbs.find('.tknews-thumb-item').removeClass('is-active');
+                        $thumbs.find('.tknews-thumb-item[data-index="' + idx + '"]').addClass('is-active');
 
-                    currentIdx = idx;
+                        currentIdx = idx;
 
-                    /* Reset progress bar */
-                    resetProgress();
-                }
+                        /* Reset progress bar */
+                        resetProgress();
+                    }
 
-                /* PROGRESS BAR (visual timer) */
-                function resetProgress() {
-                    /* reset ngay */
-                    $progress.css({
-                        transition: 'none',
-                        width: '0%'
+                    /* PROGRESS BAR (visual timer) */
+                    function resetProgress() {
+                        /* reset ngay */
+                        $progress.css({
+                            transition: 'none',
+                            width: '0%'
+                        });
+                        /* trigger reflow rồi animate */
+                        $progress[0].offsetWidth; /* eslint-disable-line */
+                        $progress.css({
+                            transition: 'width ' + AUTOPLAY_MS + 'ms linear',
+                            width: '100%'
+                        });
+                    }
+
+                    /* AUTOPLAY */
+                    function startAutoplay() {
+                        clearInterval(autoTimer);
+                        resetProgress();
+                        autoTimer = setInterval(function() {
+                            if (!userPaused) {
+                                switchTo(currentIdx + 1, true);
+                            }
+                        }, AUTOPLAY_MS);
+                    }
+
+                    /* Hover stage/thumbs → tạm dừng */
+                    $stage.add($thumbs)
+                        .on('mouseenter', function() {
+                            userPaused = true;
+                            $progress.css('transition', 'none'); /* đóng băng thanh */
+                        })
+                        .on('mouseleave', function() {
+                            userPaused = false;
+                            /* restart từ đầu ảnh hiện tại */
+                            startAutoplay();
+                        });
+
+                    /* CLICK THUMBNAIL */
+                    $thumbs.on('click', '.tknews-thumb-item', function() {
+                        var idx = parseInt($(this).data('index'), 10);
+                        switchTo(idx, false);
+                        startAutoplay(); /* restart timer */
                     });
-                    /* trigger reflow rồi animate */
-                    $progress[0].offsetWidth; /* eslint-disable-line */
-                    $progress.css({
-                        transition: 'width ' + AUTOPLAY_MS + 'ms linear',
-                        width: '100%'
-                    });
-                }
 
-                /* AUTOPLAY */
-                function startAutoplay() {
-                    clearInterval(autoTimer);
-                    resetProgress();
-                    autoTimer = setInterval(function() {
-                        if (!userPaused) {
-                            switchTo(currentIdx + 1, true);
-                        }
-                    }, AUTOPLAY_MS);
-                }
-
-                /* Hover stage/thumbs → tạm dừng */
-                $stage.add($thumbs)
-                    .on('mouseenter', function() {
-                        userPaused = true;
-                        $progress.css('transition', 'none'); /* đóng băng thanh */
-                    })
-                    .on('mouseleave', function() {
-                        userPaused = false;
-                        /* restart từ đầu ảnh hiện tại */
-                        startAutoplay();
+                    /* CLICK STAGE → LIGHTBOX */
+                    $stage.on('click', function() {
+                        openLightbox(currentIdx);
                     });
 
-                /* CLICK THUMBNAIL */
-                $thumbs.on('click', '.tknews-thumb-item', function() {
-                    var idx = parseInt($(this).data('index'), 10);
-                    switchTo(idx, false);
-                    startAutoplay(); /* restart timer */
-                });
+                    /* LIGHTBOX */
+                    var $lb = $('#tknewsLightbox');
+                    var $lbImg = $('#tknewsLbImg');
+                    var $lbCaption = $('#tknewsLbCaption');
+                    var lbIdx = 0;
 
-                /* CLICK STAGE → LIGHTBOX */
-                $stage.on('click', function() {
-                    openLightbox(currentIdx);
-                });
+                    function openLightbox(idx) {
+                        lbIdx = idx;
+                        var d = galleryData[lbIdx];
+                        $lbImg.attr('src', d.src).attr('alt', d.caption);
+                        $lbCaption.text(d.caption + '  (' + (lbIdx + 1) + ' / ' + galleryData.length + ')');
+                        $lb.addClass('is-open');
+                        $('body').css('overflow', 'hidden');
+                    }
 
-                /* LIGHTBOX */
-                var $lb = $('#tknewsLightbox');
-                var $lbImg = $('#tknewsLbImg');
-                var $lbCaption = $('#tknewsLbCaption');
-                var lbIdx = 0;
+                    function closeLightbox() {
+                        $lb.removeClass('is-open');
+                        $('body').css('overflow', '');
+                        setTimeout(function() {
+                            $lbImg.attr('src', '');
+                        }, 300);
+                    }
 
-                function openLightbox(idx) {
-                    lbIdx = idx;
-                    var d = galleryData[lbIdx];
-                    $lbImg.attr('src', d.src).attr('alt', d.caption);
-                    $lbCaption.text(d.caption + '  (' + (lbIdx + 1) + ' / ' + galleryData.length + ')');
-                    $lb.addClass('is-open');
-                    $('body').css('overflow', 'hidden');
-                }
+                    function lbGo(dir) {
+                        lbIdx = (lbIdx + dir + galleryData.length) % galleryData.length;
+                        var d = galleryData[lbIdx];
+                        $lbImg.attr('src', d.src).attr('alt', d.caption);
+                        $lbCaption.text(d.caption + '  (' + (lbIdx + 1) + ' / ' + galleryData.length + ')');
+                    }
 
-                function closeLightbox() {
-                    $lb.removeClass('is-open');
-                    $('body').css('overflow', '');
-                    setTimeout(function() {
-                        $lbImg.attr('src', '');
-                    }, 300);
-                }
+                    $('#tknewsLbClose').on('click', closeLightbox);
+                    $('#tknewsLbPrev').on('click', function() {
+                        lbGo(-1);
+                    });
+                    $('#tknewsLbNext').on('click', function() {
+                        lbGo(1);
+                    });
+                    $lb.on('click', function(e) {
+                        if ($(e.target).is($lb)) closeLightbox();
+                    });
 
-                function lbGo(dir) {
-                    lbIdx = (lbIdx + dir + galleryData.length) % galleryData.length;
-                    var d = galleryData[lbIdx];
-                    $lbImg.attr('src', d.src).attr('alt', d.caption);
-                    $lbCaption.text(d.caption + '  (' + (lbIdx + 1) + ' / ' + galleryData.length + ')');
-                }
+                    $(document).on('keydown.tknewslb', function(e) {
+                        if (!$lb.hasClass('is-open')) return;
+                        if (e.key === 'Escape' || e.keyCode === 27) closeLightbox();
+                        if (e.key === 'ArrowLeft' || e.keyCode === 37) lbGo(-1);
+                        if (e.key === 'ArrowRight' || e.keyCode === 39) lbGo(1);
+                    });
 
-                $('#tknewsLbClose').on('click', closeLightbox);
-                $('#tknewsLbPrev').on('click', function() {
-                    lbGo(-1);
-                });
-                $('#tknewsLbNext').on('click', function() {
-                    lbGo(1);
-                });
-                $lb.on('click', function(e) {
-                    if ($(e.target).is($lb)) closeLightbox();
-                });
+                    /* KHỞI ĐỘNG */
+                    startAutoplay();
 
-                $(document).on('keydown.tknewslb', function(e) {
-                    if (!$lb.hasClass('is-open')) return;
-                    if (e.key === 'Escape' || e.keyCode === 27) closeLightbox();
-                    if (e.key === 'ArrowLeft' || e.keyCode === 37) lbGo(-1);
-                    if (e.key === 'ArrowRight' || e.keyCode === 39) lbGo(1);
-                });
-
-                /* KHỞI ĐỘNG */
-                startAutoplay();
-
-            })(jQuery);
+                })(jQuery);
             }); // window load
         </script>
 
     <?php }  ?>
 
     <!-- SECTION 2: Article Body — single-column reading -->
-    <section class="tknews-detail-body">
+    <section class="tknews-detail-body tk-sec">
         <div class="fixwidth">
-            <article class="tknews-detail-article">
+            <article class="tknews-detail-article tk-rv tk-rv--up tk-d1">
                 <?php if (!empty($row_detail['mota' . $lang])) { ?>
                     <p class="tknews-detail-article__lead"><?= $row_detail['mota' . $lang] ?></p>
                 <?php } ?>
@@ -1050,20 +1127,20 @@
             </article>
         </div>
     </section>
-    
+
     <!-- SECTION 3: Related Articles -->
     <?php if (isset($news) && count($news) > 0) { ?>
-        <section class="tknews-detail-related">
+        <section class="tknews-detail-related tk-sec">
             <div class="fixwidth">
                 <div class="tknews-detail-related__header">
-                    <h2 class="tknews-detail-related__heading">Bài viết liên quan</h2>
+                    <h2 class="tknews-detail-related__heading tk-rv tk-rv--up tk-d1">Bài viết liên quan</h2>
                     <a class="tknews-detail-related__all" href="tin-tuc">
                         Xem tất cả <i class="fas fa-arrow-right"></i>
                     </a>
                 </div>
                 <div class="tknews-listing__grid">
-                    <?php foreach ($news as $v) { ?>
-                        <article class="tknews-card">
+                    <?php foreach ($news as $rk => $v) { ?>
+                        <article class="tknews-card tk-rv tk-rv--up tk-d<?= min(($rk % 6) + 1, 6) ?>">
                             <a class="tknews-card__img" href="<?= $v[$sluglang] ?>" title="<?= $v['ten' . $lang] ?>">
                                 <img src="<?= THUMBS ?>/480x320x1/<?= UPLOAD_NEWS_L . $v['photo'] ?>"
                                     onerror="this.src='<?= THUMBS ?>/480x320x1/assets/images/noimage.png';"
@@ -1093,16 +1170,36 @@
     <?php include TEMPLATE . LAYOUT . "form_dangky.php"; ?>
     <?php include TEMPLATE . LAYOUT . "hotro_lienhe.php"; ?>
     <script>
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', function() {
-                document.querySelectorAll('.tk-sec').forEach(function(el) {
-                    el.classList.add('is-revealed');
+        (function() {
+            function initReveal() {
+                var sections = document.querySelectorAll('section.tk-sec');
+                if (!('IntersectionObserver' in window)) {
+                    sections.forEach(function(el) {
+                        el.classList.add('is-revealed');
+                    });
+                    return;
+                }
+                var observer = new IntersectionObserver(function(entries) {
+                    entries.forEach(function(entry) {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('is-revealed');
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, {
+                    root: null,
+                    rootMargin: '-40px 0px -40px 0px',
+                    threshold: 0.1
                 });
-            });
-        } else {
-            document.querySelectorAll('.tk-sec').forEach(function(el) {
-                el.classList.add('is-revealed');
-            });
-        }
+                sections.forEach(function(el) {
+                    observer.observe(el);
+                });
+            }
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', initReveal);
+            } else {
+                initReveal();
+            }
+        })();
     </script>
 <?php } ?>

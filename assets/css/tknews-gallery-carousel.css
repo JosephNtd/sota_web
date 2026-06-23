@@ -112,7 +112,7 @@
    MAIN STAGE — 50% chiều rộng container
 ══════════════════════════════════════════════════════ */
 .tknews-gallery__stage {
-    width: 50%;
+    width: 70%;
     position: relative;
     border-radius: var(--tkg-radius-xl);
     overflow: hidden;
@@ -148,8 +148,8 @@
     align-items: flex-end;
     justify-content: space-between;
     gap: 10px;
-    opacity: 0;
-    transform: translateY(6px);
+    opacity: 1;
+    transform: translateY(0px);
     transition: opacity 0.28s ease, transform 0.28s ease;
 }
 
