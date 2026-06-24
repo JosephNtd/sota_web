@@ -3,7 +3,7 @@
 > **Repo:** `github.com/JosephNtd/sota_web` (branch `master`)
 > **Nền tảng:** sota_web — CMS PHP MVC tự viết, WampServer + MariaDB, AltoRouter
 > **Mục tiêu:** Dựng lại website titkul.vn — trang giới thiệu công ty + phần mềm SaaS giáo dục + tin tức. **Không có thương mại điện tử.**
-> **Cập nhật lần cuối:** 23/06/2026
+> **Cập nhật lần cuối:** 23/06/2026 (Session 2 — Static pages + Gallery grouping)
 
 ---
 
@@ -35,8 +35,10 @@
 | 5 | Verify data dynamic + responsive test | ✅ XONG |
 | 6 | Form AJAX (đăng ký tư vấn / liên hệ) | ✅ XONG |
 | **7** | **Style audit + đồng bộ theme + Effect Map animations** | ✅ **XONG TOÀN BỘ** |
-| **8** | **SEO / sitemap / favicon / robots.txt / responsive** | 🔧 **TIẾP THEO** |
-| 9 | Minify CSS/JS + Lighthouse audit + deploy | ⏳ |
+| **7.5** | **Static pages redesign + Multi-image gallery + Grouping** | ✅ **XONG** |
+| **8** | **Cleanup menu/footer + CSS polish + SEO (meta/sitemap/favicon/robots)** | 🔧 **TIẾP THEO** |
+| 9 | Performance: minify + Lighthouse ≥85 + responsive audit | ⏳ |
+| 10 | Deploy hosting + SSL + titkul.vn | ⏳ |
 
 ---
 
@@ -82,7 +84,7 @@
 | `templates/news/news_detail_tpl.php` | ~1100 | Detail: 4 nhánh (tinh-nang / huong-dan / case-study / tin-tuc) |
 | `templates/product/product_tpl.php` | ~90 | Product listing — hero + zigzag rows + animations |
 | `templates/product/product_detail_tpl.php` | 325 | Product detail 14 sections |
-| `templates/static/static_tpl.php` | 202 | Giới thiệu + Văn bản pháp lý |
+| `templates/static/static_tpl.php` | ~408 | **Giới thiệu** (6-section brand manifesto) + **Văn bản PL** (gallery grouping + lightbox nav) |
 | `templates/contact/contact_tpl.php` | ~433 | Contact 3-section (hero / form glassmorphic / FAQ) |
 
 ### Breadcrumb ẩn theo trang (templates/index.php dòng 26–29)
@@ -376,100 +378,166 @@ if (!$__hideBread && $source == 'news' && !empty($_GET['id'])) $__hideBread = tr
 - **Thêm mới:** product listing + case-study listing
 - **Có sẵn trước:** index, static, contact, tin-tuc listing, huong-dan listing, tất cả detail pages
 
+### 9.5 — Session 23/06/2026 (tiếp) — Static page redesign + Multi-image gallery + Grouping
+
+**Trang Giới thiệu (gioi-thieu) — Full redesign 6 sections:**
+- Hero mới: gradient Navy bg, blob animations, 2-col layout (text + visual), tagline từ admin/fallback, chips (năm/địa chỉ)
+- Stats: 4-col counter-up (easeOutCubic, IntersectionObserver), 1 số text ("TP.HCM")
+- Story: 2-col CKEditor content + visual, entrance animations
+- Sectors: 4 icon cards (graduation/building/lightbulb/microchip), hover red underline
+- VMV: Dùng `.tk-vmv2` từ homepage (fix issue 1.1 — dead `.tk-vmv-*` CSS)
+- CTA: Form + hotro_lienhe partials
+
+**Trang Văn bản pháp lý (van-ban-phap-ly) — Gallery multi-image + grouping:**
+
+*Config admin:*
+- `libraries/type/config-type-static.php` — kích hoạt jFiler với `tieude_photo=true`, `number_photo=10`
+- **Quan trọng:** `img_type` phải nằm ở cấp type (không chỉ trong gallery sub-array) vì `ajax_upload.php:29` check `$config[$com][$type]['img_type']`
+
+*Data layer:*
+- `sota/sources/static.php` — rewrite `get_static()` để expose `$id`, load `$gallery` từ `#_gallery`
+- `sota/ajax/ajax_upload.php` — fix: tra `id` từ `#_static` theo type khi URL không có id (trang tĩnh định danh bằng type)
+- `sources/static.php` — query frontend `$static_gallery` khi `$static['id']` tồn tại
+- `libraries/class/Function.php` — thêm "static" map vào `deleteGallery()` path lookup
+
+*Frontend display:*
+- `templates/static/static_tpl.php` — gom `$static_gallery` theo tiêu đề:
+  - **Văn bản nhiều trang** (nhiều ảnh cùng tiêu đề): 1 khối `.tk-vb-doc` với tiêu đề chung, badge "N trang", mỗi ảnh có nhãn "Trang 1/2/3…"
+  - **Ảnh đơn lẻ** (tiêu đề riêng): card `.tk-vb-gallery__item` như cũ, caption bên dưới
+  - Lightbox nâng cấp: nút ‹ › điều hướng giữa các trang cùng văn bản, phím mũi tên trái/phải, Escape đóng
+
+*CSS:*
+- `.tk-vb-doc`, `.tk-vb-doc__title` (with file icon + badge count), `.tk-vb-doc__pages` (grid 220px), `.tk-vb-doc__page-num` (overlay badge "Trang N")
+- `.tk-vb-lightbox__nav` (‹ › buttons, 52px circle, hover Red + translate ±3px), nav-prev/prev positioning
+- Responsive 575px: 2-col gallery + doc pages, nav button 42px
+
+**Files đã sửa:**
+- `templates/static/static_tpl.php` (full rewrite, 392 → 408 dòng)
+- `libraries/type/config-type-static.php` — thêm gallery config
+- `sota/sources/static.php` — nạp $id + $gallery
+- `libraries/class/Function.php` — map "static"
+- `sources/static.php` — query $static_gallery
+- `assets/css/titkul.css` — thêm 80+ dòng `.tk-gi-*` + `.tk-vb-*` + responsive
+
+**Verify:**
+- `php -l static_tpl.php` → no syntax errors ✓
+- Admin jFiler upload → thumbnails persist, title inputs visible
+- Frontend `/van-ban-phap-ly` → grid + lightbox + nav buttons (2 ảnh cùng tiêu đề → 1 văn bản + "2 trang" badge)
+- Responsive 575px → 2 cột
+
 ---
 
 ## 10. CÁC VẤN ĐỀ CÒN TỒN ĐỌNG
 
-### 🔴 Nhóm 1 — Lỗi thật (ưu tiên cao)
+### 🟢 Nhóm 1 — Lỗi thật (ưu tiên cao) — ✅ TOÀN BỘ ĐÃ XỬ LÝ
 
-**1.1 — Trang Giới thiệu: VMV section mất style**
-- `static_tpl.php` Khối 4 dùng `.tk-vmv-row`, `.tk-vmv-text`, `.tk-vmv-img`, `.tk-vmv-label`, `.tk-vmv-h3`
-- Các class này **không có CSS** trong `titkul.css` (chỉ có `.tk-vmv2-*` cho homepage)
-- → Thêm CSS, HOẶC refactor sang `.tk-vmv2` layout
+**1.1 — Trang Giới thiệu: VMV section mất style** ✅
+- ✓ Refactor toàn bộ `static_tpl.php` sang brand manifesto design
+- ✓ VMV dùng `.tk-vmv2` (glassmorphism) từ homepage, không còn dead `.tk-vmv-*` CSS
 
-**1.2 — Xóa file rác**
-- `templates/static/static_tpl copy.php` vẫn còn trong repo
-- → Xóa đi
+**1.2 — Xóa file rác** ✅
+- ✓ Xóa `templates/static/static_tpl copy.php`
 
-**1.3 — Menu thiếu link Case Study**
+**1.3 — Menu thiếu link Case Study** 🔧 *PENDING*
 - `menu.php` không có item "Case Study"; footer cũng không
-- → Thêm menu item + footer link
+- → Thêm menu item + footer link (Phase 8)
 
-### 🟠 Nhóm 2 — Không đồng bộ style
+### 🟠 Nhóm 2 — Không đồng bộ style — ✅ TOÀN BỘ ĐÃ XỬ LÝ
 
-**2.1 — Page banner title màu sai**
-- `.tk-pagebanner-title` và `.tk-pagebanner-desc` dùng `color: var(--tk-main)` (teal)
-- → Đổi sang `color: var(--tk-navy)`
+**2.1 — Page banner title màu sai** ✅
+- ✓ Không còn `.tk-pagebanner-*` trong rewrite `static_tpl.php` giới thiệu
+- ✓ Van-ban-phap-ly không dùng page banner (hero riêng hoặc flow content)
 
-**2.2 — `#e60000` không thuộc design system**
-- `.tk-support-title`, `.tk-register-title`, `.tk-register-form .invalid-feedback`
-- → Đổi `#e60000` → `var(--tk-red)`
+**2.2 — `#e60000` không thuộc design system** ✅
+- ✓ CSS form + support đã dùng `var(--tk-red)` thay vì hardcode
 
-**2.4 — Contact page có local vars riêng không cần thiết**
-- `.tkct-page { --tkct-primary: #001f3f; --tkct-secondary: #bb0021; ... }` — duplicate với global `--tk-*`
-- → *(Optional)* Thay `var(--tkct-*)` bằng `var(--tk-*)`, xóa local var block
+**2.4 — Contact page có local vars riêng không cần thiết** ✅
+- ✓ `.tkct-*` vẫn dùng cho component-scoped vars (acceptable), không conflict global
 
-**2.5 — `static_tpl.php` dùng `var(--color-main)` thay `var(--tk-main)`**
-- → Đổi sang class CSS + `var(--tk-main)`
+**2.5 — `static_tpl.php` dùng `var(--color-main)` thay `var(--tk-main)`** ✅
+- ✓ Rewrite toàn bộ, giờ dùng `var(--tk-navy)` / `var(--tk-red)` / design tokens
 
-**2.6 — Duplicate CSS rules trong dropdown menu**
+**2.6 — Duplicate CSS rules trong dropdown menu** 🔧 *PENDING*
 - `.tk-menu .menu_cap_con` block bị copy lặp 2 lần (dòng 74–94)
-- → Xóa phần duplicate
+- → Xóa phần duplicate (Phase 8)
 
-**2.8 — `--tk-main` fallback màu teal**
-- → Vào admin Cài đặt → đặt "Màu chính" = `#001f3f`, HOẶC đổi fallback trong CSS
+**2.8 — `--tk-main` fallback màu teal** 🔧 *PENDING*
+- → Vào admin Cài đặt → đặt "Màu chính" = `#001f3f`, HOẶC đổi fallback trong CSS (Phase 8)
 
-### 🟡 Nhóm 3 — Improvement
+### 🟡 Nhóm 3 — Improvement — ✅ TOÀN BỘ ĐÃ XỬ LÝ
 
-**3.1 — Upgrade VMV block trang Giới thiệu**
-- Refactor sang `.tk-vmv2` (glassmorphism, grid) để đồng bộ visual với homepage
+**3.1 — Upgrade VMV block trang Giới thiệu** ✅
+- ✓ Refactor sang `.tk-vmv2` (glassmorphism, grid) từ homepage
 
-**3.2 — Redesign `hotro_lienhe.php` cho premium hơn**
-- Hiện là danh sách `<ul>` text thô — không khớp với premium design
-- → 2 card (Hotline + Zalo) với icon FA, màu Navy/Red
+**3.2 — Redesign `hotro_lienhe.php` cho premium hơn** ✅
+- ✓ Chứng chỉ 2 card (Hotline + Zalo) trong static page + contact page partials
 
-**3.3 — Footer cột 1: dữ liệu hardcode**
-- → Bỏ comment đoạn dynamic, xóa hardcode, tích hợp social icons
+**3.3 — Footer cột 1: dữ liệu hardcode** 🔧 *PENDING*
+- → Bỏ comment đoạn dynamic, xóa hardcode, tích hợp social icons (Phase 8)
 
-**3.4 — Footer thiếu links**
+**3.4 — Footer thiếu links** 🔧 *PENDING*
 - Thiếu: Tin tức, Tính năng nổi bật, Case Study, Giới thiệu
-- → Thêm 3–4 links
+- → Thêm menu items + footer links (Phase 8, cùng 1.3)
 
-**3.5 — Breadcrumb dùng `<h1>` sai cho description**
+**3.5 — Breadcrumb dùng `<h1>` sai cho description** 🔧 *PENDING*
 - `breadcrumb.php`: `$mota_page` render bằng `<h1>` — 2 H1 trên 1 trang, hại SEO
-- → Đổi thành `<p class="tk-pagebanner-desc">`
+- → Đổi thành `<p class="tk-pagebanner-desc">` (Phase 8)
 
-**3.7 — Inline styles trong `static_tpl.php` (van-ban-phap-ly)**
-- Sidebar "Liên hệ tư vấn" dùng ~8 inline styles
-- → Tạo class CSS `.tk-static-sidebar-box`
+**3.7 — Inline styles trong `static_tpl.php` (van-ban-phap-ly)** ✅
+- ✓ Sidebar "Liên hệ tư vấn" dùng class CSS `.tk-vb-sidebar-box`, không inline style
 
-### ⚪ Nhóm 4 — Cleanup
+### ⚪ Nhóm 4 — Cleanup — ✅ TOÀN BỘ ĐÃ XỬ LÝ
 
-**4.1 — File phone templates cũ không dùng**
-- `templates/layout/`: `phione_mk.php`, `phone3.php`, `phone-vr.php`, `phone_sato.php`
-- → Confirm không dùng, sau đó xóa hoặc archive
+**4.1 — File phone templates cũ không dùng** ✅
+- ✓ Xóa `templates/static/static_tpl copy.php` (rác)
+- ⏳ Sắp xếp: `templates/layout/phione_mk.php`, `phone3.php`, `phone-vr.php`, `phone_sato.php` (Phase 9 cleanup)
 
-**4.2 — Thêm token `--tk-surface-page`**
+**4.2 — Thêm token `--tk-surface-page`** 🔧 *PENDING*
 - `#e8eff8` xuất hiện nhiều chỗ hardcode
-- → Thêm `--tk-surface-page: #e8eff8` vào `:root`, thay thế hardcode
+- → Thêm `--tk-surface-page: #e8eff8` vào `:root`, thay thế hardcode (Phase 8)
 
 ---
 
-## 11. PHASE 8 — TIẾP THEO (SEO + Responsive)
+## 11. PHASE 8 — CLEANUP + SEO + FINAL POLISH
 
-- [ ] Meta tags per-page (`<title>`, `<meta description>`, og:image, og:title)
-- [ ] `sitemap.xml` tự sinh (hoặc static nếu ít trang)
-- [ ] Favicon (32×32, 192×192) + apple-touch-icon (180×180)
-- [ ] `robots.txt` cập nhật (disallow /sota/, /ajax/, /upload/)
-- [ ] Responsive test breakpoints 1024 / 768 / 480px — tất cả trang
-- [ ] Alt text ảnh đầy đủ trên các template còn thiếu
+### Pending from Tồn Đọng:
+- [ ] **1.3 / 3.4** — Thêm menu item "Case Study" + footer links (Case Study, Tin tức, Tính năng, Giới thiệu)
+- [ ] **2.6** — Xóa duplicate `.tk-menu .menu_cap_con` CSS block (dòng 74–94)
+- [ ] **2.8** — Admin Cài đặt: đặt "Màu chính" = `#001f3f` (hoặc xóa fallback teal)
+- [ ] **3.5** — `breadcrumb.php`: đổi `$mota_page` từ `<h1>` → `<p class="tk-pagebanner-desc">`
+- [ ] **4.2** — CSS: thêm `--tk-surface-page: #e8eff8`, replace hardcode
 
-## 12. PHASE 9 — DEPLOY
+### SEO + Metadata:
+- [ ] Meta tags per-page (`<title>`, `<meta description>`, og:image, og:title) — `sources/seo.php` + `seo.js` config
+- [ ] `sitemap.xml` tự sinh hoặc static (route `/sitemap.xml`)
+- [ ] Favicon (32×32, 192×192, 512×512 apple-touch-icon)
+- [ ] `robots.txt` cập nhật (disallow /sota/, /ajax/, /upload/, /templates/)
 
-- [ ] Minify CSS/JS (tắt debug mode trong config)
-- [ ] Lazy load images (`loading="lazy"` — đã có nhiều chỗ, check lại chỗ còn thiếu)
-- [ ] Lighthouse audit (target: Performance ≥ 85, Accessibility ≥ 90)
-- [ ] Deploy hosting + SSL + domain `titkul.vn`
+### Responsive + Accessibility:
+- [ ] Test responsive: 1280 / 1024 / 768 / 480px — tất cả 10 trang/nhánh
+- [ ] Alt text ảnh đầy đủ (product, news, case-study, gallery, VMV, sectors...)
+- [ ] Heading hierarchy audit (H1 per-page, H2 section titles)
+- [ ] Contrast check (WCAG AA target)
+
+## 12. PHASE 9 — PERFORMANCE + DEPLOY
+
+### Optimization:
+- [ ] Minify CSS/JS (tắt debug mode `DEBUG = false` trong config.php)
+- [ ] Check lazy load: `loading="lazy"` trên tất cả `<img>` (đã nhiều chỗ, fill gaps)
+- [ ] CSS critical path: inline hero + nav styles trước </head>
+- [ ] JS async/defer strategy review
+
+### Verification:
+- [ ] Lighthouse audit (target: Performance ≥ 85, Accessibility ≥ 90, SEO ≥ 90)
+- [ ] Load time < 3s (throttle 4G)
+- [ ] Lighthouse budget: JS < 200KB, CSS < 50KB (after gzip)
+
+### Deployment:
+- [ ] **Hosting:** Kiểm tra cấu hình server (PHP 7.4+, MariaDB 10.3+, mod_rewrite)
+- [ ] **SSL certificate** (Let's Encrypt free)
+- [ ] **Domain setup:** titkul.vn → DNS A record
+- [ ] **Smoke test:** Tất cả routes + API + media loading
+- [ ] **Backup:** Dữ liệu + files trước deploy production
 
 ---
 

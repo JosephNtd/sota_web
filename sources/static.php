@@ -2,7 +2,12 @@
 	if(!defined('SOURCES')) die("Error");
 	
 	/* Lấy bài viết tĩnh */
-	$static = $d->rawQueryOne("select id, type, ten$lang, noidung$lang, photo, ngaytao, ngaysua, options from #_static where type = ? limit 0,1",array($type));
+	$static = $d->rawQueryOne("select id, type, ten$lang, mota$lang, noidung$lang, photo, ngaytao, ngaysua, options from #_static where type = ? limit 0,1",array($type));
+
+	/* Album hình ảnh đính kèm (mỗi ảnh có tiêu đề) */
+	$static_gallery = array();
+	if(!empty($static['id']))
+		$static_gallery = $d->rawQuery("select photo, tenvi, ten$lang from #_gallery where id_photo = ? and com = 'static' and type = ? and kind = 'man' and val = ? and hienthi > 0 order by stt,id asc", array($static['id'], $type, $type));
 
 	$seopage = $d->rawQueryOne("select * from #_seopage where type = ? limit 0,1",array($type));
 	$banner=$seopage['banner']; 

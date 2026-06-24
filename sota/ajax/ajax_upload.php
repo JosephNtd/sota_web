@@ -10,6 +10,14 @@
 	$id = (isset($params['id']) && $params['id']) ? $params['id'] : 0;
 	$com = (isset($params['com']) && $params['com'] != '') ? $params['com'] : '';
 	$type = (isset($params['type']) && $params['type'] != '') ? $params['type'] : '';
+
+	/* Trang tĩnh định danh bằng type (URL không có id) → tra id theo type để ảnh gắn đúng bài */
+	if(!$id && $com == 'static' && $type != '')
+	{
+		$rowStatic = $d->rawQueryOne("select id from #_static where type = ? limit 0,1", array($type));
+		if(!empty($rowStatic['id'])) $id = $rowStatic['id'];
+	}
+
 	$hash = (isset($_POST['hash'])) ? addslashes($_POST['hash']) : '';
 	$stt = (isset($_POST['stt'])) ? (int)$_POST['stt'] : 0;
 	$e = (isset($params['act']) && $params['act'] != '') ? @explode("_", $params['act']) : null;

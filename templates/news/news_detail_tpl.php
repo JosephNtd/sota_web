@@ -827,7 +827,17 @@
 
     <?php
     $has_tt_gallery = (isset($hinhanhtt) && count($hinhanhtt) > 0);
+    // Ước lượng thời gian đọc (~200 từ/phút)
+    $tt_plain = !empty($row_detail['noidung' . $lang]) ? trim(strip_tags(htmlspecialchars_decode($row_detail['noidung' . $lang]))) : '';
+    $tt_words = $tt_plain !== '' ? count(preg_split('/\s+/u', $tt_plain)) : 0;
+    $tt_readmin = $tt_words > 0 ? max(1, (int) ceil($tt_words / 200)) : 0;
+    // URL chia sẻ (fallback; JS sẽ dùng location.href thực tế)
+    $tt_share_url = (isset($func) && method_exists($func, 'getPageURL')) ? $func->getPageURL() : '';
+    $tt_share_title = $row_detail['ten' . $lang];
     ?>
+    <!-- Thanh tiến trình đọc -->
+    <div class="tknews-readbar" id="tknewsReadbar" aria-hidden="true"></div>
+
     <!-- SECTION 1: Article Hero — ảnh cover full-width + overlay navy + title -->
     <section class="tknews-detail-hero tk-sec">
         <?php if (!empty($row_detail['photo'])) { ?>
@@ -846,6 +856,9 @@
                 <span><i class="far fa-calendar-alt"></i> <?= date("d/m/Y", $row_detail['ngaytao']) ?></span>
                 <?php if (!empty($row_detail['luotxem'])) { ?>
                     <span><i class="far fa-eye"></i> <?= number_format($row_detail['luotxem']) ?> lượt xem</span>
+                <?php } ?>
+                <?php if ($tt_readmin > 0) { ?>
+                    <span><i class="far fa-clock"></i> <?= $tt_readmin ?> phút đọc</span>
                 <?php } ?>
             </div>
         </div>
@@ -1103,30 +1116,88 @@
 
     <?php }  ?>
 
-    <!-- SECTION 2: Article Body — single-column reading -->
+    <!-- SECTION 2: Article Body — 2 cột: nội dung + sidebar sticky (TOC + chia sẻ) -->
     <section class="tknews-detail-body tk-sec">
         <div class="fixwidth">
-            <article class="tknews-detail-article tk-rv tk-rv--up tk-d1">
-                <?php if (!empty($row_detail['mota' . $lang])) { ?>
-                    <p class="tknews-detail-article__lead"><?= $row_detail['mota' . $lang] ?></p>
-                <?php } ?>
+            <div class="tknews-detail-layout">
 
-                <?php if (!empty($row_detail['noidung' . $lang])) { ?>
-                    <div class="tknews-detail-article__content" id="toc-content">
-                        <?= htmlspecialchars_decode($row_detail['noidung' . $lang]) ?>
+                <!-- Sidebar sticky -->
+                <aside class="tknews-detail-aside">
+                    <div class="tknews-detail-aside__sticky">
+                        <!-- Mục lục (JS tự sinh từ H2/H3; ẩn nếu không có) -->
+                        <nav class="tknews-toc" id="tknewsToc" hidden aria-label="Mục lục bài viết">
+                            <p class="tknews-toc__title"><i class="fas fa-stream"></i> Trong bài viết</p>
+                            <ul class="tknews-toc__list" id="tknewsTocList"></ul>
+                        </nav>
+
+                        <!-- Chia sẻ -->
+                        <div class="tknews-share" id="tknewsShare"
+                            data-url="<?= htmlspecialchars($tt_share_url) ?>"
+                            data-title="<?= htmlspecialchars($tt_share_title) ?>">
+                            <span class="tknews-share__label">Chia sẻ bài viết</span>
+                            <div class="tknews-share__btns">
+                                <a class="tknews-share__btn tknews-share__btn--fb" data-net="facebook" href="#" target="_blank" rel="noopener nofollow" title="Chia sẻ lên Facebook" aria-label="Chia sẻ lên Facebook">
+                                    <i class="fab fa-facebook-f"></i>
+                                </a>
+                                <a class="tknews-share__btn tknews-share__btn--zalo" data-net="zalo" href="#" target="_blank" rel="noopener nofollow" title="Chia sẻ qua Zalo" aria-label="Chia sẻ qua Zalo">
+                                    <i class="fas fa-comment"></i>
+                                </a>
+                                <button type="button" class="tknews-share__btn tknews-share__btn--copy" data-net="copy" title="Sao chép liên kết" aria-label="Sao chép liên kết">
+                                    <i class="fas fa-link"></i>
+                                </button>
+                            </div>
+                            <span class="tknews-share__toast" id="tknewsShareToast">Đã sao chép liên kết!</span>
+                        </div>
                     </div>
-                <?php } else { ?>
-                    <div class="alert alert-warning"><strong><?= noidungdangcapnhat ?></strong></div>
-                <?php } ?>
+                </aside>
 
-                <div class="tknews-detail-article__footer">
-                    <a class="tknews-detail-back" href="tin-tuc">
-                        <i class="fas fa-arrow-left"></i> Quay lại danh sách tin tức
-                    </a>
-                </div>
-            </article>
+                <!-- Nội dung bài -->
+                <article class="tknews-detail-article tk-rv tk-rv--up tk-d1">
+                    <?php if (!empty($row_detail['mota' . $lang])) { ?>
+                        <p class="tknews-detail-article__lead"><?= $row_detail['mota' . $lang] ?></p>
+                    <?php } ?>
+
+                    <?php if (!empty($row_detail['noidung' . $lang])) { ?>
+                        <div class="tknews-detail-article__content" id="toc-content">
+                            <?= htmlspecialchars_decode($row_detail['noidung' . $lang]) ?>
+                        </div>
+                    <?php } else { ?>
+                        <div class="alert alert-warning"><strong><?= noidungdangcapnhat ?></strong></div>
+                    <?php } ?>
+
+                    <div class="tknews-detail-article__footer">
+                        <a class="tknews-detail-back" href="tin-tuc">
+                            <i class="fas fa-arrow-left"></i> Quay lại danh sách tin tức
+                        </a>
+                    </div>
+                </article>
+
+            </div>
         </div>
     </section>
+
+    <!-- SECTION 2.5: Điều hướng Bài trước / Bài sau -->
+    <?php if (!empty($news_prev) || !empty($news_next)) { ?>
+        <section class="tknews-detail-pager tk-sec">
+            <div class="fixwidth">
+                <div class="tknews-pager">
+                    <?php if (!empty($news_prev)) { ?>
+                        <a class="tknews-pager__item tknews-pager__item--prev tk-rv tk-rv--left tk-d1" href="<?= $news_prev[$sluglang] ?>">
+                            <span class="tknews-pager__dir"><i class="fas fa-arrow-left"></i> Bài trước</span>
+                            <span class="tknews-pager__title"><?= htmlspecialchars($news_prev['ten' . $lang]) ?></span>
+                        </a>
+                    <?php } else { ?><span class="tknews-pager__item tknews-pager__item--empty"></span><?php } ?>
+
+                    <?php if (!empty($news_next)) { ?>
+                        <a class="tknews-pager__item tknews-pager__item--next tk-rv tk-rv--right tk-d1" href="<?= $news_next[$sluglang] ?>">
+                            <span class="tknews-pager__dir">Bài sau <i class="fas fa-arrow-right"></i></span>
+                            <span class="tknews-pager__title"><?= htmlspecialchars($news_next['ten' . $lang]) ?></span>
+                        </a>
+                    <?php } else { ?><span class="tknews-pager__item tknews-pager__item--empty"></span><?php } ?>
+                </div>
+            </div>
+        </section>
+    <?php } ?>
 
     <!-- SECTION 3: Related Articles -->
     <?php if (isset($news) && count($news) > 0) { ?>
@@ -1199,6 +1270,126 @@
                 document.addEventListener('DOMContentLoaded', initReveal);
             } else {
                 initReveal();
+            }
+        })();
+    </script>
+
+    <!-- Reading progress + Sticky TOC + Share -->
+    <script>
+        (function() {
+            function initArticleUX() {
+                /* ── Thanh tiến trình đọc ── */
+                var readbar = document.getElementById('tknewsReadbar');
+                var article = document.querySelector('.tknews-detail-article');
+                if (readbar && article) {
+                    var updateBar = function() {
+                        var rect = article.getBoundingClientRect();
+                        var total = article.offsetHeight - window.innerHeight;
+                        var p = total > 0 ? Math.min(Math.max(-rect.top / total, 0), 1) : 0;
+                        readbar.style.width = (p * 100) + '%';
+                    };
+                    window.addEventListener('scroll', updateBar, { passive: true });
+                    window.addEventListener('resize', updateBar);
+                    updateBar();
+                }
+
+                /* ── Mục lục (TOC) tự sinh từ H2/H3 ── */
+                var content = document.getElementById('toc-content');
+                var toc = document.getElementById('tknewsToc');
+                var tocList = document.getElementById('tknewsTocList');
+                if (content && toc && tocList) {
+                    var heads = content.querySelectorAll('h2, h3');
+                    if (heads.length >= 2) {
+                        var items = [];
+                        Array.prototype.forEach.call(heads, function(h, i) {
+                            if (!h.id) h.id = 'tt-h-' + i;
+                            var li = document.createElement('li');
+                            li.className = 'tknews-toc__item' + (h.tagName === 'H3' ? ' is-sub' : '');
+                            var a = document.createElement('a');
+                            a.href = '#' + h.id;
+                            a.className = 'tknews-toc__link';
+                            a.textContent = h.textContent;
+                            a.addEventListener('click', function(e) {
+                                e.preventDefault();
+                                var top = h.getBoundingClientRect().top + window.pageYOffset - 90;
+                                window.scrollTo({ top: top, behavior: 'smooth' });
+                            });
+                            li.appendChild(a);
+                            tocList.appendChild(li);
+                            items.push({ h: h, a: a });
+                        });
+                        toc.hidden = false;
+
+                        if ('IntersectionObserver' in window) {
+                            var spy = new IntersectionObserver(function(entries) {
+                                entries.forEach(function(en) {
+                                    if (en.isIntersecting) {
+                                        items.forEach(function(it) {
+                                            it.a.classList.toggle('is-active', it.h === en.target);
+                                        });
+                                    }
+                                });
+                            }, { rootMargin: '-80px 0px -70% 0px', threshold: 0 });
+                            Array.prototype.forEach.call(heads, function(h) { spy.observe(h); });
+                        }
+                    }
+                }
+
+                /* ── Chia sẻ ── */
+                var share = document.getElementById('tknewsShare');
+                if (share) {
+                    var url = window.location.href;
+                    var title = share.getAttribute('data-title') || document.title;
+                    var enc = encodeURIComponent(url);
+                    var fb = share.querySelector('[data-net="facebook"]');
+                    var zalo = share.querySelector('[data-net="zalo"]');
+                    var copy = share.querySelector('[data-net="copy"]');
+
+                    if (fb) fb.href = 'https://www.facebook.com/sharer/sharer.php?u=' + enc;
+                    if (zalo) zalo.href = 'https://sp.zalo.me/plugins/share?url=' + enc;
+
+                    [fb, zalo].forEach(function(btn) {
+                        if (!btn) return;
+                        btn.addEventListener('click', function(e) {
+                            e.preventDefault();
+                            window.open(this.href, '_blank', 'width=620,height=540,noopener');
+                        });
+                    });
+
+                    if (copy) {
+                        var fallbackCopy = function(text) {
+                            var ta = document.createElement('textarea');
+                            ta.value = text;
+                            ta.style.position = 'fixed';
+                            ta.style.opacity = '0';
+                            document.body.appendChild(ta);
+                            ta.select();
+                            try { document.execCommand('copy'); } catch (err) {}
+                            document.body.removeChild(ta);
+                        };
+                        var flashToast = function() {
+                            share.classList.add('is-copied');
+                            setTimeout(function() { share.classList.remove('is-copied'); }, 1800);
+                        };
+                        copy.addEventListener('click', function() {
+                            if (navigator.clipboard && navigator.clipboard.writeText) {
+                                navigator.clipboard.writeText(url).then(flashToast, function() {
+                                    fallbackCopy(url);
+                                    flashToast();
+                                });
+                            } else {
+                                fallbackCopy(url);
+                                flashToast();
+                            }
+                        });
+                    }
+                }
+            }
+
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', initArticleUX);
+            } else {
+                initArticleUX();
             }
         })();
     </script>

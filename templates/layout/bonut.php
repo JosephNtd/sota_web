@@ -15,5 +15,8 @@
         <img src="assets/images/zalo1.png" alt="Zalo" onerror="this.style.display='none';" />
         <span class="tk-float-label">Zalo</span>
     </a>
+    <div class="row-mb-3">
+        <label class="col-form-label"> g</label>
+    </div>
     <?php } ?>
 </div>

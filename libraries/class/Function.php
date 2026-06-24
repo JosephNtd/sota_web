@@ -427,7 +427,7 @@
 		public function deleteGallery()
 		{
 			$row = $this->d->rawQuery("select id, com, photo from #_gallery where hash != '' and ngaytao < ".(time()-3*3600));
-			$array = array("product" => UPLOAD_PRODUCT, "news" => UPLOAD_NEWS);
+			$array = array("product" => UPLOAD_PRODUCT, "news" => UPLOAD_NEWS, "static" => UPLOAD_STATIC);
 
 			if($row)
 			{

@@ -121,7 +121,7 @@
     text-transform: uppercase;
     font-size: 14px;
     text-decoration: none;
-    transition: color .2s;
+    transition: color .2s, box-shadow .2s;
 }
 
 .tk-menu>li>a i {
@@ -131,11 +131,8 @@
 
 .tk-menu>li:hover>a,
 .tk-menu>li.active>a {
-    color: var(--tk-main);
-}
-
-.tk-menu>li.active>a {
-    border-bottom: 3px solid var(--tk-main);
+    color: var(--tk-dark);
+    box-shadow: inset 0 -3px 0 var(--tk-red);
 }
 
 /* dropdown — !important cần vì style.css gốc dùng !important cho color/padding/background */
@@ -527,211 +524,644 @@
     }
 }
 
-/* 
-   PRODUCT DETAIL — Hero + Info (Phase 4.4b)
+/*
+   PRODUCT DETAIL — Redesign "SaaS Micro Landing Page" (Phase 7.x)
+   Prefix: .tk-pd-*  | Tokens: --tk-navy, --tk-red, --tk-dark...
+   Keyframes dùng chung: tkFloating (def ~3186), tkCsdCtaGradient (def ~9786)
  */
-/* --- Section 1: Hero 2 cột --- */
-.tk-prodetail-hero {
-    background: #e8eff8;
-    padding: 60px 0 50px;
-}
 
-.tk-prodetail-hero__inner {
-    display: flex;
-    align-items: center;
-    gap: 40px;
-}
-
-.tk-prodetail-hero__left {
-    flex: 1;
-}
-
-.tk-prodetail-hero__right {
-    flex: 1;
-    text-align: center;
-}
-
-.tk-prodetail-hero__right img {
-    max-width: 100%;
-    max-height: 500px;
-    object-fit: contain;
-    animation: tkFloating 3s ease-in-out infinite;
-}
-
-@keyframes tkFloating {
-    0%, 100% {
-        transform: translateY(0);
-    }
-    50% {
-        transform: translateY(-8px);
-    }
-}
-
-.tk-prodetail-hero__tagline {
-    font-size: 28px;
-    font-weight: 800;
-    font-style: italic;
-    color: var(--tk-dark);
-    text-transform: uppercase;
-    line-height: 1.35;
-    margin: 0 0 24px;
-}
-
-.tk-prodetail-hero__name {
-    font-size: 48px;
-    font-weight: 900;
-    font-style: italic;
-    color: #c0392b;
-    margin: 0 0 14px;
-    line-height: 1.15;
-}
-
-.tk-prodetail-hero__subtitle {
-    font-size: 18px;
-    font-weight: 600;
-    font-style: italic;
-    color: var(--tk-dark);
-    margin: 0 0 30px;
-}
-
-.tk-prodetail-hero__dltext {
-    font-size: 14px;
-    font-style: italic;
-    color: #666;
-    margin: 0 0 16px;
-}
-
-.tk-prodetail-hero__badges {
-    display: flex;
-    gap: 24px;
-    align-items: center;
-    flex-wrap: nowrap;
-}
-
-.tk-prodetail-hero__badges a {
+/* --- Shared atoms --- */
+.tk-pd-eyebrow {
     display: inline-block;
-    transition: transform .2s;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--tk-red);
+    background: rgba(187, 0, 33, .08);
+    padding: 6px 14px;
+    border-radius: 20px;
+    margin-bottom: 14px;
 }
 
-.tk-prodetail-hero__badges a:hover {
-    transform: scale(1.05);
+.tk-pd-eyebrow--light {
+    color: #fff;
+    background: rgba(255, 255, 255, .18);
 }
 
-.tk-prodetail-hero__badges img {
-    height: 52px;
-    width: auto;
-}
-
-/* --- Section 2: Logo + Mô tả --- */
-.tk-prodetail-info {
-    padding: 50px 0 40px;
-    background: #fff;
-    text-align: center;
-}
-
-.tk-prodetail-info__name {
-    font-size: 46px;
-    font-weight: 900;
-    color: var(--tk-dark);
-    margin: 0 0 24px;
+.tk-pd-sec-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 34px;
+    font-weight: 800;
+    color: var(--tk-navy);
     line-height: 1.2;
+    margin: 0;
 }
 
-.tk-prodetail-info__desc {
-    max-width: 860px;
-    margin: 0 auto;
-    text-align: left;
+.tk-pd-accent {
+    color: var(--tk-red);
+}
+
+.tk-pd-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 13px 30px;
+    border-radius: 30px;
+    font-size: 15px;
+    font-weight: 700;
+    text-decoration: none;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: transform .25s, background .25s, color .25s, border-color .25s, box-shadow .25s;
+}
+
+.tk-pd-btn i {
+    transition: transform .25s;
+}
+
+.tk-pd-btn:hover i {
+    transform: translateX(4px);
+}
+
+.tk-pd-btn--primary {
+    background: var(--tk-red);
+    color: #fff;
+    box-shadow: 0 8px 22px rgba(187, 0, 33, .28);
+}
+
+.tk-pd-btn--primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(187, 0, 33, .38);
+    color: #fff;
+}
+
+.tk-pd-btn--ghost {
+    background: transparent;
+    color: #fff;
+    border-color: rgba(255, 255, 255, .45);
+}
+
+.tk-pd-btn--ghost:hover {
+    background: rgba(255, 255, 255, .12);
+    border-color: #fff;
+    color: #fff;
+}
+
+.tk-pd-btn--ghost-navy {
+    background: transparent;
+    color: var(--tk-navy);
+    border-color: var(--tk-navy);
+}
+
+.tk-pd-btn--ghost-navy:hover {
+    background: var(--tk-navy);
+    color: #fff;
+}
+
+.tk-pd-btn--light {
+    background: #fff;
+    color: var(--tk-navy);
+}
+
+.tk-pd-btn--light:hover {
+    transform: translateY(-3px);
+    color: var(--tk-red);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, .25);
+}
+
+/* Prose (CKEditor content) */
+.tk-pd-prose {
     font-size: 16px;
     line-height: 1.8;
     color: var(--tk-text);
 }
 
-/* --- Section 3: Heading HDSD --- */
-.tk-prodetail-hdsd-heading {
-    padding: 50px 0 10px;
-    background: #fff;
+.tk-pd-prose p {
+    margin: 0 0 14px;
+}
+
+.tk-pd-prose img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.tk-pd-prose ul,
+.tk-pd-prose ol {
+    padding-left: 22px;
+    margin: 0 0 14px;
+}
+
+.tk-pd-prose li {
+    margin-bottom: 6px;
+}
+
+.tk-pd-prose h2,
+.tk-pd-prose h3,
+.tk-pd-prose h4 {
+    color: var(--tk-navy);
+    margin: 22px 0 10px;
+}
+
+/* ===== SECTION 1 — HERO ===== */
+.tk-pd-hero {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, #001226 0%, var(--tk-navy) 55%, #002a52 100%);
+    padding: 80px 0 70px;
+}
+
+.tk-pd-hero__bg {
+    position: absolute;
+    inset: 0;
+    background-image:
+        radial-gradient(circle at 85% 15%, rgba(187, 0, 33, .25), transparent 40%),
+        radial-gradient(circle at 10% 90%, rgba(0, 100, 200, .22), transparent 45%);
+    background-size: cover;
+    pointer-events: none;
+}
+
+.tk-pd-hero__bg::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: linear-gradient(rgba(255, 255, 255, .04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, .04) 1px, transparent 1px);
+    background-size: 44px 44px;
+    mask-image: radial-gradient(circle at 50% 40%, #000 0%, transparent 75%);
+    -webkit-mask-image: radial-gradient(circle at 50% 40%, #000 0%, transparent 75%);
+}
+
+.tk-pd-hero__inner {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    gap: 50px;
+}
+
+.tk-pd-hero__left {
+    flex: 1;
+    min-width: 0;
+}
+
+.tk-pd-hero__eyebrow {
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #fff;
+    background: rgba(255, 255, 255, .12);
+    border: 1px solid rgba(255, 255, 255, .25);
+    padding: 6px 16px;
+    border-radius: 20px;
+    margin-bottom: 18px;
+}
+
+.tk-pd-hero__title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 54px;
+    font-weight: 900;
+    color: #fff;
+    line-height: 1.08;
+    margin: 0 0 18px;
+}
+
+.tk-pd-hero__desc {
+    font-size: 18px;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, .82);
+    max-width: 540px;
+    margin: 0 0 30px;
+}
+
+.tk-pd-hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-bottom: 30px;
+}
+
+.tk-pd-hero__badges {
+    display: flex;
+    gap: 14px;
+    align-items: center;
+}
+
+.tk-pd-hero__badges img {
+    height: 46px;
+    width: auto;
+    transition: transform .25s;
+}
+
+.tk-pd-hero__badges a:hover img {
+    transform: scale(1.05);
+}
+
+.tk-pd-hero__right {
+    position: relative;
+    flex: 0 0 44%;
+    max-width: 44%;
     text-align: center;
 }
 
-.tk-prodetail-hdsd-heading__title {
-    font-size: 32px;
-    font-weight: 800;
-    font-style: italic;
-    color: var(--tk-main);
-    text-transform: uppercase;
-    margin: 0;
-    line-height: 1.3;
+.tk-pd-hero__right img {
+    position: relative;
+    z-index: 1;
+    max-width: 100%;
+    max-height: 480px;
+    object-fit: contain;
+    animation: tkFloating 3.5s ease-in-out infinite;
+    filter: drop-shadow(0 30px 50px rgba(0, 0, 0, .45));
 }
 
-/* --- Section 4: Cards HDSD --- */
-.tk-prodetail-hdsd-cards {
-    padding: 20px 0 40px;
-    background: #fff;
+.tk-pd-hero__glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 420px;
+    height: 420px;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(circle, rgba(187, 0, 33, .35), transparent 65%);
+    filter: blur(20px);
+    pointer-events: none;
 }
 
-.tk-prodetail-hdsd-cards__grid {
+/* ===== SECTION 2 — HIGHLIGHT STRIP ===== */
+.tk-pd-highlights {
+    background: var(--tk-bg);
+    padding: 56px 0;
+}
+
+.tk-pd-highlights__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 22px;
+}
+
+.tk-pd-hl {
     display: flex;
-    justify-content: center;
-    gap: 28px;
-    flex-wrap: wrap;
+    align-items: center;
+    gap: 14px;
+    background: #fff;
+    border: 1px solid var(--tk-border-subtle);
+    border-left: 4px solid var(--tk-red);
+    border-radius: 14px;
+    padding: 18px 20px;
+    box-shadow: var(--tk-shadow-card);
+    transition: transform .25s, box-shadow .25s;
 }
 
-.tk-prodetail-hdsd-card {
+.tk-pd-hl:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 14px 30px rgba(0, 31, 63, .12);
+}
+
+.tk-pd-hl__icon {
+    flex: 0 0 48px;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--tk-navy);
+    border-radius: 12px;
+    padding: 10px;
+}
+
+.tk-pd-hl__icon img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
+}
+
+.tk-pd-hl__name {
+    margin: 0;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--tk-navy);
+    line-height: 1.35;
+}
+
+/* ===== SECTION 3 — OVERVIEW ===== */
+.tk-pd-overview {
+    background: #fff;
+    padding: 70px 0;
+}
+
+.tk-pd-overview__head {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.tk-pd-overview__body {
+    max-width: 860px;
+    margin: 0 auto;
+}
+
+/* ===== SECTION 4 — FEATURE TABS ===== */
+.tk-pd-features {
+    background: var(--tk-bg);
+    padding: 70px 0;
+}
+
+.tk-pd-features__head {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.tk-pd-tabs {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: 30px;
+    align-items: start;
+}
+
+.tk-pd-tabs__nav {
     display: flex;
     flex-direction: column;
+    gap: 10px;
+}
+
+.tk-pd-tab {
+    display: flex;
     align-items: center;
-    width: 200px;
-    padding: 24px 16px;
-    border: 2px solid var(--tk-main);
-    border-radius: 14px;
-    text-decoration: none;
-    transition: transform .25s, box-shadow .25s;
+    gap: 14px;
+    width: 100%;
+    text-align: left;
     background: #fff;
+    border: 1px solid var(--tk-border-subtle);
+    border-radius: 14px;
+    padding: 14px 16px;
+    cursor: pointer;
+    transition: background .25s, border-color .25s, transform .2s, box-shadow .25s;
 }
 
-.tk-prodetail-hdsd-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 12px 28px rgba(0, 0, 0, .1);
+.tk-pd-tab:hover {
+    transform: translateX(4px);
+    border-color: var(--tk-navy);
 }
 
-.tk-prodetail-hdsd-card__icon {
-    margin-bottom: 16px;
+.tk-pd-tab.is-active {
+    background: var(--tk-navy);
+    border-color: var(--tk-navy);
+    box-shadow: 0 10px 26px rgba(0, 31, 63, .22);
 }
 
-.tk-prodetail-hdsd-card__icon img {
-    width: 72px;
-    height: 72px;
+.tk-pd-tab__icon {
+    flex: 0 0 40px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 31, 63, .06);
+    border-radius: 10px;
+    padding: 8px;
+    transition: background .25s;
+}
+
+.tk-pd-tab.is-active .tk-pd-tab__icon {
+    background: rgba(255, 255, 255, .9);
+}
+
+.tk-pd-tab__icon img {
+    max-width: 100%;
+    max-height: 100%;
     object-fit: contain;
 }
 
-.tk-prodetail-hdsd-card__name {
-    font-size: 14px;
+.tk-pd-tab__label {
+    font-size: 15px;
     font-weight: 700;
-    text-transform: uppercase;
-    color: var(--tk-dark);
-    text-align: center;
-    margin: 0;
-    line-height: 1.5;
+    color: var(--tk-navy);
+    line-height: 1.35;
+    transition: color .25s;
 }
 
-/* --- Section 5: Gallery ảnh --- */
-.tk-prodetail-gallery {
-    padding: 40px 0;
+.tk-pd-tab.is-active .tk-pd-tab__label {
+    color: #fff;
+}
+
+.tk-pd-tabs__panels {
+    position: relative;
     background: #fff;
+    border: 1px solid var(--tk-border-subtle);
+    border-radius: var(--tk-radius-card);
+    box-shadow: var(--tk-shadow-card);
+    min-height: 260px;
+    overflow: hidden;
 }
 
-.tk-prodetail-gallery__grid {
+.tk-pd-panel {
+    display: none;
+    gap: 28px;
+    padding: 40px;
+    align-items: center;
+    animation: tkPdFade .4s ease;
+}
+
+.tk-pd-panel.is-active {
+    display: flex;
+}
+
+@keyframes tkPdFade {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.tk-pd-panel__icon {
+    flex: 0 0 120px;
+    width: 120px;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 31, 63, .06);
+    border-radius: 20px;
+    padding: 26px;
+}
+
+.tk-pd-panel__icon img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.tk-pd-panel__title {
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--tk-navy);
+    margin: 0 0 12px;
+}
+
+/* ===== SECTION 5 — FEATURE BANNER ===== */
+.tk-pd-banner {
+    position: relative;
+    background-size: cover;
+    background-position: center;
+    padding: 0;
+    overflow: hidden;
+}
+
+.tk-pd-banner__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, rgba(0, 18, 38, .9) 0%, rgba(0, 31, 63, .72) 50%, rgba(0, 31, 63, .45) 100%);
+}
+
+.tk-pd-banner__inner {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    gap: 50px;
+    min-height: 360px;
+    padding: 50px 0;
+}
+
+.tk-pd-banner__mockup {
+    flex: 0 0 300px;
+    max-width: 300px;
+    text-align: center;
+}
+
+.tk-pd-banner__mockup img {
+    max-width: 100%;
+    max-height: 320px;
+    object-fit: contain;
+    filter: drop-shadow(0 20px 40px rgba(0, 0, 0, .5));
+    animation: tkFloating 3.5s ease-in-out infinite;
+}
+
+.tk-pd-banner__text h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 38px;
+    font-weight: 800;
+    color: #fff;
+    line-height: 1.2;
+    margin: 0;
+}
+
+.tk-pd-banner__brand {
+    color: #fff;
+    font-size: 48px;
+    font-weight: 900;
+}
+
+/* ===== SECTION 6 — BENEFITS ===== */
+.tk-pd-benefits {
+    background: var(--tk-navy);
+    padding: 72px 0;
+}
+
+.tk-pd-benefits__head {
+    text-align: center;
+    margin-bottom: 44px;
+}
+
+.tk-pd-benefits__head .tk-pd-sec-title {
+    color: #fff;
+}
+
+.tk-pd-benefits__head .tk-pd-accent {
+    color: #ff5a6e;
+}
+
+.tk-pd-benefits__grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 8px;
+    gap: 26px;
 }
 
-.tk-prodetail-gallery__item {
+.tk-pd-benefit {
+    background: rgba(255, 255, 255, .06);
+    border: 1px solid rgba(255, 255, 255, .12);
+    border-radius: var(--tk-radius-card);
+    padding: 32px 26px;
+    text-align: center;
+    transition: transform .25s, background .25s, border-color .25s;
+}
+
+.tk-pd-benefit:hover {
+    transform: translateY(-6px);
+    background: rgba(255, 255, 255, .1);
+    border-color: rgba(255, 90, 110, .5);
+}
+
+.tk-pd-benefit__icon {
+    width: 72px;
+    height: 72px;
+    margin: 0 auto 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--tk-red), #e63950);
+    border-radius: 18px;
+    padding: 18px;
+}
+
+.tk-pd-benefit__icon img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
+}
+
+.tk-pd-benefit__name {
+    font-size: 19px;
+    font-weight: 700;
+    color: #fff;
+    margin: 0 0 10px;
+}
+
+.tk-pd-benefit__desc {
+    font-size: 14.5px;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, .72);
+    margin: 0;
+}
+
+/* ===== SECTION 7 — GALLERY ===== */
+.tk-pd-gallery {
+    background: #fff;
+    padding: 70px 0;
+}
+
+.tk-pd-gallery__head {
+    text-align: center;
+    margin-bottom: 36px;
+}
+
+.tk-pd-gallery__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.tk-pd-gallery__item {
+    position: relative;
+    display: block;
+    width: 100%;
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+    border-radius: var(--tk-radius-card);
     overflow: hidden;
-    border-radius: 8px;
+    background: var(--tk-bg);
+    aspect-ratio: 16 / 10;
+    box-shadow: var(--tk-shadow-card);
 }
 
-.tk-prodetail-gallery__item img {
+.tk-pd-gallery__item--lead {
+    grid-column: span 2;
+    aspect-ratio: 21 / 9;
+}
+
+.tk-pd-gallery__item img {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -739,752 +1169,438 @@
     transition: transform .4s;
 }
 
-.tk-prodetail-gallery__item:hover img {
+.tk-pd-gallery__item:hover img {
     transform: scale(1.05);
 }
 
-/* --- Section 6: Mô tả chức năng (func-intro) --- */
-.tk-prodetail-func-intro {
-    background: #e8eff8;
-    padding: 50px 0;
-}
-
-.tk-prodetail-func-intro__text {
-    max-width: 900px;
-    margin: 0 auto;
-    font-size: 16px;
-    line-height: 1.8;
-    color: var(--tk-text);
-    text-align: center;
-}
-
-/* --- Section 7+8: Grid chức năng (features) --- */
-.tk-prodetail-features {
-    background: #e8eff8;
-    padding: 50px 0 60px;
-    text-align: center;
-}
-
-.tk-prodetail-features__title {
-    font-size: 30px;
-    font-weight: 800;
-    color: var(--tk-dark);
-    text-transform: uppercase;
-    margin-bottom: 40px;
-    letter-spacing: 0.5px;
-}
-
-.tk-prodetail-features__title .tk-brand-name {
-    color: var(--tk-main);
-}
-
-.tk-prodetail-features__grid {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 30px 50px;
-    max-width: 900px;
-    margin: 0 auto;
-}
-
-.tk-prodetail-feature-item {
-    width: 160px;
-    text-align: center;
-    transition: transform .3s;
-}
-
-.tk-prodetail-feature-item:hover {
-    transform: translateY(-8px);
-}
-
-.tk-prodetail-feature-item__icon {
-    width: 64px;
-    height: 64px;
-    margin: 0 auto 14px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.tk-prodetail-feature-item__icon img {
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain;
-    transition: filter .4s;
-}
-
-.tk-prodetail-feature-item:hover .tk-prodetail-feature-item__icon img {
-    filter: drop-shadow(0 0 8px rgba(0, 31, 63, 0.3));
-}
-
-.tk-prodetail-feature-item__name {
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--tk-dark);
-    line-height: 1.4;
-    margin: 0;
-    transition: color .3s;
-}
-
-.tk-prodetail-feature-item:hover .tk-prodetail-feature-item__name {
-    color: var(--tk-main);
-}
-
-@media (max-width: 767px) {
-    .tk-prodetail-hdsd-heading__title {
-        font-size: 24px;
-    }
-
-    .tk-prodetail-hdsd-cards__grid {
-        gap: 16px;
-    }
-
-    .tk-prodetail-hdsd-card {
-        width: 160px;
-        padding: 18px 12px;
-    }
-
-    .tk-prodetail-hdsd-card__icon img {
-        width: 56px;
-        height: 56px;
-    }
-
-    .tk-prodetail-gallery__grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .tk-prodetail-func-intro {
-        padding: 30px 0;
-    }
-
-    .tk-prodetail-func-intro__text {
-        font-size: 14px;
-        padding: 0 10px;
-    }
-
-    .tk-prodetail-features {
-        padding: 30px 0 40px;
-    }
-
-    .tk-prodetail-features__title {
-        font-size: 22px;
-        margin-bottom: 28px;
-    }
-
-    .tk-prodetail-features__grid {
-        gap: 20px 30px;
-    }
-
-    .tk-prodetail-feature-item {
-        width: 130px;
-    }
-
-    .tk-prodetail-feature-item__icon {
-        width: 50px;
-        height: 50px;
-    }
-
-    .tk-prodetail-feature-item__name {
-        font-size: 13px;
-    }
-}
-
-/* --- Section 9: Banner tính năng nổi bật --- */
-.tk-prodetail-tnb-banner {
-    position: relative;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-color: #eaf0f7;
-    min-height: 380px;
-    overflow: hidden;
-}
-
-.tk-prodetail-tnb-banner__overlay {
-    position: absolute;
-    inset: 0;
-    background: rgba(255, 255, 255, 0.25);
-}
-
-.tk-prodetail-tnb-banner__inner {
-    position: relative;
-    z-index: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 40px;
-    min-height: 380px;
-    padding: 40px 0;
-}
-
-.tk-prodetail-tnb-banner__mockup {
-    flex: 0 0 auto;
-    max-width: 420px;
-}
-
-.tk-prodetail-tnb-banner__mockup img {
-    width: 100%;
-    height: auto;
-    display: block;
-    animation: tkFloating 4s ease-in-out infinite;
-}
-
-.tk-prodetail-tnb-banner__text {
-    text-align: left;
-}
-
-.tk-prodetail-tnb-banner__text h2 {
-    font-size: 34px;
-    font-weight: 800;
-    color: var(--tk-dark);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    margin: 0 0 8px;
-    font-style: italic;
-}
-
-.tk-prodetail-tnb-banner__text .tk-brand-name {
-    font-size: 50px;
-    font-weight: 900;
-    color: var(--tk-main);
-    margin: 0;
-    line-height: 1.1;
-}
-
-/* --- Section 10: Grid tính năng nổi bật SP --- */
-.tk-prodetail-tnb-grid {
-    background: #f0f5e6;
-    padding: 50px 0 60px;
-}
-
-.tk-prodetail-tnb-grid__wrap {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    justify-content: center;
-    justify-items: center;
-    gap: 40px 60px;
-    max-width: 1000px;
-    margin: 0 auto;
-}
-
-.tk-prodetail-tnb-item {
-    width: 200px;
-    width: 100%;
-    text-align: center;
-    padding: 16px;
-    border: 2px solid transparent;
-    border-radius: 12px;
-    transition: transform .3s, border-color .3s, box-shadow .3s;
-}
-
-.tk-prodetail-tnb-item:hover {
-    transform: translateY(-6px);
-    border-color: var(--tk-main);
-    box-shadow: 0 0 16px rgba(0, 31, 63, 0.15);
-}
-
-.tk-prodetail-tnb-item__icon {
-    width: 50px;
-    height: 50px;
-    margin: 0 auto 14px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: var(--tk-main);
-    border-radius: 14px;
-    padding: 12px;
-}
-
-.tk-prodetail-tnb-item__icon img {
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain;
-    filter: brightness(0) invert(1);
-}
-
-.tk-prodetail-tnb-item__name {
-    font-size: 15px;
-    font-weight: 600;
-    color: var(--tk-dark);
-    line-height: 1.4;
-    margin: 0;
-}
-
-@media (max-width: 767px) {
-    .tk-prodetail-tnb-banner {
-        min-height: 260px;
-    }
-
-    .tk-prodetail-tnb-banner__inner {
-        flex-direction: column;
-        gap: 20px;
-        min-height: 260px;
-        padding: 30px 0;
-        text-align: center;
-    }
-
-    .tk-prodetail-tnb-banner__mockup {
-        max-width: 280px;
-    }
-
-    .tk-prodetail-tnb-banner__text {
-        text-align: center;
-    }
-
-    .tk-prodetail-tnb-banner__text h2 {
-        font-size: 22px;
-    }
-
-    .tk-prodetail-tnb-banner__text .tk-brand-name {
-        font-size: 34px;
-    }
-
-    .tk-prodetail-tnb-grid {
-        padding: 30px 0 40px;
-    }
-
-    .tk-prodetail-tnb-grid__wrap {
-        gap: 24px 30px;
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .tk-prodetail-tnb-item {
-        max-width: 140px;
-    }
-
-    .tk-prodetail-tnb-item__icon {
-        width: 50px;
-        height: 50px;
-        border-radius: 10px;
-        padding: 10px;
-    }
-
-    .tk-prodetail-tnb-item__name {
-        font-size: 13px;
-    }
-}
-
-/* --- Section 11: Lợi ích của phần mềm --- */
-.tk-prodetail-benefits {
-    background: #e8eff8;
-    padding: 60px 0;
-}
-
-.tk-prodetail-benefits__inner {
-    display: flex;
-    align-items: center;
-    gap: 50px;
-}
-
-.tk-prodetail-benefits__left {
-    flex: 1;
-    min-width: 0;
-}
-
-.tk-prodetail-benefits__heading {
-    font-size: 28px;
-    font-weight: 800;
-    font-style: italic;
-    color: var(--tk-dark);
-    text-transform: uppercase;
-    margin: 0 0 6px;
-    letter-spacing: 0.5px;
-}
-
-.tk-prodetail-benefits__brand {
-    font-size: 44px;
-    font-weight: 900;
-    color: var(--tk-main);
-    margin: 0 0 18px;
-    line-height: 1.1;
-}
-
-.tk-prodetail-benefits__desc {
-    font-size: 15px;
-    line-height: 1.75;
-    color: var(--tk-text);
-    margin-bottom: 30px;
-}
-
-.tk-prodetail-benefits__grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 24px;
-}
-
-.tk-prodetail-benefit-card {
-    flex: 1 1 140px;
-    max-width: 200px;
-    text-align: center;
-    transition: transform .3s;
-}
-
-.tk-prodetail-benefit-card:hover {
-    transform: translateY(-6px);
-}
-
-.tk-prodetail-benefit-card__icon {
-    width: 56px;
-    height: 56px;
-    margin: 0 auto 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: filter .3s;
-}
-
-.tk-prodetail-benefit-card__icon img {
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain;
-}
-
-.tk-prodetail-benefit-card:hover .tk-prodetail-benefit-card__icon {
-    filter: drop-shadow(0 0 8px rgba(187, 0, 33, 0.2));
-}
-
-.tk-prodetail-benefit-card__name {
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--tk-dark);
-    line-height: 1.4;
-    margin: 0;
-    transition: color .3s;
-}
-
-.tk-prodetail-benefit-card:hover .tk-prodetail-benefit-card__name {
-    color: var(--tk-main);
-}
-
-.tk-prodetail-benefits__right {
-    flex: 0 0 380px;
-    max-width: 380px;
-}
-
-.tk-prodetail-benefits__right img {
-    width: 100%;
-    height: auto;
-    display: block;
-    animation: tkFloating 3.5s ease-in-out infinite;
-}
-
-@media (max-width: 767px) {
-    .tk-prodetail-benefits {
-        padding: 36px 0;
-    }
-
-    .tk-prodetail-benefits__inner {
-        flex-direction: column-reverse;
-        gap: 28px;
-    }
-
-    .tk-prodetail-benefits__right {
-        flex: none;
-        max-width: 260px;
-        margin: 0 auto;
-    }
-
-    .tk-prodetail-benefits__left {
-        text-align: center;
-    }
-
-    .tk-prodetail-benefits__heading {
-        font-size: 22px;
-    }
-
-    .tk-prodetail-benefits__brand {
-        font-size: 32px;
-    }
-
-    .tk-prodetail-benefits__grid {
-        justify-content: center;
-    }
-
-    .tk-prodetail-benefit-card {
-        flex: 0 0 120px;
-    }
-
-    .tk-prodetail-benefit-card__icon {
-        width: 44px;
-        height: 44px;
-    }
-
-    .tk-prodetail-benefit-card__name {
-        font-size: 13px;
-    }
-}
-
-/* --- Section 12+13: Video header (tên SP + subtitle) --- */
-.tk-prodetail-video-header {
-    padding: 50px 0 10px;
-    text-align: center;
-    background: #fff;
-}
-
-.tk-prodetail-video-header__name {
-    font-size: 48px;
-    font-weight: 900;
-    color: var(--tk-main);
-    margin: 0 0 8px;
-    line-height: 1.1;
-}
-
-.tk-prodetail-video-header__sub {
-    font-size: 22px;
-    font-weight: 700;
-    font-style: italic;
-    color: var(--tk-dark);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    margin: 0;
-}
-
-/* --- Section 14: Video grid --- */
-.tk-prodetail-videos {
-    padding: 30px 0 60px;
-    background: #fff;
-}
-
-.tk-prodetail-videos__grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 28px;
-}
-
-.tk-prodetail-video-card {
-    border: 1px solid #e0e0e0;
-    border-radius: 10px;
-    overflow: hidden;
-    transition: box-shadow .25s;
-}
-
-.tk-prodetail-video-card:hover {
-    box-shadow: 0 6px 24px rgba(0, 0, 0, .1);
-}
-
-.tk-prodetail-video-card__thumb {
-    position: relative;
-    aspect-ratio: 16/9;
-    overflow: hidden;
-    background: #000;
-}
-
-.tk-prodetail-video-card__thumb a {
-    display: block;
-    width: 100%;
-    height: 100%;
-}
-
-.tk-prodetail-video-card__thumb img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-    transition: opacity .2s;
-}
-
-.tk-prodetail-video-card:hover .tk-prodetail-video-card__thumb img {
-    opacity: .85;
-}
-
-.tk-prodetail-video-card__play {
+.tk-pd-gallery__zoom {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
-    pointer-events: none;
-    opacity: .85;
-    transition: opacity .2s, transform .2s;
+    transform: translate(-50%, -50%) scale(.8);
+    width: 54px;
+    height: 54px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 31, 63, .8);
+    color: #fff;
+    border-radius: 50%;
+    opacity: 0;
+    transition: opacity .3s, transform .3s;
 }
 
-.tk-prodetail-video-card:hover .tk-prodetail-video-card__play {
+.tk-pd-gallery__item:hover .tk-pd-gallery__zoom {
     opacity: 1;
-    transform: translate(-50%, -50%) scale(1.1);
+    transform: translate(-50%, -50%) scale(1);
 }
 
-.tk-prodetail-video-card__title {
-    padding: 14px 16px;
-    margin: 0;
-    font-size: 15px;
-    font-weight: 700;
-    color: var(--tk-dark);
+/* ===== SECTION 8 — VIDEOS ===== */
+.tk-pd-videos {
+    background: var(--tk-bg);
+    padding: 70px 0;
+}
+
+.tk-pd-videos__head {
     text-align: center;
-    line-height: 1.4;
+    margin-bottom: 36px;
 }
 
-@media (max-width: 767px) {
-    .tk-prodetail-video-header {
-        padding: 36px 0 8px;
-    }
-
-    .tk-prodetail-video-header__name {
-        font-size: 32px;
-    }
-
-    .tk-prodetail-video-header__sub {
-        font-size: 16px;
-    }
-
-    .tk-prodetail-videos__grid {
-        grid-template-columns: 1fr;
-        max-width: 480px;
-        margin: 0 auto;
-    }
-
-    .tk-prodetail-video-card__title {
-        font-size: 14px;
-        padding: 10px 12px;
-    }
-}
-
-/* --- Related products wrapper --- */
-.tk-prodetail-related {
-    padding: 40px 0 50px;
-    background: var(--tk-soft);
-}
-
-.tk-prodetail-related .title {
-    font-size: 28px;
-    font-weight: 800;
-    color: var(--tk-dark);
-    text-align: center;
-    margin-bottom: 30px;
-}
-
-.tk-prodetail-related .mainkhung_product {
+.tk-pd-videos__grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 26px;
 }
 
-.tk-prodetail-related .boxproduct_item {
+.tk-pd-video {
+    display: block;
+    width: 100%;
+    border: 1px solid var(--tk-border-subtle);
     background: #fff;
-    border-radius: 14px;
+    border-radius: var(--tk-radius-card);
     overflow: hidden;
-    box-shadow: 0 4px 18px rgba(0, 0, 0, .07);
+    padding: 0;
+    cursor: pointer;
+    text-align: center;
     transition: transform .25s, box-shadow .25s;
-    display: flex;
-    flex-direction: column;
 }
 
-.tk-prodetail-related .boxproduct_item:hover {
+.tk-pd-video:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 16px 34px rgba(0, 0, 0, .12);
+}
+
+.tk-pd-video__thumb {
+    position: relative;
+    display: block;
+    aspect-ratio: 16 / 9;
+    background: #000;
+    overflow: hidden;
+}
+
+.tk-pd-video__thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: opacity .25s;
+}
+
+.tk-pd-video:hover .tk-pd-video__thumb img {
+    opacity: .8;
+}
+
+.tk-pd-video__play {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: transform .25s;
+}
+
+.tk-pd-video:hover .tk-pd-video__play {
+    transform: translate(-50%, -50%) scale(1.12);
+}
+
+.tk-pd-video__title {
+    display: block;
+    padding: 16px;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--tk-navy);
+    line-height: 1.4;
+}
+
+/* ===== SECTION 9 — HDSD ===== */
+.tk-pd-hdsd {
+    background: #fff;
+    padding: 70px 0;
+}
+
+.tk-pd-hdsd__head {
+    text-align: center;
+    margin-bottom: 36px;
+}
+
+.tk-pd-hdsd__scroll {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 22px;
+}
+
+.tk-pd-hdsd-card {
+    position: relative;
+    display: block;
+    text-decoration: none;
+    background: var(--tk-bg);
+    border: 1px solid var(--tk-border-subtle);
+    border-radius: var(--tk-radius-card);
+    padding: 28px 22px;
+    text-align: center;
+    transition: transform .25s, box-shadow .25s, border-color .25s;
+}
+
+.tk-pd-hdsd-card:hover {
+    transform: translateY(-6px);
+    border-color: var(--tk-navy);
+    box-shadow: 0 14px 30px rgba(0, 31, 63, .12);
+}
+
+.tk-pd-hdsd-card__num {
+    position: absolute;
+    top: 12px;
+    right: 16px;
+    font-size: 30px;
+    font-weight: 900;
+    color: rgba(0, 31, 63, .08);
+    line-height: 1;
+}
+
+.tk-pd-hdsd-card__icon {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.tk-pd-hdsd-card__icon img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.tk-pd-hdsd-card__name {
+    display: block;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--tk-navy);
+    line-height: 1.4;
+}
+
+.tk-pd-hdsd__more {
+    text-align: center;
+    margin-top: 36px;
+}
+
+/* ===== SECTION 10 — CTA ===== */
+.tk-pd-cta {
+    padding: 30px 0 70px;
+    background: #fff;
+}
+
+.tk-pd-cta__inner {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--tk-radius-xl);
+    padding: 64px 40px;
+    text-align: center;
+    background: linear-gradient(120deg, #001226, var(--tk-navy), #7a0016, var(--tk-navy));
+    background-size: 300% 300%;
+    animation: tkCsdCtaGradient 8s ease infinite;
+}
+
+.tk-pd-cta__title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 36px;
+    font-weight: 800;
+    color: #fff;
+    line-height: 1.25;
+    margin: 0 0 16px;
+}
+
+.tk-pd-cta__brand {
+    color: #ff5a6e;
+}
+
+.tk-pd-cta__desc {
+    font-size: 17px;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, .85);
+    max-width: 620px;
+    margin: 0 auto 30px;
+}
+
+.tk-pd-cta__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    justify-content: center;
+}
+
+/* ===== SECTION 12 — RELATED ===== */
+.tk-pd-related {
+    background: var(--tk-soft);
+    padding: 70px 0;
+}
+
+.tk-pd-related__head {
+    text-align: center;
+    margin-bottom: 36px;
+}
+
+.tk-pd-related__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 26px;
+}
+
+.tk-pd-procard {
+    background: #fff;
+    border-radius: var(--tk-radius-card);
+    overflow: hidden;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, .07);
+    display: flex;
+    flex-direction: column;
+    transition: transform .25s, box-shadow .25s;
+}
+
+.tk-pd-procard:hover {
     transform: translateY(-6px);
     box-shadow: 0 16px 34px rgba(0, 0, 0, .12);
 }
 
-.tk-prodetail-related .boxproduct_img {
+.tk-pd-procard__img {
     display: block;
     overflow: hidden;
 }
 
-.tk-prodetail-related .boxproduct_img img {
+.tk-pd-procard__img img {
     width: 100%;
     height: 230px;
     object-fit: cover;
     display: block;
-    transition: .4s;
+    transition: transform .4s;
 }
 
-.tk-prodetail-related .boxproduct_item:hover .boxproduct_img img {
+.tk-pd-procard:hover .tk-pd-procard__img img {
     transform: scale(1.05);
 }
 
-.tk-prodetail-related .boxproduct_info {
+.tk-pd-procard__info {
     padding: 20px;
     display: flex;
     flex-direction: column;
     flex: 1;
 }
 
-.tk-prodetail-related .boxproduct_name {
-    margin-bottom: 14px;
-}
-
-.tk-prodetail-related .boxproduct_name a {
+.tk-pd-procard__name {
+    margin: 0 0 14px;
     font-size: 19px;
     font-weight: 800;
-    color: var(--tk-dark);
-    text-decoration: none;
     line-height: 1.4;
 }
 
-.tk-prodetail-related .boxproduct_name a:hover {
-    color: var(--tk-main);
+.tk-pd-procard__name a {
+    color: var(--tk-navy);
+    text-decoration: none;
 }
 
-.tk-prodetail-related .boxproduct_more {
-    display: inline-block;
+.tk-pd-procard__name a:hover {
+    color: var(--tk-red);
+}
+
+.tk-pd-procard__more {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
     margin-top: auto;
-    padding: 8px 20px;
-    border-radius: 20px;
-    background: var(--tk-main);
-    color: #fff;
-    font-weight: 600;
+    color: var(--tk-red);
+    font-weight: 700;
     font-size: 14px;
     text-decoration: none;
-    text-align: center;
 }
 
-.tk-prodetail-related .boxproduct_more:hover {
-    filter: brightness(1.08);
+.tk-pd-procard__more i {
+    transition: transform .25s;
 }
 
-@media (max-width: 991px) {
-    .tk-prodetail-hero__inner {
-        gap: 30px;
-    }
+.tk-pd-procard:hover .tk-pd-procard__more i {
+    transform: translateX(4px);
+}
 
-    .tk-prodetail-hero__tagline {
-        font-size: 22px;
-    }
+/* ===== MODAL (lightbox + video) ===== */
+.tk-pd-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+}
 
-    .tk-prodetail-hero__name {
-        font-size: 36px;
-    }
+.tk-pd-modal.is-open {
+    display: flex;
+}
 
-    .tk-prodetail-related .mainkhung_product {
-        grid-template-columns: repeat(2, 1fr);
-    }
+.tk-pd-modal__backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 8, 20, .85);
+    backdrop-filter: blur(4px);
+}
+
+.tk-pd-modal__box {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 960px;
+    animation: tkPdFade .35s ease;
+}
+
+.tk-pd-modal__close {
+    position: absolute;
+    top: -44px;
+    right: 0;
+    width: 40px;
+    height: 40px;
+    border: 0;
+    background: rgba(255, 255, 255, .15);
+    color: #fff;
+    font-size: 26px;
+    line-height: 1;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background .25s;
+}
+
+.tk-pd-modal__close:hover {
+    background: var(--tk-red);
+}
+
+.tk-pd-modal__img {
+    width: 100%;
+    max-height: 82vh;
+    object-fit: contain;
+    border-radius: 12px;
+    display: block;
+}
+
+.tk-pd-modal__video {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #000;
+}
+
+.tk-pd-modal__video iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1024px) {
+    .tk-pd-hero__title { font-size: 44px; }
+    .tk-pd-highlights__grid { grid-template-columns: repeat(2, 1fr); }
+    .tk-pd-tabs { grid-template-columns: 260px 1fr; }
+    .tk-pd-benefits__grid { grid-template-columns: repeat(2, 1fr); }
+    .tk-pd-videos__grid { grid-template-columns: repeat(2, 1fr); }
+    .tk-pd-hdsd__scroll { grid-template-columns: repeat(2, 1fr); }
+    .tk-pd-related__grid { grid-template-columns: repeat(2, 1fr); }
+    .tk-pd-sec-title { font-size: 28px; }
 }
 
 @media (max-width: 767px) {
-    .tk-prodetail-hero {
-        padding: 36px 0 30px;
-    }
+    .tk-pd-hero { padding: 56px 0 50px; }
+    .tk-pd-hero__inner { flex-direction: column-reverse; text-align: center; gap: 32px; }
+    .tk-pd-hero__right { flex: none; max-width: 78%; }
+    .tk-pd-hero__title { font-size: 34px; }
+    .tk-pd-hero__desc { font-size: 16px; margin-left: auto; margin-right: auto; }
+    .tk-pd-hero__actions,
+    .tk-pd-hero__badges { justify-content: center; }
 
-    .tk-prodetail-hero__inner {
-        flex-direction: column;
-        text-align: center;
-    }
+    .tk-pd-highlights__grid { grid-template-columns: 1fr; }
 
-    .tk-prodetail-hero__tagline {
-        font-size: 20px;
-    }
+    .tk-pd-tabs { grid-template-columns: 1fr; }
+    .tk-pd-tab:hover { transform: none; }
+    .tk-pd-panel { flex-direction: column; text-align: center; padding: 28px 22px; }
+    .tk-pd-panel__icon { flex-basis: 90px; width: 90px; height: 90px; padding: 20px; }
 
-    .tk-prodetail-hero__name {
-        font-size: 32px;
-    }
+    .tk-pd-banner__inner { flex-direction: column; text-align: center; gap: 24px; min-height: 0; padding: 40px 0; }
+    .tk-pd-banner__mockup { flex: none; max-width: 240px; }
+    .tk-pd-banner__text h2 { font-size: 28px; }
+    .tk-pd-banner__brand { font-size: 36px; }
 
-    .tk-prodetail-hero__subtitle {
-        font-size: 16px;
-        margin-bottom: 20px;
-    }
+    .tk-pd-benefits__grid { grid-template-columns: 1fr; }
+    .tk-pd-gallery__grid { grid-template-columns: 1fr; }
+    .tk-pd-gallery__item--lead { grid-column: span 1; aspect-ratio: 16 / 10; }
+    .tk-pd-videos__grid { grid-template-columns: 1fr; max-width: 460px; margin: 0 auto; }
+    .tk-pd-hdsd__scroll { grid-template-columns: 1fr; }
+    .tk-pd-related__grid { grid-template-columns: 1fr; }
 
-    .tk-prodetail-hero__badges {
-        justify-content: center;
-    }
+    .tk-pd-cta__inner { padding: 48px 24px; }
+    .tk-pd-cta__title { font-size: 26px; }
+    .tk-pd-sec-title { font-size: 24px; }
 
-    .tk-prodetail-hero__right img {
-        max-height: 320px;
-    }
-
-    .tk-prodetail-info__name {
-        font-size: 32px;
-    }
-
-    .tk-prodetail-related .mainkhung_product {
-        grid-template-columns: 1fr;
-    }
+    .tk-pd-modal { padding: 16px; }
+    .tk-pd-modal__close { top: -42px; }
 }
 
 /*  FOOTER  */
@@ -1732,6 +1848,304 @@
 /* ẩn mũi tên angle-down (desktop) khi menu được clone sang mobile (JS tự thêm chevron) */
 .menu_mobi_add .fa-angle-down {
     display: none;
+}
+
+/* Icon dẫn đầu mỗi mục: ẩn ở desktop, chỉ hiện trong panel mobile */
+.tk-menu .tk-mi {
+    display: none !important;
+}
+
+/* ============================================================
+   MOBILE NAV — "Navy Drawer" (Premium Scholastic)
+   Restyle panel do JS clone (.menu_mobi_add) + header/footer (menu.php)
+   Giữ nguyên JS-hook: menu_mobi_add / menu_mobi_active / close_menu /
+   menu_baophu / menulicha / active2 / chevron-right
+   ============================================================ */
+@media (max-width: 1024px) {
+
+    /* ----- Lớp phủ nền tối + blur ----- */
+    .menu_baophu {
+        background: rgba(0, 12, 26, .55);
+        opacity: 1 !important;
+        backdrop-filter: blur(3px);
+        -webkit-backdrop-filter: blur(3px);
+    }
+
+    /* ----- Panel chính ----- */
+    div.menu_mobi_add {
+        display: flex;
+        flex-direction: column;
+        padding: 0;
+        width: 86%;
+        max-width: 380px;
+        background: linear-gradient(165deg, #002a54 0%, var(--tk-navy, #001F3F) 60%, #00152c 100%);
+        color: #fff;
+        box-shadow: 8px 0 40px rgba(0, 0, 0, .45);
+        overflow: hidden;
+    }
+
+    /* Reset vị trí tuyệt đối mà framework áp cho mọi <i> trong .menulicha */
+    .menu_mobi_add .menulicha a i {
+        position: static;
+        right: auto;
+        top: auto;
+        padding: 0;
+    }
+
+    /* Hiện icon dẫn đầu trong panel */
+    .menu_mobi_add .tk-mi {
+        display: inline-flex !important;
+        justify-content: center;
+        width: 30px;
+        flex: 0 0 30px;
+        font-size: 15px;
+        color: var(--tk-red, #bb0021);
+        opacity: .95;
+        pointer-events: none;
+        transition: color .25s;
+    }
+
+    /* ----- Header: logo ----- */
+    .tk-mnav-head {
+        order: 1;
+        flex: 0 0 auto;
+        display: flex;
+        align-items: center;
+        padding: 20px 20px 18px;
+        border-bottom: 1px solid rgba(255, 255, 255, .12);
+        background: rgba(255, 255, 255, .03);
+    }
+
+    .tk-mnav-logo {
+        display: block;
+        line-height: 0;
+    }
+
+    .tk-mnav-logo img {
+        height: 42px;
+        width: auto;
+        max-width: 200px;
+        object-fit: contain;
+        filter: brightness(0) invert(1);
+    }
+
+    /* ----- Nút đóng (JS chèn <span class="close_menu">X</span>) ----- */
+    .menu_mobi_add .close_menu {
+        order: 0;
+        position: absolute;
+        top: 18px;
+        right: 16px;
+        z-index: 5;
+        width: 40px;
+        height: 40px;
+        line-height: 40px;
+        text-align: center;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, .1);
+        border: 1px solid rgba(255, 255, 255, .18);
+        color: #fff;
+        font-size: 0;
+        cursor: pointer;
+        transition: background .25s, transform .25s, border-color .25s;
+    }
+
+    .menu_mobi_add .close_menu::before {
+        content: "\f00d";
+        font-family: "Font Awesome 5 Pro";
+        font-weight: 900;
+        font-size: 18px;
+    }
+
+    .menu_mobi_add .close_menu:hover {
+        background: var(--tk-red, #bb0021);
+        border-color: var(--tk-red, #bb0021);
+        transform: rotate(90deg);
+    }
+
+    /* ----- Danh sách menu (ul do JS chèn) ----- */
+    .menu_mobi_add > ul {
+        order: 2;
+        flex: 1 1 auto;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+        padding: 10px 0;
+        margin: 0;
+    }
+
+    .menu_mobi_add > ul > li {
+        margin: 2px 12px;
+    }
+
+    /* Link cấp 1 (thêm tiền tố div để thắng rule color:#000 của style.css) */
+    div.menu_mobi_add ul li a,
+    div.menu_mobi_add ul li span {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        color: rgba(255, 255, 255, .9);
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 600;
+        font-size: 15px;
+        letter-spacing: .2px;
+        text-decoration: none;
+        padding: 14px 14px;
+        border: 0;
+        border-radius: 12px;
+        position: relative;
+        transition: background .22s, color .22s, padding .22s;
+    }
+
+    .menu_mobi_add > ul > li > a:hover {
+        background: rgba(255, 255, 255, .08);
+        color: #fff;
+        padding-left: 18px;
+    }
+
+    /* Mục đang ở trang hiện tại */
+    .menu_mobi_add > ul > li.active > a {
+        background: rgba(255, 255, 255, .1);
+        color: #fff;
+    }
+
+    .menu_mobi_add > ul > li.active > a::before {
+        content: "";
+        position: absolute;
+        left: -12px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 4px;
+        height: 60%;
+        border-radius: 0 4px 4px 0;
+        background: var(--tk-red, #bb0021);
+    }
+
+    .menu_mobi_add > ul > li.active > a .tk-mi {
+        color: #fff;
+    }
+
+    /* Mũi tên xổ submenu (JS chèn fa-chevron-right) */
+    .menu_mobi_add ul li a .fa-chevron-right {
+        margin-left: auto;
+        width: 22px;
+        height: 22px;
+        line-height: 22px;
+        text-align: center;
+        font-size: 11px;
+        border-radius: 6px;
+        background: rgba(255, 255, 255, .08);
+        color: rgba(255, 255, 255, .75);
+        transition: transform .3s, background .25s, color .25s;
+    }
+
+    .menu_mobi_add ul li a.active2 .fa-chevron-right {
+        transform: rotate(90deg);
+        background: var(--tk-red, #bb0021);
+        color: #fff;
+    }
+
+    /* ----- Submenu (cấp con) ----- */
+    .menu_mobi_add ul li ul {
+        margin: 4px 0 6px;
+        padding: 4px 0 4px 6px;
+        list-style: none;
+        background: rgba(0, 0, 0, .22);
+        border-radius: 12px;
+        border-left: 2px solid rgba(187, 0, 33, .5);
+    }
+
+    .menu_mobi_add ul li ul li {
+        margin: 0;
+    }
+
+    .menu_mobi_add ul li ul li a {
+        font-weight: 500;
+        font-size: 14px;
+        color: rgba(255, 255, 255, .72);
+        padding: 11px 14px 11px 16px !important;
+    }
+
+    .menu_mobi_add ul li ul li a::before {
+        content: "\2013";
+        margin-right: 4px;
+        color: rgba(255, 255, 255, .4);
+    }
+
+    .menu_mobi_add ul li ul li a:hover {
+        background: rgba(255, 255, 255, .07);
+        color: #fff;
+    }
+
+    /* ----- Footer: hotline + HDSD ----- */
+    .tk-mnav-foot {
+        order: 3;
+        flex: 0 0 auto;
+        padding: 16px 16px 20px;
+        border-top: 1px solid rgba(255, 255, 255, .12);
+        background: rgba(0, 0, 0, .18);
+    }
+
+    .tk-mnav-call {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        background: var(--tk-red, #bb0021);
+        color: #fff !important;
+        text-decoration: none;
+        padding: 12px 16px;
+        border-radius: 12px;
+        box-shadow: 0 8px 20px rgba(187, 0, 33, .35);
+        transition: filter .2s, transform .2s;
+    }
+
+    .tk-mnav-call:hover {
+        filter: brightness(1.08);
+        transform: translateY(-1px);
+    }
+
+    .tk-mnav-call i {
+        font-size: 18px;
+    }
+
+    .tk-mnav-call span {
+        display: flex;
+        flex-direction: column;
+        line-height: 1.25;
+    }
+
+    .tk-mnav-call small {
+        font-size: 11px;
+        opacity: .85;
+        font-weight: 500;
+    }
+
+    .tk-mnav-call strong {
+        font-size: 17px;
+        font-weight: 800;
+        letter-spacing: .3px;
+    }
+
+    .tk-mnav-hdsd {
+        display: block;
+        text-align: center;
+        margin-top: 12px;
+        color: rgba(255, 255, 255, .8);
+        font-size: 13px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: color .2s;
+    }
+
+    .tk-mnav-hdsd:hover {
+        color: #fff;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        div.menu_mobi_add,
+        .menu_mobi_add .close_menu,
+        .menu_mobi_add ul li a {
+            transition: none !important;
+        }
+    }
 }
 
 /* HOMEPAGE (P4.3) */
@@ -2070,6 +2484,10 @@
 .tk-hex--pos6 {
     width: 132px;
     height: 150px;
+}
+
+.tk-hex--feature {
+    cursor: pointer;
 }
 
 .tk-hex--pos1 {
@@ -3281,73 +3699,337 @@
     text-decoration: underline;
 }
 
-/*  HỖ TRỢ LIÊN HỆ  */
+/*  HỖ TRỢ LIÊN HỆ — premium 2-card layout  */
 .tk-support {
-    background: #fff;
-    border-top: 1px solid #eee;
-    padding: 50px 0;
+    position: relative;
+    background: var(--tk-surface-page, #e8eff8);
+    padding: 80px 0;
+    overflow: hidden;
+}
+
+.tk-support-bg {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.tk-support-blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(70px);
+    opacity: .5;
+}
+
+.tk-support-blob--1 {
+    width: 360px;
+    height: 360px;
+    top: -120px;
+    left: -100px;
+    background: radial-gradient(circle, rgba(0, 31, 63, .18), transparent 70%);
+}
+
+.tk-support-blob--2 {
+    width: 320px;
+    height: 320px;
+    bottom: -120px;
+    right: -80px;
+    background: radial-gradient(circle, rgba(187, 0, 33, .12), transparent 70%);
+}
+
+.tk-support .fixwidth {
+    position: relative;
+    z-index: 1;
+}
+
+/* Header */
+.tk-support-head {
+    text-align: center;
+    max-width: 680px;
+    margin: 0 auto 48px;
+}
+
+.tk-support-eyebrow {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--tk-red);
+    margin-bottom: 12px;
 }
 
 .tk-support-title {
-    color: var(--tk-red);
-    font-size: 28px;
+    font-family: 'Montserrat', sans-serif;
+    color: var(--tk-navy);
+    font-size: 30px;
     font-weight: 700;
-    font-style: italic;
-    text-align: center;
-    line-height: 1.5;
-    margin: 0 0 30px;
+    line-height: 1.3;
+    margin: 0 0 14px;
 }
 
-.tk-support-content {
-    max-width: 900px;
-    margin: 0 auto;
+.tk-support-sub {
+    font-size: 15px;
+    line-height: 1.7;
+    color: #4a5568;
+    margin: 0;
 }
 
-.tk-support-list {
-    list-style: square;
-    padding-left: 20px;
+/* Grid */
+.tk-support-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 28px;
+    align-items: stretch;
+}
+
+/* Card base */
+.tk-support-card {
+    position: relative;
+    background: rgba(255, 255, 255, 0.72);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--tk-border-subtle, #E2E8F0);
+    border-radius: var(--tk-radius-card, 16px);
+    box-shadow: var(--tk-shadow-card, 0 4px 20px rgba(0, 0, 0, .05));
+    padding: 36px 32px;
+    transition: transform .35s cubic-bezier(.215, .61, .355, 1), box-shadow .35s;
+}
+
+.tk-support-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 40px rgba(0, 31, 63, .12);
+}
+
+.tk-support-card__badge {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    color: var(--tk-navy);
+    background: #eaf0f8;
+    border-radius: 999px;
+    padding: 5px 12px;
+}
+
+.tk-support-card__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    border-radius: 16px;
+    font-size: 26px;
+    margin-bottom: 18px;
+}
+
+.tk-support-card__icon--phone {
+    background: linear-gradient(135deg, var(--tk-navy), #003a73);
+    color: #fff;
+}
+
+.tk-support-card__icon--zalo {
+    background: linear-gradient(135deg, #0068ff, #00a3ff);
+    color: #fff;
+}
+
+.tk-support-card__title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 19px;
+    font-weight: 700;
+    color: var(--tk-navy);
+    margin: 0 0 8px;
+}
+
+.tk-support-card__desc {
+    font-size: 14px;
+    line-height: 1.65;
+    color: #5a6678;
     margin: 0 0 20px;
 }
 
-.tk-support-list li {
-    font-size: 15px;
-    line-height: 1.8;
-    color: #333;
-    margin-bottom: 6px;
+.tk-support-card__desc strong {
+    color: var(--tk-red);
 }
 
-.tk-support-list li a {
-    color: var(--tk-main);
+/* Hotline display */
+.tk-support-card__hotline {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 26px;
+    font-weight: 800;
+    color: var(--tk-red);
+    text-decoration: none;
+    letter-spacing: .01em;
+    transition: color .2s, transform .2s;
+}
+
+.tk-support-card__hotline i {
+    font-size: 18px;
+    width: 38px;
+    height: 38px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(187, 0, 33, .1);
+    border-radius: 50%;
+    animation: tkSupportRing 2.4s ease-in-out infinite;
+}
+
+.tk-support-card__hotline:hover {
+    color: var(--tk-navy);
+    transform: translateX(2px);
+}
+
+@keyframes tkSupportRing {
+    0%, 70%, 100% { transform: rotate(0); }
+    75% { transform: rotate(-12deg); }
+    80% { transform: rotate(12deg); }
+    85% { transform: rotate(-8deg); }
+    90% { transform: rotate(8deg); }
+}
+
+.tk-support-card__note {
+    display: block;
+    margin-top: 14px;
+    font-size: 13px;
+    color: #8a96a8;
+}
+
+/* Zalo card layout */
+.tk-support-zalo {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 32px;
+    align-items: center;
+}
+
+.tk-support-zalo__main {
+    min-width: 0;
 }
 
 .tk-support-steps {
-    padding-left: 20px;
+    list-style: none;
+    counter-reset: tksup;
+    padding: 0;
+    margin: 0 0 22px;
 }
 
-.tk-support-steps p {
-    font-size: 15px;
-    line-height: 1.7;
-    color: #333;
-    margin: 0 0 16px;
+.tk-support-steps li {
+    position: relative;
+    counter-increment: tksup;
+    padding-left: 38px;
+    font-size: 14px;
+    line-height: 1.6;
+    color: #4a5568;
+    margin-bottom: 12px;
 }
 
-.tk-support-steps a {
-    color: var(--tk-main);
-    text-decoration: underline;
+.tk-support-steps li:last-child {
+    margin-bottom: 0;
 }
 
-.tk-support-qr {
+.tk-support-steps li::before {
+    content: counter(tksup);
+    position: absolute;
+    left: 0;
+    top: -1px;
+    width: 26px;
+    height: 26px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+    color: #0068ff;
+    background: rgba(0, 104, 255, .1);
+    border-radius: 50%;
+}
+
+.tk-support-steps strong {
+    color: var(--tk-navy);
+}
+
+.tk-support-card__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    background: linear-gradient(135deg, #0068ff, #00a3ff);
+    color: #fff;
+    font-size: 14px;
+    font-weight: 700;
+    padding: 12px 24px;
+    border-radius: 10px;
+    text-decoration: none;
+    box-shadow: 0 8px 20px rgba(0, 104, 255, .25);
+    transition: transform .25s, box-shadow .25s;
+}
+
+.tk-support-card__btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 28px rgba(0, 104, 255, .35);
+    color: #fff;
+}
+
+/* Zalo QR */
+.tk-support-zalo__qr {
+    flex-shrink: 0;
     text-align: center;
-    margin: 20px 0;
 }
 
-.tk-support-qr img {
-    max-width: 200px;
-    height: auto;
+.tk-support-zalo__qr img {
+    width: 150px;
+    height: 150px;
+    object-fit: contain;
+    padding: 10px;
+    background: #fff;
+    border: 1px solid var(--tk-border-subtle, #E2E8F0);
+    border-radius: 14px;
+    box-shadow: 0 6px 18px rgba(0, 31, 63, .08);
 }
 
-@media (max-width: 767px) {
+.tk-support-zalo__qr-cap {
+    display: block;
+    margin-top: 10px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #0068ff;
+}
+
+@media (max-width: 991px) {
+    .tk-support-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 575px) {
+    .tk-support {
+        padding: 56px 0;
+    }
+
     .tk-support-title {
+        font-size: 23px;
+    }
+
+    .tk-support-card {
+        padding: 28px 22px;
+    }
+
+    .tk-support-zalo {
+        grid-template-columns: 1fr;
+        gap: 24px;
+    }
+
+    .tk-support-zalo__qr {
+        order: -1;
+    }
+
+    .tk-support-card__hotline {
         font-size: 22px;
     }
 }
@@ -4706,243 +5388,890 @@
     padding-bottom: 10px;
 }
 
-/*    ABOUT PAGE  (/gioi-thieu-titkul — 4 khối)    */
-/* — Header: logo + tên công ty — */
-.tk-about-header {
-    text-align: center;
-    padding: 10px 0 36px;
+/* ============================================================
+   ABOUT PAGE — "Brand Manifesto" (/gioi-thieu-titkul)
+   Prefix: .tk-gi-*  | Tokens: --tk-navy, --tk-red, --tk-main
+   ============================================================ */
+.tk-gi {
+    overflow: hidden;
 }
 
-.tk-about-logo {
-    max-height: 72px;
+/* — SECTION 1: HERO — */
+.tk-gi-hero {
+    position: relative;
+    background: linear-gradient(135deg, #001327 0%, var(--tk-navy) 55%, #002a52 100%);
+    padding: 96px 0 88px;
+    overflow: hidden;
+    margin-bottom: 0;
+}
+
+.tk-gi-hero__bg {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.tk-gi-hero__blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: .5;
+}
+
+.tk-gi-hero__blob--a {
+    width: 460px;
+    height: 460px;
+    background: rgba(187, 0, 33, .35);
+    top: -140px;
+    right: -100px;
+    animation: tkBlobDrift 11s ease-in-out infinite;
+}
+
+.tk-gi-hero__blob--b {
+    width: 380px;
+    height: 380px;
+    background: rgba(33, 120, 220, .30);
+    bottom: -160px;
+    left: -80px;
+    animation: tkBlobDrift 13s ease-in-out infinite reverse;
+}
+
+.tk-gi-hero__wrap {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: 1.15fr .85fr;
+    align-items: center;
+    gap: 56px;
+}
+
+.tk-gi-hero__logo {
+    max-height: 56px;
     width: auto;
+    margin-bottom: 22px;
+    filter: brightness(0) invert(1);
+}
+
+.tk-gi-hero__eyebrow {
+    display: inline-block;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: #ffd7dd;
+    background: rgba(187, 0, 33, .25);
+    border: 1px solid rgba(255, 255, 255, .18);
+    padding: 6px 16px;
+    border-radius: 999px;
+    margin-bottom: 20px;
+}
+
+.tk-gi-hero__title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 48px;
+    font-weight: 800;
+    line-height: 1.1;
+    color: #fff;
+    margin: 0 0 18px;
+    letter-spacing: -.5px;
+}
+
+.tk-gi-accent {
+    color: #ff5a72;
+}
+
+.tk-gi-hero__tagline {
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, .82);
+    max-width: 520px;
+    margin: 0 0 26px;
+}
+
+.tk-gi-hero__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.tk-gi-hero__chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: #fff;
+    background: rgba(255, 255, 255, .08);
+    border: 1px solid rgba(255, 255, 255, .16);
+    padding: 9px 18px;
+    border-radius: 12px;
+    backdrop-filter: blur(6px);
+}
+
+.tk-gi-hero__chip i {
+    color: #ff8fa0;
+}
+
+.tk-gi-hero__visual {
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+
+.tk-gi-hero__img {
+    width: 100%;
+    max-width: 420px;
+    height: auto;
+    border-radius: 24px;
+    box-shadow: 0 30px 70px rgba(0, 0, 0, .45);
+    animation: tkFloating 6s ease-in-out infinite;
+    position: relative;
+    z-index: 2;
+}
+
+.tk-gi-hero__visual.is-empty .tk-gi-hero__img {
+    display: none;
+}
+
+.tk-gi-hero__frame {
+    position: absolute;
+    inset: 18px -18px -18px 18px;
+    border: 2px solid rgba(255, 90, 114, .5);
+    border-radius: 24px;
+    z-index: 1;
+}
+
+/* — SECTION 2: STATS STRIP — */
+.tk-gi-stats {
+    background: var(--tk-navy);
+    padding: 0;
+    margin-bottom: 0;
+}
+
+.tk-gi-stats__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: rgba(255, 255, 255, .08);
+    border-radius: 0;
+}
+
+.tk-gi-stat {
+    background: var(--tk-navy);
+    text-align: center;
+    padding: 40px 20px;
+    transition: background .3s;
+}
+
+.tk-gi-stat:hover {
+    background: #002a52;
+}
+
+.tk-gi-stat__num {
+    display: block;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 44px;
+    font-weight: 800;
+    line-height: 1;
+    color: #fff;
+    margin-bottom: 8px;
+}
+
+.tk-gi-stat__num--text {
+    color: #ff5a72;
+}
+
+.tk-gi-stat__label {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, .65);
+}
+
+/* — Shared eyebrow + section title — */
+.tk-gi-eyebrow {
+    display: inline-block;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--tk-red);
     margin-bottom: 12px;
 }
 
-.tk-about-company {
-    font-size: 32px;
-    font-weight: 900;
-    color: var(--tk-dark);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin: 0;
+.tk-gi-sec-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 34px;
+    font-weight: 800;
+    line-height: 1.2;
+    color: var(--tk-navy);
+    margin: 0 0 16px;
+    letter-spacing: -.3px;
 }
 
-/* — Section chung (giới thiệu / ngành nghề) — */
-.tk-about-section {
-    padding: 0 0 40px;
+/* — SECTION 3: COMPANY STORY — */
+.tk-gi-story {
+    padding: 88px 0;
+    background: var(--tk-bg);
 }
 
-.tk-about-grid {
-    display: flex;
+.tk-gi-story__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     align-items: center;
-    gap: 44px;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 15px;
+    gap: 56px;
 }
 
-.tk-about-text {
-    flex: 1;
-    min-width: 0;
-}
-
-.tk-about-img {
-    flex: 1;
-    min-width: 0;
-    text-align: center;
-}
-
-.tk-about-img img {
-    max-width: 100%;
-    height: auto;
-}
-
-/* — Tiêu đề phụ — */
-.tk-about-subtitle {
-    font-size: 20px;
-    font-weight: 700;
-    color: var(--tk-dark);
-    text-decoration: underline;
-    text-underline-offset: 4px;
-    margin: 0 0 18px;
-}
-
-.tk-about-subtitle--bold {
-    font-size: 22px;
-    font-weight: 900;
-    font-style: italic;
-    text-decoration: none;
-}
-
-/* — Nội dung text giới thiệu — */
-.tk-about-text p {
-    color: #444;
+.tk-gi-prose p {
+    font-family: 'Inter', sans-serif;
     font-size: 16px;
     line-height: 1.85;
+    color: var(--tk-on-surface-variant);
     margin: 0 0 16px;
 }
 
-/* — Tagline — */
-.tk-about-tagline {
-    text-align: right;
+.tk-gi-prose p:last-child {
+    margin-bottom: 0;
+}
+
+.tk-gi-prose img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 12px;
+}
+
+.tk-gi-story__visual {
+    position: relative;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 24px 56px rgba(0, 31, 63, .14);
+}
+
+.tk-gi-story__visual img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.tk-gi-story__badge {
+    position: absolute;
+    left: 20px;
+    bottom: 20px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--tk-navy);
+    background: rgba(255, 255, 255, .92);
+    backdrop-filter: blur(8px);
+    padding: 10px 18px;
+    border-radius: 999px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, .12);
+}
+
+.tk-gi-story__badge i {
+    color: var(--tk-red);
+}
+
+/* — SECTION 4: BUSINESS SECTORS — */
+.tk-gi-sectors {
+    padding: 88px 0;
+    background: #fff;
+}
+
+.tk-gi-sectors__head {
+    text-align: center;
+    margin-bottom: 48px;
+}
+
+.tk-gi-sectors__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 26px;
+}
+
+.tk-gi-sector {
+    background: var(--tk-bg);
+    border: 1px solid var(--tk-border-subtle);
+    border-radius: var(--tk-radius-card);
+    padding: 34px 26px;
+    border-bottom: 3px solid transparent;
+    transition: transform .35s, box-shadow .35s, border-color .35s;
+}
+
+.tk-gi-sector:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 44px rgba(0, 31, 63, .12);
+    border-bottom-color: var(--tk-red);
+}
+
+.tk-gi-sector__ico {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 64px;
+    height: 64px;
+    border-radius: 18px;
+    background: linear-gradient(135deg, var(--tk-navy), #003366);
+    color: #fff;
     font-size: 26px;
+    margin-bottom: 20px;
+    transition: transform .35s;
+}
+
+.tk-gi-sector:hover .tk-gi-sector__ico {
+    transform: scale(1.08) rotate(-4deg);
+    background: linear-gradient(135deg, var(--tk-red), #e0334f);
+}
+
+.tk-gi-sector__title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 18px;
     font-weight: 700;
-    font-style: italic;
-    color: var(--tk-main);
-    margin: 10px 0 0;
-    max-width: 1200px;
-    padding: 0 15px;
-    margin-left: auto;
-    margin-right: auto;
+    color: var(--tk-navy);
+    margin: 0 0 10px;
 }
 
-/* — Ngành nghề kinh doanh — */
-.tk-about-business {
-    background: linear-gradient(135deg, rgba(22, 177, 169, .06) 0%, rgba(22, 177, 169, .02) 100%);
-    padding: 44px 0;
-}
-
-.tk-about-list {
-    list-style: disc;
-    padding-left: 22px;
+.tk-gi-sector__desc {
+    font-family: 'Inter', sans-serif;
+    font-size: 14.5px;
+    line-height: 1.7;
+    color: var(--tk-on-surface-variant);
     margin: 0;
 }
 
-.tk-about-list li {
-    color: #444;
+/* — SECTION 5: VMV wrapper (reuse .tk-vmv2) — */
+.tk-gi-vmv {
+    background: var(--tk-bg);
+    padding: 88px 0;
+}
+
+.tk-gi-vmv .tk-gi-sectors__head {
+    margin-bottom: 44px;
+}
+
+/* ============================================================
+   STATIC LEGAL PAGE (/van-ban-phap-ly)
+   Prefix: .tk-vb-*
+   ============================================================ */
+.tk-vb {
+    padding: 48px 15px 40px;
+}
+
+.tk-vb__grid {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 40px;
+    align-items: start;
+}
+
+.tk-vb__grid--full {
+    grid-template-columns: 1fr;
+    max-width: 860px;
+    margin: 0 auto;
+}
+
+.tk-vb__content {
+    font-family: 'Inter', sans-serif;
     font-size: 16px;
-    line-height: 1.85;
-    margin-bottom: 10px;
+    line-height: 1.9;
+    color: #3a4250;
 }
 
-/* — VMV trên trang giới thiệu (nền sáng) — */
-.tk-about-vmv {
-    background: #e2f6fb;
-    margin-top: 0;
-    margin-left: calc(-50vw + 50%);
-    margin-right: calc(-50vw + 50%);
-    padding-left: calc(50vw - 50%);
-    padding-right: calc(50vw - 50%);
+.tk-vb__content h1,
+.tk-vb__content h2,
+.tk-vb__content h3,
+.tk-vb__content h4 {
+    font-family: 'Montserrat', sans-serif;
+    color: var(--tk-navy);
+    font-weight: 700;
+    margin: 28px 0 14px;
+    line-height: 1.35;
 }
 
-.tk-about-vmv .fixwidth {
-    max-width: 800px;
+.tk-vb__content h2 {
+    font-size: 24px;
 }
 
-.tk-about-vmv .tk-sec-title {
-    margin-bottom: 42px;
+.tk-vb__content h3 {
+    font-size: 20px;
 }
 
-/* — Share dưới cùng — */
-.tk-about .share {
-    margin-top: 26px;
-    padding-top: 18px;
+.tk-vb__content p {
+    margin: 0 0 16px;
+}
+
+.tk-vb__content ul,
+.tk-vb__content ol {
+    padding-left: 22px;
+    margin: 0 0 16px;
+}
+
+.tk-vb__content li {
+    margin-bottom: 8px;
+}
+
+.tk-vb__content a {
+    color: var(--tk-red);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.tk-vb__content img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.tk-vb__content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0 0 16px;
+}
+
+.tk-vb__content table td,
+.tk-vb__content table th {
+    border: 1px solid var(--tk-border-subtle);
+    padding: 10px 12px;
+}
+
+.tk-vb__share {
+    margin-top: 32px;
+    padding-top: 20px;
     border-top: 1px solid var(--tk-line);
 }
 
-.tk-about .share b {
+.tk-vb__share b {
     display: inline-block;
     margin-right: 10px;
-    color: var(--tk-dark);
+    color: var(--tk-navy);
 }
 
-.tk-about .share .social-plugin {
+.tk-vb__share .social-plugin {
     display: inline-flex;
     align-items: center;
     gap: 8px;
     vertical-align: middle;
 }
 
-/*    RESPONSIVE — INNER PAGES    */
-@media (max-width: 991px) {
-    .tk-about-grid {
-        flex-direction: column;
-        gap: 35px;
-    }
-
-    /* Đưa toàn bộ Cột 2 (gồm cả ảnh và tagline nhỏ) lên trên text ở mobile */
-    .tk-about-right-col {
-        order: -1;
-        width: 100%;
-    }
-
-    .tk-about-tagline-new {
-        font-size: 20px;
-    }
+.tk-vb__sticky {
+    position: sticky;
+    top: 20px;
 }
 
-@media (max-width: 767px) {
+.tk-vb__img {
+    width: 100%;
+    border-radius: var(--tk-radius-card);
+    box-shadow: 0 12px 32px rgba(0, 31, 63, .12);
+    margin-bottom: 20px;
+    display: block;
+}
 
-    .tk-about-bg-intro,
-    .tk-about-bg-business {
-        padding: 35px 0;
+.tk-vb-sidebar-box {
+    background: linear-gradient(135deg, var(--tk-navy), #003366);
+    border-radius: var(--tk-radius-card);
+    padding: 26px 24px;
+    color: #fff;
+    box-shadow: 0 14px 32px rgba(0, 31, 63, .22);
+}
+
+.tk-vb-sidebar-box__title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 17px;
+    font-weight: 700;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.tk-vb-sidebar-box__title i {
+    color: #ff8fa0;
+}
+
+.tk-vb-sidebar-box__row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14.5px;
+    font-weight: 500;
+    color: #fff;
+    margin-bottom: 12px;
+    text-decoration: none;
+    transition: color .25s;
+}
+
+.tk-vb-sidebar-box__row:last-child {
+    margin-bottom: 0;
+}
+
+a.tk-vb-sidebar-box__row:hover {
+    color: #ff8fa0;
+}
+
+.tk-vb-sidebar-box__row i {
+    width: 18px;
+    text-align: center;
+    color: rgba(255, 255, 255, .75);
+    flex-shrink: 0;
+}
+
+/* — Album hình ảnh văn bản (grid + caption) — */
+.tk-vb-gallery {
+    margin-top: 40px;
+    padding-top: 32px;
+    border-top: 1px solid var(--tk-line);
+}
+
+.tk-vb-gallery__title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 40px;
+    font-weight: 700;
+    color: var(--tk-navy);
+    margin: 0 0 22px;
+    align-items: center;
+}
+
+.tk-vb-gallery__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 20px;
+}
+
+.tk-vb-gallery__item {
+    margin: 0;
+}
+
+.tk-vb-gallery__link {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    border-radius: var(--tk-radius-card);
+    border: 1px solid var(--tk-border-subtle);
+    background: #fff;
+    box-shadow: var(--tk-shadow-card);
+    aspect-ratio: 3 / 4;
+}
+
+.tk-vb-gallery__link img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform .45s ease;
+}
+
+.tk-vb-gallery__link:hover img {
+    transform: scale(1.06);
+}
+
+.tk-vb-gallery__zoom {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+    color: #fff;
+    background: rgba(0, 31, 63, .45);
+    opacity: 0;
+    transition: opacity .35s ease;
+}
+
+.tk-vb-gallery__link:hover .tk-vb-gallery__zoom {
+    opacity: 1;
+}
+
+.tk-vb-gallery__cap {
+    margin: 12px 4px 0;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.5;
+    color: var(--tk-navy);
+    text-align: center;
+}
+
+/* — Văn bản nhiều trang (gom nhóm theo tiêu đề) — */
+.tk-vb-doc {
+    margin-bottom: 32px;
+    padding: 20px;
+    border: 1px solid var(--tk-border-subtle);
+    border-radius: var(--tk-radius-card);
+    background: #fff;
+    box-shadow: var(--tk-shadow-card);
+}
+
+.tk-vb-doc__title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0 0 18px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--tk-navy);
+}
+
+.tk-vb-doc__title i {
+    color: var(--tk-red);
+    font-size: 18px;
+}
+
+.tk-vb-doc__count {
+    margin-left: auto;
+    padding: 4px 12px;
+    border-radius: 999px;
+    background: var(--tk-bg);
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--tk-navy);
+    white-space: nowrap;
+}
+
+.tk-vb-doc__pages {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 14px;
+}
+
+.tk-vb-doc__page {
+    margin: 0;
+}
+
+.tk-vb-doc__page .tk-vb-gallery__link {
+    aspect-ratio: 3 / 4;
+}
+
+.tk-vb-doc__page-num {
+    position: absolute;
+    left: 8px;
+    bottom: 8px;
+    z-index: 2;
+    padding: 3px 10px;
+    border-radius: 999px;
+    background: rgba(0, 31, 63, .82);
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    color: #fff;
+    letter-spacing: .3px;
+}
+
+/* — Lightbox phóng to — */
+.tk-vb-lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    background: rgba(0, 12, 26, .88);
+    backdrop-filter: blur(6px);
+}
+
+.tk-vb-lightbox.is-open {
+    display: flex;
+    animation: tkVbLbFade .25s ease;
+}
+
+@keyframes tkVbLbFade {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+.tk-vb-lightbox__body {
+    margin: 0;
+    max-width: 90vw;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.tk-vb-lightbox__img {
+    max-width: 90vw;
+    max-height: 78vh;
+    width: auto;
+    height: auto;
+    border-radius: var(--tk-radius-card);
+    box-shadow: 0 30px 80px rgba(0, 0, 0, .55);
+}
+
+.tk-vb-lightbox__cap {
+    margin-top: 16px;
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    color: #fff;
+    text-align: center;
+    max-width: 720px;
+}
+
+.tk-vb-lightbox__close {
+    position: absolute;
+    top: 20px;
+    right: 24px;
+    width: 44px;
+    height: 44px;
+    border: none;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, .12);
+    color: #fff;
+    font-size: 20px;
+    cursor: pointer;
+    transition: background .25s, transform .25s;
+}
+
+.tk-vb-lightbox__close:hover {
+    background: var(--tk-red);
+    transform: rotate(90deg);
+}
+
+.tk-vb-lightbox__nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 52px;
+    height: 52px;
+    border: none;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, .12);
+    color: #fff;
+    font-size: 22px;
+    cursor: pointer;
+    transition: background .25s, transform .25s;
+}
+
+.tk-vb-lightbox__nav:hover {
+    background: var(--tk-red);
+}
+
+.tk-vb-lightbox__nav--prev {
+    left: 24px;
+}
+
+.tk-vb-lightbox__nav--next {
+    right: 24px;
+}
+
+.tk-vb-lightbox__nav--prev:hover {
+    transform: translateY(-50%) translateX(-3px);
+}
+
+.tk-vb-lightbox__nav--next:hover {
+    transform: translateY(-50%) translateX(3px);
+}
+
+/* — RESPONSIVE: About + Legal — */
+@media (max-width: 991px) {
+    .tk-gi-hero__wrap,
+    .tk-gi-story__grid {
+        grid-template-columns: 1fr;
+        gap: 36px;
     }
 
-    .tk-about-tagline-new {
-        font-size: 18px;
+    .tk-gi-hero__title {
+        font-size: 38px;
+    }
+
+    .tk-gi-hero__visual {
+        order: -1;
+    }
+
+    .tk-gi-sectors__grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .tk-gi-stats__grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .tk-vb__grid {
+        grid-template-columns: 1fr;
+    }
+
+    .tk-vb__sticky {
+        position: static;
     }
 }
 
 @media (max-width: 575px) {
+    .tk-gi-hero {
+        padding: 64px 0 56px;
+    }
+
+    .tk-gi-hero__title {
+        font-size: 30px;
+    }
+
+    .tk-gi-sec-title {
+        font-size: 26px;
+    }
+
+    .tk-gi-story,
+    .tk-gi-sectors,
+    .tk-gi-vmv {
+        padding: 56px 0;
+    }
+
+    .tk-gi-sectors__grid {
+        grid-template-columns: 1fr;
+    }
+
+    .tk-gi-stat__num {
+        font-size: 34px;
+    }
+
+    .tk-vb-gallery__grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 14px;
+    }
+
+    .tk-vb-doc__pages {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+
+    .tk-vb-doc__count {
+        font-size: 11px;
+    }
+
+    .tk-vb-lightbox {
+        padding: 16px;
+    }
+
+    .tk-vb-lightbox__nav {
+        width: 42px;
+        height: 42px;
+        font-size: 18px;
+    }
+
+    .tk-vb-lightbox__nav--prev {
+        left: 8px;
+    }
+
+    .tk-vb-lightbox__nav--next {
+        right: 8px;
+    }
+
     .wrap-main .mainkhung_product {
         grid-template-columns: 1fr;
     }
 }
 
-/* --- Khối ngoài cùng bọc tất cả: Thêm ảnh background --- */
-.tk-about-bg-intro {
-    background-image: linear-gradient(rgba(255, 255, 255, 0.88), rgba(255, 255, 255, 0.88)),
-        url('../../assets/images/titkul/gioithieu-collage.png');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    padding: 50px 0 40px;
-}
-
-.tk-about-bg-business {
-    background-image: linear-gradient(rgba(245, 253, 252, 0.92), rgba(245, 253, 252, 0.92)),
-        url('../../assets/images/titkul/gioithieu-collage.png');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    padding: 50px 0;
-}
-
-/* --- COLUMN 2: Chứa các hàng nhỏ bên trong --- */
-.tk-about-right-col {
-    flex: 1;
-    min-width: 0;
-    display: flex;
-    flex-direction: column;
-    /* Xếp các hàng nhỏ theo chiều dọc */
-    gap: 15px;
-    /* Khoảng cách giữa hàng ảnh và hàng chữ */
-}
-
-/* Row nhỏ 1: Hình ảnh */
-.tk-about-sub-img {
-    text-align: center;
-}
-
-.tk-about-sub-img img {
-    max-width: 100%;
-    height: auto;
-    display: inline-block;
-}
-
-/* Row nhỏ 2: 1 dòng chữ */
-.tk-about-sub-txt {
-    text-align: center;
-}
-
-.tk-about-tagline-new {
-    font-size: 22px;
-    font-weight: 700;
-    font-style: italic;
-    color: var(--tk-main);
-    margin: 0;
-}
 
 /* Ép thanh trượt chuyển động tuyến tính liên tục, không ngắt quãng */
 #doitac_slider .owl-stage {
@@ -5059,9 +6388,8 @@ section.tk-sec.tk-intro {
         transform: none !important;
     }
 
-    .tk-prodetail-hero__right img,
-    .tk-prodetail-tnb-banner__mockup img,
-    .tk-prodetail-benefits__right img {
+    .tk-pd-hero__right img,
+    .tk-pd-banner__mockup img {
         animation: none !important;
     }
 }
@@ -7690,6 +9018,7 @@ section.tk-sec.tk-intro {
     margin: 36px 0 16px;
     line-height: 1.35;
     font-weight: 700;
+    scroll-margin-top: 90px;
 }
 
 .tknews-detail-article__content h2 {
@@ -7794,6 +9123,295 @@ section.tk-sec.tk-intro {
 .tknews-detail-back:hover {
     background: #001f3f;
     color: #fff;
+}
+
+/* ════════ Reading UX: readbar + layout 2 cột + TOC + share + pager ════════ */
+
+/* Thanh tiến trình đọc */
+.tknews-readbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    width: 0;
+    background: linear-gradient(90deg, #bb0021, #ff5470);
+    z-index: 9999;
+    transition: width .1s linear;
+}
+
+/* Layout 2 cột: sidebar sticky + bài viết */
+.tknews-detail-layout {
+    display: grid;
+    grid-template-columns: 260px minmax(0, 1fr);
+    gap: 40px;
+    align-items: start;
+    max-width: 1180px;
+    margin: 0 auto;
+}
+
+.tknews-detail-layout .tknews-detail-article {
+    max-width: none;
+    margin: 0;
+}
+
+.tknews-detail-aside__sticky {
+    position: sticky;
+    top: 90px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Mục lục (TOC) */
+.tknews-toc {
+    background: #fff;
+    border: 1px solid #E2E8F0;
+    border-radius: 14px;
+    padding: 18px 18px 18px 20px;
+    box-shadow: 0 4px 20px rgba(0, 31, 63, .05);
+}
+
+.tknews-toc__title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+    color: #001f3f;
+    margin: 0 0 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.tknews-toc__title i {
+    color: #bb0021;
+}
+
+.tknews-toc__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    max-height: calc(100vh - 220px);
+    overflow-y: auto;
+}
+
+.tknews-toc__item {
+    margin: 0;
+}
+
+.tknews-toc__link {
+    display: block;
+    font-size: 13.5px;
+    line-height: 1.45;
+    color: #5a6678;
+    text-decoration: none;
+    padding: 6px 0 6px 14px;
+    border-left: 2px solid transparent;
+    transition: color .2s, border-color .2s;
+}
+
+.tknews-toc__item.is-sub .tknews-toc__link {
+    padding-left: 26px;
+    font-size: 12.5px;
+}
+
+.tknews-toc__link:hover {
+    color: #001f3f;
+}
+
+.tknews-toc__link.is-active {
+    color: #bb0021;
+    border-left-color: #bb0021;
+    font-weight: 600;
+}
+
+/* Chia sẻ */
+.tknews-share {
+    position: relative;
+    background: #fff;
+    border: 1px solid #E2E8F0;
+    border-radius: 14px;
+    padding: 16px 18px;
+    box-shadow: 0 4px 20px rgba(0, 31, 63, .05);
+}
+
+.tknews-share__label {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+    color: #8a96a8;
+    margin-bottom: 12px;
+}
+
+.tknews-share__btns {
+    display: flex;
+    gap: 10px;
+}
+
+.tknews-share__btn {
+    width: 40px;
+    height: 40px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    color: #fff;
+    text-decoration: none;
+    transition: transform .2s, box-shadow .2s;
+}
+
+.tknews-share__btn:hover {
+    transform: translateY(-2px);
+    color: #fff;
+    box-shadow: 0 8px 18px rgba(0, 31, 63, .18);
+}
+
+.tknews-share__btn--fb {
+    background: #1877f2;
+}
+
+.tknews-share__btn--zalo {
+    background: #0068ff;
+}
+
+.tknews-share__btn--copy {
+    background: #001f3f;
+}
+
+.tknews-share__toast {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    font-size: 12px;
+    font-weight: 700;
+    color: #1a7f37;
+    background: #e7f6ec;
+    padding: 4px 10px;
+    border-radius: 999px;
+    opacity: 0;
+    transform: translateY(-4px);
+    transition: opacity .25s, transform .25s;
+    pointer-events: none;
+}
+
+.tknews-share.is-copied .tknews-share__toast {
+    opacity: 1;
+    transform: none;
+}
+
+/* Điều hướng Bài trước / Bài sau */
+.tknews-detail-pager {
+    padding: 8px 0 56px;
+    background: #f8f9ff;
+}
+
+.tknews-pager {
+    max-width: 1180px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.tknews-pager__item {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    background: #fff;
+    border: 1px solid #E2E8F0;
+    border-radius: 14px;
+    padding: 18px 22px;
+    text-decoration: none;
+    transition: transform .25s, box-shadow .25s, border-color .25s;
+}
+
+.tknews-pager__item--next {
+    text-align: right;
+    align-items: flex-end;
+}
+
+.tknews-pager__item:not(.tknews-pager__item--empty):hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(0, 31, 63, .1);
+    border-color: #bb0021;
+}
+
+.tknews-pager__item--empty {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+}
+
+.tknews-pager__dir {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+    color: #bb0021;
+}
+
+.tknews-pager__title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: #001f3f;
+    line-height: 1.45;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* Responsive */
+@media (max-width: 991px) {
+    .tknews-detail-layout {
+        grid-template-columns: 1fr;
+        gap: 24px;
+    }
+
+    .tknews-detail-aside {
+        order: 2;
+    }
+
+    .tknews-detail-aside__sticky {
+        position: static;
+    }
+
+    .tknews-toc {
+        display: none;
+    }
+
+    .tknews-share {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        flex-wrap: wrap;
+    }
+
+    .tknews-share__label {
+        margin-bottom: 0;
+    }
+}
+
+@media (max-width: 575px) {
+    .tknews-pager {
+        grid-template-columns: 1fr;
+    }
+
+    .tknews-pager__item--next {
+        text-align: left;
+        align-items: flex-start;
+    }
 }
 
 /* ── Related Articles ── */
@@ -8750,7 +10368,7 @@ section.tk-sec.tk-intro {
 .tkct-faq__body {
     display: grid;
     grid-template-rows: 0fr;
-    transition: grid-template-rows 0.3s ease-out;
+    transition: grid-template-rows .38s cubic-bezier(.4, 0, .2, 1);
     background: var(--tkct-surface);
     border-top: 1px solid transparent;
 }
@@ -8760,9 +10378,14 @@ section.tk-sec.tk-intro {
     border-top-color: var(--tkct-border-subtle);
 }
 
+/* Đóng: padding trên/dưới = 0 → track co về 0fr là biến mất sạch (không lộ dòng đầu).
+   Mở: padding 24/32px. Transition CẢ padding cùng nhịp với chiều cao → vừa gọn vừa mượt. */
 .tkct-faq__bodyinner {
     overflow: hidden;
+    min-height: 0;
     padding: 0 24px;
+    transition: padding-top .38s cubic-bezier(.4, 0, .2, 1),
+                padding-bottom .38s cubic-bezier(.4, 0, .2, 1);
     font-family: var(--tkct-font-body);
     font-size: 16px;
     line-height: 28px;
@@ -8770,12 +10393,19 @@ section.tk-sec.tk-intro {
 }
 
 .tkct-faq__body[data-state="open"] .tkct-faq__bodyinner {
-    padding: 24px;
+    padding-top: 24px;
+    padding-bottom: 24px;
 }
 
 @media (min-width: 768px) {
+    .tkct-faq__bodyinner {
+        padding-left: 32px;
+        padding-right: 32px;
+    }
+
     .tkct-faq__body[data-state="open"] .tkct-faq__bodyinner {
-        padding: 32px;
+        padding-top: 32px;
+        padding-bottom: 32px;
     }
 }
 
@@ -10312,36 +11942,21 @@ section.tk-sec.tk-intro {
 }
 
 /* ============================================================
-   HERO FEATURE CAROUSEL — 3D Coverflow (Premium Scholastic)
-   Triggered by clicking center hexagon.
+   FEATURE CAROUSEL — 3D Coverflow (Premium Scholastic)
+   Section inline trên trang chủ (sau Apps).
    ============================================================ */
-.tk-feat-overlay {
-    display: flex;
-    /* always flex, hidden via opacity+visibility */
-    position: absolute;
-    inset: 0;
-    z-index: 40;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 40px 24px;
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-    transition: opacity .5s ease, visibility .5s ease;
-}
-
-.tk-feat-overlay.is-active {
-    opacity: 1;
-    visibility: visible;
-    pointer-events: auto;
+.tk-feat-section {
+    position: relative;
+    padding: 80px 0;
+    background: var(--tk-bg, #f8f9ff);
+    overflow: hidden;
 }
 
 .tk-feat-ambient {
     position: absolute;
     inset: 0;
     pointer-events: none;
-    background: radial-gradient(circle at 50% -10%, rgba(187, 0, 33, 0.05) 0%, rgba(67, 71, 78, 0.02) 40%, rgba(248, 249, 255, 0) 70%);
+    background: radial-gradient(circle at 50% -10%, rgba(187, 0, 33, 0.06) 0%, rgba(67, 71, 78, 0.02) 40%, rgba(248, 249, 255, 0) 70%);
 }
 
 /* Header */
@@ -10392,57 +12007,41 @@ section.tk-sec.tk-intro {
     transform-style: preserve-3d;
 }
 
-/* Slide states */
+/* Slides — vị trí & transform điều khiển hoàn toàn bằng JS (xoay 3D liên tục) */
+.tk-feat-coverflow {
+    cursor: grab;
+    touch-action: pan-y;
+}
+
+.tk-feat-coverflow.is-dragging,
+.tk-feat-coverflow.is-dragging .tk-feat-slide {
+    cursor: grabbing;
+}
+
 .tk-feat-slide {
     position: absolute;
+    top: 50%;
+    left: 50%;
     width: 100%;
     max-width: 960px;
     opacity: 0;
-    pointer-events: none;
-    visibility: hidden;
-    transform: translateX(0) translateZ(-400px) rotateY(0deg);
-    transition: all 0.6s cubic-bezier(0.25, 1, 0.25, 1);
+    visibility: visible;
+    transform: translate(-50%, -50%);
+    transform-origin: center center;
+    will-change: transform, opacity;
+    backface-visibility: hidden;
 }
 
-.tk-feat-slide.active {
-    position: relative;
-    transform: translateX(0) translateZ(0) rotateY(0deg);
-    opacity: 1;
-    z-index: 30;
-    pointer-events: auto;
-    visibility: visible;
-}
-
-.tk-feat-slide.prev {
-    transform: translateX(-45%) translateZ(-250px) rotateY(30deg);
-    opacity: 0.4;
-    z-index: 10;
-    pointer-events: auto;
-    visibility: visible;
+.tk-feat-slide:not(.is-center) {
     cursor: pointer;
 }
 
-.tk-feat-slide.next {
-    transform: translateX(45%) translateZ(-250px) rotateY(-30deg);
-    opacity: 0.4;
-    z-index: 10;
-    pointer-events: auto;
-    visibility: visible;
-    cursor: pointer;
-}
-
-.tk-feat-slide:not(.active) * {
+/* Các slide KHÔNG ở giữa: chặn click vào con (chỉ click được vào chính slide
+   để đẩy nó ra giữa). Slide GIỮA luôn bấm được nút "Xem Chi Tiết". */
+.tk-feat-slide:not(.is-center) * {
     pointer-events: none;
     user-select: none;
     filter: grayscale(20%) brightness(95%);
-}
-
-/* Khi overlay đóng: ép mọi slide tắt hẳn tương tác, nếu không các class
-   active/prev/next vẫn giữ visibility:visible + pointer-events:auto → tạo
-   lớp vô hình đè lên cụm hexagon, chặn click nút giữa & hover lục giác. */
-.tk-feat-overlay:not(.is-active) .tk-feat-slide {
-    visibility: hidden !important;
-    pointer-events: none !important;
 }
 
 /* Card — Dual Ticket Stub Layout */
@@ -10675,47 +12274,6 @@ section.tk-sec.tk-intro {
     transform: scale(1.3);
 }
 
-/* Back button */
-.tk-feat-back {
-    position: absolute;
-    top: 20px;
-    left: 24px;
-    z-index: 50;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    background: rgba(255, 255, 255, 0.8);
-    backdrop-filter: blur(8px);
-    border: 1px solid #e2e8f0;
-    border-radius: 8px;
-    padding: 8px 16px;
-    cursor: pointer;
-    font-family: 'Inter', sans-serif;
-    font-size: 13px;
-    font-weight: 500;
-    color: #0b1c30;
-    transition: all .2s;
-}
-
-.tk-feat-back:hover {
-    background: #fff;
-}
-
-.tk-feat-back i {
-    font-size: 12px;
-}
-
-/* Hero default hide when carousel active */
-.tk-hero2-inner {
-    transition: opacity .4s ease, visibility .4s ease;
-}
-
-.tk-hero2-inner.is-hidden {
-    opacity: 0;
-    pointer-events: none;
-    visibility: hidden;
-}
-
 /* Responsive carousel */
 @media (max-width: 1024px) {
     .tk-feat-slide {
@@ -10728,8 +12286,8 @@ section.tk-sec.tk-intro {
 }
 
 @media (max-width: 767px) {
-    .tk-feat-overlay {
-        padding: 20px 16px;
+    .tk-feat-section {
+        padding: 56px 0;
     }
 
     .tk-feat-header__title {
@@ -10764,12 +12322,5 @@ section.tk-sec.tk-intro {
 
     .tk-feat-arrow--next {
         right: 4px;
-    }
-
-    .tk-feat-back {
-        top: 12px;
-        left: 12px;
-        padding: 6px 12px;
-        font-size: 12px;
     }
 }

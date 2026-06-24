@@ -59,4 +59,20 @@
     $config['static'][$nametype]['tieude'] = true;
     $config['static'][$nametype]['noidung'] = true;
     $config['static'][$nametype]['noidung_cke'] = true;
+    $config['static'][$nametype]['gallery'] = array(
+        $nametype => array(
+            "title_main_photo" => "Hình ảnh văn bản",
+            "title_sub_photo"  => "Hình ảnh",
+            "number_photo"     => 10,
+            "images_photo"     => true,
+            "cart_photo"       => false,
+            "avatar_photo"     => false,
+            "tieude_photo"     => true,
+            "width_photo"      => 800,
+            "height_photo"     => 1100,
+            "thumb_photo"      => '100x100x1',
+            "img_type_photo"   => '.jpg|.gif|.png|.jpeg|.JPG|.PNG|.JPEG|.Png|.GIF'
+        )
+    );
+    $config['static'][$nametype]['img_type'] = '.jpg|.gif|.png|.jpeg|.JPG|.PNG|.JPEG|.Png|.GIF';
 ?>

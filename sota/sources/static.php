@@ -30,9 +30,13 @@
 	/* Get static */
 	function get_static()
 	{
-		global $d, $item, $type;
+		global $d, $item, $gallery, $id, $type, $com;
 
 		$item = $d->rawQueryOne("select * from #_static where type = ? limit 0,1",array($type));
+
+		/* Lấy album gallery (id_photo = id bài tĩnh) để form jFiler hiển thị */
+		$id = isset($item['id']) ? $item['id'] : 0;
+		$gallery = $d->rawQuery("select * from #_gallery where id_photo = ? and com = ? and type = ? and kind = ? and val = ? order by stt,id desc", array($id, 'static', $type, 'man', $type));
 	}
 
 	/* Save static */
@@ -139,6 +143,12 @@
 
 				if($d->insert('static',$data))
 				{
+					$id_insert = $d->getLastInsertId();
+
+					/* Nối các ảnh gallery đã upload bằng hash về id bài tĩnh mới */
+					$hash = (isset($_POST['hash'])) ? htmlspecialchars($_POST['hash']) : '';
+					if($hash != '') $d->rawQuery("update #_gallery set hash = ?, id_photo = ? where hash = ? and com = ?", array('', $id_insert, $hash, $com));
+
 					/* SEO */
 					if(isset($config['static'][$type]['seo']) && $config['static'][$type]['seo'] == true)
 					{

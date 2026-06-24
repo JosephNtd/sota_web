@@ -48,6 +48,75 @@
     </div>
 </section>
 
+<!-- SECTION 2.5 — TÍNH NĂNG NỔI BẬT (3D Coverflow inline) -->
+<?php if (isset($tinhnang) && count($tinhnang) > 0) { ?>
+<section class="tk-sec tk-feat-section">
+    <div class="tk-feat-ambient"></div>
+    <div class="fixwidth">
+        <div class="tk-feat-header tk-rv tk-rv--up">
+            <p class="tk-feat-header__mono">— TÍNH NĂNG NỔI BẬT —</p>
+            <h2 class="tk-feat-header__title">Giải pháp chuyển đổi số toàn diện cho trường học thông minh</h2>
+        </div>
+
+        <!-- Carousel wrapper -->
+        <div class="tk-feat-carousel-wrap tk-rv tk-rv--up tk-d1">
+            <!-- Coverflow container (xoay 3D liên tục, kéo-ném quán tính) -->
+            <div class="tk-feat-coverflow" id="tkFeatCoverflow">
+                <?php foreach ($tinhnang as $fk => $fv) {
+                    if ($fk >= 6) break;
+                    $fTitle = $fv['ten' . $lang];
+                    $fDesc = isset($fv['mota' . $lang]) ? $fv['mota' . $lang] : '';
+                    $fPhoto = $fv['photo'];
+                    $feat_href   = (!empty($fv['link'])) ? $fv['link'] : $fv[$sluglang];
+                    $feat_target = (!empty($fv['link'])) ? ' target="_blank" rel="noopener noreferrer"' : '';
+                    $fNum = str_pad($fk + 1, 2, '0', STR_PAD_LEFT);
+                ?>
+                    <div class="tk-feat-slide" data-index="<?= $fk ?>">
+                        <div class="tk-feat-card">
+                            <!-- Left: Info -->
+                            <div class="tk-feat-card__info">
+                                <div class="tk-feat-card__top">
+                                    <span class="tk-feat-card__tag">TÍNH NĂNG #<?= $fNum ?></span>
+                                    <h3 class="tk-feat-card__title"><?= htmlspecialchars($fTitle) ?></h3>
+                                    <?php if ($fDesc) { ?>
+                                        <p class="tk-feat-card__desc"><?= htmlspecialchars($fDesc) ?></p>
+                                    <?php } ?>
+                                </div>
+                                <div class="tk-feat-card__bottom">
+                                    <a href="<?= $feat_href ?>" <?= $feat_target ?> class="tk-feat-card__btn">
+                                        <span>Xem Chi Tiết</span>
+                                        <i class="fas fa-arrow-right"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <!-- Right: Ticket Stub with Image -->
+                            <div class="tk-feat-card__stub">
+                                <div class="tk-feat-card__img-wrap">
+                                    <img src="<?= UPLOAD_NEWS_L . $fPhoto ?>" alt="<?= htmlspecialchars($fTitle) ?>"
+                                        onerror="this.style.opacity=0;" loading="lazy" />
+                                    <div class="tk-feat-card__img-gradient"></div>
+                                </div>
+                                <div class="tk-feat-card__stub-footer">
+                                    <span class="tk-feat-card__stub-label">SMART SCHOOL</span>
+                                    <span class="tk-feat-card__stub-num">#<?= $fNum ?></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <?php } ?>
+            </div>
+
+            <!-- Pagination dots -->
+            <div class="tk-feat-dots" id="tkFeatDots">
+                <?php for ($di = 0; $di < min(count($tinhnang), 6); $di++) { ?>
+                    <button class="tk-feat-dot" data-dot="<?= $di ?>" aria-label="Tính năng <?= $di + 1 ?>"></button>
+                <?php } ?>
+            </div>
+        </div>
+    </div>
+</section>
+<?php } ?>
+
 <!-- SECTION 3+4 — LỢI ÍCH + TẠI SAO CHỌN TITKUL (combined) -->
 <section class="tk-sec tk-benefit2">
     <!-- Subtle gradient blobs -->
@@ -457,101 +526,215 @@ $tk_doituong = (isset($huongdan) && count($huongdan) > 0) ? $huongdan : $tk_fall
             }, { threshold: 0.6 });
             counters.forEach(function(c) { countObserver.observe(c); });
         }
+
+        // Entrance animation cho Case Study items (.tk-cs-item)
+        var csItems = document.querySelectorAll('.tk-casestudy .tk-cs-item');
+        if (csItems.length) {
+            var csObserver = new IntersectionObserver(function(entries) {
+                entries.forEach(function(entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-revealed');
+                        csObserver.unobserve(entry.target);
+                    }
+                });
+            }, { root: null, rootMargin: '-40px 0px -40px 0px', threshold: 0.1 });
+            csItems.forEach(function(item) { csObserver.observe(item); });
+        }
     });
 </script>
-<!-- Feature Carousel: 3D Coverflow Logic -->
+<!-- Feature Carousel: 3D xoay liên tục + kéo/ném quán tính (inline section) -->
 <script>
 window.addEventListener('load', function() {
-    var hexCenter  = document.getElementById('tkHexCenter');
-    var heroDefault = document.getElementById('tkHeroDefault');
-    var overlay    = document.getElementById('tkFeatOverlay');
-    var backBtn    = document.getElementById('tkFeatBack');
+    var coverflow = document.getElementById('tkFeatCoverflow');
+    if (!coverflow) return;
 
-    if (!hexCenter || !overlay) return;
-
-    var slides     = overlay.querySelectorAll('.tk-feat-slide');
-    var dots       = overlay.querySelectorAll('.tk-feat-dot');
-    var prevBtn    = document.getElementById('tkFeatPrev');
-    var nextBtn    = document.getElementById('tkFeatNext');
-    var currentIdx = 0;
-    var total      = slides.length;
+    var section = coverflow.closest('.tk-feat-section');
+    var slides  = Array.prototype.slice.call(coverflow.querySelectorAll('.tk-feat-slide'));
+    var dots    = section ? Array.prototype.slice.call(section.querySelectorAll('.tk-feat-dot')) : [];
+    var total   = slides.length;
     if (total === 0) return;
 
-    function updateCarousel(idx) {
-        if (idx < 0) idx = total - 1;
-        if (idx >= total) idx = 0;
-        currentIdx = idx;
+    var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-        var prevIdx = (currentIdx - 1 + total) % total;
-        var nextIdx = (currentIdx + 1) % total;
+    // ----- Trạng thái physics -----
+    var pos        = 0;     // vị trí liên tục (chỉ số slide ở giữa, dạng float)
+    var vel        = 0;     // vận tốc quán tính (slide / giây)
+    var AUTO_SPEED = 0.16;  // tốc độ tự xoay khi rảnh (slide / giây)
+    var FRICTION   = 2.4;   // ma sát giảm tốc sau khi ném
+    var MAX_VEL    = 9;     // giới hạn vận tốc ném
+    var DRAG_PX    = 320;   // số px kéo tương ứng 1 slide
+    var HOLD_MS    = 2000;  // thời gian dừng xoay sau khi click hex/dot/slide
+    var lastTime   = null;
+    var target     = null;  // mục tiêu ease tới (click hex/dot)
+    var holdUntil  = 0;     // tạm dừng auto tới thời điểm này
+    var visible    = true;
 
+    var dragging = false, moved = false, wasDragged = false;
+    var startX = 0, lastX = 0, lastMoveT = 0, dragVel = 0;
+
+    function wrapClamp(v) { return ((v % total) + total) % total; }
+    // khoảng cách vòng ngắn nhất (đưa offset về [-total/2, total/2])
+    function wrap(d) { d = wrapClamp(d); if (d > total / 2) d -= total; return d; }
+
+    // Chiều cao container = card cao nhất (mọi slide đều absolute)
+    function syncHeight() {
+        var max = 0;
         for (var i = 0; i < total; i++) {
-            slides[i].className = 'tk-feat-slide';
+            var card = slides[i].querySelector('.tk-feat-card');
+            var h = card ? card.offsetHeight : slides[i].offsetHeight;
+            if (h > max) max = h;
         }
-        slides[currentIdx].classList.add('active');
-        if (total > 1) slides[prevIdx].classList.add('prev');
-        if (total > 2) slides[nextIdx].classList.add('next');
+        if (max > 0) coverflow.style.height = max + 'px';
+    }
 
+    function centerIndex() { return wrapClamp(Math.round(pos)); }
+
+    function render() {
+        var ci = centerIndex();
+        for (var i = 0; i < total; i++) {
+            var o  = wrap(i - pos);          // offset liên tục so với tâm
+            var ao = Math.abs(o);
+            var tx = o * 46;                 // dịch ngang (% bề rộng slide)
+            var tz = -ao * 230;              // lùi sâu theo trục Z
+            var ry = Math.max(-55, Math.min(55, -o * 32));
+            var sc = Math.max(0.6, 1 - ao * 0.12);
+            var op = ao > 2.6 ? 0 : Math.max(0, 1 - ao * 0.42);
+            var s  = slides[i];
+            s.style.transform = 'translate(-50%, -50%) translateX(' + tx + '%) translateZ(' + tz + 'px) rotateY(' + ry + 'deg) scale(' + sc + ')';
+            s.style.opacity = op;
+            s.style.zIndex = String(100 - Math.round(ao * 10));
+            s.style.pointerEvents = op <= 0.03 ? 'none' : 'auto';
+            s.classList.toggle('is-center', i === ci);
+        }
         for (var j = 0; j < dots.length; j++) {
-            dots[j].classList.toggle('is-active', j === currentIdx);
+            dots[j].classList.toggle('is-active', j === ci);
         }
     }
 
-    // Open carousel
-    hexCenter.addEventListener('click', function(e) {
-        e.preventDefault();
-        heroDefault.classList.add('is-hidden');
-        overlay.classList.add('is-active');
-        updateCarousel(0);
-    });
+    function tick(now) {
+        if (lastTime === null) lastTime = now;
+        var dt = Math.min(0.05, (now - lastTime) / 1000);
+        lastTime = now;
 
-    // Close carousel
-    backBtn.addEventListener('click', function() {
-        overlay.classList.remove('is-active');
-        heroDefault.classList.remove('is-hidden');
-    });
-
-    // Nav
-    prevBtn.addEventListener('click', function() { updateCarousel(currentIdx - 1); });
-    nextBtn.addEventListener('click', function() { updateCarousel(currentIdx + 1); });
-
-    // Dots
-    for (var d = 0; d < dots.length; d++) {
-        dots[d].addEventListener('click', function() {
-            updateCarousel(parseInt(this.getAttribute('data-dot')));
-        });
-    }
-
-    // Click prev/next slide to navigate
-    for (var s = 0; s < total; s++) {
-        (function(idx) {
-            slides[idx].addEventListener('click', function() {
-                if (this.classList.contains('prev') || this.classList.contains('next')) {
-                    updateCarousel(idx);
+        if (!dragging) {
+            if (target !== null) {
+                // ease mượt tới mục tiêu (click hex/dot)
+                var d = target - pos;
+                if (Math.abs(d) < 0.002) {
+                    pos = target; target = null; holdUntil = now + HOLD_MS;
+                } else {
+                    pos += d * (1 - Math.exp(-dt * 6));
                 }
-            });
-        })(s);
+                vel = 0;
+            } else if (Math.abs(vel) > AUTO_SPEED) {
+                // quán tính sau khi ném
+                pos += vel * dt;
+                vel *= Math.exp(-dt * FRICTION);
+            } else if (visible && now >= holdUntil && !reduceMotion) {
+                // tự xoay liên tục khi rảnh
+                pos += AUTO_SPEED * dt; vel = 0;
+            }
+            // Chỉ wrap khi KHÔNG đang ease tới target (target có thể nằm ngoài [0,total)
+            // nếu đường vòng ngắn nhất băng qua mốc 0 -> wrap sẽ làm xoay vô hạn)
+            if (target === null) pos = wrapClamp(pos);
+        }
+
+        // Đang dừng ở 1 slide (ease tới mục tiêu hoặc trong thời gian giữ) -> cho bấm nút
+        var focused = !dragging && (target !== null || now < holdUntil);
+        coverflow.classList.toggle('is-focused', focused);
+
+        render();
+        requestAnimationFrame(tick);
     }
 
-    // Keyboard nav
-    document.addEventListener('keydown', function(e) {
-        if (!overlay.classList.contains('is-active')) return;
-        if (e.key === 'ArrowLeft') updateCarousel(currentIdx - 1);
-        if (e.key === 'ArrowRight') updateCarousel(currentIdx + 1);
-        if (e.key === 'Escape') backBtn.click();
+    // ----- Kéo / ném -----
+    coverflow.addEventListener('pointerdown', function(e) {
+        if (e.button && e.button !== 0) return; // chỉ xử lý chuột trái
+        dragging = true; moved = false; wasDragged = false; target = null; vel = 0;
+        startX = lastX = e.clientX; lastMoveT = performance.now(); dragVel = 0;
+        coverflow.classList.add('is-dragging');
+        // KHÔNG dùng setPointerCapture: nó khiến Chrome chuyển target của sự kiện
+        // 'click' về coverflow -> thẻ <a> mất điều hướng khi bấm chuột trái.
+        // pointermove/pointerup đã gắn ở window nên kéo-ném vẫn hoạt động bình thường.
     });
-
-    // Touch swipe
-    var touchStartX = 0;
-    overlay.addEventListener('touchstart', function(e) {
-        touchStartX = e.changedTouches[0].screenX;
-    }, { passive: true });
-    overlay.addEventListener('touchend', function(e) {
-        var diff = e.changedTouches[0].screenX - touchStartX;
-        if (Math.abs(diff) > 50) {
-            if (diff > 0) updateCarousel(currentIdx - 1);
-            else updateCarousel(currentIdx + 1);
+    window.addEventListener('pointermove', function(e) {
+        if (!dragging) return;
+        var dx = e.clientX - lastX;
+        if (Math.abs(e.clientX - startX) > 5) moved = true;
+        var dPos = -dx / DRAG_PX;
+        pos = wrapClamp(pos + dPos);
+        var t = performance.now(), dtm = (t - lastMoveT) / 1000;
+        if (dtm > 0) dragVel = dPos / dtm; // slide / giây
+        lastX = e.clientX; lastMoveT = t;
+    });
+    function endDrag(e) {
+        if (!dragging) return;
+        dragging = false;
+        coverflow.classList.remove('is-dragging');
+        if (moved) {
+            // ném: vận tốc theo lực kéo (ném mạnh xoay xa, nhẹ xoay ít)
+            vel = Math.max(-MAX_VEL, Math.min(MAX_VEL, dragVel));
+            holdUntil = 0; wasDragged = true;
         }
-    }, { passive: true });
+        // tap không kéo: hex/dot có handler riêng; tap trúng link để <a> tự điều hướng
+    }
+    window.addEventListener('pointerup', endDrag);
+    window.addEventListener('pointercancel', endDrag);
+    coverflow.addEventListener('dragstart', function(e) { e.preventDefault(); });
+
+    // ease tới slide idx theo hướng vòng ngắn nhất rồi giữ tâm
+    function spinTo(idx) {
+        if (idx < 0 || idx >= total) return;
+        target = pos + wrap(idx - pos);
+        vel = 0;
+    }
+
+    // Việc căn-giữa khi tap slide đã xử lý ở endDrag (pointerup).
+    // Handler click ở đây chỉ để CHẶN điều hướng "ăn theo" ngay sau khi kéo-ném.
+    for (var sN = 0; sN < total; sN++) {
+        (function(i) {
+            slides[i].addEventListener('click', function(e) {
+                if (wasDragged) { wasDragged = false; e.preventDefault(); e.stopPropagation(); }
+            });
+        })(sN);
+    }
+
+    // Dots -> xoay tới
+    for (var d = 0; d < dots.length; d++) {
+        (function(i) { dots[i].addEventListener('click', function() { spinTo(i); }); })(d);
+    }
+
+    // ----- Hex cluster (Hero) -> cuộn xuống + xoay tới tính năng -----
+    var featHexes = document.querySelectorAll('.tk-hex--feature[data-feat-index]');
+    function goToFeature(idx) {
+        if (isNaN(idx) || idx < 0 || idx >= total) return;
+        spinTo(idx);
+        if (!section) return;
+        var header = document.querySelector('.tk-header-wrap.tk-sticky .tk-header') || document.querySelector('.tk-header');
+        var offset = (header ? header.offsetHeight : 0) + 20;
+        var topY = section.getBoundingClientRect().top + window.pageYOffset - offset;
+        window.scrollTo({ top: topY, behavior: 'smooth' });
+    }
+    for (var h = 0; h < featHexes.length; h++) {
+        (function(hex) {
+            var idx = parseInt(hex.getAttribute('data-feat-index'), 10);
+            hex.addEventListener('click', function() { goToFeature(idx); });
+            hex.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); goToFeature(idx); }
+            });
+        })(featHexes[h]);
+    }
+
+    // Tạm dừng auto khi section ngoài viewport (tiết kiệm + không lệch khi cuộn tới)
+    if ('IntersectionObserver' in window && section) {
+        new IntersectionObserver(function(entries) {
+            visible = entries[0].isIntersecting;
+        }, { threshold: 0.2 }).observe(section);
+    }
+
+    // ----- Khởi động -----
+    syncHeight();
+    window.addEventListener('resize', syncHeight);
+    requestAnimationFrame(tick);
 });
 </script>
