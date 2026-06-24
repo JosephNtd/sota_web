@@ -199,12 +199,12 @@
         </section>
     <?php } ?>
 
-    <?php include TEMPLATE . LAYOUT . " .php"; ?>
+    <?php include TEMPLATE . LAYOUT . "form_dangky.php"; ?>
     <?php include TEMPLATE . LAYOUT . "hotro_lienhe.php"; ?>
 
     <script>
         window.addEventListener('DOMContentLoaded', function () {
-            var rows = document.querySelectorAll('.tk-feature-list .tk-feat');
+            var rows = document.querySelectorAll('.tk-feature-list .tk-feat, section.tk-sec');
             var observer = new IntersectionObserver(function (entries) {
                 entries.forEach(function (entry) {
                     if (entry.isIntersecting) {

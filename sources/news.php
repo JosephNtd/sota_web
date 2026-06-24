@@ -71,6 +71,16 @@ if ($id != '') {
 	$url = $func->getCurrentPageURL();
 	$paging = $func->pagination($total, $per_page, $curPage, $url);
 
+	/* Điều hướng Bài trước / Bài sau (cùng type) */
+	$news_prev = $d->rawQueryOne(
+		"select ten$lang, tenkhongdauvi, tenkhongdauen, photo from #_news where id > ? and type = ? and hienthi > 0 order by id asc limit 0,1",
+		array($row_detail['id'], $type)
+	);
+	$news_next = $d->rawQueryOne(
+		"select ten$lang, tenkhongdauvi, tenkhongdauen, photo from #_news where id < ? and type = ? and hienthi > 0 order by id desc limit 0,1",
+		array($row_detail['id'], $type)
+	);
+
 	/* SEO */
 	$seoDB = $seo->getSeoDB($row_detail['id'], 'news', 'man', $row_detail['type']);
 	$seo->setSeo('h1', $row_detail['ten' . $lang]);

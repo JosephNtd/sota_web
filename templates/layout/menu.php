@@ -47,12 +47,12 @@
                 <ul class="menu_cap_cha tk-menu d-flex">
 
                     <li class="menulicha <?= $com == 'gioi-thieu-titkul' ? 'active' : '' ?>">
-                        <a href="gioi-thieu-titkul" title="Giới Thiệu">Giới Thiệu</a>
+                        <a href="gioi-thieu-titkul" title="Giới Thiệu"><i class="tk-mi fas fa-info-circle"></i>Giới Thiệu</a>
                     </li>
 
                     <!-- SẢN PHẨM -->
                     <li class="menulicha tk-has-child <?= $com == 'san-pham' ? 'active' : '' ?>">
-                        <a href="san-pham" title="Sản Phẩm">Sản Phẩm <i class="fas fa-angle-down"></i></a>
+                        <a href="san-pham" title="Sản Phẩm"><i class="tk-mi fas fa-cube"></i>Sản Phẩm <i class="fas fa-angle-down"></i></a>
                         <?php if (!empty($splistmenu)) { ?>
                         <ul class="menu_cap_con">
                             <?php foreach ($splistmenu as $cat) { ?>
@@ -64,7 +64,7 @@
 
                     <!-- TÍNH NĂNG NỔI BẬT -->
                     <li class="menulicha tk-has-child <?= $com == 'tinh-nang-noi-bat' ? 'active' : '' ?>">
-                        <a href="tinh-nang-noi-bat" title="Tính Năng Nổi Bật">Tính Năng Nổi Bật <i class="fas fa-angle-down"></i></a>
+                        <a href="tinh-nang-noi-bat" title="Tính Năng Nổi Bật"><i class="tk-mi fas fa-star"></i>Tính Năng Nổi Bật <i class="fas fa-angle-down"></i></a>
                         <?php if (!empty($tinhnang_menu)) { ?>
                         <ul class="menu_cap_con">
                             <?php foreach ($tinhnang_menu as $tn) { ?>
@@ -76,7 +76,7 @@
 
                     <!-- HƯỚNG DẪN SỬ DỤNG -->
                     <li class="menulicha tk-has-child <?= $com == 'huong-dan-su-dung' ? 'active' : '' ?>">
-                        <a href="huong-dan-su-dung" title="Hướng Dẫn Sử Dụng">Hướng Dẫn Sử Dụng <i class="fas fa-angle-down"></i></a>
+                        <a href="huong-dan-su-dung" title="Hướng Dẫn Sử Dụng"><i class="tk-mi fas fa-book-open"></i>Hướng Dẫn Sử Dụng <i class="fas fa-angle-down"></i></a>
                         <?php if (!empty($huongdan_menu)) { ?>
                         <ul class="menu_cap_con">
                             <?php foreach ($huongdan_menu as $hd) { ?>
@@ -87,15 +87,15 @@
                     </li>
 
                     <li class="menulicha <?= $com == 'tin-tuc' ? 'active' : '' ?>">
-                        <a href="tin-tuc" title="Tin Tức">Tin Tức</a>
+                        <a href="tin-tuc" title="Tin Tức"><i class="tk-mi fas fa-newspaper"></i>Tin Tức</a>
                     </li>
 
                     <li class="menulicha <?= $com == 'case-study' ? 'active' : '' ?>">
-                        <a href="case-study" title="Case Study">Case Study</a>
+                        <a href="case-study" title="Case Study"><i class="tk-mi fas fa-bullseye"></i>Case Study</a>
                     </li>
 
                     <li class="menulicha <?= $com == 'lien-he' ? 'active' : '' ?>">
-                        <a href="lien-he" title="Liên Hệ">Liên Hệ</a>
+                        <a href="lien-he" title="Liên Hệ"><i class="tk-mi fas fa-envelope"></i>Liên Hệ</a>
                     </li>
                 </ul>
             </nav>
@@ -104,7 +104,29 @@
 
     <!-- Lớp phủ + ngăn chứa menu mobile (JS append vào .menu_mobi_add) -->
     <div class="menu_baophu"></div>
-    <div class="menu_mobi_add"></div>
+    <div class="menu_mobi_add">
+        <!-- Header panel (order:1) -->
+        <div class="tk-mnav-head">
+            <a class="tk-mnav-logo" href="" title="<?= $setting['ten' . $lang] ?>">
+                <img onerror="this.src='assets/images/noimage.png';"
+                    src="<?= UPLOAD_PHOTO_L . $logo['photo'] ?>" alt="<?= $setting['ten' . $lang] ?>" />
+            </a>
+        </div>
+        <!-- Footer panel (order:3) — JS append close + ul vào giữa -->
+        <div class="tk-mnav-foot">
+            <?php $tk_hotline_m = !empty($optsetting['hotline']) ? $optsetting['hotline'] : '094.242.9989'; ?>
+            <a class="tk-mnav-call" href="tel:<?= preg_replace('/[^0-9+]/', '', $tk_hotline_m) ?>">
+                <i class="fas fa-phone-alt"></i>
+                <span>
+                    <small>Tổng đài tư vấn</small>
+                    <strong><?= $tk_hotline_m ?></strong>
+                </span>
+            </a>
+            <a class="tk-mnav-hdsd" href="huong-dan-su-dung">
+                <i class="far fa-question-circle"></i> Hướng Dẫn Sử Dụng
+            </a>
+        </div>
+    </div>
 </div>
 
 <!-- Spacer chống nhảy layout khi header fixed -->
